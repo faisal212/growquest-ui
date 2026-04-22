@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useSyncExternalStore } from 'react'
 import { createPortal } from 'react-dom'
 import { MissionIcon } from '../../art'
 import { Eyebrow, XPPill, Tag, Countdown, Button } from '../../atoms'
@@ -21,9 +21,14 @@ export interface MissionModalProps {
 /** Full-screen modal wrapping a mission's interactive experience (quiz, survey, hangman, trivia, or social). Handles the claim flow on completion. */
 export function MissionModal({ m, onClose, onClaim }: MissionModalProps) {
   const [step, setStep] = useState(0)
+  const mounted = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false
+  )
   const dialogRef = useRef<HTMLDivElement>(null)
   useFocusTrap(dialogRef, m !== null)
-  if (!m) return null
+  if (!m || !mounted) return null
 
   const interactive = ['quiz', 'survey', 'hangman', 'trivia'].includes(m.type)
   if (interactive) {

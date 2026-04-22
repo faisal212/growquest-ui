@@ -12,13 +12,13 @@ A gamification UI kit for React — missions, rewards, leaderboards, and interac
 ## Install
 
 ```bash
-npm install github:faisal212/growquest-ui
+npm install growquest-ui
 ```
 
 Then import the styles once in your app entry:
 
 ```typescript
-import 'growquest-ui/styles'
+import 'growquest-ui/styles.css'
 ```
 
 ---
@@ -62,6 +62,29 @@ export default function App() {
   )
 }
 ```
+
+---
+
+## Usage in Next.js
+
+Import the stylesheet in your root layout:
+
+```tsx
+// app/layout.tsx
+import 'growquest-ui/styles.css'
+```
+
+Interactive components (`MissionModal`, `*Experience`, `Countdown`, `FilterTabs`, `MissionTile`, `RewardCard`) use React hooks and must run on the client. Wrap them in a `'use client'` boundary — this is the standard Next.js pattern for third-party UI libraries:
+
+```tsx
+// components/MissionModalWrapper.tsx
+'use client'
+export { MissionModal } from 'growquest-ui'
+```
+
+Or just add `'use client'` to the file where you use them directly.
+
+Purely presentational components (`HeroBanner`, `Podium`, `ProfileSnapshot`, `StatCard`, `TierLadder`, `BadgeGrid`, `LeaderboardTable`, `Logo`, `BrandLockup`, `Chip`, `Tag`, `XPPill`, `Eyebrow`, `Divider`, `Sparkline`) work in Server Components with no extra setup.
 
 ---
 
