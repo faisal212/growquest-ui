@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import type { Badge } from '../../types'
 
 const ACCENT_COLORS = ['cyan', 'magenta', 'lime', 'amber', 'violet']
@@ -7,8 +8,7 @@ interface BadgeGridProps {
   columns?: number
 }
 
-/** Grid of achievement badges. Unlocked badges render in full colour; locked badges are dimmed with a lock indicator. */
-export function BadgeGrid({ badges, columns = 3 }: BadgeGridProps) {
+export const BadgeGrid = memo(function BadgeGrid({ badges, columns = 3 }: BadgeGridProps) {
   return (
     <div className="panel" style={{ padding: 20 }}>
       <div className="mono-label" style={{ marginBottom: 14 }}>
@@ -65,4 +65,4 @@ export function BadgeGrid({ badges, columns = 3 }: BadgeGridProps) {
       </div>
     </div>
   )
-}
+})

@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import { Tag, XPPill, Button } from '../../atoms'
 import type { Persona, Reward } from '../../types'
 
@@ -8,8 +9,12 @@ export interface RewardCardProps {
   compact?: boolean
 }
 
-/** Reward marketplace card showing item art, XP cost, stock level, and a redeem button gated by the user's XP balance. */
-export function RewardCard({ r, persona, onRedeem, compact = false }: RewardCardProps) {
+export const RewardCard = memo(function RewardCard({
+  r,
+  persona,
+  onRedeem,
+  compact = false,
+}: RewardCardProps) {
   const canAfford = persona.xp >= r.cost
   const tone = r.tone === 'accent' ? 'cyan' : r.tone
 
@@ -28,6 +33,9 @@ export function RewardCard({ r, persona, onRedeem, compact = false }: RewardCard
           <img
             src={r.imageUrl}
             alt={r.title}
+            width={400}
+            height={300}
+            loading="lazy"
             style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
           />
         ) : (
@@ -112,4 +120,4 @@ export function RewardCard({ r, persona, onRedeem, compact = false }: RewardCard
       </div>
     </div>
   )
-}
+})

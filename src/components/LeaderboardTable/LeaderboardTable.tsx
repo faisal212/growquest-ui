@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import { Avatar } from '../../art'
 import { Tag } from '../../atoms'
 import type { LeaderboardEntry } from '../../types'
@@ -24,8 +25,7 @@ const DEFAULT_LABELS: Required<ColumnLabels> = {
   xp: 'xp',
 }
 
-/** Ranked table of leaderboard entries with streak, tier chip, and XP columns. Highlights the current user row. */
-export function LeaderboardTable({
+export const LeaderboardTable = memo(function LeaderboardTable({
   entries,
   streakEmoji = '🔥',
   columnLabels,
@@ -73,4 +73,4 @@ export function LeaderboardTable({
       ))}
     </div>
   )
-}
+})

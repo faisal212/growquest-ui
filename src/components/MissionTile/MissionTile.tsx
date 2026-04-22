@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import { MissionIcon } from '../../art'
 import { XPPill, Tag, Countdown } from '../../atoms'
 import type { Mission } from '../../types'
@@ -14,8 +15,7 @@ export interface MissionTileProps {
   onOpen: (mission: Mission) => void
 }
 
-/** Renders a single gamification mission as a tile. Supports split / stack / list layouts and comfortable / compact density. */
-export function MissionTile({
+export const MissionTile = memo(function MissionTile({
   m,
   density = 'comfortable',
   layout = 'split',
@@ -236,4 +236,4 @@ export function MissionTile({
       </div>
     </button>
   )
-}
+})
