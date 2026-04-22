@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { MissionIcon } from '../../art'
 import { Eyebrow, XPPill, Tag, Countdown, Button } from '../../atoms'
@@ -9,6 +9,7 @@ import {
   TriviaExperience,
 } from '../../screens/experiences'
 import { toneColor } from '../../utils/toneColor'
+import { useFocusTrap } from '../../utils/useFocusTrap'
 import type { Mission } from '../../types'
 
 export interface MissionModalProps {
@@ -20,6 +21,8 @@ export interface MissionModalProps {
 /** Full-screen modal wrapping a mission's interactive experience (quiz, survey, hangman, trivia, or social). Handles the claim flow on completion. */
 export function MissionModal({ m, onClose, onClaim }: MissionModalProps) {
   const [step, setStep] = useState(0)
+  const dialogRef = useRef<HTMLDivElement>(null)
+  useFocusTrap(dialogRef, m !== null)
   if (!m) return null
 
   const interactive = ['quiz', 'survey', 'hangman', 'trivia'].includes(m.type)
@@ -92,15 +95,14 @@ export function MissionModal({ m, onClose, onClaim }: MissionModalProps) {
       <div
         className="modal-backdrop"
         role="presentation"
-        onClick={onClose}
+        onClick={(e) => e.target === e.currentTarget && onClose()}
         onKeyDown={(e) => e.key === 'Escape' && onClose()}
       >
         <div
+          ref={dialogRef}
           className="modal"
           role="dialog"
           aria-modal="true"
-          onClick={(e) => e.stopPropagation()}
-          onKeyDown={(e) => e.stopPropagation()}
           style={{ maxWidth: 560 }}
         >
           {header}
@@ -120,10 +122,10 @@ export function MissionModal({ m, onClose, onClaim }: MissionModalProps) {
     <div
       className="modal-backdrop"
       role="presentation"
-      onClick={onClose}
+      onClick={(e) => e.target === e.currentTarget && onClose()}
       onKeyDown={(e) => e.key === 'Escape' && onClose()}
     >
-      <div className="modal" role="dialog" aria-modal="true" onClick={(e) => e.stopPropagation()}>
+      <div ref={dialogRef} className="modal" role="dialog" aria-modal="true">
         <div
           style={{
             position: 'relative',

@@ -174,16 +174,10 @@ export function SpinModal({
     <div
       className="modal-backdrop"
       role="presentation"
-      onClick={onClose}
+      onClick={(e) => e.target === e.currentTarget && onClose()}
       onKeyDown={(e) => e.key === 'Escape' && onClose()}
     >
-      <div
-        className="modal w-[min(420px,100%)] p-7 text-center"
-        role="dialog"
-        aria-modal="true"
-        onClick={(e) => e.stopPropagation()}
-        onKeyDown={(e) => e.stopPropagation()}
-      >
+      <div className="modal w-[min(420px,100%)] p-7 text-center" role="dialog" aria-modal="true">
         <Eyebrow>// lootbox · spin to win</Eyebrow>
         <h2 className="display mt-2 mb-5 text-[24px]">Take your spin</h2>
 
@@ -303,16 +297,10 @@ export function DailyModal({
     <div
       className="modal-backdrop"
       role="presentation"
-      onClick={onClose}
+      onClick={(e) => e.target === e.currentTarget && onClose()}
       onKeyDown={(e) => e.key === 'Escape' && onClose()}
     >
-      <div
-        className="modal w-[min(480px,100%)] p-7"
-        role="dialog"
-        aria-modal="true"
-        onClick={(e) => e.stopPropagation()}
-        onKeyDown={(e) => e.stopPropagation()}
-      >
+      <div className="modal w-[min(480px,100%)] p-7" role="dialog" aria-modal="true">
         <Eyebrow>// daily drop</Eyebrow>
         <h2 className="display mt-2 mb-[6px] text-[24px]">Day {streak + 1} · keep it alive</h2>
         <p className="text-[13px] mb-[18px]" style={{ color: 'var(--ink-dim)' }}>
