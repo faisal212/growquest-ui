@@ -30,7 +30,6 @@
     "format": "prettier --write src",
     "test": "vitest run",
     "test:ui": "vitest --ui",
-    "chromatic": "npx chromatic --project-token=$CHROMATIC_PROJECT_TOKEN",
     "prepare": "husky"
   },
   "lint-staged": {
@@ -62,7 +61,6 @@
     "@typescript-eslint/parser": "^8.59.0",
     "@vitejs/plugin-react": "^4.3.4",
     "@vitest/ui": "^4.1.5",
-    "chromatic": "^16.5.0",
     "eslint": "^9.39.4",
     "eslint-config-prettier": "^10.1.8",
     "eslint-formatter-compact": "^9.0.1",
