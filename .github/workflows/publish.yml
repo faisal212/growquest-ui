@@ -23,6 +23,14 @@ jobs:
 
       - run: npm run build:lib
 
-      - run: npm publish --access public
+      - name: Publish to npm
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          EXISTING=$(npm view growquest-ui@$VERSION version 2>/dev/null || echo "")
+          if [ -n "$EXISTING" ]; then
+            echo "growquest-ui@$VERSION already published — skipping."
+          else
+            npm publish --access public
+          fi
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
