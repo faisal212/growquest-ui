@@ -38,8 +38,8 @@ export function TriviaExperience({
 
   useEffect(() => {
     if (phase !== 'answering') return
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     if (time <= 0) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setPhase('reveal')
       return
     }
@@ -47,10 +47,12 @@ export function TriviaExperience({
     return () => clearTimeout(t)
   }, [time, phase])
 
-  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setTime(timeLimit)
+
     setPick(null)
+
     setPhase('answering')
   }, [idx, timeLimit])
 

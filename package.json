@@ -1,11 +1,19 @@
 {
-  "name": "growquest",
-  "private": true,
+  "name": "growquest-ui",
   "version": "0.1.0",
   "type": "module",
+  "exports": {
+    ".": { "import": "./dist/index.js" },
+    "./styles": "./styles.css"
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "files": ["dist"],
+  "sideEffects": ["*.css"],
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "build:lib": "vite build --config vite.lib.config.ts",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
@@ -21,6 +29,10 @@
       "eslint --fix",
       "prettier --write"
     ]
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.2.4",
