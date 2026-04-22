@@ -41,7 +41,14 @@ export const SplitLayout: Story = {
     expect(args.onOpen).toHaveBeenCalledOnce()
   },
 }
-export const StackLayout: Story = { args: { layout: 'stack' } }
+export const StackLayout: Story = {
+  args: { layout: 'stack' },
+  play: async ({ canvasElement, args }) => {
+    const canvas = within(canvasElement)
+    await userEvent.click(canvas.getByRole('button'))
+    expect(args.onOpen).toHaveBeenCalledOnce()
+  },
+}
 export const ListLayout: Story = {
   args: { layout: 'list' },
   decorators: [
@@ -51,6 +58,11 @@ export const ListLayout: Story = {
       </div>
     ),
   ],
+  play: async ({ canvasElement, args }) => {
+    const canvas = within(canvasElement)
+    await userEvent.click(canvas.getByRole('button'))
+    expect(args.onOpen).toHaveBeenCalledOnce()
+  },
 }
 export const Compact: Story = { args: { layout: 'stack', density: 'compact' } }
 export const WithLimitedBadge: Story = {

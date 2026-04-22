@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { fn } from 'storybook/test'
+import { fn, userEvent, within, expect } from 'storybook/test'
 import { MissionModal } from './MissionModal'
 import { MISSIONS } from '../../data'
 
@@ -37,9 +37,22 @@ export const Playground: Story = {
   ),
 }
 
-export const Social: Story = { args: { m: MISSIONS[0] } }
+export const Social: Story = {
+  args: { m: MISSIONS[0] },
+  play: async ({ canvasElement, args }) => {
+    const canvas = within(canvasElement)
+    await userEvent.click(canvas.getByRole('button', { name: 'Close' }))
+    expect(args.onClose).toHaveBeenCalledOnce()
+  },
+}
 export const Quiz: Story = { args: { m: MISSIONS.find((m) => m.type === 'quiz')! } }
 export const Survey: Story = { args: { m: MISSIONS.find((m) => m.type === 'survey')! } }
 export const Hangman: Story = { args: { m: MISSIONS.find((m) => m.type === 'hangman')! } }
-export const Trivia: Story = { args: { m: MISSIONS.find((m) => m.type === 'trivia')! } }
+export const Trivia: Story = {
+  args: { m: MISSIONS.find((m) => m.type === 'trivia')! },
+  play: async ({ args }) => {
+    await userEvent.keyboard('{Escape}')
+    expect(args.onClose).toHaveBeenCalledOnce()
+  },
+}
 export const Limited: Story = { args: { m: MISSIONS.find((m) => m.limited)! } }

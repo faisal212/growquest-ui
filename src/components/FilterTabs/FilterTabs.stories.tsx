@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { fn } from 'storybook/test'
+import { fn, userEvent, within, expect } from 'storybook/test'
 import { useState } from 'react'
 import { FilterTabs } from './FilterTabs'
 
@@ -24,8 +24,17 @@ export const Playground: Story = {
     value: { control: 'text' },
   } as any,
   render: (args) => (
-    <FilterTabs options={String(args.options).split(',')} value={args.value} onChange={() => {}} />
+    <FilterTabs
+      options={String(args.options).split(',')}
+      value={args.value}
+      onChange={args.onChange}
+    />
   ),
+  play: async ({ canvasElement, args }) => {
+    const canvas = within(canvasElement)
+    await userEvent.click(canvas.getByRole('button', { name: 'new' }))
+    expect(args.onChange).toHaveBeenCalledWith('new')
+  },
 }
 
 // Named components so React hooks rules are satisfied (component names must start with uppercase).
