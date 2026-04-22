@@ -32,7 +32,7 @@
     "format": "prettier --write src",
     "test": "vitest run",
     "test:ui": "vitest --ui",
-    "prepare": "husky"
+    "prepare": "node -e \"try{require('child_process').execSync('husky',{stdio:'inherit',shell:true})}catch(e){process.exitCode=0}\""
   },
   "lint-staged": {
     "*.{ts,tsx}": [
