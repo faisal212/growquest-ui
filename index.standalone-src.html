@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>GrowQuest — Growth engine prototype</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css?v=3" />
+</head>
+<body>
+<template id="__bundler_thumbnail" data-bg-color="#05060A">
+  <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="tg" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#F5B841"/>
+        <stop offset="1" stop-color="#D97757"/>
+      </linearGradient>
+    </defs>
+    <rect width="400" height="400" fill="#05060A"/>
+    <polygon points="200,60 320,130 320,270 200,340 80,270 80,130" fill="url(#tg)"/>
+    <polygon points="200,110 275,155 275,245 200,290 125,245 125,155" fill="#05060A"/>
+    <circle cx="200" cy="200" r="24" fill="url(#tg)"/>
+    <text x="200" y="380" font-family="monospace" font-size="14" letter-spacing="4" fill="#F5B841" text-anchor="middle">GROWQUEST</text>
+  </svg>
+</template>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script>
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "theme": "dark",
+  "accent": "amber",
+  "tileLayout": "stack",
+  "xpStyle": "notched",
+  "tileDensity": "comfortable",
+  "heroStyle": "grid-poster",
+  "rewardsLayout": "side-by-side",
+  "rewardsRatio": "missions-heavy",
+  "mobileNav": "top",
+  "mobileDensity": "comfortable",
+  "mobileHero": "show"
+}/*EDITMODE-END*/;
+window.__TWEAKS = TWEAK_DEFAULTS;
+</script>
+
+<script type="text/babel" src="src/art.jsx"></script>
+<script type="text/babel" src="src/atoms.jsx"></script>
+<script type="text/babel" src="src/data.jsx"></script>
+<script type="text/babel" src="src/screens/onboarding.jsx"></script>
+<script type="text/babel" src="src/screens/welcome.jsx"></script>
+<script type="text/babel" src="src/screens/missions.jsx"></script>
+<script type="text/babel" src="src/screens/experiences.jsx"></script>
+<script type="text/babel" src="src/screens/rewards.jsx"></script>
+<script type="text/babel" src="src/screens/leaderboard.jsx"></script>
+<script type="text/babel" src="src/screens/profile.jsx"></script>
+<script type="text/babel" src="src/screens/celebration.jsx"></script>
+<script type="text/babel" src="src/tweaks.jsx"></script>
+<script type="text/babel" src="src/app.jsx"></script>
+</body>
+</html>
