@@ -1,14 +1,14 @@
 // Primitives
-export { Button } from './primitives/Button/Button'
-export type { ButtonProps } from './primitives/Button/Button'
-export { Chip } from './primitives/Chip/Chip'
-export type { ChipProps } from './primitives/Chip/Chip'
-export { Input, Textarea, Field } from './primitives/Input/Input'
-export type { InputProps, TextareaProps, FieldProps } from './primitives/Input/Input'
-export { XPBar } from './primitives/XPBar/XPBar'
-export type { XPBarProps } from './primitives/XPBar/XPBar'
-export { Logo, BrandLockup } from './primitives/Logo/Logo'
-export { Tag, XPPill, Eyebrow, Countdown, Sparkline, Divider } from './primitives/Elements/Elements'
+export { Button } from './primitives/Button'
+export type { ButtonProps } from './primitives/Button'
+export { Chip } from './primitives/Chip'
+export type { ChipProps } from './primitives/Chip'
+export { Input, Textarea, Field } from './primitives/Input'
+export type { InputProps, TextareaProps, FieldProps } from './primitives/Input'
+export { XPBar } from './primitives/XPBar'
+export type { XPBarProps } from './primitives/XPBar'
+export { Logo, BrandLockup } from './primitives/Logo'
+export { Tag, XPPill, Eyebrow, Countdown, Sparkline, Divider } from './primitives/Elements'
 
 // Components
 export { BadgeGrid } from './components/BadgeGrid'
@@ -20,15 +20,15 @@ export { MissionTile } from './components/MissionTile'
 export { Podium } from './components/Podium'
 export { ProfileSnapshot } from './components/ProfileSnapshot'
 export { RewardCard } from './components/RewardCard'
-export type { RewardCardProps } from './components/RewardCard/RewardCard'
+export type { RewardCardProps } from './components/RewardCard'
 export { StatCard } from './components/StatCard'
 export { TierLadder } from './components/TierLadder'
 
 // Experiences — tree-shake away in projects that don't use them
-export { QuizExperience } from './experiences/Quiz/QuizExperience'
-export { SurveyExperience } from './experiences/Survey/SurveyExperience'
-export { HangmanExperience } from './experiences/Hangman/HangmanExperience'
-export { TriviaExperience } from './experiences/Trivia/TriviaExperience'
+export { QuizExperience } from './experiences/Quiz'
+export { SurveyExperience } from './experiences/Survey'
+export { HangmanExperience } from './experiences/Hangman'
+export { TriviaExperience } from './experiences/Trivia'
 
 // Types
 export type {
