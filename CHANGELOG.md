@@ -11,6 +11,41 @@ Version numbers follow [Semantic Versioning](https://semver.org/spec/v2.0.0.html
 
 ---
 
+## [0.2.0] - 2026-04-24
+
+### Added
+
+**Experiences** — 14 new tree-shakeable mission experience components:
+- `VideoExperience` — YouTube/Vimeo iframe or `<video>`, 10 s countdown unlock
+- `ReadArticleExperience` — article card + `window.open` + 60 s client-side timer
+- `ProfileCompletionExperience` — display name + bio textarea + progress bar
+- `AvatarUploadExperience` — drag-drop file picker + circular image preview
+- `EmailVerificationExperience` — envelope icon + 30 s resend cooldown
+- `PhoneVerificationExperience` — 8 country codes, phone → 6-digit OTP step
+- `SpinWheelExperience` — SVG 8-segment wheel with CSS rotation + result reveal
+- `ScratchCardExperience` — 4×4 CSS tile grid, auto-completes at 75% revealed
+- `BadgeCollectExperience` — badge grid (earned / unearned) + progress bar
+- `ReferralExperience` — referral link box + clipboard copy + share buttons
+- `ShareExperience` — content preview card + X / Facebook / WhatsApp / copy
+- `InviteExperience` — email input + sent-invite list
+- `PhotoProofExperience` — file upload → "pending admin review" state
+- `FollowSocialExperience` — platform SVG icon + "Open platform" → "I've followed"
+
+All 18 experience types are now wired in `MissionModal`; `body === null` fallback renders "Experience coming soon".
+
+---
+
+## [0.1.1] - 2026-04-22
+
+### Fixed
+- `MissionModal` SSR crash — replaced `createPortal(..., document.body)` with `useSyncExternalStore` client-hydration guard for Next.js App Router compatibility
+
+### Changed
+- Moved `react-router-dom`, `tailwindcss`, `@tailwindcss/vite` from `dependencies` → `devDependencies`
+- Removed duplicate `react` / `react-dom` from `dependencies` (already in `peerDependencies`)
+
+---
+
 ## [0.1.0] - 2026-04-22
 
 Initial public release of the growquest-ui component library.
@@ -60,5 +95,7 @@ Initial public release of the growquest-ui component library.
 
 ---
 
-[Unreleased]: https://github.com/faisal212/growquest-ui/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/faisal212/growquest-ui/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/faisal212/growquest-ui/compare/v0.1.1...v0.2.0
+[0.1.1]: https://github.com/faisal212/growquest-ui/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/faisal212/growquest-ui/releases/tag/v0.1.0
