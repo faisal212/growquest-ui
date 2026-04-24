@@ -1,5 +1,5 @@
-import ye, { useState as p, useEffect as M, memo as Y, useRef as ee, useSyncExternalStore as je } from "react";
-import { createPortal as be } from "react-dom";
+import me, { useState as p, useEffect as M, memo as Y, useRef as ee, useSyncExternalStore as ye } from "react";
+import { createPortal as je } from "react-dom";
 var K = { exports: {} }, D = {};
 /**
  * @license React
@@ -11,23 +11,23 @@ var K = { exports: {} }, D = {};
  * LICENSE file in the root directory of this source tree.
  */
 var ae;
-function ke() {
+function be() {
   if (ae) return D;
   ae = 1;
   var t = Symbol.for("react.transitional.element"), n = Symbol.for("react.fragment");
-  function r(i, o, s) {
+  function r(i, s, o) {
     var l = null;
-    if (s !== void 0 && (l = "" + s), o.key !== void 0 && (l = "" + o.key), "key" in o) {
-      s = {};
-      for (var a in o)
-        a !== "key" && (s[a] = o[a]);
-    } else s = o;
-    return o = s.ref, {
+    if (o !== void 0 && (l = "" + o), s.key !== void 0 && (l = "" + s.key), "key" in s) {
+      o = {};
+      for (var a in s)
+        a !== "key" && (o[a] = s[a]);
+    } else o = s;
+    return s = o.ref, {
       $$typeof: t,
       type: i,
       key: l,
-      ref: o !== void 0 ? o : null,
-      props: s
+      ref: s !== void 0 ? s : null,
+      props: o
     };
   }
   return D.Fragment = n, D.jsx = r, D.jsxs = r, D;
@@ -43,12 +43,12 @@ var P = {};
  * LICENSE file in the root directory of this source tree.
  */
 var ce;
-function we() {
+function ke() {
   return ce || (ce = 1, process.env.NODE_ENV !== "production" && function() {
     function t(x) {
       if (x == null) return null;
       if (typeof x == "function")
-        return x.$$typeof === ge ? null : x.displayName || x.name || null;
+        return x.$$typeof === ue ? null : x.displayName || x.name || null;
       if (typeof x == "string") return x;
       switch (x) {
         case T:
@@ -59,9 +59,9 @@ function we() {
           return "StrictMode";
         case E:
           return "Suspense";
-        case pe:
+        case he:
           return "SuspenseList";
-        case ue:
+        case fe:
           return "Activity";
       }
       if (typeof x == "object")
@@ -77,7 +77,7 @@ function we() {
           case z:
             var f = x.render;
             return x = x.displayName, x || (x = f.displayName || f.name || "", x = x !== "" ? "ForwardRef(" + x + ")" : "ForwardRef"), x;
-          case fe:
+          case pe:
             return f = x.displayName || null, f !== null ? f : t(x.type) || "Memo";
           case H:
             f = x._payload, x = x._init;
@@ -119,11 +119,11 @@ function we() {
         return "<...>";
       }
     }
-    function o() {
+    function s() {
       var x = q.A;
       return x === null ? null : x.getOwner();
     }
-    function s() {
+    function o() {
       return Error("react-stack-top-frame");
     }
     function l(x) {
@@ -151,7 +151,7 @@ function we() {
         "Accessing element.ref was removed in React 19. ref is now a regular prop. It will be removed from the JSX Element type in a future release."
       )), x = this.props.ref, x !== void 0 ? x : null;
     }
-    function c(x, f, m, y, $, V) {
+    function c(x, f, m, y, F, V) {
       var j = m.ref;
       return x = {
         $$typeof: w,
@@ -176,7 +176,7 @@ function we() {
         configurable: !1,
         enumerable: !1,
         writable: !0,
-        value: $
+        value: F
       }), Object.defineProperty(x, "_debugTask", {
         configurable: !1,
         enumerable: !1,
@@ -184,11 +184,11 @@ function we() {
         value: V
       }), Object.freeze && (Object.freeze(x.props), Object.freeze(x)), x;
     }
-    function h(x, f, m, y, $, V) {
+    function h(x, f, m, y, F, V) {
       var j = f.children;
       if (j !== void 0)
         if (y)
-          if (ve(j)) {
+          if (ge(j)) {
             for (y = 0; y < j.length; y++)
               u(j[y]);
             Object.freeze && Object.freeze(j);
@@ -199,8 +199,8 @@ function we() {
         else u(j);
       if (ne.call(f, "key")) {
         j = t(x);
-        var I = Object.keys(f).filter(function(me) {
-          return me !== "key";
+        var I = Object.keys(f).filter(function(ve) {
+          return ve !== "key";
         });
         y = 0 < I.length ? "{key: someKey, " + I.join(": ..., ") + ": ...}" : "{key: someKey}", le[j + y] || (I = 0 < I.length ? "{" + I.join(": ..., ") + ": ...}" : "{}", console.error(
           `A props object containing a "key" prop is being spread into JSX:
@@ -227,8 +227,8 @@ React keys must be passed directly to JSX without using spread:
         x,
         j,
         m,
-        o(),
-        $,
+        s(),
+        F,
         V
       );
     }
@@ -238,7 +238,7 @@ React keys must be passed directly to JSX without using spread:
     function v(x) {
       return typeof x == "object" && x !== null && x.$$typeof === w;
     }
-    var b = ye, w = Symbol.for("react.transitional.element"), A = Symbol.for("react.portal"), T = Symbol.for("react.fragment"), W = Symbol.for("react.strict_mode"), S = Symbol.for("react.profiler"), k = Symbol.for("react.consumer"), R = Symbol.for("react.context"), z = Symbol.for("react.forward_ref"), E = Symbol.for("react.suspense"), pe = Symbol.for("react.suspense_list"), fe = Symbol.for("react.memo"), H = Symbol.for("react.lazy"), ue = Symbol.for("react.activity"), ge = Symbol.for("react.client.reference"), q = b.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, ne = Object.prototype.hasOwnProperty, ve = Array.isArray, X = console.createTask ? console.createTask : function() {
+    var b = me, w = Symbol.for("react.transitional.element"), A = Symbol.for("react.portal"), T = Symbol.for("react.fragment"), W = Symbol.for("react.strict_mode"), S = Symbol.for("react.profiler"), k = Symbol.for("react.consumer"), R = Symbol.for("react.context"), z = Symbol.for("react.forward_ref"), E = Symbol.for("react.suspense"), he = Symbol.for("react.suspense_list"), pe = Symbol.for("react.memo"), H = Symbol.for("react.lazy"), fe = Symbol.for("react.activity"), ue = Symbol.for("react.client.reference"), q = b.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, ne = Object.prototype.hasOwnProperty, ge = Array.isArray, X = console.createTask ? console.createTask : function() {
       return null;
     };
     b = {
@@ -246,10 +246,10 @@ React keys must be passed directly to JSX without using spread:
         return x();
       }
     };
-    var re, ie = {}, se = b.react_stack_bottom_frame.bind(
+    var re, ie = {}, oe = b.react_stack_bottom_frame.bind(
       b,
-      s
-    )(), oe = X(i(s)), le = {};
+      o
+    )(), se = X(i(o)), le = {};
     P.Fragment = T, P.jsx = function(x, f, m) {
       var y = 1e4 > q.recentlyCreatedOwnerStacks++;
       return h(
@@ -257,8 +257,8 @@ React keys must be passed directly to JSX without using spread:
         f,
         m,
         !1,
-        y ? Error("react-stack-top-frame") : se,
-        y ? X(i(x)) : oe
+        y ? Error("react-stack-top-frame") : oe,
+        y ? X(i(x)) : se
       );
     }, P.jsxs = function(x, f, m) {
       var y = 1e4 > q.recentlyCreatedOwnerStacks++;
@@ -267,21 +267,21 @@ React keys must be passed directly to JSX without using spread:
         f,
         m,
         !0,
-        y ? Error("react-stack-top-frame") : se,
-        y ? X(i(x)) : oe
+        y ? Error("react-stack-top-frame") : oe,
+        y ? X(i(x)) : se
       );
     };
   }()), P;
 }
-process.env.NODE_ENV === "production" ? K.exports = ke() : K.exports = we();
+process.env.NODE_ENV === "production" ? K.exports = be() : K.exports = ke();
 var e = K.exports;
 function g({
   variant: t = "default",
   size: n = "md",
   icon: r,
   iconLeft: i,
-  iconRight: o,
-  children: s,
+  iconRight: s,
+  children: o,
   className: l,
   style: a,
   ...d
@@ -294,11 +294,11 @@ function g({
   ].filter(Boolean).join(" ");
   return /* @__PURE__ */ e.jsxs("button", { className: c, style: a, ...d, children: [
     i,
-    s,
-    o ?? r
+    o,
+    s ?? r
   ] });
 }
-const Se = {
+const we = {
   accent: {
     color: "var(--accent)",
     borderColor: "color-mix(in oklch, var(--accent) 40%, transparent)",
@@ -320,13 +320,13 @@ const Se = {
     background: "color-mix(in oklch, var(--accent-amber) 14%, transparent)"
   }
 };
-function Ce({ children: t, tone: n = "default", dot: r, className: i, style: o }) {
-  const s = n !== "default" ? Se[n] : {};
+function Se({ children: t, tone: n = "default", dot: r, className: i, style: s }) {
+  const o = n !== "default" ? we[n] : {};
   return /* @__PURE__ */ e.jsxs(
     "span",
     {
       className: ["chip", i].filter(Boolean).join(" "),
-      style: { ...s, ...o },
+      style: { ...o, ...s },
       children: [
         r && /* @__PURE__ */ e.jsx(
           "span",
@@ -346,10 +346,10 @@ function Ce({ children: t, tone: n = "default", dot: r, className: i, style: o }
     }
   );
 }
-function F({ className: t, ...n }) {
+function G({ className: t, ...n }) {
   return /* @__PURE__ */ e.jsx("input", { className: ["input", t].filter(Boolean).join(" "), ...n });
 }
-function xe({ className: t, style: n, ...r }) {
+function de({ className: t, style: n, ...r }) {
   return /* @__PURE__ */ e.jsx(
     "textarea",
     {
@@ -359,13 +359,13 @@ function xe({ className: t, style: n, ...r }) {
     }
   );
 }
-function de({
+function Ce({
   label: t,
   labelInside: n,
   adornmentLeft: r,
   adornmentRight: i,
-  hint: o,
-  error: s,
+  hint: s,
+  error: o,
   style: l,
   ...a
 }) {
@@ -445,7 +445,7 @@ function de({
           ]
         }
       ) : /* @__PURE__ */ e.jsx(
-        F,
+        G,
         {
           style: {
             paddingLeft: r ? 38 : void 0,
@@ -471,39 +471,39 @@ function de({
         }
       )
     ] }),
-    (o || s) && /* @__PURE__ */ e.jsx(
+    (s || o) && /* @__PURE__ */ e.jsx(
       "span",
       {
         style: {
           fontSize: 11,
           fontFamily: "var(--font-mono)",
           lineHeight: 1.4,
-          color: s ? "var(--danger)" : "var(--ink-faint)"
+          color: o ? "var(--danger)" : "var(--ink-faint)"
         },
-        children: s ?? o
+        children: o ?? s
       }
     )
   ] });
 }
-function Re({ value: t, max: n, style: r = "segmented", segments: i = 10, label: o }) {
-  const s = Math.max(0, Math.min(1, t / n));
+function Re({ value: t, max: n, style: r = "segmented", segments: i = 10, label: s }) {
+  const o = Math.max(0, Math.min(1, t / n));
   if (r === "plain")
     return /* @__PURE__ */ e.jsxs("div", { children: [
-      o && /* @__PURE__ */ e.jsxs("div", { className: "xpbar-label", children: [
-        /* @__PURE__ */ e.jsx("span", { children: o }),
+      s && /* @__PURE__ */ e.jsxs("div", { className: "xpbar-label", children: [
+        /* @__PURE__ */ e.jsx("span", { children: s }),
         /* @__PURE__ */ e.jsxs("span", { children: [
           t,
           "/",
           n
         ] })
       ] }),
-      /* @__PURE__ */ e.jsx("div", { className: "xpbar", children: /* @__PURE__ */ e.jsx("div", { className: "fill", style: { width: `${s * 100}%` } }) })
+      /* @__PURE__ */ e.jsx("div", { className: "xpbar", children: /* @__PURE__ */ e.jsx("div", { className: "fill", style: { width: `${o * 100}%` } }) })
     ] });
   if (r === "segmented") {
-    const l = Math.round(s * i);
+    const l = Math.round(o * i);
     return /* @__PURE__ */ e.jsxs("div", { children: [
-      o && /* @__PURE__ */ e.jsxs("div", { className: "xpbar-label", children: [
-        /* @__PURE__ */ e.jsx("span", { children: o }),
+      s && /* @__PURE__ */ e.jsxs("div", { className: "xpbar-label", children: [
+        /* @__PURE__ */ e.jsx("span", { children: s }),
         /* @__PURE__ */ e.jsxs("span", { children: [
           t,
           "/",
@@ -528,7 +528,7 @@ function Re({ value: t, max: n, style: r = "segmented", segments: i = 10, label:
             stroke: "var(--accent)",
             strokeWidth: "6",
             strokeDasharray: a,
-            strokeDashoffset: a * (1 - s),
+            strokeDashoffset: a * (1 - o),
             transform: "rotate(-90 40 40)",
             strokeLinecap: "round",
             style: {
@@ -548,13 +548,13 @@ function Re({ value: t, max: n, style: r = "segmented", segments: i = 10, label:
             fontWeight: "700",
             fill: "currentColor",
             children: [
-              Math.round(s * 100),
+              Math.round(o * 100),
               "%"
             ]
           }
         )
       ] }),
-      o && /* @__PURE__ */ e.jsxs("div", { children: [
+      s && /* @__PURE__ */ e.jsxs("div", { children: [
         /* @__PURE__ */ e.jsx(
           "div",
           {
@@ -565,7 +565,7 @@ function Re({ value: t, max: n, style: r = "segmented", segments: i = 10, label:
               textTransform: "uppercase",
               color: "var(--ink-dim)"
             },
-            children: o
+            children: s
           }
         ),
         /* @__PURE__ */ e.jsxs("div", { style: { fontFamily: "var(--font-mono)", fontSize: 14, fontWeight: 700 }, children: [
@@ -577,7 +577,7 @@ function Re({ value: t, max: n, style: r = "segmented", segments: i = 10, label:
     ] });
   }
   return /* @__PURE__ */ e.jsxs("div", { children: [
-    o && /* @__PURE__ */ e.jsxs(
+    s && /* @__PURE__ */ e.jsxs(
       "div",
       {
         style: {
@@ -589,7 +589,7 @@ function Re({ value: t, max: n, style: r = "segmented", segments: i = 10, label:
           color: "var(--ink-dim)"
         },
         children: [
-          /* @__PURE__ */ e.jsx("span", { children: o }),
+          /* @__PURE__ */ e.jsx("span", { children: s }),
           /* @__PURE__ */ e.jsxs("span", { children: [
             t,
             "/",
@@ -616,7 +616,7 @@ function Re({ value: t, max: n, style: r = "segmented", segments: i = 10, label:
               style: {
                 position: "absolute",
                 inset: 2,
-                background: `linear-gradient(90deg, var(--accent) 0%, var(--accent) ${s * 100}%, transparent ${s * 100}%)`,
+                background: `linear-gradient(90deg, var(--accent) 0%, var(--accent) ${o * 100}%, transparent ${o * 100}%)`,
                 borderRadius: 2
               }
             }
@@ -718,17 +718,17 @@ function O({ amount: t, icon: n = !0 }) {
     " XP"
   ] });
 }
-function he({ endsAt: t }) {
+function xe({ endsAt: t }) {
   const [n, r] = p(Date.now);
   M(() => {
     const a = setInterval(() => r(Date.now()), 1e3);
     return () => clearInterval(a);
   }, []);
-  const i = Math.max(0, t - n), o = Math.floor(i / 36e5).toString().padStart(2, "0"), s = Math.floor(i % 36e5 / 6e4).toString().padStart(2, "0"), l = Math.floor(i % 6e4 / 1e3).toString().padStart(2, "0");
+  const i = Math.max(0, t - n), s = Math.floor(i / 36e5).toString().padStart(2, "0"), o = Math.floor(i % 36e5 / 6e4).toString().padStart(2, "0"), l = Math.floor(i % 6e4 / 1e3).toString().padStart(2, "0");
   return /* @__PURE__ */ e.jsxs("span", { className: "mono", style: { color: "var(--accent-magenta)" }, children: [
-    o,
-    ":",
     s,
+    ":",
+    o,
     ":",
     l
   ] });
@@ -739,8 +739,8 @@ function ze({
   w: r = 80,
   h: i = 24
 }) {
-  const o = Math.min(...t), s = Math.max(...t), l = t.map((a, d) => {
-    const c = d / (t.length - 1) * r, h = i - (a - o) / (s - o || 1) * (i - 2) - 1;
+  const s = Math.min(...t), o = Math.max(...t), l = t.map((a, d) => {
+    const c = d / (t.length - 1) * r, h = i - (a - s) / (o - s || 1) * (i - 2) - 1;
     return `${c},${h}`;
   }).join(" ");
   return /* @__PURE__ */ e.jsx("svg", { width: r, height: i, viewBox: `0 0 ${r} ${i}`, children: /* @__PURE__ */ e.jsx("polyline", { points: l, fill: "none", stroke: n, strokeWidth: "1.5" }) });
@@ -760,7 +760,7 @@ const Ee = ["cyan", "magenta", "lime", "amber", "violet"], pt = Y(function({ bad
       "/",
       n.length
     ] }),
-    /* @__PURE__ */ e.jsx("div", { style: { display: "grid", gap: 10, gridTemplateColumns: `repeat(${r}, 1fr)` }, children: n.map((i, o) => /* @__PURE__ */ e.jsxs(
+    /* @__PURE__ */ e.jsx("div", { style: { display: "grid", gap: 10, gridTemplateColumns: `repeat(${r}, 1fr)` }, children: n.map((i, s) => /* @__PURE__ */ e.jsxs(
       "div",
       {
         title: i.desc,
@@ -781,7 +781,7 @@ const Ee = ["cyan", "magenta", "lime", "amber", "violet"], pt = Y(function({ bad
                 height: 44,
                 margin: "0 auto 8px",
                 borderRadius: 10,
-                background: i.got ? `var(--accent-${Ee[o % 5]})` : "var(--panel)",
+                background: i.got ? `var(--accent-${Ee[s % 5]})` : "var(--panel)",
                 display: "grid",
                 placeItems: "center",
                 border: "1px solid var(--border)"
@@ -912,7 +912,7 @@ function Me({ variant: t = "isometric", accent: n }) {
       ] }) }),
       /* @__PURE__ */ e.jsx("rect", { width: "480", height: "480", fill: "transparent" }),
       /* @__PURE__ */ e.jsx("circle", { cx: "240", cy: "240", r: "200", fill: "url(#orb-glow)" }),
-      [160, 110, 60].map((i, o) => /* @__PURE__ */ e.jsx(
+      [160, 110, 60].map((i, s) => /* @__PURE__ */ e.jsx(
         "ellipse",
         {
           cx: "240",
@@ -921,11 +921,11 @@ function Me({ variant: t = "isometric", accent: n }) {
           ry: i * 0.5,
           fill: "none",
           stroke: r,
-          strokeOpacity: 0.4 - o * 0.1,
+          strokeOpacity: 0.4 - s * 0.1,
           strokeWidth: "1",
-          transform: `rotate(${-20 + o * 12} 240 240)`
+          transform: `rotate(${-20 + s * 12} 240 240)`
         },
-        o
+        s
       )),
       /* @__PURE__ */ e.jsx("circle", { cx: "240", cy: "240", r: "34", fill: r, opacity: "0.9" }),
       /* @__PURE__ */ e.jsx(
@@ -940,21 +940,21 @@ function Me({ variant: t = "isometric", accent: n }) {
           strokeWidth: "1"
         }
       ),
-      [0, 72, 144, 216, 288].map((i, o) => {
-        const s = i * Math.PI / 180, l = 240 + Math.cos(s) * 170, a = 240 + Math.sin(s) * 60;
-        return /* @__PURE__ */ e.jsx("circle", { cx: l, cy: a, r: 6 + o % 3 * 2, fill: r, opacity: 0.7 }, o);
+      [0, 72, 144, 216, 288].map((i, s) => {
+        const o = i * Math.PI / 180, l = 240 + Math.cos(o) * 170, a = 240 + Math.sin(o) * 60;
+        return /* @__PURE__ */ e.jsx("circle", { cx: l, cy: a, r: 6 + s % 3 * 2, fill: r, opacity: 0.7 }, s);
       }),
       /* @__PURE__ */ e.jsx("text", { x: "30", y: "40", fontFamily: "JetBrains Mono", fontSize: "10", letterSpacing: "2", fill: r, children: "// ORBIT.SYS" })
     ] });
   if (t === "pixel") {
-    const s = [];
+    const o = [];
     for (let l = 0; l < 12; l++)
       for (let a = 0; a < 12; a++) {
         const d = a + l * 0.5 - 3, c = l - a * 0.3 + 4;
-        Math.hypot(d - 5, c - 5) < 3 + Math.sin(l * a * 0.3) * 1.5 && s.push({ x: a * 34 + 30, y: l * 30 + 40, hue: l * a % 3 });
+        Math.hypot(d - 5, c - 5) < 3 + Math.sin(l * a * 0.3) * 1.5 && o.push({ x: a * 34 + 30, y: l * 30 + 40, hue: l * a % 3 });
       }
     return /* @__PURE__ */ e.jsxs("svg", { viewBox: "0 0 480 480", style: { width: "100%", height: "100%", display: "block" }, children: [
-      s.map((l, a) => /* @__PURE__ */ e.jsx(
+      o.map((l, a) => /* @__PURE__ */ e.jsx(
         "rect",
         {
           x: l.x,
@@ -1109,7 +1109,7 @@ function te({ seed: t = 1, size: n = 40 }) {
     "var(--accent-lime)",
     "var(--accent-amber)",
     "var(--accent-violet)"
-  ], i = r[t % r.length], o = r[(t + 2) % r.length], s = t % 3;
+  ], i = r[t % r.length], s = r[(t + 2) % r.length], o = t % 3;
   return /* @__PURE__ */ e.jsxs(
     "svg",
     {
@@ -1124,23 +1124,23 @@ function te({ seed: t = 1, size: n = 40 }) {
       },
       children: [
         /* @__PURE__ */ e.jsx("rect", { width: "40", height: "40", fill: "var(--panel-2)" }),
-        s === 0 && /* @__PURE__ */ e.jsxs(e.Fragment, { children: [
+        o === 0 && /* @__PURE__ */ e.jsxs(e.Fragment, { children: [
           /* @__PURE__ */ e.jsx("circle", { cx: "20", cy: "20", r: "12", fill: i }),
-          /* @__PURE__ */ e.jsx("circle", { cx: "20", cy: "20", r: "5", fill: o })
+          /* @__PURE__ */ e.jsx("circle", { cx: "20", cy: "20", r: "5", fill: s })
         ] }),
-        s === 1 && /* @__PURE__ */ e.jsxs(e.Fragment, { children: [
+        o === 1 && /* @__PURE__ */ e.jsxs(e.Fragment, { children: [
           /* @__PURE__ */ e.jsx("polygon", { points: "20,6 34,20 20,34 6,20", fill: i }),
-          /* @__PURE__ */ e.jsx("rect", { x: "16", y: "16", width: "8", height: "8", fill: o })
+          /* @__PURE__ */ e.jsx("rect", { x: "16", y: "16", width: "8", height: "8", fill: s })
         ] }),
-        s === 2 && /* @__PURE__ */ e.jsxs(e.Fragment, { children: [
+        o === 2 && /* @__PURE__ */ e.jsxs(e.Fragment, { children: [
           /* @__PURE__ */ e.jsx("rect", { x: "8", y: "8", width: "24", height: "24", fill: i }),
-          /* @__PURE__ */ e.jsx("circle", { cx: "20", cy: "20", r: "6", fill: o })
+          /* @__PURE__ */ e.jsx("circle", { cx: "20", cy: "20", r: "6", fill: s })
         ] })
       ]
     }
   );
 }
-function G({ type: t, size: n = 22 }) {
+function U({ type: t, size: n = 22 }) {
   const r = n, i = {
     width: r,
     height: r,
@@ -1248,49 +1248,49 @@ const Ae = {
   streakEmoji: r = "🔥",
   columnLabels: i
 }) {
-  const o = { ...Ae, ...i };
+  const s = { ...Ae, ...i };
   return /* @__PURE__ */ e.jsxs("div", { className: "panel", style: { overflow: "hidden" }, children: [
     /* @__PURE__ */ e.jsxs("div", { className: "lb-head lb-row", children: [
-      /* @__PURE__ */ e.jsx("span", { children: o.rank }),
-      /* @__PURE__ */ e.jsx("span", { children: o.handle }),
-      /* @__PURE__ */ e.jsx("span", { className: "lb-streak", children: o.streak }),
-      /* @__PURE__ */ e.jsx("span", { className: "lb-tier", children: o.tier }),
-      /* @__PURE__ */ e.jsx("span", { className: "lb-cell-right", children: o.xp })
+      /* @__PURE__ */ e.jsx("span", { children: s.rank }),
+      /* @__PURE__ */ e.jsx("span", { children: s.handle }),
+      /* @__PURE__ */ e.jsx("span", { className: "lb-streak", children: s.streak }),
+      /* @__PURE__ */ e.jsx("span", { className: "lb-tier", children: s.tier }),
+      /* @__PURE__ */ e.jsx("span", { className: "lb-cell-right", children: s.xp })
     ] }),
-    n.map((s) => /* @__PURE__ */ e.jsxs(
+    n.map((o) => /* @__PURE__ */ e.jsxs(
       "div",
       {
         className: "lb-row",
-        style: { background: s.me ? "var(--accent-soft)" : "transparent" },
+        style: { background: o.me ? "var(--accent-soft)" : "transparent" },
         children: [
           /* @__PURE__ */ e.jsx(
             "span",
             {
               className: "mono",
-              style: { fontWeight: 700, color: s.rank <= 3 ? "var(--accent)" : "var(--ink)" },
-              children: String(s.rank).padStart(2, "0")
+              style: { fontWeight: 700, color: o.rank <= 3 ? "var(--accent)" : "var(--ink)" },
+              children: String(o.rank).padStart(2, "0")
             }
           ),
           /* @__PURE__ */ e.jsxs("span", { className: "lb-identity", children: [
-            /* @__PURE__ */ e.jsx(te, { seed: s.seed, size: 28 }),
-            /* @__PURE__ */ e.jsx("span", { style: { fontWeight: 600, fontSize: 14 }, children: s.handle }),
-            s.me && /* @__PURE__ */ e.jsx(C, { tone: "accent", children: "YOU" })
+            /* @__PURE__ */ e.jsx(te, { seed: o.seed, size: 28 }),
+            /* @__PURE__ */ e.jsx("span", { style: { fontWeight: 600, fontSize: 14 }, children: o.handle }),
+            o.me && /* @__PURE__ */ e.jsx(C, { tone: "accent", children: "YOU" })
           ] }),
           /* @__PURE__ */ e.jsxs("span", { className: "mono lb-streak", style: { fontSize: 13, color: "var(--accent-amber)" }, children: [
-            s.streak,
+            o.streak,
             r
           ] }),
           /* @__PURE__ */ e.jsx("span", { className: "lb-tier", children: /* @__PURE__ */ e.jsx(
             C,
             {
-              tone: s.tier === "Oracle" ? "magenta" : s.tier === "Ascendant" ? "lime" : "accent",
-              children: s.tier
+              tone: o.tier === "Oracle" ? "magenta" : o.tier === "Ascendant" ? "lime" : "accent",
+              children: o.tier
             }
           ) }),
-          /* @__PURE__ */ e.jsx("span", { className: "mono lb-xp", children: s.xp.toLocaleString() })
+          /* @__PURE__ */ e.jsx("span", { className: "mono lb-xp", children: o.xp.toLocaleString() })
         ]
       },
-      s.rank
+      o.rank
     ))
   ] });
 });
@@ -1298,7 +1298,7 @@ function Z({ shape: t, tint: n }) {
   const r = `var(--accent-${n})`;
   return /* @__PURE__ */ e.jsxs("svg", { viewBox: "0 0 100 100", style: { width: "100%", height: "100%", display: "block" }, children: [
     /* @__PURE__ */ e.jsx("rect", { width: "100", height: "100", fill: "var(--panel)" }),
-    /* @__PURE__ */ e.jsx("g", { opacity: "0.18", stroke: r, strokeWidth: "1", children: Array.from({ length: 10 }).map((i, o) => /* @__PURE__ */ e.jsx("line", { x1: "0", y1: o * 10, x2: "100", y2: o * 10 }, o)) }),
+    /* @__PURE__ */ e.jsx("g", { opacity: "0.18", stroke: r, strokeWidth: "1", children: Array.from({ length: 10 }).map((i, s) => /* @__PURE__ */ e.jsx("line", { x1: "0", y1: s * 10, x2: "100", y2: s * 10 }, s)) }),
     t === "hex" && /* @__PURE__ */ e.jsx("polygon", { points: "50,14 84,32 84,68 50,86 16,68 16,32", fill: r }),
     t === "circle" && /* @__PURE__ */ e.jsx("circle", { cx: "50", cy: "50", r: "30", fill: r }),
     t === "diamond" && /* @__PURE__ */ e.jsx("polygon", { points: "50,14 86,50 50,86 14,50", fill: r }),
@@ -1310,8 +1310,8 @@ function N({
   correct: n,
   wrong: r,
   disabled: i,
-  onClick: o,
-  children: s,
+  onClick: s,
+  children: o,
   layout: l = "row"
 }) {
   const a = n ? "var(--accent-lime)" : r ? "var(--danger)" : t ? "var(--accent)" : "var(--border)", d = n ? "color-mix(in oklch, var(--accent-lime) 14%, transparent)" : r ? "color-mix(in oklch, var(--danger) 14%, transparent)" : t ? "var(--accent-soft)" : "var(--panel-2)";
@@ -1319,7 +1319,7 @@ function N({
     "button",
     {
       disabled: i,
-      onClick: o,
+      onClick: s,
       style: {
         textAlign: "left",
         padding: l === "row" ? "14px 16px" : 10,
@@ -1331,7 +1331,7 @@ function N({
         alignItems: l === "row" ? "center" : void 0,
         gap: l === "row" ? 12 : 8
       },
-      children: s
+      children: o
     }
   );
 }
@@ -1371,7 +1371,7 @@ function Ie({
   variant: t,
   onComplete: n
 }) {
-  const r = t === "text" ? Q.text : t === "textImage" ? Q.textImage : Q.imageOnly, [i, o] = p(null), [s, l] = p(!1), a = r.correct === i;
+  const r = t === "text" ? Q.text : t === "textImage" ? Q.textImage : Q.imageOnly, [i, s] = p(null), [o, l] = p(!1), a = r.correct === i;
   return /* @__PURE__ */ e.jsxs("div", { style: { padding: 24, display: "flex", flexDirection: "column", gap: 16 }, children: [
     /* @__PURE__ */ e.jsxs(_, { children: [
       "// quiz · 1 of 5 ·",
@@ -1380,15 +1380,15 @@ function Ie({
     ] }),
     /* @__PURE__ */ e.jsx("div", { style: { fontSize: 17, fontWeight: 600, lineHeight: 1.4 }, children: r.q }),
     t === "text" && /* @__PURE__ */ e.jsx("div", { style: { display: "flex", flexDirection: "column", gap: 8 }, children: r.choices.map((d) => {
-      const c = i === d.id, h = s && d.id === r.correct, u = s && c && !a;
+      const c = i === d.id, h = o && d.id === r.correct, u = o && c && !a;
       return /* @__PURE__ */ e.jsxs(
         N,
         {
           selected: c,
           correct: h,
           wrong: u,
-          disabled: s,
-          onClick: () => o(d.id),
+          disabled: o,
+          onClick: () => s(d.id),
           layout: "row",
           children: [
             /* @__PURE__ */ e.jsx(
@@ -1441,15 +1441,15 @@ function Ie({
       );
     }) }),
     t === "textImage" && /* @__PURE__ */ e.jsx("div", { style: { display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 10 }, children: r.choices.map((d) => {
-      const c = i === d.id, h = s && d.id === r.correct, u = s && c && !a;
+      const c = i === d.id, h = o && d.id === r.correct, u = o && c && !a;
       return /* @__PURE__ */ e.jsxs(
         N,
         {
           selected: c,
           correct: h,
           wrong: u,
-          disabled: s,
-          onClick: () => o(d.id),
+          disabled: o,
+          onClick: () => s(d.id),
           layout: "column",
           children: [
             /* @__PURE__ */ e.jsxs(
@@ -1546,22 +1546,22 @@ function Ie({
       );
     }) }),
     t === "imageOnly" && /* @__PURE__ */ e.jsx("div", { style: { display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 10 }, children: r.choices.map((d) => {
-      const c = i === d.id, h = s && d.id === r.correct, u = s && c && !a;
+      const c = i === d.id, h = o && d.id === r.correct, u = o && c && !a;
       return /* @__PURE__ */ e.jsx(
         N,
         {
           selected: c,
           correct: h,
           wrong: u,
-          disabled: s,
-          onClick: () => o(d.id),
+          disabled: o,
+          onClick: () => s(d.id),
           layout: "column",
           children: /* @__PURE__ */ e.jsx("div", { style: { aspectRatio: "1/1" }, children: /* @__PURE__ */ e.jsx(Z, { shape: d.shape, tint: d.tint }) })
         },
         d.id
       );
     }) }),
-    s && /* @__PURE__ */ e.jsxs(
+    o && /* @__PURE__ */ e.jsxs(
       "div",
       {
         style: {
@@ -1578,7 +1578,7 @@ function Ie({
         ]
       }
     ),
-    /* @__PURE__ */ e.jsx("div", { style: { display: "flex", gap: 8 }, children: s ? /* @__PURE__ */ e.jsx(g, { variant: "primary", style: { flex: 1 }, onClick: n, children: "Continue" }) : /* @__PURE__ */ e.jsx(
+    /* @__PURE__ */ e.jsx("div", { style: { display: "flex", gap: 8 }, children: o ? /* @__PURE__ */ e.jsx(g, { variant: "primary", style: { flex: 1 }, onClick: n, children: "Continue" }) : /* @__PURE__ */ e.jsx(
       g,
       {
         variant: "primary",
@@ -1620,15 +1620,15 @@ function De({
   onComplete: n,
   textMinLength: r = 20
 }) {
-  const [i, o] = p(null), [s, l] = p("");
+  const [i, s] = p(null), [o, l] = p("");
   if (t === "textarea")
     return /* @__PURE__ */ e.jsxs("div", { style: { padding: 24, display: "flex", flexDirection: "column", gap: 16 }, children: [
       /* @__PURE__ */ e.jsx(_, { children: "// survey · open question" }),
       /* @__PURE__ */ e.jsx("div", { style: { fontSize: 17, fontWeight: 600, lineHeight: 1.4 }, children: "What's the single biggest pain point in your growth stack right now?" }),
       /* @__PURE__ */ e.jsx(
-        xe,
+        de,
         {
-          value: s,
+          value: o,
           onChange: (d) => l(d.target.value),
           placeholder: `Type your answer… (minimum ${r} characters)`,
           style: { minHeight: 180 }
@@ -1646,14 +1646,14 @@ function De({
           },
           children: [
             /* @__PURE__ */ e.jsxs("span", { children: [
-              s.length,
+              o.length,
               " chars"
             ] }),
-            /* @__PURE__ */ e.jsx("span", { children: s.length >= r ? "ready to submit" : `${r - s.length} more to go` })
+            /* @__PURE__ */ e.jsx("span", { children: o.length >= r ? "ready to submit" : `${r - o.length} more to go` })
           ]
         }
       ),
-      /* @__PURE__ */ e.jsx(g, { variant: "primary", disabled: s.length < r, onClick: n, children: "Submit feedback" })
+      /* @__PURE__ */ e.jsx(g, { variant: "primary", disabled: o.length < r, onClick: n, children: "Submit feedback" })
     ] });
   const a = t === "text" ? Ne : t === "textImage" ? _e : We;
   return /* @__PURE__ */ e.jsxs("div", { style: { padding: 24, display: "flex", flexDirection: "column", gap: 16 }, children: [
@@ -1661,7 +1661,7 @@ function De({
     /* @__PURE__ */ e.jsx("div", { style: { fontSize: 17, fontWeight: 600, lineHeight: 1.4 }, children: a.q }),
     t === "text" && /* @__PURE__ */ e.jsx("div", { style: { display: "flex", flexDirection: "column", gap: 8 }, children: a.choices.map((d) => {
       const c = i === d.id;
-      return /* @__PURE__ */ e.jsxs(N, { selected: c, onClick: () => o(d.id), layout: "row", children: [
+      return /* @__PURE__ */ e.jsxs(N, { selected: c, onClick: () => s(d.id), layout: "row", children: [
         /* @__PURE__ */ e.jsx(
           "span",
           {
@@ -1692,7 +1692,7 @@ function De({
         N,
         {
           selected: c,
-          onClick: () => o(d.id),
+          onClick: () => s(d.id),
           layout: "column",
           children: [
             /* @__PURE__ */ e.jsx("div", { style: { aspectRatio: "16/10", borderRadius: 6, overflow: "hidden" }, children: /* @__PURE__ */ e.jsx(
@@ -1714,7 +1714,7 @@ function De({
         N,
         {
           selected: c,
-          onClick: () => o(d.id),
+          onClick: () => s(d.id),
           layout: "column",
           children: /* @__PURE__ */ e.jsx("div", { style: { aspectRatio: "1/1" }, children: /* @__PURE__ */ e.jsx(Z, { shape: d.shape, tint: d.tint }) })
         },
@@ -1730,7 +1730,7 @@ function Pe({
   maxWrong: r = 6,
   category: i = "growth engine brand"
 }) {
-  const [o, s] = p([]), l = o.filter((c) => !n.includes(c)), a = n.split("").every((c) => o.includes(c)), d = l.length >= r;
+  const [s, o] = p([]), l = s.filter((c) => !n.includes(c)), a = n.split("").every((c) => s.includes(c)), d = l.length >= r;
   return /* @__PURE__ */ e.jsxs("div", { style: { padding: 24, display: "flex", flexDirection: "column", gap: 16 }, children: [
     /* @__PURE__ */ e.jsxs(_, { children: [
       "// hangman · guess the word · ",
@@ -1771,7 +1771,7 @@ function Pe({
                 fontFamily: "var(--font-mono)",
                 fontSize: 20,
                 fontWeight: 700,
-                color: o.includes(c) ? "var(--accent)" : "transparent"
+                color: s.includes(c) ? "var(--accent)" : "transparent"
               },
               children: c
             },
@@ -1786,12 +1786,12 @@ function Pe({
         className: "hangman-keys",
         style: { display: "grid", gridTemplateColumns: "repeat(9, 1fr)", gap: 4 },
         children: "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").map((c) => {
-          const h = o.includes(c), u = h && !n.includes(c), v = h && n.includes(c);
+          const h = s.includes(c), u = h && !n.includes(c), v = h && n.includes(c);
           return /* @__PURE__ */ e.jsx(
             "button",
             {
               disabled: h || a || d,
-              onClick: () => s([...o, c]),
+              onClick: () => o([...s, c]),
               style: {
                 padding: "8px 0",
                 borderRadius: 5,
@@ -1851,7 +1851,7 @@ function Be({
   timeLimit: r = 15,
   passScore: i = 2
 }) {
-  const [o, s] = p(0), [l, a] = p(null), [d, c] = p(0), [h, u] = p(r), [v, b] = p("answering");
+  const [s, o] = p(0), [l, a] = p(null), [d, c] = p(0), [h, u] = p(r), [v, b] = p("answering");
   M(() => {
     if (v !== "answering") return;
     if (h <= 0) {
@@ -1862,13 +1862,13 @@ function Be({
     return () => clearTimeout(S);
   }, [h, v]), M(() => {
     u(r), a(null), b("answering");
-  }, [o, r]);
-  const w = n[o], A = l === w.correct;
+  }, [s, r]);
+  const w = n[s], A = l === w.correct;
   function T(S) {
     v === "answering" && (a(S), b("reveal"), S === w.correct && c((k) => k + 1));
   }
   function W() {
-    o === n.length - 1 ? b("done") : s(o + 1);
+    s === n.length - 1 ? b("done") : o(s + 1);
   }
   if (v === "done") {
     const S = Math.round(d / n.length * 100), k = d >= i;
@@ -1925,12 +1925,12 @@ function Be({
     /* @__PURE__ */ e.jsxs("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "center" }, children: [
       /* @__PURE__ */ e.jsxs(_, { children: [
         "// trivia · q",
-        o + 1,
+        s + 1,
         " / ",
         n.length
       ] }),
       /* @__PURE__ */ e.jsxs("div", { style: { display: "flex", alignItems: "center", gap: 6 }, children: [
-        /* @__PURE__ */ e.jsxs(Ce, { tone: "accent", children: [
+        /* @__PURE__ */ e.jsxs(Se, { tone: "accent", children: [
           "SCORE ",
           d
         ] }),
@@ -2015,7 +2015,7 @@ function Be({
         k
       );
     }) }),
-    v === "reveal" && /* @__PURE__ */ e.jsx(g, { variant: "primary", onClick: W, children: o === n.length - 1 ? "See results" : "Next question" })
+    v === "reveal" && /* @__PURE__ */ e.jsx(g, { variant: "primary", onClick: W, children: s === n.length - 1 ? "See results" : "Next question" })
   ] });
 }
 function Fe(t) {
@@ -2025,49 +2025,73 @@ function Fe(t) {
   return r ? { kind: "vimeo", id: r[1] } : { kind: "native" };
 }
 function $e({ url: t, onComplete: n }) {
-  const [r, i] = p(!1), [o, s] = p(10), l = Fe(t);
+  const [r, i] = p(!1), [s, o] = p(10), l = Fe(t);
   return M(() => {
     if (l.kind === "native") return;
     const a = setInterval(() => {
-      s((d) => d <= 1 ? (clearInterval(a), i(!0), 0) : d - 1);
+      o((d) => d <= 1 ? (clearInterval(a), i(!0), 0) : d - 1);
     }, 1e3);
     return () => clearInterval(a);
   }, [l.kind]), /* @__PURE__ */ e.jsxs("div", { style: { display: "flex", flexDirection: "column", gap: 16, padding: 24 }, children: [
-    /* @__PURE__ */ e.jsxs("div", { style: { position: "relative", paddingBottom: "56.25%", background: "var(--panel-2)", borderRadius: 8, overflow: "hidden" }, children: [
-      l.kind === "youtube" && /* @__PURE__ */ e.jsx(
-        "iframe",
-        {
-          title: "YouTube video player",
-          style: { position: "absolute", inset: 0, width: "100%", height: "100%", border: "none" },
-          src: `https://www.youtube.com/embed/${l.id}?autoplay=1`,
-          allow: "autoplay; encrypted-media",
-          allowFullScreen: !0
-        }
-      ),
-      l.kind === "vimeo" && /* @__PURE__ */ e.jsx(
-        "iframe",
-        {
-          title: "Vimeo video player",
-          style: { position: "absolute", inset: 0, width: "100%", height: "100%", border: "none" },
-          src: `https://player.vimeo.com/video/${l.id}?autoplay=1`,
-          allow: "autoplay; fullscreen",
-          allowFullScreen: !0
-        }
-      ),
-      l.kind === "native" && /* @__PURE__ */ e.jsx(
-        "video",
-        {
-          style: { position: "absolute", inset: 0, width: "100%", height: "100%" },
-          src: t,
-          controls: !0,
-          onEnded: () => i(!0),
-          children: /* @__PURE__ */ e.jsx("track", { kind: "captions" })
-        }
-      )
-    ] }),
+    /* @__PURE__ */ e.jsxs(
+      "div",
+      {
+        style: {
+          position: "relative",
+          paddingBottom: "56.25%",
+          background: "var(--panel-2)",
+          borderRadius: 8,
+          overflow: "hidden"
+        },
+        children: [
+          l.kind === "youtube" && /* @__PURE__ */ e.jsx(
+            "iframe",
+            {
+              title: "YouTube video player",
+              style: {
+                position: "absolute",
+                inset: 0,
+                width: "100%",
+                height: "100%",
+                border: "none"
+              },
+              src: `https://www.youtube.com/embed/${l.id}?autoplay=1`,
+              allow: "autoplay; encrypted-media",
+              allowFullScreen: !0
+            }
+          ),
+          l.kind === "vimeo" && /* @__PURE__ */ e.jsx(
+            "iframe",
+            {
+              title: "Vimeo video player",
+              style: {
+                position: "absolute",
+                inset: 0,
+                width: "100%",
+                height: "100%",
+                border: "none"
+              },
+              src: `https://player.vimeo.com/video/${l.id}?autoplay=1`,
+              allow: "autoplay; fullscreen",
+              allowFullScreen: !0
+            }
+          ),
+          l.kind === "native" && /* @__PURE__ */ e.jsx(
+            "video",
+            {
+              style: { position: "absolute", inset: 0, width: "100%", height: "100%" },
+              src: t,
+              controls: !0,
+              onEnded: () => i(!0),
+              children: /* @__PURE__ */ e.jsx("track", { kind: "captions" })
+            }
+          )
+        ]
+      }
+    ),
     l.kind !== "native" && !r && /* @__PURE__ */ e.jsxs("div", { style: { fontSize: 12, color: "var(--ink-dim)", textAlign: "center" }, children: [
       "Button available in ",
-      o,
+      s,
       "s"
     ] }),
     /* @__PURE__ */ e.jsx(g, { variant: "primary", disabled: !r, onClick: n, style: { width: "100%" }, children: "I've watched it" })
@@ -2077,15 +2101,15 @@ function Le({
   url: t,
   onComplete: n
 }) {
-  const [r, i] = p(!1), [o, s] = p(60), [l, a] = p(!1);
+  const [r, i] = p(!1), [s, o] = p(60), [l, a] = p(!1);
   M(() => {
     if (!r) return;
     const c = setInterval(() => {
-      s((h) => h <= 1 ? (clearInterval(c), a(!0), 0) : h - 1);
+      o((h) => h <= 1 ? (clearInterval(c), a(!0), 0) : h - 1);
     }, 1e3);
     return () => clearInterval(c);
   }, [r]);
-  const d = r ? Math.round((60 - o) / 60 * 100) : 0;
+  const d = r ? Math.round((60 - s) / 60 * 100) : 0;
   return /* @__PURE__ */ e.jsxs("div", { style: { display: "flex", flexDirection: "column", gap: 20, padding: 24 }, children: [
     /* @__PURE__ */ e.jsxs(
       "div",
@@ -2100,32 +2124,61 @@ function Le({
           gap: 8
         },
         children: [
-          /* @__PURE__ */ e.jsx("div", { style: { fontSize: 12, color: "var(--ink-dim)", fontFamily: "var(--font-mono)", textTransform: "uppercase", letterSpacing: "0.06em" }, children: "Article" }),
+          /* @__PURE__ */ e.jsx(
+            "div",
+            {
+              style: {
+                fontSize: 12,
+                color: "var(--ink-dim)",
+                fontFamily: "var(--font-mono)",
+                textTransform: "uppercase",
+                letterSpacing: "0.06em"
+              },
+              children: "Article"
+            }
+          ),
           /* @__PURE__ */ e.jsx("div", { style: { fontWeight: 600, fontSize: 15 }, children: "How XP & Levels work in GrowQuest" }),
           t && /* @__PURE__ */ e.jsx("div", { style: { fontSize: 12, color: "var(--ink-dim)" }, children: t.replace(/^https?:\/\//, "") })
         ]
       }
     ),
     r ? /* @__PURE__ */ e.jsxs("div", { style: { display: "flex", flexDirection: "column", gap: 8 }, children: [
-      /* @__PURE__ */ e.jsxs("div", { style: { display: "flex", justifyContent: "space-between", fontSize: 12, color: "var(--ink-dim)" }, children: [
-        /* @__PURE__ */ e.jsx("span", { children: l ? "Reading complete!" : `Reading… ${o}s remaining` }),
-        /* @__PURE__ */ e.jsxs("span", { children: [
-          d,
-          "%"
-        ] })
-      ] }),
-      /* @__PURE__ */ e.jsx("div", { style: { height: 4, background: "var(--panel-2)", borderRadius: 2, overflow: "hidden" }, children: /* @__PURE__ */ e.jsx(
+      /* @__PURE__ */ e.jsxs(
         "div",
         {
           style: {
-            height: "100%",
-            width: `${d}%`,
-            background: "var(--accent)",
-            transition: "width 1s linear",
-            borderRadius: 2
-          }
+            display: "flex",
+            justifyContent: "space-between",
+            fontSize: 12,
+            color: "var(--ink-dim)"
+          },
+          children: [
+            /* @__PURE__ */ e.jsx("span", { children: l ? "Reading complete!" : `Reading… ${s}s remaining` }),
+            /* @__PURE__ */ e.jsxs("span", { children: [
+              d,
+              "%"
+            ] })
+          ]
         }
-      ) })
+      ),
+      /* @__PURE__ */ e.jsx(
+        "div",
+        {
+          style: { height: 4, background: "var(--panel-2)", borderRadius: 2, overflow: "hidden" },
+          children: /* @__PURE__ */ e.jsx(
+            "div",
+            {
+              style: {
+                height: "100%",
+                width: `${d}%`,
+                background: "var(--accent)",
+                transition: "width 1s linear",
+                borderRadius: 2
+              }
+            }
+          )
+        }
+      )
     ] }) : /* @__PURE__ */ e.jsx(
       g,
       {
@@ -2141,61 +2194,98 @@ function Le({
   ] });
 }
 function Ue({ onComplete: t }) {
-  const [n, r] = p(""), [i, o] = p(""), s = [n.length > 0, i.length > 0].filter(Boolean).length;
+  const [n, r] = p(""), [i, s] = p(""), o = [n.length > 0, i.length > 0].filter(Boolean).length;
   return /* @__PURE__ */ e.jsxs("div", { style: { display: "flex", flexDirection: "column", gap: 16, padding: 24 }, children: [
-    /* @__PURE__ */ e.jsx(de, { label: "Display name", children: /* @__PURE__ */ e.jsx(
-      F,
+    /* @__PURE__ */ e.jsx(
+      Ce,
       {
+        label: "Display name",
         placeholder: "Your name",
         value: n,
         onChange: (l) => r(l.target.value)
       }
-    ) }),
-    /* @__PURE__ */ e.jsx(de, { label: "Bio", children: /* @__PURE__ */ e.jsx(
-      xe,
-      {
-        placeholder: "Tell us about yourself…",
-        value: i,
-        onChange: (l) => o(l.target.value)
-      }
-    ) }),
-    /* @__PURE__ */ e.jsxs("div", { style: { display: "flex", alignItems: "center", gap: 8, fontSize: 12, color: "var(--ink-dim)" }, children: [
+    ),
+    /* @__PURE__ */ e.jsxs("div", { style: { display: "flex", flexDirection: "column", gap: 6 }, children: [
       /* @__PURE__ */ e.jsx(
-        "div",
+        "span",
         {
           style: {
-            flex: 1,
-            height: 4,
-            background: "var(--panel-2)",
-            borderRadius: 2,
-            overflow: "hidden"
+            fontFamily: "var(--font-mono)",
+            fontSize: 10,
+            letterSpacing: "0.12em",
+            textTransform: "uppercase",
+            color: "var(--ink-dim)"
           },
-          children: /* @__PURE__ */ e.jsx(
+          children: "Bio"
+        }
+      ),
+      /* @__PURE__ */ e.jsx(
+        de,
+        {
+          placeholder: "Tell us about yourself…",
+          value: i,
+          onChange: (l) => s(l.target.value)
+        }
+      )
+    ] }),
+    /* @__PURE__ */ e.jsxs(
+      "div",
+      {
+        style: {
+          display: "flex",
+          alignItems: "center",
+          gap: 8,
+          fontSize: 12,
+          color: "var(--ink-dim)"
+        },
+        children: [
+          /* @__PURE__ */ e.jsx(
             "div",
             {
               style: {
-                height: "100%",
-                width: `${s / 2 * 100}%`,
-                background: s === 2 ? "var(--accent-lime)" : "var(--accent)",
-                transition: "width 0.3s ease",
-                borderRadius: 2
-              }
+                flex: 1,
+                height: 4,
+                background: "var(--panel-2)",
+                borderRadius: 2,
+                overflow: "hidden"
+              },
+              children: /* @__PURE__ */ e.jsx(
+                "div",
+                {
+                  style: {
+                    height: "100%",
+                    width: `${o / 2 * 100}%`,
+                    background: o === 2 ? "var(--accent-lime)" : "var(--accent)",
+                    transition: "width 0.3s ease",
+                    borderRadius: 2
+                  }
+                }
+              )
             }
-          )
-        }
-      ),
-      /* @__PURE__ */ e.jsxs("span", { style: { whiteSpace: "nowrap" }, children: [
-        s,
-        "/2 fields"
-      ] })
-    ] }),
-    /* @__PURE__ */ e.jsx(g, { variant: "primary", disabled: n.length === 0, onClick: t, style: { width: "100%" }, children: "Save profile" })
+          ),
+          /* @__PURE__ */ e.jsxs("span", { style: { whiteSpace: "nowrap" }, children: [
+            o,
+            "/2 fields"
+          ] })
+        ]
+      }
+    ),
+    /* @__PURE__ */ e.jsx(
+      g,
+      {
+        variant: "primary",
+        disabled: n.length === 0,
+        onClick: t,
+        style: { width: "100%" },
+        children: "Save profile"
+      }
+    )
   ] });
 }
 function Ge({ onComplete: t }) {
-  const [n, r] = p(null), [i, o] = p(null), s = ee(null);
+  const [n, r] = p(null), [i, s] = p(null), o = ee(null);
   function l(a) {
-    o(a.name);
+    s(a.name);
     const d = new FileReader();
     d.onload = (c) => {
       var h;
@@ -2206,7 +2296,7 @@ function Ge({ onComplete: t }) {
     /* @__PURE__ */ e.jsx(
       "input",
       {
-        ref: s,
+        ref: o,
         type: "file",
         accept: "image/*",
         style: { display: "none" },
@@ -2222,7 +2312,13 @@ function Ge({ onComplete: t }) {
         {
           src: n,
           alt: "Preview",
-          style: { width: 88, height: 88, borderRadius: "50%", objectFit: "cover", border: "2px solid var(--accent)" }
+          style: {
+            width: 88,
+            height: 88,
+            borderRadius: "50%",
+            objectFit: "cover",
+            border: "2px solid var(--accent)"
+          }
         }
       ),
       /* @__PURE__ */ e.jsx("span", { style: { fontSize: 12, color: "var(--ink-dim)" }, children: i }),
@@ -2230,9 +2326,16 @@ function Ge({ onComplete: t }) {
         "button",
         {
           onClick: () => {
-            r(null), o(null);
+            r(null), s(null);
           },
-          style: { fontSize: 12, color: "var(--ink-dim)", background: "none", border: "none", cursor: "pointer", textDecoration: "underline" },
+          style: {
+            fontSize: 12,
+            color: "var(--ink-dim)",
+            background: "none",
+            border: "none",
+            cursor: "pointer",
+            textDecoration: "underline"
+          },
           children: "Change photo"
         }
       )
@@ -2243,11 +2346,11 @@ function Ge({ onComplete: t }) {
         tabIndex: 0,
         onClick: () => {
           var a;
-          return (a = s.current) == null ? void 0 : a.click();
+          return (a = o.current) == null ? void 0 : a.click();
         },
         onKeyDown: (a) => {
           var d;
-          (a.key === "Enter" || a.key === " ") && ((d = s.current) == null || d.click());
+          (a.key === "Enter" || a.key === " ") && ((d = o.current) == null || d.click());
         },
         onDragOver: (a) => a.preventDefault(),
         onDrop: (a) => {
@@ -2280,54 +2383,66 @@ function Ye({
   const [r, i] = p(0);
   return M(() => {
     if (r <= 0) return;
-    const o = setInterval(() => i((s) => Math.max(0, s - 1)), 1e3);
-    return () => clearInterval(o);
-  }, [r]), /* @__PURE__ */ e.jsxs("div", { style: { display: "flex", flexDirection: "column", alignItems: "center", gap: 20, padding: "32px 24px" }, children: [
-    /* @__PURE__ */ e.jsx(
-      "div",
-      {
-        style: {
-          width: 64,
-          height: 64,
-          borderRadius: 14,
-          background: "var(--panel-2)",
-          border: "1px solid var(--border)",
-          display: "grid",
-          placeItems: "center",
-          color: "var(--accent)"
-        },
-        children: /* @__PURE__ */ e.jsx(G, { type: "verify_email", size: 32 })
-      }
-    ),
-    /* @__PURE__ */ e.jsxs("div", { style: { textAlign: "center" }, children: [
-      /* @__PURE__ */ e.jsx("div", { style: { fontWeight: 600, fontSize: 16, marginBottom: 6 }, children: "Check your inbox" }),
-      /* @__PURE__ */ e.jsxs("div", { style: { fontSize: 13, color: "var(--ink-dim)", lineHeight: 1.5 }, children: [
-        "We sent a verification link to",
-        " ",
-        t ? /* @__PURE__ */ e.jsx("strong", { style: { color: "var(--ink)" }, children: t }) : "your email address",
-        ".",
-        /* @__PURE__ */ e.jsx("br", {}),
-        "Click the link to verify your address."
-      ] })
-    ] }),
-    /* @__PURE__ */ e.jsx(
-      "button",
-      {
-        disabled: r > 0,
-        onClick: () => i(30),
-        style: {
-          background: "none",
-          border: "none",
-          cursor: r > 0 ? "not-allowed" : "pointer",
-          fontSize: 12,
-          color: r > 0 ? "var(--ink-dim)" : "var(--accent)",
-          textDecoration: r > 0 ? "none" : "underline"
-        },
-        children: r > 0 ? `Resend in ${r}s` : "Resend email"
-      }
-    ),
-    /* @__PURE__ */ e.jsx(g, { variant: "primary", onClick: n, style: { width: "100%" }, children: "I've verified my email" })
-  ] });
+    const s = setInterval(() => i((o) => Math.max(0, o - 1)), 1e3);
+    return () => clearInterval(s);
+  }, [r]), /* @__PURE__ */ e.jsxs(
+    "div",
+    {
+      style: {
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        gap: 20,
+        padding: "32px 24px"
+      },
+      children: [
+        /* @__PURE__ */ e.jsx(
+          "div",
+          {
+            style: {
+              width: 64,
+              height: 64,
+              borderRadius: 14,
+              background: "var(--panel-2)",
+              border: "1px solid var(--border)",
+              display: "grid",
+              placeItems: "center",
+              color: "var(--accent)"
+            },
+            children: /* @__PURE__ */ e.jsx(U, { type: "verify_email", size: 32 })
+          }
+        ),
+        /* @__PURE__ */ e.jsxs("div", { style: { textAlign: "center" }, children: [
+          /* @__PURE__ */ e.jsx("div", { style: { fontWeight: 600, fontSize: 16, marginBottom: 6 }, children: "Check your inbox" }),
+          /* @__PURE__ */ e.jsxs("div", { style: { fontSize: 13, color: "var(--ink-dim)", lineHeight: 1.5 }, children: [
+            "We sent a verification link to",
+            " ",
+            t ? /* @__PURE__ */ e.jsx("strong", { style: { color: "var(--ink)" }, children: t }) : "your email address",
+            ".",
+            /* @__PURE__ */ e.jsx("br", {}),
+            "Click the link to verify your address."
+          ] })
+        ] }),
+        /* @__PURE__ */ e.jsx(
+          "button",
+          {
+            disabled: r > 0,
+            onClick: () => i(30),
+            style: {
+              background: "none",
+              border: "none",
+              cursor: r > 0 ? "not-allowed" : "pointer",
+              fontSize: 12,
+              color: r > 0 ? "var(--ink-dim)" : "var(--accent)",
+              textDecoration: r > 0 ? "none" : "underline"
+            },
+            children: r > 0 ? `Resend in ${r}s` : "Resend email"
+          }
+        ),
+        /* @__PURE__ */ e.jsx(g, { variant: "primary", onClick: n, style: { width: "100%" }, children: "I've verified my email" })
+      ]
+    }
+  );
 }
 const He = [
   { code: "+1", flag: "🇺🇸", name: "US" },
@@ -2340,7 +2455,7 @@ const He = [
   { code: "+61", flag: "🇦🇺", name: "AU" }
 ];
 function qe({ onComplete: t }) {
-  const [n, r] = p("phone"), [i, o] = p("+1"), [s, l] = p(""), [a, d] = p("");
+  const [n, r] = p("phone"), [i, s] = p("+1"), [o, l] = p(""), [a, d] = p("");
   return n === "otp" ? /* @__PURE__ */ e.jsxs("div", { style: { display: "flex", flexDirection: "column", gap: 20, padding: 24 }, children: [
     /* @__PURE__ */ e.jsxs("div", { style: { textAlign: "center" }, children: [
       /* @__PURE__ */ e.jsx("div", { style: { fontWeight: 600, fontSize: 15, marginBottom: 4 }, children: "Enter the 6-digit code" }),
@@ -2348,11 +2463,11 @@ function qe({ onComplete: t }) {
         "Sent to ",
         i,
         " ",
-        s
+        o
       ] })
     ] }),
     /* @__PURE__ */ e.jsx(
-      F,
+      G,
       {
         type: "text",
         inputMode: "numeric",
@@ -2405,7 +2520,7 @@ function qe({ onComplete: t }) {
         {
           className: "input",
           value: i,
-          onChange: (c) => o(c.target.value),
+          onChange: (c) => s(c.target.value),
           style: { width: "100%" },
           children: He.map(({ code: c, flag: h, name: u }) => /* @__PURE__ */ e.jsxs("option", { value: c, children: [
             h,
@@ -2421,11 +2536,11 @@ function qe({ onComplete: t }) {
     /* @__PURE__ */ e.jsxs("div", { children: [
       /* @__PURE__ */ e.jsx("div", { style: { fontSize: 12, color: "var(--ink-dim)", marginBottom: 6 }, children: "Phone number" }),
       /* @__PURE__ */ e.jsx(
-        F,
+        G,
         {
           type: "tel",
           placeholder: "Phone number",
-          value: s,
+          value: o,
           onChange: (c) => l(c.target.value.replace(/[^0-9]/g, ""))
         }
       )
@@ -2434,7 +2549,7 @@ function qe({ onComplete: t }) {
       g,
       {
         variant: "primary",
-        disabled: s.length < 6,
+        disabled: o.length < 6,
         onClick: () => r("otp"),
         style: { width: "100%" },
         children: "Send OTP"
@@ -2448,156 +2563,238 @@ function Xe(t) {
   return B[r];
 }
 function Ve({ onComplete: t }) {
-  const [n, r] = p(!1), [i, o] = p(0), [s, l] = p(null);
+  const [n, r] = p(!1), [i, s] = p(0), [o, l] = p(null);
   function a() {
     if (n) return;
     const v = 1440 + Math.floor(Math.random() * 360), b = i + v;
-    r(!0), o(b), setTimeout(() => {
+    r(!0), s(b), setTimeout(() => {
       l(Xe(b)), r(!1);
     }, 3100);
   }
   const d = 240, c = d / 2, h = B.length, u = 2 * Math.PI / h;
-  return /* @__PURE__ */ e.jsxs("div", { style: { display: "flex", flexDirection: "column", alignItems: "center", gap: 20, padding: 24 }, children: [
-    /* @__PURE__ */ e.jsxs("div", { style: { position: "relative", width: d, height: d }, children: [
-      /* @__PURE__ */ e.jsx("div", { style: {
-        position: "absolute",
-        top: -10,
-        left: "50%",
-        transform: "translateX(-50%)",
-        width: 0,
-        height: 0,
-        borderLeft: "8px solid transparent",
-        borderRight: "8px solid transparent",
-        borderTop: "18px solid var(--accent)",
-        zIndex: 10
-      } }),
-      /* @__PURE__ */ e.jsxs(
-        "svg",
-        {
-          width: d,
-          height: d,
-          style: { transform: `rotate(${i}deg)`, transition: n ? "transform 3s cubic-bezier(.17,.67,.12,.99)" : "none" },
-          children: [
-            B.map((v, b) => {
-              const w = b * u - Math.PI / 2, A = (b + 1) * u - Math.PI / 2, T = c + c * Math.cos(w), W = c + c * Math.sin(w), S = c + c * Math.cos(A), k = c + c * Math.sin(A), R = w + u / 2, z = c + c * 0.65 * Math.cos(R), E = c + c * 0.65 * Math.sin(R);
-              return /* @__PURE__ */ e.jsxs("g", { children: [
+  return /* @__PURE__ */ e.jsxs(
+    "div",
+    {
+      style: {
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        gap: 20,
+        padding: 24
+      },
+      children: [
+        /* @__PURE__ */ e.jsxs("div", { style: { position: "relative", width: d, height: d }, children: [
+          /* @__PURE__ */ e.jsx(
+            "div",
+            {
+              style: {
+                position: "absolute",
+                top: -10,
+                left: "50%",
+                transform: "translateX(-50%)",
+                width: 0,
+                height: 0,
+                borderLeft: "8px solid transparent",
+                borderRight: "8px solid transparent",
+                borderTop: "18px solid var(--accent)",
+                zIndex: 10
+              }
+            }
+          ),
+          /* @__PURE__ */ e.jsxs(
+            "svg",
+            {
+              width: d,
+              height: d,
+              style: {
+                transform: `rotate(${i}deg)`,
+                transition: n ? "transform 3s cubic-bezier(.17,.67,.12,.99)" : "none"
+              },
+              children: [
+                B.map((v, b) => {
+                  const w = b * u - Math.PI / 2, A = (b + 1) * u - Math.PI / 2, T = c + c * Math.cos(w), W = c + c * Math.sin(w), S = c + c * Math.cos(A), k = c + c * Math.sin(A), R = w + u / 2, z = c + c * 0.65 * Math.cos(R), E = c + c * 0.65 * Math.sin(R);
+                  return /* @__PURE__ */ e.jsxs("g", { children: [
+                    /* @__PURE__ */ e.jsx(
+                      "path",
+                      {
+                        d: `M${c},${c} L${T},${W} A${c},${c} 0 0,1 ${S},${k} Z`,
+                        fill: b % 2 === 0 ? "var(--panel)" : "var(--panel-2)",
+                        stroke: "var(--border)",
+                        strokeWidth: "1"
+                      }
+                    ),
+                    /* @__PURE__ */ e.jsx(
+                      "text",
+                      {
+                        x: z,
+                        y: E,
+                        textAnchor: "middle",
+                        dominantBaseline: "middle",
+                        transform: `rotate(${R * 180 / Math.PI + 90}, ${z}, ${E})`,
+                        style: {
+                          fontSize: 9,
+                          fill: "var(--ink)",
+                          fontFamily: "var(--font-mono)",
+                          fontWeight: 700
+                        },
+                        children: v
+                      }
+                    )
+                  ] }, b);
+                }),
                 /* @__PURE__ */ e.jsx(
-                  "path",
+                  "circle",
                   {
-                    d: `M${c},${c} L${T},${W} A${c},${c} 0 0,1 ${S},${k} Z`,
-                    fill: b % 2 === 0 ? "var(--panel)" : "var(--panel-2)",
+                    cx: c,
+                    cy: c,
+                    r: 18,
+                    fill: "var(--panel)",
                     stroke: "var(--border)",
-                    strokeWidth: "1"
+                    strokeWidth: "2"
                   }
                 ),
-                /* @__PURE__ */ e.jsx(
-                  "text",
-                  {
-                    x: z,
-                    y: E,
-                    textAnchor: "middle",
-                    dominantBaseline: "middle",
-                    transform: `rotate(${R * 180 / Math.PI + 90}, ${z}, ${E})`,
-                    style: { fontSize: 9, fill: "var(--ink)", fontFamily: "var(--font-mono)", fontWeight: 700 },
-                    children: v
-                  }
-                )
-              ] }, b);
-            }),
-            /* @__PURE__ */ e.jsx("circle", { cx: c, cy: c, r: 18, fill: "var(--panel)", stroke: "var(--border)", strokeWidth: "2" }),
-            /* @__PURE__ */ e.jsx("circle", { cx: c, cy: c, r: 6, fill: "var(--accent)" })
-          ]
-        }
-      )
-    ] }),
-    s && /* @__PURE__ */ e.jsxs("div", { style: { textAlign: "center" }, children: [
-      /* @__PURE__ */ e.jsx("div", { style: { fontSize: 13, color: "var(--ink-dim)" }, children: "You got" }),
-      /* @__PURE__ */ e.jsx("div", { style: { fontSize: 22, fontWeight: 700, color: "var(--accent)" }, children: s })
-    ] }),
-    s ? /* @__PURE__ */ e.jsx(g, { variant: "primary", onClick: t, style: { width: "100%" }, children: "Claim reward" }) : /* @__PURE__ */ e.jsx(g, { variant: "primary", disabled: n, onClick: a, style: { width: "100%" }, children: n ? "Spinning…" : "Spin the wheel" })
-  ] });
+                /* @__PURE__ */ e.jsx("circle", { cx: c, cy: c, r: 6, fill: "var(--accent)" })
+              ]
+            }
+          )
+        ] }),
+        o && /* @__PURE__ */ e.jsxs("div", { style: { textAlign: "center" }, children: [
+          /* @__PURE__ */ e.jsx("div", { style: { fontSize: 13, color: "var(--ink-dim)" }, children: "You got" }),
+          /* @__PURE__ */ e.jsx("div", { style: { fontSize: 22, fontWeight: 700, color: "var(--accent)" }, children: o })
+        ] }),
+        o ? /* @__PURE__ */ e.jsx(g, { variant: "primary", onClick: t, style: { width: "100%" }, children: "Claim reward" }) : /* @__PURE__ */ e.jsx(g, { variant: "primary", disabled: n, onClick: a, style: { width: "100%" }, children: n ? "Spinning…" : "Spin the wheel" })
+      ]
+    }
+  );
 }
-const L = 16;
+const $ = 16;
 function Je({
   reward: t = "200 XP",
   onComplete: n
 }) {
-  const [r, i] = p(/* @__PURE__ */ new Set()), [o, s] = p(!1);
+  const [r, i] = p(/* @__PURE__ */ new Set()), [s, o] = p(!1);
   function l(c) {
-    o || i((h) => {
+    s || i((h) => {
       const u = new Set(h);
-      return u.add(c), u.size / L * 100 >= 75 && !o && (s(!0), setTimeout(n, 1500)), u;
+      return u.add(c), u.size / $ * 100 >= 75 && !s && (o(!0), setTimeout(n, 1500)), u;
     });
   }
   function a() {
-    const c = new Set(Array.from({ length: L }, (h, u) => u));
-    i(c), s(!0), setTimeout(n, 1500);
+    const c = new Set(Array.from({ length: $ }, (h, u) => u));
+    i(c), o(!0), setTimeout(n, 1500);
   }
-  const d = Math.round(r.size / L * 100);
-  return /* @__PURE__ */ e.jsxs("div", { style: { display: "flex", flexDirection: "column", alignItems: "center", gap: 16, padding: 24 }, children: [
-    /* @__PURE__ */ e.jsxs("div", { style: { position: "relative", width: 280 }, children: [
-      /* @__PURE__ */ e.jsx("div", { style: {
-        height: 140,
-        display: "grid",
-        placeItems: "center",
-        background: "var(--panel-2)",
-        border: "1px solid var(--border)",
-        borderRadius: 10
-      }, children: /* @__PURE__ */ e.jsxs("div", { style: { textAlign: "center" }, children: [
-        /* @__PURE__ */ e.jsx("div", { style: { fontSize: 11, color: "var(--ink-dim)", marginBottom: 4, fontFamily: "var(--font-mono)", textTransform: "uppercase", letterSpacing: "0.06em" }, children: "You won" }),
-        /* @__PURE__ */ e.jsx("div", { style: { fontSize: 32, fontWeight: 800, color: "var(--accent)" }, children: t })
-      ] }) }),
-      /* @__PURE__ */ e.jsx("div", { style: {
-        position: "absolute",
-        inset: 0,
-        borderRadius: 10,
-        display: "grid",
-        gridTemplateColumns: "repeat(4, 1fr)",
-        gap: 2,
-        padding: 2,
-        pointerEvents: o ? "none" : "auto"
-      }, children: Array.from({ length: L }, (c, h) => /* @__PURE__ */ e.jsx(
-        "div",
-        {
-          role: "button",
-          tabIndex: 0,
-          "aria-label": `Scratch tile ${h + 1}`,
-          onClick: () => l(h),
-          onKeyDown: (u) => {
-            (u.key === "Enter" || u.key === " ") && l(h);
-          },
-          onMouseEnter: (u) => {
-            u.buttons === 1 && l(h);
-          },
-          style: {
-            background: r.has(h) ? "transparent" : "var(--panel)",
-            border: r.has(h) ? "none" : "1px solid var(--border)",
-            borderRadius: 6,
-            cursor: "pointer",
-            transition: "background 0.15s",
-            minHeight: 32
+  const d = Math.round(r.size / $ * 100);
+  return /* @__PURE__ */ e.jsxs(
+    "div",
+    {
+      style: {
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        gap: 16,
+        padding: 24
+      },
+      children: [
+        /* @__PURE__ */ e.jsxs("div", { style: { position: "relative", width: 280 }, children: [
+          /* @__PURE__ */ e.jsx(
+            "div",
+            {
+              style: {
+                height: 140,
+                display: "grid",
+                placeItems: "center",
+                background: "var(--panel-2)",
+                border: "1px solid var(--border)",
+                borderRadius: 10
+              },
+              children: /* @__PURE__ */ e.jsxs("div", { style: { textAlign: "center" }, children: [
+                /* @__PURE__ */ e.jsx(
+                  "div",
+                  {
+                    style: {
+                      fontSize: 11,
+                      color: "var(--ink-dim)",
+                      marginBottom: 4,
+                      fontFamily: "var(--font-mono)",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.06em"
+                    },
+                    children: "You won"
+                  }
+                ),
+                /* @__PURE__ */ e.jsx("div", { style: { fontSize: 32, fontWeight: 800, color: "var(--accent)" }, children: t })
+              ] })
+            }
+          ),
+          /* @__PURE__ */ e.jsx(
+            "div",
+            {
+              style: {
+                position: "absolute",
+                inset: 0,
+                borderRadius: 10,
+                display: "grid",
+                gridTemplateColumns: "repeat(4, 1fr)",
+                gap: 2,
+                padding: 2,
+                pointerEvents: s ? "none" : "auto"
+              },
+              children: Array.from({ length: $ }, (c, h) => /* @__PURE__ */ e.jsx(
+                "div",
+                {
+                  role: "button",
+                  tabIndex: 0,
+                  "aria-label": `Scratch tile ${h + 1}`,
+                  onClick: () => l(h),
+                  onKeyDown: (u) => {
+                    (u.key === "Enter" || u.key === " ") && l(h);
+                  },
+                  onMouseEnter: (u) => {
+                    u.buttons === 1 && l(h);
+                  },
+                  style: {
+                    background: r.has(h) ? "transparent" : "var(--panel)",
+                    border: r.has(h) ? "none" : "1px solid var(--border)",
+                    borderRadius: 6,
+                    cursor: "pointer",
+                    transition: "background 0.15s",
+                    minHeight: 32
+                  }
+                },
+                h
+              ))
+            }
+          )
+        ] }),
+        /* @__PURE__ */ e.jsx(
+          "div",
+          {
+            style: {
+              fontSize: 12,
+              color: s ? "var(--accent)" : "var(--ink-dim)",
+              textAlign: "center"
+            },
+            children: s ? `🎉 You revealed: ${t}` : `Scratch to reveal… ${d}% uncovered`
           }
-        },
-        h
-      )) })
-    ] }),
-    /* @__PURE__ */ e.jsx("div", { style: { fontSize: 12, color: o ? "var(--accent)" : "var(--ink-dim)", textAlign: "center" }, children: o ? `🎉 You revealed: ${t}` : `Scratch to reveal… ${d}% uncovered` }),
-    !o && /* @__PURE__ */ e.jsx(
-      "button",
-      {
-        onClick: a,
-        style: {
-          background: "none",
-          border: "none",
-          cursor: "pointer",
-          fontSize: 11,
-          color: "var(--ink-dim)",
-          textDecoration: "underline"
-        },
-        children: "Reveal all"
-      }
-    )
-  ] });
+        ),
+        !s && /* @__PURE__ */ e.jsx(
+          "button",
+          {
+            onClick: a,
+            style: {
+              background: "none",
+              border: "none",
+              cursor: "pointer",
+              fontSize: 11,
+              color: "var(--ink-dim)",
+              textDecoration: "underline"
+            },
+            children: "Reveal all"
+          }
+        )
+      ]
+    }
+  );
 }
 const Qe = [
   { id: "b1", name: "First Quest", got: !0, desc: "Completed your first mission." },
@@ -2611,29 +2808,46 @@ function Ke({
   earned: r,
   onComplete: i
 }) {
-  const o = r ?? t.filter((l) => l.got).length, s = o >= n;
+  const s = r ?? t.filter((l) => l.got).length, o = s >= n;
   return /* @__PURE__ */ e.jsxs("div", { style: { display: "flex", flexDirection: "column", gap: 16, padding: 24 }, children: [
     /* @__PURE__ */ e.jsxs("div", { style: { display: "flex", flexDirection: "column", gap: 6 }, children: [
-      /* @__PURE__ */ e.jsxs("div", { style: { display: "flex", justifyContent: "space-between", fontSize: 12, color: "var(--ink-dim)" }, children: [
-        /* @__PURE__ */ e.jsx("span", { children: "Badges collected" }),
-        /* @__PURE__ */ e.jsxs("span", { style: { color: s ? "var(--accent-lime)" : "var(--ink)" }, children: [
-          o,
-          "/",
-          n
-        ] })
-      ] }),
-      /* @__PURE__ */ e.jsx("div", { style: { height: 6, background: "var(--panel-2)", borderRadius: 3, overflow: "hidden" }, children: /* @__PURE__ */ e.jsx(
+      /* @__PURE__ */ e.jsxs(
         "div",
         {
           style: {
-            height: "100%",
-            width: `${Math.min(100, o / n * 100)}%`,
-            background: s ? "var(--accent-lime)" : "var(--accent)",
-            transition: "width 0.4s ease",
-            borderRadius: 3
-          }
+            display: "flex",
+            justifyContent: "space-between",
+            fontSize: 12,
+            color: "var(--ink-dim)"
+          },
+          children: [
+            /* @__PURE__ */ e.jsx("span", { children: "Badges collected" }),
+            /* @__PURE__ */ e.jsxs("span", { style: { color: o ? "var(--accent-lime)" : "var(--ink)" }, children: [
+              s,
+              "/",
+              n
+            ] })
+          ]
         }
-      ) })
+      ),
+      /* @__PURE__ */ e.jsx(
+        "div",
+        {
+          style: { height: 6, background: "var(--panel-2)", borderRadius: 3, overflow: "hidden" },
+          children: /* @__PURE__ */ e.jsx(
+            "div",
+            {
+              style: {
+                height: "100%",
+                width: `${Math.min(100, s / n * 100)}%`,
+                background: o ? "var(--accent-lime)" : "var(--accent)",
+                transition: "width 0.4s ease",
+                borderRadius: 3
+              }
+            }
+          )
+        }
+      )
     ] }),
     /* @__PURE__ */ e.jsx("div", { style: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }, children: t.map((l) => /* @__PURE__ */ e.jsxs(
       "div",
@@ -2651,32 +2865,38 @@ function Ke({
         children: [
           /* @__PURE__ */ e.jsxs("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "center" }, children: [
             /* @__PURE__ */ e.jsx("span", { style: { fontSize: 18 }, children: "🏅" }),
-            l.got && /* @__PURE__ */ e.jsx("span", { style: {
-              fontSize: 10,
-              background: "var(--accent)",
-              color: "#05060A",
-              padding: "1px 6px",
-              borderRadius: 4,
-              fontWeight: 700
-            }, children: "✓" })
+            l.got && /* @__PURE__ */ e.jsx(
+              "span",
+              {
+                style: {
+                  fontSize: 10,
+                  background: "var(--accent)",
+                  color: "#05060A",
+                  padding: "1px 6px",
+                  borderRadius: 4,
+                  fontWeight: 700
+                },
+                children: "✓"
+              }
+            )
           ] }),
           /* @__PURE__ */ e.jsx("div", { style: { fontSize: 12, fontWeight: 600 }, children: l.name })
         ]
       },
       l.id
     )) }),
-    !s && /* @__PURE__ */ e.jsx("div", { style: { fontSize: 12, color: "var(--ink-dim)", textAlign: "center" }, children: "Keep completing missions to earn more badges" }),
-    /* @__PURE__ */ e.jsx(g, { variant: "primary", disabled: !s, onClick: i, style: { width: "100%" }, children: s ? "Claim XP" : `Earn ${n - o} more badge${n - o !== 1 ? "s" : ""}` })
+    !o && /* @__PURE__ */ e.jsx("div", { style: { fontSize: 12, color: "var(--ink-dim)", textAlign: "center" }, children: "Keep completing missions to earn more badges" }),
+    /* @__PURE__ */ e.jsx(g, { variant: "primary", disabled: !o, onClick: i, style: { width: "100%" }, children: o ? "Claim XP" : `Earn ${n - s} more badge${n - s !== 1 ? "s" : ""}` })
   ] });
 }
 function Ze({
   referralLink: t = "https://app.growquest.io/ref/demo-abc123",
   onComplete: n
 }) {
-  const [r, i] = p(!1), [o, s] = p(!1), l = r || o;
+  const [r, i] = p(!1), [s, o] = p(!1), l = r || s;
   function a() {
     navigator.clipboard.writeText(t).then(() => {
-      i(!0), setTimeout(() => i(!1), 2e3), s(!0);
+      i(!0), setTimeout(() => i(!1), 2e3), o(!0);
     });
   }
   function d(c) {
@@ -2685,49 +2905,74 @@ function Ze({
       whatsapp: `https://wa.me/?text=${h("Join me on GrowQuest! " + t)}`,
       linkedin: `https://linkedin.com/sharing/share-offsite/?url=${h(t)}`
     };
-    window.open(u[c], "_blank"), s(!0);
+    window.open(u[c], "_blank"), o(!0);
   }
   return /* @__PURE__ */ e.jsxs("div", { style: { display: "flex", flexDirection: "column", gap: 16, padding: 24 }, children: [
     /* @__PURE__ */ e.jsxs("div", { children: [
-      /* @__PURE__ */ e.jsx("div", { style: { fontSize: 11, color: "var(--ink-dim)", fontFamily: "var(--font-mono)", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 6 }, children: "Your referral link" }),
-      /* @__PURE__ */ e.jsxs("div", { style: {
-        display: "flex",
-        gap: 8,
-        padding: "10px 12px",
-        background: "var(--panel-2)",
-        border: "1px solid var(--border)",
-        borderRadius: 8,
-        alignItems: "center"
-      }, children: [
-        /* @__PURE__ */ e.jsx("span", { style: {
-          flex: 1,
-          fontFamily: "var(--font-mono)",
-          fontSize: 12,
-          color: "var(--ink-dim)",
-          overflow: "hidden",
-          textOverflow: "ellipsis",
-          whiteSpace: "nowrap"
-        }, children: t }),
-        /* @__PURE__ */ e.jsx(
-          "button",
-          {
-            onClick: a,
-            style: {
-              padding: "4px 10px",
-              borderRadius: 5,
-              border: "1px solid var(--border)",
-              background: r ? "var(--accent)" : "var(--panel)",
-              color: r ? "#05060A" : "var(--ink)",
-              fontSize: 11,
-              fontWeight: 600,
-              cursor: "pointer",
-              whiteSpace: "nowrap",
-              transition: "all 0.15s"
-            },
-            children: r ? "Copied ✓" : "Copy"
-          }
-        )
-      ] })
+      /* @__PURE__ */ e.jsx(
+        "div",
+        {
+          style: {
+            fontSize: 11,
+            color: "var(--ink-dim)",
+            fontFamily: "var(--font-mono)",
+            textTransform: "uppercase",
+            letterSpacing: "0.06em",
+            marginBottom: 6
+          },
+          children: "Your referral link"
+        }
+      ),
+      /* @__PURE__ */ e.jsxs(
+        "div",
+        {
+          style: {
+            display: "flex",
+            gap: 8,
+            padding: "10px 12px",
+            background: "var(--panel-2)",
+            border: "1px solid var(--border)",
+            borderRadius: 8,
+            alignItems: "center"
+          },
+          children: [
+            /* @__PURE__ */ e.jsx(
+              "span",
+              {
+                style: {
+                  flex: 1,
+                  fontFamily: "var(--font-mono)",
+                  fontSize: 12,
+                  color: "var(--ink-dim)",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                  whiteSpace: "nowrap"
+                },
+                children: t
+              }
+            ),
+            /* @__PURE__ */ e.jsx(
+              "button",
+              {
+                onClick: a,
+                style: {
+                  padding: "4px 10px",
+                  borderRadius: 5,
+                  border: "1px solid var(--border)",
+                  background: r ? "var(--accent)" : "var(--panel)",
+                  color: r ? "#05060A" : "var(--ink)",
+                  fontSize: 11,
+                  fontWeight: 600,
+                  cursor: "pointer",
+                  whiteSpace: "nowrap",
+                  transition: "all 0.15s"
+                },
+                children: r ? "Copied ✓" : "Copy"
+              }
+            )
+          ]
+        }
+      )
     ] }),
     /* @__PURE__ */ e.jsxs("div", { children: [
       /* @__PURE__ */ e.jsx("div", { style: { fontSize: 11, color: "var(--ink-dim)", marginBottom: 8 }, children: "Share via" }),
@@ -2763,17 +3008,17 @@ function et({
   shareUrl: n = "https://growquest.io",
   onComplete: r
 }) {
-  const [i, o] = p(!1);
-  function s(d) {
+  const [i, s] = p(!1);
+  function o(d) {
     const c = encodeURIComponent, h = {
       x: `https://x.com/intent/tweet?text=${c(t)}&url=${c(n)}`,
       facebook: `https://www.facebook.com/sharer/sharer.php?u=${c(n)}`,
       whatsapp: `https://wa.me/?text=${c(t + " " + n)}`
     };
-    window.open(h[d], "_blank"), o(!0);
+    window.open(h[d], "_blank"), s(!0);
   }
   function l() {
-    navigator.clipboard.writeText(n), o(!0);
+    navigator.clipboard.writeText(n), s(!0);
   }
   const a = [
     { id: "x", label: "𝕏 X / Twitter" },
@@ -2781,21 +3026,27 @@ function et({
     { id: "whatsapp", label: "WhatsApp" }
   ];
   return /* @__PURE__ */ e.jsxs("div", { style: { display: "flex", flexDirection: "column", gap: 16, padding: 24 }, children: [
-    /* @__PURE__ */ e.jsxs("div", { style: {
-      padding: 14,
-      background: "var(--panel-2)",
-      border: "1px solid var(--border)",
-      borderRadius: 10
-    }, children: [
-      /* @__PURE__ */ e.jsx("div", { style: { fontWeight: 600, fontSize: 13, marginBottom: 4 }, children: t }),
-      /* @__PURE__ */ e.jsx("div", { style: { fontSize: 11, color: "var(--ink-dim)", fontFamily: "var(--font-mono)" }, children: n })
-    ] }),
+    /* @__PURE__ */ e.jsxs(
+      "div",
+      {
+        style: {
+          padding: 14,
+          background: "var(--panel-2)",
+          border: "1px solid var(--border)",
+          borderRadius: 10
+        },
+        children: [
+          /* @__PURE__ */ e.jsx("div", { style: { fontWeight: 600, fontSize: 13, marginBottom: 4 }, children: t }),
+          /* @__PURE__ */ e.jsx("div", { style: { fontSize: 11, color: "var(--ink-dim)", fontFamily: "var(--font-mono)" }, children: n })
+        ]
+      }
+    ),
     /* @__PURE__ */ e.jsx("div", { style: { fontSize: 12, color: "var(--ink-dim)" }, children: "Share via" }),
     /* @__PURE__ */ e.jsxs("div", { style: { display: "flex", flexDirection: "column", gap: 8 }, children: [
       a.map(({ id: d, label: c }) => /* @__PURE__ */ e.jsxs(
         "button",
         {
-          onClick: () => s(d),
+          onClick: () => o(d),
           style: {
             padding: "10px 14px",
             borderRadius: 8,
@@ -2837,21 +3088,21 @@ function et({
   ] });
 }
 function tt({ onComplete: t }) {
-  const [n, r] = p(""), [i, o] = p([]);
-  function s() {
-    n.includes("@") && (o((l) => [...l, n]), r(""));
+  const [n, r] = p(""), [i, s] = p([]);
+  function o() {
+    n.includes("@") && (s((l) => [...l, n]), r(""));
   }
   return /* @__PURE__ */ e.jsxs("div", { style: { display: "flex", flexDirection: "column", gap: 16, padding: 24 }, children: [
     /* @__PURE__ */ e.jsxs("div", { style: { display: "flex", gap: 8 }, children: [
       /* @__PURE__ */ e.jsx(
-        F,
+        G,
         {
           type: "email",
           placeholder: "friend@example.com",
           value: n,
           onChange: (l) => r(l.target.value),
           onKeyDown: (l) => {
-            l.key === "Enter" && s();
+            l.key === "Enter" && o();
           },
           style: { flex: 1 }
         }
@@ -2859,7 +3110,7 @@ function tt({ onComplete: t }) {
       /* @__PURE__ */ e.jsx(
         "button",
         {
-          onClick: s,
+          onClick: o,
           disabled: !n.includes("@"),
           style: {
             padding: "0 16px",
@@ -2877,7 +3128,13 @@ function tt({ onComplete: t }) {
         }
       )
     ] }),
-    i.length === 0 ? /* @__PURE__ */ e.jsx("div", { style: { fontSize: 12, color: "var(--ink-dim)", textAlign: "center", padding: "12px 0" }, children: "No invites sent yet" }) : /* @__PURE__ */ e.jsx("div", { style: { display: "flex", flexDirection: "column", gap: 6 }, children: i.map((l, a) => /* @__PURE__ */ e.jsxs(
+    i.length === 0 ? /* @__PURE__ */ e.jsx(
+      "div",
+      {
+        style: { fontSize: 12, color: "var(--ink-dim)", textAlign: "center", padding: "12px 0" },
+        children: "No invites sent yet"
+      }
+    ) : /* @__PURE__ */ e.jsx("div", { style: { display: "flex", flexDirection: "column", gap: 6 }, children: i.map((l, a) => /* @__PURE__ */ e.jsxs(
       "div",
       {
         style: {
@@ -2890,43 +3147,70 @@ function tt({ onComplete: t }) {
           fontSize: 12
         },
         children: [
-          /* @__PURE__ */ e.jsx("span", { style: {
-            width: 16,
-            height: 16,
-            borderRadius: "50%",
-            background: "var(--accent-lime, #84cc16)",
-            display: "grid",
-            placeItems: "center",
-            fontSize: 9,
-            fontWeight: 700,
-            color: "#05060A"
-          }, children: "✓" }),
+          /* @__PURE__ */ e.jsx(
+            "span",
+            {
+              style: {
+                width: 16,
+                height: 16,
+                borderRadius: "50%",
+                background: "var(--accent-lime, #84cc16)",
+                display: "grid",
+                placeItems: "center",
+                fontSize: 9,
+                fontWeight: 700,
+                color: "#05060A"
+              },
+              children: "✓"
+            }
+          ),
           /* @__PURE__ */ e.jsx("span", { style: { color: "var(--ink)", flex: 1 }, children: l })
         ]
       },
       a
     )) }),
-    /* @__PURE__ */ e.jsx(g, { variant: "primary", disabled: i.length === 0, onClick: t, style: { width: "100%" }, children: i.length === 0 ? "Send at least 1 invite" : `Done · ${i.length} invite${i.length !== 1 ? "s" : ""} sent` })
+    /* @__PURE__ */ e.jsx(
+      g,
+      {
+        variant: "primary",
+        disabled: i.length === 0,
+        onClick: t,
+        style: { width: "100%" },
+        children: i.length === 0 ? "Send at least 1 invite" : `Done · ${i.length} invite${i.length !== 1 ? "s" : ""} sent`
+      }
+    )
   ] });
 }
 function nt({ onComplete: t }) {
-  const [n, r] = p(null), [i, o] = p(null), [s, l] = p(!1), a = ee(null);
+  const [n, r] = p(null), [i, s] = p(null), [o, l] = p(!1), a = ee(null);
   function d(c) {
-    o(c.name);
+    s(c.name);
     const h = new FileReader();
     h.onload = (u) => {
       var v;
       return r((v = u.target) == null ? void 0 : v.result);
     }, h.readAsDataURL(c);
   }
-  return s ? /* @__PURE__ */ e.jsxs("div", { style: { display: "flex", flexDirection: "column", alignItems: "center", gap: 20, padding: "32px 24px" }, children: [
-    /* @__PURE__ */ e.jsx("div", { style: { fontSize: 48 }, children: "⏳" }),
-    /* @__PURE__ */ e.jsxs("div", { style: { textAlign: "center" }, children: [
-      /* @__PURE__ */ e.jsx("div", { style: { fontWeight: 600, fontSize: 15, marginBottom: 6 }, children: "Photo submitted — pending review" }),
-      /* @__PURE__ */ e.jsx("div", { style: { fontSize: 13, color: "var(--ink-dim)", lineHeight: 1.5 }, children: "Our team will review your photo and approve it within 24h. You'll be notified when XP is credited." })
-    ] }),
-    /* @__PURE__ */ e.jsx(g, { variant: "primary", onClick: t, style: { width: "100%" }, children: "Got it" })
-  ] }) : /* @__PURE__ */ e.jsxs("div", { style: { display: "flex", flexDirection: "column", gap: 16, padding: 24 }, children: [
+  return o ? /* @__PURE__ */ e.jsxs(
+    "div",
+    {
+      style: {
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        gap: 20,
+        padding: "32px 24px"
+      },
+      children: [
+        /* @__PURE__ */ e.jsx("div", { style: { fontSize: 48 }, children: "⏳" }),
+        /* @__PURE__ */ e.jsxs("div", { style: { textAlign: "center" }, children: [
+          /* @__PURE__ */ e.jsx("div", { style: { fontWeight: 600, fontSize: 15, marginBottom: 6 }, children: "Photo submitted — pending review" }),
+          /* @__PURE__ */ e.jsx("div", { style: { fontSize: 13, color: "var(--ink-dim)", lineHeight: 1.5 }, children: "Our team will review your photo and approve it within 24h. You'll be notified when XP is credited." })
+        ] }),
+        /* @__PURE__ */ e.jsx(g, { variant: "primary", onClick: t, style: { width: "100%" }, children: "Got it" })
+      ]
+    }
+  ) : /* @__PURE__ */ e.jsxs("div", { style: { display: "flex", flexDirection: "column", gap: 16, padding: 24 }, children: [
     /* @__PURE__ */ e.jsx(
       "input",
       {
@@ -2947,7 +3231,13 @@ function nt({ onComplete: t }) {
         {
           src: n,
           alt: "Proof",
-          style: { width: "100%", maxHeight: 220, objectFit: "cover", borderRadius: 8, border: "1px solid var(--border)" }
+          style: {
+            width: "100%",
+            maxHeight: 220,
+            objectFit: "cover",
+            borderRadius: 8,
+            border: "1px solid var(--border)"
+          }
         }
       ),
       /* @__PURE__ */ e.jsx("div", { style: { fontSize: 12, color: "var(--ink-dim)" }, children: i }),
@@ -2955,9 +3245,17 @@ function nt({ onComplete: t }) {
         "button",
         {
           onClick: () => {
-            r(null), o(null);
+            r(null), s(null);
           },
-          style: { background: "none", border: "none", cursor: "pointer", fontSize: 12, color: "var(--ink-dim)", textDecoration: "underline", textAlign: "left" },
+          style: {
+            background: "none",
+            border: "none",
+            cursor: "pointer",
+            fontSize: 12,
+            color: "var(--ink-dim)",
+            textDecoration: "underline",
+            textAlign: "left"
+          },
           children: "Change photo"
         }
       )
@@ -3012,13 +3310,46 @@ function rt({ platform: t }) {
     /* @__PURE__ */ e.jsx("rect", { x: "2", y: "2", width: "20", height: "20", rx: "5", stroke: "currentColor", strokeWidth: "1.6" }),
     /* @__PURE__ */ e.jsx("circle", { cx: "12", cy: "12", r: "4", stroke: "currentColor", strokeWidth: "1.6" }),
     /* @__PURE__ */ e.jsx("circle", { cx: "17.5", cy: "6.5", r: "1.2", fill: "currentColor" })
-  ] }) : n === "Twitter" ? /* @__PURE__ */ e.jsx("svg", { width: "32", height: "32", viewBox: "0 0 24 24", fill: "currentColor", children: /* @__PURE__ */ e.jsx("path", { d: "M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" }) }) : n === "YouTube" ? /* @__PURE__ */ e.jsxs("svg", { width: "32", height: "32", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "1.6", children: [
-    /* @__PURE__ */ e.jsx("rect", { x: "2", y: "5", width: "20", height: "14", rx: "3" }),
-    /* @__PURE__ */ e.jsx("polygon", { points: "10,9 16,12 10,15", fill: "currentColor", stroke: "none" })
-  ] }) : n === "Telegram" ? /* @__PURE__ */ e.jsx("svg", { width: "32", height: "32", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "1.6", children: /* @__PURE__ */ e.jsx("path", { d: "M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z", strokeLinejoin: "round" }) }) : /* @__PURE__ */ e.jsxs("svg", { width: "32", height: "32", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "1.6", children: [
-    /* @__PURE__ */ e.jsx("circle", { cx: "12", cy: "12", r: "9" }),
-    /* @__PURE__ */ e.jsx("path", { d: "M8 12h8M12 8v8" })
-  ] });
+  ] }) : n === "Twitter" ? /* @__PURE__ */ e.jsx("svg", { width: "32", height: "32", viewBox: "0 0 24 24", fill: "currentColor", children: /* @__PURE__ */ e.jsx("path", { d: "M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" }) }) : n === "YouTube" ? /* @__PURE__ */ e.jsxs(
+    "svg",
+    {
+      width: "32",
+      height: "32",
+      viewBox: "0 0 24 24",
+      fill: "none",
+      stroke: "currentColor",
+      strokeWidth: "1.6",
+      children: [
+        /* @__PURE__ */ e.jsx("rect", { x: "2", y: "5", width: "20", height: "14", rx: "3" }),
+        /* @__PURE__ */ e.jsx("polygon", { points: "10,9 16,12 10,15", fill: "currentColor", stroke: "none" })
+      ]
+    }
+  ) : n === "Telegram" ? /* @__PURE__ */ e.jsx(
+    "svg",
+    {
+      width: "32",
+      height: "32",
+      viewBox: "0 0 24 24",
+      fill: "none",
+      stroke: "currentColor",
+      strokeWidth: "1.6",
+      children: /* @__PURE__ */ e.jsx("path", { d: "M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z", strokeLinejoin: "round" })
+    }
+  ) : /* @__PURE__ */ e.jsxs(
+    "svg",
+    {
+      width: "32",
+      height: "32",
+      viewBox: "0 0 24 24",
+      fill: "none",
+      stroke: "currentColor",
+      strokeWidth: "1.6",
+      children: [
+        /* @__PURE__ */ e.jsx("circle", { cx: "12", cy: "12", r: "9" }),
+        /* @__PURE__ */ e.jsx("path", { d: "M8 12h8M12 8v8" })
+      ]
+    }
+  );
 }
 function it({
   platform: t = "Instagram",
@@ -3026,87 +3357,105 @@ function it({
   url: r = "https://instagram.com/growquest",
   onComplete: i
 }) {
-  const [o, s] = p(!1);
-  return /* @__PURE__ */ e.jsxs("div", { style: { display: "flex", flexDirection: "column", alignItems: "center", gap: 24, padding: "32px 24px" }, children: [
-    /* @__PURE__ */ e.jsx("div", { style: {
-      width: 72,
-      height: 72,
-      borderRadius: 18,
-      background: "var(--panel-2)",
-      border: "1px solid var(--border)",
-      display: "grid",
-      placeItems: "center",
-      color: "var(--accent)"
-    }, children: /* @__PURE__ */ e.jsx(rt, { platform: t }) }),
-    /* @__PURE__ */ e.jsxs("div", { style: { textAlign: "center" }, children: [
-      /* @__PURE__ */ e.jsx("div", { style: { fontWeight: 700, fontSize: 22, letterSpacing: "-0.02em", marginBottom: 4 }, children: n }),
-      /* @__PURE__ */ e.jsxs("div", { style: { fontSize: 13, color: "var(--ink-dim)" }, children: [
-        "Follow us on ",
-        t,
-        " to earn XP"
-      ] })
-    ] }),
-    /* @__PURE__ */ e.jsxs("div", { style: { display: "flex", flexDirection: "column", gap: 8, width: "100%" }, children: [
-      /* @__PURE__ */ e.jsxs(
-        g,
-        {
-          variant: "primary",
-          onClick: () => {
-            window.open(r, "_blank"), s(!0);
-          },
-          style: { width: "100%" },
-          children: [
-            "Open ",
+  const [s, o] = p(!1);
+  return /* @__PURE__ */ e.jsxs(
+    "div",
+    {
+      style: {
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        gap: 24,
+        padding: "32px 24px"
+      },
+      children: [
+        /* @__PURE__ */ e.jsx(
+          "div",
+          {
+            style: {
+              width: 72,
+              height: 72,
+              borderRadius: 18,
+              background: "var(--panel-2)",
+              border: "1px solid var(--border)",
+              display: "grid",
+              placeItems: "center",
+              color: "var(--accent)"
+            },
+            children: /* @__PURE__ */ e.jsx(rt, { platform: t })
+          }
+        ),
+        /* @__PURE__ */ e.jsxs("div", { style: { textAlign: "center" }, children: [
+          /* @__PURE__ */ e.jsx("div", { style: { fontWeight: 700, fontSize: 22, letterSpacing: "-0.02em", marginBottom: 4 }, children: n }),
+          /* @__PURE__ */ e.jsxs("div", { style: { fontSize: 13, color: "var(--ink-dim)" }, children: [
+            "Follow us on ",
             t,
-            " ↗"
-          ]
-        }
-      ),
-      /* @__PURE__ */ e.jsx(
-        g,
-        {
-          variant: o ? "primary" : "ghost",
-          disabled: !o,
-          onClick: i,
-          style: { width: "100%" },
-          children: "I've followed"
-        }
-      )
-    ] })
-  ] });
+            " to earn XP"
+          ] })
+        ] }),
+        /* @__PURE__ */ e.jsxs("div", { style: { display: "flex", flexDirection: "column", gap: 8, width: "100%" }, children: [
+          /* @__PURE__ */ e.jsxs(
+            g,
+            {
+              variant: "primary",
+              onClick: () => {
+                window.open(r, "_blank"), o(!0);
+              },
+              style: { width: "100%" },
+              children: [
+                "Open ",
+                t,
+                " ↗"
+              ]
+            }
+          ),
+          /* @__PURE__ */ e.jsx(
+            g,
+            {
+              variant: s ? "primary" : "ghost",
+              disabled: !s,
+              onClick: i,
+              style: { width: "100%" },
+              children: "I've followed"
+            }
+          )
+        ] })
+      ]
+    }
+  );
 }
-const st = 'a,button:not([disabled]),input:not([disabled]),textarea:not([disabled]),select:not([disabled]),[tabindex]:not([tabindex="-1"])';
-function ot(t, n) {
+const ot = 'a,button:not([disabled]),input:not([disabled]),textarea:not([disabled]),select:not([disabled]),[tabindex]:not([tabindex="-1"])';
+function st(t, n) {
   M(() => {
     if (!n || !t.current) return;
-    const r = t.current, i = Array.from(r.querySelectorAll(st)), o = i[0], s = i[i.length - 1];
-    o == null || o.focus();
+    const r = t.current, i = Array.from(r.querySelectorAll(ot)), s = i[0], o = i[i.length - 1];
+    s == null || s.focus();
     const l = (a) => {
-      a.key === "Tab" && (a.shiftKey ? document.activeElement === o && (a.preventDefault(), s == null || s.focus()) : document.activeElement === s && (a.preventDefault(), o == null || o.focus()));
+      a.key === "Tab" && (a.shiftKey ? document.activeElement === s && (a.preventDefault(), o == null || o.focus()) : document.activeElement === o && (a.preventDefault(), s == null || s.focus()));
     };
     return r.addEventListener("keydown", l), () => r.removeEventListener("keydown", l);
   }, [n, t]);
 }
 function vt({ m: t, onClose: n, onClaim: r }) {
-  const i = je(
+  const i = ye(
     () => () => {
     },
     () => !0,
     () => !1
-  ), o = ee(null);
-  if (ot(o, t !== null), !t || !i) return null;
-  const s = () => {
+  ), s = ee(null);
+  if (st(s, t !== null), !t || !i) return null;
+  const o = () => {
     r(t), n();
   };
   let l = null;
   if (t.type === "quiz") {
     const a = t.subtype === "quiz-textImage" ? "textImage" : t.subtype === "quiz-imageOnly" ? "imageOnly" : "text";
-    l = /* @__PURE__ */ e.jsx(Ie, { variant: a, onComplete: s });
+    l = /* @__PURE__ */ e.jsx(Ie, { variant: a, onComplete: o });
   } else if (t.type === "survey") {
     const a = t.subtype === "survey-textImage" ? "textImage" : t.subtype === "survey-imageOnly" ? "imageOnly" : t.subtype === "survey-textarea" ? "textarea" : "text";
-    l = /* @__PURE__ */ e.jsx(De, { variant: a, onComplete: s });
-  } else t.type === "hangman" ? l = /* @__PURE__ */ e.jsx(Pe, { onComplete: s }) : t.type === "trivia" ? l = /* @__PURE__ */ e.jsx(Be, { onComplete: s }) : t.type === "video" ? l = /* @__PURE__ */ e.jsx($e, { url: t.url ?? "", onComplete: s }) : t.type === "read_article" ? l = /* @__PURE__ */ e.jsx(Le, { url: t.url, onComplete: s }) : t.type === "profile" ? l = /* @__PURE__ */ e.jsx(Ue, { onComplete: s }) : t.type === "avatar" ? l = /* @__PURE__ */ e.jsx(Ge, { onComplete: s }) : t.type === "verify_email" ? l = /* @__PURE__ */ e.jsx(Ye, { onComplete: s }) : t.type === "verify_phone" ? l = /* @__PURE__ */ e.jsx(qe, { onComplete: s }) : t.type === "spin_wheel" ? l = /* @__PURE__ */ e.jsx(Ve, { onComplete: s }) : t.type === "scratch_card" ? l = /* @__PURE__ */ e.jsx(Je, { onComplete: s }) : t.type === "badge_collect" ? l = /* @__PURE__ */ e.jsx(Ke, { onComplete: s }) : t.type === "refer" ? l = /* @__PURE__ */ e.jsx(Ze, { onComplete: s }) : t.type === "share" ? l = /* @__PURE__ */ e.jsx(et, { shareUrl: t.url, onComplete: s }) : t.type === "invite" ? l = /* @__PURE__ */ e.jsx(tt, { onComplete: s }) : t.type === "photo_proof" ? l = /* @__PURE__ */ e.jsx(nt, { onComplete: s }) : (t.type === "follow_social" || t.type === "social") && (l = /* @__PURE__ */ e.jsx(it, { url: t.url, onComplete: s }));
-  return be(
+    l = /* @__PURE__ */ e.jsx(De, { variant: a, onComplete: o });
+  } else t.type === "hangman" ? l = /* @__PURE__ */ e.jsx(Pe, { onComplete: o }) : t.type === "trivia" ? l = /* @__PURE__ */ e.jsx(Be, { onComplete: o }) : t.type === "video" ? l = /* @__PURE__ */ e.jsx($e, { url: t.url ?? "", onComplete: o }) : t.type === "read_article" ? l = /* @__PURE__ */ e.jsx(Le, { url: t.url, onComplete: o }) : t.type === "profile" ? l = /* @__PURE__ */ e.jsx(Ue, { onComplete: o }) : t.type === "avatar" ? l = /* @__PURE__ */ e.jsx(Ge, { onComplete: o }) : t.type === "verify_email" ? l = /* @__PURE__ */ e.jsx(Ye, { onComplete: o }) : t.type === "verify_phone" ? l = /* @__PURE__ */ e.jsx(qe, { onComplete: o }) : t.type === "spin_wheel" ? l = /* @__PURE__ */ e.jsx(Ve, { onComplete: o }) : t.type === "scratch_card" ? l = /* @__PURE__ */ e.jsx(Je, { onComplete: o }) : t.type === "badge_collect" ? l = /* @__PURE__ */ e.jsx(Ke, { onComplete: o }) : t.type === "refer" ? l = /* @__PURE__ */ e.jsx(Ze, { onComplete: o }) : t.type === "share" ? l = /* @__PURE__ */ e.jsx(et, { shareUrl: t.url, onComplete: o }) : t.type === "invite" ? l = /* @__PURE__ */ e.jsx(tt, { onComplete: o }) : t.type === "photo_proof" ? l = /* @__PURE__ */ e.jsx(nt, { onComplete: o }) : (t.type === "follow_social" || t.type === "social") && (l = /* @__PURE__ */ e.jsx(it, { url: t.url, onComplete: o }));
+  return je(
     /* @__PURE__ */ e.jsx(
       "div",
       {
@@ -3117,7 +3466,7 @@ function vt({ m: t, onClose: n, onClaim: r }) {
         children: /* @__PURE__ */ e.jsxs(
           "div",
           {
-            ref: o,
+            ref: s,
             className: "modal",
             role: "dialog",
             "aria-modal": "true",
@@ -3141,7 +3490,7 @@ function vt({ m: t, onClose: n, onClaim: r }) {
                         /* @__PURE__ */ e.jsx(O, { amount: t.xp }),
                         t.limited && t.endsAt && /* @__PURE__ */ e.jsxs(C, { tone: "magenta", children: [
                           "Ends in ",
-                          /* @__PURE__ */ e.jsx(he, { endsAt: t.endsAt })
+                          /* @__PURE__ */ e.jsx(xe, { endsAt: t.endsAt })
                         ] })
                       ] })
                     ] }),
@@ -3175,20 +3524,20 @@ function vt({ m: t, onClose: n, onClaim: r }) {
     document.body
   );
 }
-function U(t) {
+function L(t) {
   return `var(--accent-${t === "accent" ? "cyan" : t})`;
 }
 const mt = Y(function({
   m: n,
   density: r = "comfortable",
   layout: i = "split",
-  onOpen: o
+  onOpen: s
 }) {
-  const [s, l] = n.progress, a = l > 0 ? s / l : 0, d = r === "compact", c = d ? 14 : 18;
+  const [o, l] = n.progress, a = l > 0 ? o / l : 0, d = r === "compact", c = d ? 14 : 18;
   return i === "stack" ? /* @__PURE__ */ e.jsxs(
     "button",
     {
-      onClick: () => o(n),
+      onClick: () => s(n),
       className: "mission-tile",
       style: {
         textAlign: "left",
@@ -3207,8 +3556,8 @@ const mt = Y(function({
             "div",
             {
               className: "icon-box",
-              style: { width: 32, height: 32, borderRadius: 6, color: U(n.tone) },
-              children: /* @__PURE__ */ e.jsx(G, { type: n.type, size: 18 })
+              style: { width: 32, height: 32, borderRadius: 6, color: L(n.tone) },
+              children: /* @__PURE__ */ e.jsx(U, { type: n.type, size: 18 })
             }
           ),
           n.limited && /* @__PURE__ */ e.jsxs(C, { tone: "magenta", children: [
@@ -3216,7 +3565,7 @@ const mt = Y(function({
             n.endsAt ? /* @__PURE__ */ e.jsxs(e.Fragment, { children: [
               " ",
               "· ",
-              /* @__PURE__ */ e.jsx(he, { endsAt: n.endsAt })
+              /* @__PURE__ */ e.jsx(xe, { endsAt: n.endsAt })
             ] }) : null
           ] })
         ] }),
@@ -3237,7 +3586,7 @@ const mt = Y(function({
             children: [
               /* @__PURE__ */ e.jsx(O, { amount: n.xp }),
               /* @__PURE__ */ e.jsxs("span", { style: { fontFamily: "var(--font-mono)", fontSize: 11, color: "var(--ink-dim)" }, children: [
-                s,
+                o,
                 "/",
                 l
               ] })
@@ -3250,7 +3599,7 @@ const mt = Y(function({
   ) : i === "list" ? /* @__PURE__ */ e.jsxs(
     "button",
     {
-      onClick: () => o(n),
+      onClick: () => s(n),
       className: "mission-tile",
       style: {
         textAlign: "left",
@@ -3272,10 +3621,10 @@ const mt = Y(function({
               width: 40,
               height: 40,
               borderRadius: 8,
-              color: U(n.tone),
+              color: L(n.tone),
               flexShrink: 0
             },
-            children: /* @__PURE__ */ e.jsx(G, { type: n.type, size: 20 })
+            children: /* @__PURE__ */ e.jsx(U, { type: n.type, size: 20 })
           }
         ),
         /* @__PURE__ */ e.jsxs("div", { style: { flex: 1, minWidth: 0 }, children: [
@@ -3297,7 +3646,7 @@ const mt = Y(function({
         /* @__PURE__ */ e.jsxs("div", { style: { display: "flex", alignItems: "center", gap: 10, flexShrink: 0 }, children: [
           n.limited && /* @__PURE__ */ e.jsx(C, { tone: "magenta", children: "LIMITED" }),
           /* @__PURE__ */ e.jsxs("span", { style: { fontFamily: "var(--font-mono)", fontSize: 11, color: "var(--ink-dim)" }, children: [
-            s,
+            o,
             "/",
             l
           ] }),
@@ -3308,7 +3657,7 @@ const mt = Y(function({
   ) : /* @__PURE__ */ e.jsxs(
     "button",
     {
-      onClick: () => o(n),
+      onClick: () => s(n),
       className: "mission-tile",
       style: {
         textAlign: "left",
@@ -3352,8 +3701,8 @@ const mt = Y(function({
                 "div",
                 {
                   className: "icon-box",
-                  style: { width: 34, height: 34, borderRadius: 7, color: U(n.tone) },
-                  children: /* @__PURE__ */ e.jsx(G, { type: n.type, size: 18 })
+                  style: { width: 34, height: 34, borderRadius: 7, color: L(n.tone) },
+                  children: /* @__PURE__ */ e.jsx(U, { type: n.type, size: 18 })
                 }
               ),
               n.limited && /* @__PURE__ */ e.jsx(C, { tone: "magenta", children: "⏱ LIMITED" })
@@ -3382,7 +3731,7 @@ const mt = Y(function({
                     alignItems: "center",
                     gap: 6,
                     padding: "6px 10px",
-                    background: U(n.tone),
+                    background: L(n.tone),
                     color: "#05060A",
                     borderRadius: 6,
                     fontSize: 12,
@@ -3417,13 +3766,13 @@ const mt = Y(function({
   3: "var(--accent-magenta)"
 }, at = { 1: 180, 2: 150, 3: 130 };
 function yt({ entries: t, rankColors: n, platformHeights: r }) {
-  const i = n ?? lt, o = r ?? at, s = t.slice(0, 3), l = [s[1], s[0], s[2]].filter(Boolean);
+  const i = n ?? lt, s = r ?? at, o = t.slice(0, 3), l = [o[1], o[0], o[2]].filter(Boolean);
   return /* @__PURE__ */ e.jsx(
     "div",
     {
       style: { display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 14, marginBottom: 28 },
       children: l.map((a) => {
-        const d = i[a.rank] ?? "var(--accent)", c = o[a.rank] ?? 120;
+        const d = i[a.rank] ?? "var(--accent)", c = s[a.rank] ?? 120;
         return /* @__PURE__ */ e.jsxs(
           "div",
           {
@@ -3529,7 +3878,7 @@ function jt({
   xpStyle: n,
   xpMax: r = 12e3,
   label: i = "Progress to Ascendant",
-  walletAddress: o = "0xE63F6A · 356C10AC"
+  walletAddress: s = "0xE63F6A · 356C10AC"
 }) {
   return /* @__PURE__ */ e.jsxs(
     "div",
@@ -3547,7 +3896,7 @@ function jt({
               ] }),
               /* @__PURE__ */ e.jsx(C, { tone: "accent", children: t.tier })
             ] }),
-            /* @__PURE__ */ e.jsx("div", { style: { fontFamily: "var(--font-mono)", fontSize: 11, color: "var(--ink-faint)" }, children: o })
+            /* @__PURE__ */ e.jsx("div", { style: { fontFamily: "var(--font-mono)", fontSize: 11, color: "var(--ink-faint)" }, children: s })
           ] })
         ] }),
         /* @__PURE__ */ e.jsx(Re, { value: t.xp, max: r, style: n, label: i }),
@@ -3555,7 +3904,7 @@ function jt({
           { k: "Missions", v: `${t.missionsDone}/12` },
           { k: "XP", v: t.xp.toLocaleString() },
           { k: "Streak", v: `${t.streak}d` }
-        ].map((s) => /* @__PURE__ */ e.jsxs("div", { className: "stat-cell", children: [
+        ].map((o) => /* @__PURE__ */ e.jsxs("div", { className: "stat-cell", children: [
           /* @__PURE__ */ e.jsx(
             "div",
             {
@@ -3566,11 +3915,11 @@ function jt({
                 textTransform: "uppercase",
                 color: "var(--ink-faint)"
               },
-              children: s.k
+              children: o.k
             }
           ),
-          /* @__PURE__ */ e.jsx("div", { style: { fontWeight: 700, fontSize: 14, marginTop: 2 }, children: s.v })
-        ] }, s.k)) })
+          /* @__PURE__ */ e.jsx("div", { style: { fontWeight: 700, fontSize: 14, marginTop: 2 }, children: o.v })
+        ] }, o.k)) })
       ]
     }
   );
@@ -3579,15 +3928,15 @@ const bt = Y(function({
   r: n,
   persona: r,
   onRedeem: i,
-  compact: o = !1
+  compact: s = !1
 }) {
-  const s = r.xp >= n.cost, l = n.tone === "accent" ? "cyan" : n.tone;
+  const o = r.xp >= n.cost, l = n.tone === "accent" ? "cyan" : n.tone;
   return /* @__PURE__ */ e.jsxs("div", { className: "panel", style: { overflow: "hidden", display: "flex", flexDirection: "column" }, children: [
     /* @__PURE__ */ e.jsxs(
       "div",
       {
         style: {
-          aspectRatio: o ? "2 / 1" : "4 / 3",
+          aspectRatio: s ? "2 / 1" : "4 / 3",
           position: "relative",
           background: "var(--panel-2)",
           borderBottom: "1px solid var(--border)",
@@ -3619,8 +3968,8 @@ const bt = Y(function({
               "div",
               {
                 style: {
-                  width: o ? 52 : 68,
-                  height: o ? 52 : 68,
+                  width: s ? 52 : 68,
+                  height: s ? 52 : 68,
                   borderRadius: 12,
                   background: `var(--accent-${l})`,
                   color: "#05060A",
@@ -3628,7 +3977,7 @@ const bt = Y(function({
                   placeItems: "center",
                   fontWeight: 700,
                   fontFamily: "var(--font-mono)",
-                  fontSize: o ? 9 : 11,
+                  fontSize: s ? 9 : 11,
                   letterSpacing: "0.1em",
                   textTransform: "uppercase",
                   boxShadow: "0 10px 30px -10px rgba(0,0,0,0.3)"
@@ -3646,7 +3995,7 @@ const bt = Y(function({
       "div",
       {
         style: {
-          padding: o ? 10 : 14,
+          padding: s ? 10 : 14,
           display: "flex",
           flexDirection: "column",
           gap: 8,
@@ -3654,7 +4003,7 @@ const bt = Y(function({
         },
         children: [
           /* @__PURE__ */ e.jsxs("div", { children: [
-            /* @__PURE__ */ e.jsx("div", { style: { fontWeight: 600, fontSize: o ? 13 : 14 }, children: n.title }),
+            /* @__PURE__ */ e.jsx("div", { style: { fontWeight: 600, fontSize: s ? 13 : 14 }, children: n.title }),
             /* @__PURE__ */ e.jsx(
               "div",
               {
@@ -3682,7 +4031,7 @@ const bt = Y(function({
               },
               children: [
                 /* @__PURE__ */ e.jsx(O, { amount: n.cost.toLocaleString() }),
-                /* @__PURE__ */ e.jsx(g, { variant: "primary", size: "sm", disabled: !s, onClick: () => i(n), children: s ? "Redeem" : "Locked" })
+                /* @__PURE__ */ e.jsx(g, { variant: "primary", size: "sm", disabled: !o, onClick: () => i(n), children: o ? "Redeem" : "Locked" })
               ]
             }
           )
@@ -3708,22 +4057,22 @@ function wt({ tiers: t, currentXP: n }) {
       "div",
       {
         style: { display: "grid", gridTemplateColumns: `repeat(${t.length}, 1fr)`, gap: 10 },
-        children: t.map((i, o) => {
-          const s = r.name === i.name, l = n >= i.min;
+        children: t.map((i, s) => {
+          const o = r.name === i.name, l = n >= i.min;
           return /* @__PURE__ */ e.jsxs(
             "div",
             {
               style: {
                 padding: 14,
                 borderRadius: 10,
-                border: s ? `1px solid ${i.color}` : "1px solid var(--border)",
-                background: s ? `color-mix(in oklch, ${i.color} 12%, transparent)` : "var(--panel-2)",
-                opacity: l || s ? 1 : 0.5
+                border: o ? `1px solid ${i.color}` : "1px solid var(--border)",
+                background: o ? `color-mix(in oklch, ${i.color} 12%, transparent)` : "var(--panel-2)",
+                opacity: l || o ? 1 : 0.5
               },
               children: [
                 /* @__PURE__ */ e.jsxs("div", { className: "mono-label", children: [
                   "tier ",
-                  String(o + 1).padStart(2, "0")
+                  String(s + 1).padStart(2, "0")
                 ] }),
                 /* @__PURE__ */ e.jsx(
                   "div",
@@ -3732,7 +4081,7 @@ function wt({ tiers: t, currentXP: n }) {
                       fontWeight: 700,
                       fontSize: 16,
                       marginTop: 4,
-                      color: s ? i.color : "var(--ink)"
+                      color: o ? i.color : "var(--ink)"
                     },
                     children: i.name
                   }
@@ -3767,17 +4116,17 @@ export {
   pt as BadgeGrid,
   xt as BrandLockup,
   g as Button,
-  Ce as Chip,
-  he as Countdown,
+  Se as Chip,
+  xe as Countdown,
   ht as Divider,
   Ye as EmailVerificationExperience,
   _ as Eyebrow,
-  de as Field,
+  Ce as Field,
   ft as FilterTabs,
   it as FollowSocialExperience,
   Pe as HangmanExperience,
   ut as HeroBanner,
-  F as Input,
+  G as Input,
   tt as InviteExperience,
   gt as LeaderboardTable,
   Te as Logo,
@@ -3799,7 +4148,7 @@ export {
   kt as StatCard,
   De as SurveyExperience,
   C as Tag,
-  xe as Textarea,
+  de as Textarea,
   wt as TierLadder,
   Be as TriviaExperience,
   $e as VideoExperience,
