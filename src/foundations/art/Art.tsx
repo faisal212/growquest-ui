@@ -374,6 +374,100 @@ export function MissionIcon({ type, size = 22 }: { type: string; size?: number }
         <path d="M9 7V5a3 3 0 016 0v2" />
       </svg>
     )
+  if (type === 'read_article')
+    return (
+      <svg {...common}>
+        <rect x="4" y="3" width="16" height="18" rx="2" />
+        <path d="M8 8h8M8 12h8M8 16h5" />
+      </svg>
+    )
+  if (type === 'profile')
+    return (
+      <svg {...common}>
+        <circle cx="12" cy="8" r="4" />
+        <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
+        <path d="M15 15l1.5 1.5L19 14" />
+      </svg>
+    )
+  if (type === 'avatar')
+    return (
+      <svg {...common}>
+        <circle cx="12" cy="8" r="4" />
+        <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
+        <path d="M18 14v4M16 16h4" />
+      </svg>
+    )
+  if (type === 'verify_email')
+    return (
+      <svg {...common}>
+        <rect x="3" y="6" width="18" height="13" rx="2" />
+        <path d="M3 8l9 6 9-6" />
+        <path d="M14 17l2 2 4-4" />
+      </svg>
+    )
+  if (type === 'verify_phone')
+    return (
+      <svg {...common}>
+        <rect x="7" y="2" width="10" height="20" rx="2" />
+        <path d="M7 6h10M7 18h10" />
+        <path d="M14 14l1.5 1.5L18 13" />
+      </svg>
+    )
+  if (type === 'spin_wheel')
+    return (
+      <svg {...common}>
+        <circle cx="12" cy="12" r="9" />
+        <path d="M12 3v9M12 12l6.4 6.4M12 12H3" />
+        <circle cx="12" cy="12" r="2" fill="currentColor" stroke="none" />
+      </svg>
+    )
+  if (type === 'scratch_card')
+    return (
+      <svg {...common}>
+        <rect x="3" y="5" width="18" height="14" rx="2" />
+        <path d="M7 12c1.5-2 3-2 4 0s2.5 2 4 0" strokeDasharray="3 2" />
+        <path d="M8 16h2M12 16h4" />
+      </svg>
+    )
+  if (type === 'badge_collect')
+    return (
+      <svg {...common}>
+        <path d="M12 3l2.2 5.2H20l-4.6 3.4 1.8 5.4L12 14l-5.2 3 1.8-5.4L4 8.2h5.8z" />
+        <path d="M9 21h6M12 17.5v3.5" />
+      </svg>
+    )
+  if (type === 'share')
+    return (
+      <svg {...common}>
+        <path d="M4 12v7a2 2 0 002 2h12a2 2 0 002-2v-7" />
+        <path d="M16 6l-4-4-4 4M12 2v13" />
+      </svg>
+    )
+  if (type === 'invite')
+    return (
+      <svg {...common}>
+        <circle cx="9" cy="8" r="3" />
+        <path d="M3 20c0-3 2.5-5 6-5s6 2 6 5" />
+        <path d="M18 8v6M15 11h6" />
+      </svg>
+    )
+  if (type === 'photo_proof')
+    return (
+      <svg {...common}>
+        <rect x="3" y="6" width="18" height="14" rx="2" />
+        <circle cx="12" cy="13" r="3.5" />
+        <path d="M8 6l2-3h4l2 3" />
+        <path d="M15 11l1.5 1.5L19 10" />
+      </svg>
+    )
+  if (type === 'follow_social')
+    return (
+      <svg {...common}>
+        <circle cx="12" cy="12" r="9" />
+        <path d="M8 12h8M12 8v8" />
+        <circle cx="18.5" cy="5.5" r="2.5" fill="currentColor" stroke="none" />
+      </svg>
+    )
   return (
     <svg {...common}>
       <circle cx="12" cy="12" r="8" />

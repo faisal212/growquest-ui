@@ -11,6 +11,18 @@ export type MissionType =
   | 'event'
   | 'purchase'
   | 'bundle'
+  | 'read_article'
+  | 'profile'
+  | 'avatar'
+  | 'verify_email'
+  | 'verify_phone'
+  | 'spin_wheel'
+  | 'scratch_card'
+  | 'badge_collect'
+  | 'share'
+  | 'invite'
+  | 'photo_proof'
+  | 'follow_social'
 
 export type MissionSubtype =
   | 'quiz-text'
