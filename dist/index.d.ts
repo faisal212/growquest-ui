@@ -37,8 +37,8 @@ import { LeaderboardTable } from './components/LeaderboardTable'
 import { Logo } from './primitives/Logo'
 import { LogoSet } from './config'
 import { Mission } from './types'
+import { MissionCard } from './components/MissionCard'
 import { MissionModal } from './components/MissionModal'
-import { MissionTile } from './components/MissionTile'
 import { MissionType } from './types'
 import { Mode } from './config'
 import { Overrides } from './config'
@@ -47,8 +47,8 @@ import { PhoneVerificationExperience } from './experiences/PhoneVerification'
 import { PhotoProofExperience } from './experiences/PhotoProof'
 import { Podium } from './components/Podium'
 import { preloadAssets } from './config'
+import { ProfileCard } from './components/ProfileCard'
 import { ProfileCompletionExperience } from './experiences/ProfileCompletion'
-import { ProfileSnapshot } from './components/ProfileSnapshot'
 import { QuizExperience } from './experiences/Quiz'
 import { RadiusSet } from './config'
 import { ReadArticleExperience } from './experiences/ReadArticle'
@@ -160,9 +160,9 @@ export { LogoSet }
 
 export { Mission }
 
-export { MissionModal }
+export { MissionCard }
 
-export { MissionTile }
+export { MissionModal }
 
 export { MissionType }
 
@@ -180,9 +180,9 @@ export { Podium }
 
 export { preloadAssets }
 
-export { ProfileCompletionExperience }
+export { ProfileCard }
 
-export { ProfileSnapshot }
+export { ProfileCompletionExperience }
 
 export { QuizExperience }
 
