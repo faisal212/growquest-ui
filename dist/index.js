@@ -1,4 +1,4 @@
-import ur, { useState as j, useEffect as G, useMemo as hr, useContext as pr, createContext as mr, memo as Xe, useRef as Bt, useSyncExternalStore as br } from "react";
+import ur, { useState as j, useEffect as G, useMemo as hr, useContext as pr, createContext as mr, memo as He, useRef as Bt, useSyncExternalStore as br } from "react";
 import { createPortal as gr } from "react-dom";
 function Dt(e, t) {
   if (!t) return e;
@@ -39,25 +39,7 @@ const vr = {
     sectionTitle: "Daily quests",
     rewardsEyebrow: "// rewards marketplace",
     rewardsTitle: "Spend your XP",
-    rewardsBalance: "balance",
-    dailyDrop: {
-      eyebrow: "// daily drop",
-      title: "Daily streak",
-      subtitle: "Claim +50 XP every 24h"
-    },
-    spin: {
-      eyebrow: "// lootbox",
-      title: "Spin-to-win",
-      subtitle: "1 free spin available",
-      prizes: "PRIZES: XP · MERCH · RARE DROP"
-    },
-    readyToCollect: {
-      eyebrow: "// ready to collect",
-      empty: "Complete a mission to collect rewards.",
-      buttonEmpty: "No rewards yet",
-      buttonReady: (e) => `Collect (${e})`,
-      waiting: (e) => `${e} reward${e > 1 ? "s" : ""} waiting.`
-    }
+    rewardsBalance: "balance"
   }
 }, we = {
   mode: "dark",
@@ -65,7 +47,7 @@ const vr = {
     primary: "oklch(0.86 0.18 200)",
     secondary: "oklch(0.72 0.25 340)"
   }
-}, $n = (e, t) => {
+}, Tn = (e, t) => {
   if (typeof e == "number") {
     if (t === 3)
       return {
@@ -249,9 +231,9 @@ const vr = {
   whitesmoke: 16119285,
   yellow: 16776960,
   yellowgreen: 10145074
-}, jr = (e) => $n(yr[e.toLowerCase()], 6), kr = /^#?([0-9a-f]{8}|[0-9a-f]{6}|[0-9a-f]{4}|[0-9a-f]{3})$/i, wr = (e) => {
+}, jr = (e) => Tn(yr[e.toLowerCase()], 6), kr = /^#?([0-9a-f]{8}|[0-9a-f]{6}|[0-9a-f]{4}|[0-9a-f]{3})$/i, wr = (e) => {
   let t;
-  return (t = e.match(kr)) ? $n(parseInt(t[1], 16), t[1].length) : void 0;
+  return (t = e.match(kr)) ? Tn(parseInt(t[1], 16), t[1].length) : void 0;
 }, U = "([+-]?\\d*\\.?\\d+(?:[eE][+-]?\\d+)?)", Ne = `${U}%`, qt = `(?:${U}%|${U})`, Nr = `(?:${U}(deg|grad|rad|turn)|${U})`, de = "\\s*,\\s*", Mr = new RegExp(
   `^rgba?\\(\\s*${U}${de}${U}${de}${U}\\s*(?:,\\s*${qt}\\s*)?\\)$`
 ), Cr = new RegExp(
@@ -265,7 +247,7 @@ const vr = {
   else
     return;
   return n[4] !== void 0 ? t.alpha = Math.max(0, Math.min(1, n[4] / 100)) : n[5] !== void 0 && (t.alpha = Math.max(0, Math.min(1, +n[5]))), t;
-}, Tn = (e, t) => e === void 0 ? void 0 : typeof e != "object" ? An(e) : e.mode !== void 0 ? e : t ? { ...e, mode: t } : void 0, Sn = (e = "rgb") => (t) => (t = Tn(t, e)) !== void 0 ? (
+}, $n = (e, t) => e === void 0 ? void 0 : typeof e != "object" ? An(e) : e.mode !== void 0 ? e : t ? { ...e, mode: t } : void 0, Sn = (e = "rgb") => (t) => (t = $n(t, e)) !== void 0 ? (
   // if the color's mode corresponds to our target mode
   t.mode === e ? (
     // then just return the color
@@ -288,7 +270,7 @@ const vr = {
       )
     )
   )
-) : void 0, L = {}, En = {}, Ie = [], Pn = {}, $r = (e) => e, N = (e) => (L[e.mode] = {
+) : void 0, L = {}, En = {}, Ie = [], zn = {}, Tr = (e) => e, N = (e) => (L[e.mode] = {
   ...L[e.mode],
   ...e.toMode
 }, Object.keys(e.fromMode || {}).forEach((t) => {
@@ -298,14 +280,14 @@ const vr = {
     throw new Error(`Missing interpolator for: ${t}`);
   typeof e.interpolate[t] == "function" && (e.interpolate[t] = {
     use: e.interpolate[t]
-  }), e.interpolate[t].fixup || (e.interpolate[t].fixup = $r);
+  }), e.interpolate[t].fixup || (e.interpolate[t].fixup = Tr);
 }), En[e.mode] = e, (e.parse || []).forEach((t) => {
-  Tr(t, e.mode);
-}), Sn(e.mode)), zn = (e) => En[e], Tr = (e, t) => {
+  $r(t, e.mode);
+}), Sn(e.mode)), Pn = (e) => En[e], $r = (e, t) => {
   if (typeof e == "string") {
     if (!t)
       throw new Error("'mode' required when 'parser' is a string");
-    Pn[e] = t;
+    zn[e] = t;
   } else typeof e == "function" && Ie.indexOf(e) < 0 && Ie.push(e);
 }, St = /[^\x00-\x7F]|[a-zA-Z_]/, Sr = /[^\x00-\x7F]|[-\w]/, h = {
   Function: "function",
@@ -318,7 +300,7 @@ const vr = {
   Alpha: "alpha"
 };
 let g = 0;
-function ze(e) {
+function Pe(e) {
   let t = e[g], n = e[g + 1];
   return t === "-" || t === "+" ? /\d/.test(n) || n === "." && /\d/.test(e[g + 2]) : t === "." ? /\d/.test(n) : /\d/.test(t);
 }
@@ -362,11 +344,11 @@ function Fe(e) {
     t += e[g++];
   return t;
 }
-function Pr(e) {
+function zr(e) {
   let t = Fe(e);
   return e[g] === "(" ? (g++, { type: h.Function, value: t }) : t === "none" ? { type: h.None, value: void 0 } : { type: h.Ident, value: t };
 }
-function zr(e = "") {
+function Pr(e = "") {
   let t = e.trim(), n = [], i;
   for (g = 0; g < t.length; ) {
     if (i = t[g++], i === `
@@ -383,14 +365,14 @@ function zr(e = "") {
       continue;
     }
     if (i === "+") {
-      if (g--, ze(t)) {
+      if (g--, Pe(t)) {
         n.push(ve(t));
         continue;
       }
       return;
     }
     if (i === "-") {
-      if (g--, ze(t)) {
+      if (g--, Pe(t)) {
         n.push(ve(t));
         continue;
       }
@@ -401,7 +383,7 @@ function zr(e = "") {
       return;
     }
     if (i === ".") {
-      if (g--, ze(t)) {
+      if (g--, Pe(t)) {
         n.push(ve(t));
         continue;
       }
@@ -412,7 +394,7 @@ function zr(e = "") {
 ` || t[g] === "	" || t[g] === " "); )
         g++;
       let a;
-      if (ze(t) && (a = ve(t), a.type !== h.Hue)) {
+      if (Pe(t) && (a = ve(t), a.type !== h.Hue)) {
         n.push({ type: h.Alpha, value: a });
         continue;
       }
@@ -430,7 +412,7 @@ function zr(e = "") {
       continue;
     }
     if (St.test(i)) {
-      g--, n.push(Pr(t));
+      g--, n.push(zr(t));
       continue;
     }
     return;
@@ -442,13 +424,13 @@ function Rr(e) {
   let t = e[e._i++];
   if (!t || t.type !== h.Function || t.value !== "color" || (t = e[e._i++], t.type !== h.Ident))
     return;
-  const n = Pn[t.value];
+  const n = zn[t.value];
   if (!n)
     return;
   const i = { mode: n }, a = Rn(e, !1);
   if (!a)
     return;
-  const s = zn(n).channels;
+  const s = Pn(n).channels;
   for (let o = 0, l, d; o < s.length; o++)
     l = a[o], d = s[o], l.type !== h.None && (i[d] = l.type === h.Number ? l.value : l.value / 100, d === "alpha" && (i[d] = Math.max(0, Math.min(1, i[d]))));
   return i;
@@ -489,7 +471,7 @@ function Ar(e, t) {
 const An = (e) => {
   if (typeof e != "string")
     return;
-  const t = zr(e), n = t ? Ar(t, !0) : void 0;
+  const t = Pr(e), n = t ? Ar(t, !0) : void 0;
   let i, a = 0, s = Ie.length;
   for (; a < s; )
     if ((i = Ie[a++](e, n)) !== void 0)
@@ -625,7 +607,7 @@ const Ir = (e) => e === "transparent" ? { mode: "rgb", r: 0, g: 0, b: 0, alpha: 
     return n;
   let s = F(n);
   return i === 0 || e[i - 1] === void 0 ? s : t(s - F(a[i - 1]));
-}).reduce((n, i) => !n.length || i === void 0 || n[n.length - 1] === void 0 ? (n.push(i), n) : (n.push(i + n[n.length - 1]), n), []), H = (e) => qr(e, (t) => Math.abs(t) <= 180 ? t : t - 360 * Math.sign(t)), O = [-0.14861, 1.78277, -0.29227, -0.90649, 1.97294, 0], Xr = Math.PI / 180, Hr = 180 / Math.PI;
+}).reduce((n, i) => !n.length || i === void 0 || n[n.length - 1] === void 0 ? (n.push(i), n) : (n.push(i + n[n.length - 1]), n), []), X = (e) => qr(e, (t) => Math.abs(t) <= 180 ? t : t - 360 * Math.sign(t)), O = [-0.14861, 1.78277, -0.29227, -0.90649, 1.97294, 0], Hr = Math.PI / 180, Xr = 180 / Math.PI;
 let en = O[3] * O[4], tn = O[1] * O[4], nn = O[1] * O[2] - O[0] * O[3];
 const Wr = ({ r: e, g: t, b: n, alpha: i }) => {
   e === void 0 && (e = 0), t === void 0 && (t = 0), n === void 0 && (n = 0);
@@ -634,13 +616,13 @@ const Wr = ({ r: e, g: t, b: n, alpha: i }) => {
     l: a,
     s: a === 0 || a === 1 ? void 0 : Math.sqrt(s * s + o * o) / (O[4] * a * (1 - a))
   };
-  return l.s && (l.h = Math.atan2(o, s) * Hr - 120), i !== void 0 && (l.alpha = i), l;
+  return l.s && (l.h = Math.atan2(o, s) * Xr - 120), i !== void 0 && (l.alpha = i), l;
 }, Yr = ({ h: e, s: t, l: n, alpha: i }) => {
   let a = { mode: "rgb" };
-  e = (e === void 0 ? 0 : e + 120) * Xr, n === void 0 && (n = 0);
+  e = (e === void 0 ? 0 : e + 120) * Hr, n === void 0 && (n = 0);
   let s = t === void 0 ? 0 : t * n * (1 - n), o = Math.cos(e), l = Math.sin(e);
   return a.r = n + s * (O[0] * o + O[1] * l), a.g = n + s * (O[2] * o + O[3] * l), a.b = n + s * (O[4] * o + O[5] * l), i !== void 0 && (a.alpha = i), a;
-}, He = (e, t) => {
+}, Xe = (e, t) => {
   if (e.h === void 0 || t.h === void 0 || !e.s || !t.s)
     return 0;
   let n = F(e.h), i = F(t.h), a = Math.sin((i - n + 360) / 2 * Math.PI / 180);
@@ -686,7 +668,7 @@ const Wr = ({ r: e, g: t, b: n, alpha: i }) => {
   interpolate: {
     h: {
       use: p,
-      fixup: H
+      fixup: X
     },
     s: p,
     l: p,
@@ -696,7 +678,7 @@ const Wr = ({ r: e, g: t, b: n, alpha: i }) => {
     }
   },
   difference: {
-    h: He
+    h: Xe
   },
   average: {
     h: W
@@ -745,14 +727,14 @@ const Fn = ({ l: e, a: t, b: n, alpha: i }) => {
 }, Ue = (e) => {
   let t = Ln(ee(e));
   return e.r === e.b && e.b === e.g && (t.a = t.b = 0), t;
-}, Le = 1, Bn = 1, _e = 26 / 180 * Math.PI, Be = Math.cos(_e), De = Math.sin(_e), Dn = 100 / Math.log(139 / 100), Pt = ({ l: e, c: t, h: n, alpha: i }) => {
+}, Le = 1, Bn = 1, _e = 26 / 180 * Math.PI, Be = Math.cos(_e), De = Math.sin(_e), Dn = 100 / Math.log(139 / 100), zt = ({ l: e, c: t, h: n, alpha: i }) => {
   e === void 0 && (e = 0), t === void 0 && (t = 0), n === void 0 && (n = 0);
   let a = {
     mode: "lab65",
     l: (Math.exp(e * Le / Dn) - 1) / 39e-4
   }, s = (Math.exp(0.0435 * t * Bn * Le) - 1) / 0.075, o = s * Math.cos(n / 180 * Math.PI - _e), l = s * Math.sin(n / 180 * Math.PI - _e);
   return a.a = o * Be - l / 0.83 * De, a.b = o * De + l / 0.83 * Be, i !== void 0 && (a.alpha = i), a;
-}, zt = ({ l: e, a: t, b: n, alpha: i }) => {
+}, Pt = ({ l: e, a: t, b: n, alpha: i }) => {
   e === void 0 && (e = 0), t === void 0 && (t = 0), n === void 0 && (n = 0);
   let a = t * Be + n * De, s = 0.83 * (n * Be - t * De), o = Math.sqrt(a * a + s * s), l = {
     mode: "dlch",
@@ -760,7 +742,7 @@ const Fn = ({ l: e, a: t, b: n, alpha: i }) => {
     c: Math.log(1 + 0.075 * o) / (0.0435 * Bn * Le)
   };
   return l.c && (l.h = F((Math.atan2(s, a) + _e) / Math.PI * 180)), i !== void 0 && (l.alpha = i), l;
-}, rn = (e) => Pt(J(e, "dlch")), an = (e) => V(zt(e), "dlab"), Jr = {
+}, rn = (e) => zt(J(e, "dlch")), an = (e) => V(Pt(e), "dlab"), Jr = {
   mode: "dlab",
   parse: ["--din99o-lab"],
   serialize: "--din99o-lab",
@@ -792,14 +774,14 @@ const Fn = ({ l: e, a: t, b: n, alpha: i }) => {
   parse: ["--din99o-lch"],
   serialize: "--din99o-lch",
   toMode: {
-    lab65: Pt,
+    lab65: zt,
     dlab: (e) => V(e, "dlab"),
-    rgb: (e) => Ye(Pt(e))
+    rgb: (e) => Ye(zt(e))
   },
   fromMode: {
-    lab65: zt,
+    lab65: Pt,
     dlab: (e) => J(e, "dlch"),
-    rgb: (e) => zt(Ue(e))
+    rgb: (e) => Pt(Ue(e))
   },
   channels: ["l", "c", "h", "alpha"],
   ranges: {
@@ -812,7 +794,7 @@ const Fn = ({ l: e, a: t, b: n, alpha: i }) => {
     c: p,
     h: {
       use: p,
-      fixup: H
+      fixup: X
     },
     alpha: {
       use: p,
@@ -902,13 +884,13 @@ const Kr = {
   },
   gamut: "rgb",
   interpolate: {
-    h: { use: p, fixup: H },
+    h: { use: p, fixup: X },
     s: p,
     i: p,
     alpha: { use: p, fixup: A }
   },
   difference: {
-    h: He
+    h: Xe
   },
   average: {
     h: W
@@ -1012,19 +994,19 @@ const qn = {
   parse: [ia, aa],
   serialize: (e) => `hsl(${e.h !== void 0 ? e.h : "none"} ${e.s !== void 0 ? e.s * 100 + "%" : "none"} ${e.l !== void 0 ? e.l * 100 + "%" : "none"}${e.alpha < 1 ? ` / ${e.alpha}` : ""})`,
   interpolate: {
-    h: { use: p, fixup: H },
+    h: { use: p, fixup: X },
     s: p,
     l: p,
     alpha: { use: p, fixup: A }
   },
   difference: {
-    h: He
+    h: Xe
   },
   average: {
     h: W
   }
 };
-function Xn({ h: e, s: t, v: n, alpha: i }) {
+function Hn({ h: e, s: t, v: n, alpha: i }) {
   e = F(e !== void 0 ? e : 0), t === void 0 && (t = 0), n === void 0 && (n = 0);
   let a = Math.abs(e / 60 % 2 - 1), s;
   switch (Math.floor(e / 60)) {
@@ -1051,7 +1033,7 @@ function Xn({ h: e, s: t, v: n, alpha: i }) {
   }
   return s.mode = "rgb", i !== void 0 && (s.alpha = i), s;
 }
-function Hn({ r: e, g: t, b: n, alpha: i }) {
+function Xn({ r: e, g: t, b: n, alpha: i }) {
   e === void 0 && (e = 0), t === void 0 && (t = 0), n === void 0 && (n = 0);
   let a = Math.max(e, t, n), s = Math.min(e, t, n), o = {
     mode: "hsv",
@@ -1063,12 +1045,12 @@ function Hn({ r: e, g: t, b: n, alpha: i }) {
 const Wn = {
   mode: "hsv",
   toMode: {
-    rgb: Xn
+    rgb: Hn
   },
   parse: ["--hsv"],
   serialize: "--hsv",
   fromMode: {
-    rgb: Hn
+    rgb: Xn
   },
   channels: ["h", "s", "v", "alpha"],
   ranges: {
@@ -1076,13 +1058,13 @@ const Wn = {
   },
   gamut: "rgb",
   interpolate: {
-    h: { use: p, fixup: H },
+    h: { use: p, fixup: X },
     s: p,
     v: p,
     alpha: { use: p, fixup: A }
   },
   difference: {
-    h: He
+    h: Xe
   },
   average: {
     h: W
@@ -1093,7 +1075,7 @@ function sa({ h: e, w: t, b: n, alpha: i }) {
     let a = t + n;
     t /= a, n /= a;
   }
-  return Xn({
+  return Hn({
     h: e,
     s: n === 1 ? 1 : 1 - t / (1 - n),
     v: 1 - n,
@@ -1101,7 +1083,7 @@ function sa({ h: e, w: t, b: n, alpha: i }) {
   });
 }
 function oa(e) {
-  let t = Hn(e);
+  let t = Xn(e);
   if (t === void 0) return;
   let n = t.s !== void 0 ? t.s : 0, i = t.v !== void 0 ? t.v : 0, a = {
     mode: "hwb",
@@ -1153,7 +1135,7 @@ const da = {
   parse: [la],
   serialize: (e) => `hwb(${e.h !== void 0 ? e.h : "none"} ${e.w !== void 0 ? e.w * 100 + "%" : "none"} ${e.b !== void 0 ? e.b * 100 + "%" : "none"}${e.alpha < 1 ? ` / ${e.alpha}` : ""})`,
   interpolate: {
-    h: { use: p, fixup: H },
+    h: { use: p, fixup: X },
     w: p,
     b: p,
     alpha: { use: p, fixup: A }
@@ -1322,7 +1304,7 @@ const ct = (e) => Math.max(e / Yn, 0), sn = ({ i: e, t, p: n, alpha: i }) => {
     h: [0, 360]
   },
   interpolate: {
-    h: { use: p, fixup: H },
+    h: { use: p, fixup: X },
     c: p,
     j: p,
     alpha: { use: p, fixup: A }
@@ -1333,9 +1315,9 @@ const ct = (e) => Math.max(e / Yn, 0), sn = ({ i: e, t, p: n, alpha: i }) => {
   average: {
     h: W
   }
-}, Qe = Math.pow(29, 3) / Math.pow(3, 3), Xt = Math.pow(6, 3) / Math.pow(29, 3);
-let mt = (e) => Math.pow(e, 3) > Xt ? Math.pow(e, 3) : (116 * e - 16) / Qe;
-const Ht = ({ l: e, a: t, b: n, alpha: i }) => {
+}, Qe = Math.pow(29, 3) / Math.pow(3, 3), Ht = Math.pow(6, 3) / Math.pow(29, 3);
+let mt = (e) => Math.pow(e, 3) > Ht ? Math.pow(e, 3) : (116 * e - 16) / Qe;
+const Xt = ({ l: e, a: t, b: n, alpha: i }) => {
   e === void 0 && (e = 0), t === void 0 && (t = 0), n === void 0 && (n = 0);
   let a = (e + 16) / 116, s = t / 500 + a, o = a - n / 200, l = {
     mode: "xyz50",
@@ -1344,7 +1326,7 @@ const Ht = ({ l: e, a: t, b: n, alpha: i }) => {
     z: mt(o) * R.Z
   };
   return i !== void 0 && (l.alpha = i), l;
-}, Te = ({ x: e, y: t, z: n, alpha: i }) => {
+}, $e = ({ x: e, y: t, z: n, alpha: i }) => {
   e === void 0 && (e = 0), t === void 0 && (t = 0), n === void 0 && (n = 0);
   let a = ue({
     r: e * 3.1341359569958707 - t * 1.6173863321612538 - 0.4906619460083532 * n,
@@ -1352,7 +1334,7 @@ const Ht = ({ l: e, a: t, b: n, alpha: i }) => {
     b: e * 0.07195537988411677 - t * 0.2289768264158322 + 1.405386058324125 * n
   });
   return i !== void 0 && (a.alpha = i), a;
-}, Qn = (e) => Te(Ht(e)), Se = (e) => {
+}, Qn = (e) => $e(Xt(e)), Se = (e) => {
   let { r: t, g: n, b: i, alpha: a } = xe(e), s = {
     mode: "xyz50",
     x: 0.436065742824811 * t + 0.3851514688337912 * n + 0.14307845442264197 * i,
@@ -1360,7 +1342,7 @@ const Ht = ({ l: e, a: t, b: n, alpha: i }) => {
     z: 0.013923904500943465 * t + 0.09708128566574634 * n + 0.7140993584005155 * i
   };
   return a !== void 0 && (s.alpha = a), s;
-}, bt = (e) => e > Xt ? Math.cbrt(e) : (Qe * e + 16) / 116, Wt = ({ x: e, y: t, z: n, alpha: i }) => {
+}, bt = (e) => e > Ht ? Math.cbrt(e) : (Qe * e + 16) / 116, Wt = ({ x: e, y: t, z: n, alpha: i }) => {
   e === void 0 && (e = 0), t === void 0 && (t = 0), n === void 0 && (n = 0);
   let a = bt(e / R.X), s = bt(t / R.Y), o = bt(n / R.Z), l = {
     mode: "lab",
@@ -1389,7 +1371,7 @@ function ma(e, t) {
 const Yt = {
   mode: "lab",
   toMode: {
-    xyz50: Ht,
+    xyz50: Xt,
     rgb: Qn
   },
   fromMode: {
@@ -1473,7 +1455,7 @@ const Ut = {
   parse: [ga],
   serialize: (e) => `lch(${e.l !== void 0 ? e.l : "none"} ${e.c !== void 0 ? e.c : "none"} ${e.h !== void 0 ? e.h : "none"}${e.alpha < 1 ? ` / ${e.alpha}` : ""})`,
   interpolate: {
-    h: { use: p, fixup: H },
+    h: { use: p, fixup: X },
     c: p,
     l: p,
     alpha: { use: p, fixup: A }
@@ -1519,7 +1501,7 @@ const Ut = {
     v: t ? t * Math.sin(n / 180 * Math.PI) : 0
   };
   return i !== void 0 && (a.alpha = i), a;
-}, nr = (e, t, n) => 4 * e / (e + 15 * t + 3 * n), rr = (e, t, n) => 9 * t / (e + 15 * t + 3 * n), ya = nr(R.X, R.Y, R.Z), ja = rr(R.X, R.Y, R.Z), ka = (e) => e <= Xt ? Qe * e : 116 * Math.cbrt(e) - 16, Rt = ({ x: e, y: t, z: n, alpha: i }) => {
+}, nr = (e, t, n) => 4 * e / (e + 15 * t + 3 * n), rr = (e, t, n) => 9 * t / (e + 15 * t + 3 * n), ya = nr(R.X, R.Y, R.Z), ja = rr(R.X, R.Y, R.Z), ka = (e) => e <= Ht ? Qe * e : 116 * Math.cbrt(e) - 16, Rt = ({ x: e, y: t, z: n, alpha: i }) => {
   e === void 0 && (e = 0), t === void 0 && (t = 0), n === void 0 && (n = 0);
   let a = ka(t / R.Y), s = nr(e, t, n), o = rr(e, t, n);
   !isFinite(s) || !isFinite(o) ? a = s = o = 0 : (s = 13 * a * (s - ya), o = 13 * a * (o - ja));
@@ -1536,11 +1518,11 @@ const Ut = {
   t === void 0 && (t = 0), n === void 0 && (n = 0);
   let a = t / (13 * e) + Ma, s = n / (13 * e) + Ca, o = R.Y * (e <= 8 ? e / Qe : Math.pow((e + 16) / 116, 3)), l = o * (9 * a) / (4 * s), d = o * (12 - 3 * a - 20 * s) / (4 * s), c = { mode: "xyz50", x: l, y: o, z: d };
   return i !== void 0 && (c.alpha = i), c;
-}, _a = (e) => er(Rt(Se(e))), $a = (e) => Te(At(tr(e))), Ta = {
+}, _a = (e) => er(Rt(Se(e))), Ta = (e) => $e(At(tr(e))), $a = {
   mode: "lchuv",
   toMode: {
     luv: tr,
-    rgb: $a
+    rgb: Ta
   },
   fromMode: {
     rgb: _a,
@@ -1555,7 +1537,7 @@ const Ut = {
     h: [0, 360]
   },
   interpolate: {
-    h: { use: p, fixup: H },
+    h: { use: p, fixup: X },
     c: p,
     l: p,
     alpha: { use: p, fixup: A }
@@ -1581,7 +1563,7 @@ const Ut = {
   mode: "luv",
   toMode: {
     xyz50: At,
-    rgb: (e) => Te(At(e))
+    rgb: (e) => $e(At(e))
   },
   fromMode: {
     xyz50: Rt,
@@ -1636,7 +1618,7 @@ function Ot(e) {
 function qe(e) {
   return (e * e + 0.206 * e) / (1.170873786407767 * (e + 0.03));
 }
-function Pa(e, t) {
+function za(e, t) {
   let n, i, a, s, o, l, d, c;
   -1.88170328 * e - 0.80936493 * t > 1 ? (n = 1.19086277, i = 1.76576728, a = 0.59662641, s = 0.75515197, o = 0.56771245, l = 4.0767416621, d = -3.3077115913, c = 0.2309699292) : 1.81444104 * e - 1.19445276 * t > 1 ? (n = 0.73956515, i = -0.45954404, a = 0.08285427, s = 0.1254107, o = 0.14503204, l = -1.2684380046, d = 2.6097574011, c = -0.3413193965) : (n = 1.35733652, i = -915799e-8, a = -1.1513021, s = -0.50559606, o = 692167e-8, l = -0.0041960863, d = -0.7034186147, c = 1.707614701);
   let f = n + i * e + a * t + s * e * e + o * e * t, m = 0.3963377774 * e + 0.2158037573 * t, b = -0.1055613458 * e - 0.0638541728 * t, v = -0.0894841775 * e - 1.291485548 * t;
@@ -1647,10 +1629,10 @@ function Pa(e, t) {
   return f;
 }
 function Gt(e, t) {
-  let n = Pa(e, t), i = Ee({ l: 1, a: n * e, b: n * t }), a = Math.cbrt(1 / Math.max(i.r, i.g, i.b)), s = a * n;
+  let n = za(e, t), i = Ee({ l: 1, a: n * e, b: n * t }), a = Math.cbrt(1 / Math.max(i.r, i.g, i.b)), s = a * n;
   return [a, s];
 }
-function za(e, t, n, i, a, s = null) {
+function Pa(e, t, n, i, a, s = null) {
   s || (s = Gt(e, t));
   let o;
   if ((n - a) * s[1] - (s[0] - a) * i <= 0)
@@ -1660,8 +1642,8 @@ function za(e, t, n, i, a, s = null) {
     {
       let l = n - a, d = i, c = 0.3963377774 * e + 0.2158037573 * t, f = -0.1055613458 * e - 0.0638541728 * t, m = -0.0894841775 * e - 1.291485548 * t, b = l + d * c, v = l + d * f, k = l + d * m;
       {
-        let C = a * (1 - o) + o * n, M = o * i, S = C + M * c, w = C + M * f, _ = C + M * m, I = S * S * S, u = w * w * w, E = _ * _ * _, Z = 3 * b * S * S, Q = 3 * v * w * w, B = 3 * k * _ * _, Y = 6 * b * b * S, D = 6 * v * v * w, q = 6 * k * k * _, he = 4.0767416621 * I - 3.3077115913 * u + 0.2309699292 * E - 1, pe = 4.0767416621 * Z - 3.3077115913 * Q + 0.2309699292 * B, me = 4.0767416621 * Y - 3.3077115913 * D + 0.2309699292 * q, be = pe / (pe * pe - 0.5 * he * me), ne = -he * be, ge = -1.2684380046 * I + 2.6097574011 * u - 0.3413193965 * E - 1, re = -1.2684380046 * Z + 2.6097574011 * Q - 0.3413193965 * B, Pe = -1.2684380046 * Y + 2.6097574011 * D - 0.3413193965 * q, x = re / (re * re - 0.5 * ge * Pe), y = -ge * x, T = -0.0041960863 * I - 0.7034186147 * u + 1.707614701 * E - 1, P = -0.0041960863 * Z - 0.7034186147 * Q + 1.707614701 * B, ae = -0.0041960863 * Y - 0.7034186147 * D + 1.707614701 * q, ie = P / (P * P - 0.5 * T * ae), z = -T * ie;
-        ne = be >= 0 ? ne : 1e6, y = x >= 0 ? y : 1e6, z = ie >= 0 ? z : 1e6, o += Math.min(ne, Math.min(y, z));
+        let C = a * (1 - o) + o * n, M = o * i, S = C + M * c, w = C + M * f, _ = C + M * m, I = S * S * S, u = w * w * w, E = _ * _ * _, Z = 3 * b * S * S, Q = 3 * v * w * w, B = 3 * k * _ * _, Y = 6 * b * b * S, D = 6 * v * v * w, q = 6 * k * k * _, he = 4.0767416621 * I - 3.3077115913 * u + 0.2309699292 * E - 1, pe = 4.0767416621 * Z - 3.3077115913 * Q + 0.2309699292 * B, me = 4.0767416621 * Y - 3.3077115913 * D + 0.2309699292 * q, be = pe / (pe * pe - 0.5 * he * me), ne = -he * be, ge = -1.2684380046 * I + 2.6097574011 * u - 0.3413193965 * E - 1, re = -1.2684380046 * Z + 2.6097574011 * Q - 0.3413193965 * B, ze = -1.2684380046 * Y + 2.6097574011 * D - 0.3413193965 * q, x = re / (re * re - 0.5 * ge * ze), y = -ge * x, $ = -0.0041960863 * I - 0.7034186147 * u + 1.707614701 * E - 1, z = -0.0041960863 * Z - 0.7034186147 * Q + 1.707614701 * B, ae = -0.0041960863 * Y - 0.7034186147 * D + 1.707614701 * q, ie = z / (z * z - 0.5 * $ * ae), P = -$ * ie;
+        ne = be >= 0 ? ne : 1e6, y = x >= 0 ? y : 1e6, P = ie >= 0 ? P : 1e6, o += Math.min(ne, Math.min(y, P));
       }
     }
   }
@@ -1673,7 +1655,7 @@ function Jt(e, t, n = null) {
   return [a / i, a / (1 - i)];
 }
 function ir(e, t, n) {
-  let i = Gt(t, n), a = za(t, n, e, 1, e, i), s = Jt(t, n, i), o = 0.11516993 + 1 / (7.4477897 + 4.1590124 * n + t * (-2.19557347 + 1.75198401 * n + t * (-2.13704948 - 10.02301043 * n + t * (-4.24894561 + 5.38770819 * n + 4.69891013 * t)))), l = 0.11239642 + 1 / (1.6132032 - 0.68124379 * n + t * (0.40370612 + 0.90148123 * n + t * (-0.27087943 + 0.6122399 * n + t * (299215e-8 - 0.45399568 * n - 0.14661872 * t)))), d = a / Math.min(e * s[0], (1 - e) * s[1]), c = e * o, f = (1 - e) * l, m = 0.9 * d * Math.sqrt(
+  let i = Gt(t, n), a = Pa(t, n, e, 1, e, i), s = Jt(t, n, i), o = 0.11516993 + 1 / (7.4477897 + 4.1590124 * n + t * (-2.19557347 + 1.75198401 * n + t * (-2.13704948 - 10.02301043 * n + t * (-4.24894561 + 5.38770819 * n + 4.69891013 * t)))), l = 0.11239642 + 1 / (1.6132032 - 0.68124379 * n + t * (0.40370612 + 0.90148123 * n + t * (-0.27087943 + 0.6122399 * n + t * (299215e-8 - 0.45399568 * n - 0.14661872 * t)))), d = a / Math.min(e * s[0], (1 - e) * s[1]), c = e * o, f = (1 - e) * l, m = 0.9 * d * Math.sqrt(
     Math.sqrt(
       1 / (1 / (c * c * c * c) + 1 / (f * f * f * f))
     )
@@ -1911,7 +1893,7 @@ const La = {
   },
   toMode: {
     xyz50: gn,
-    rgb: (e) => Te(gn(e))
+    rgb: (e) => $e(gn(e))
   }
 }, vn = 1.09929682680944, qa = 0.018053968510807, yt = (e) => {
   const t = Math.abs(e);
@@ -1931,9 +1913,9 @@ const La = {
     )
   };
   return i !== void 0 && (a.alpha = i), a;
-}, jn = 1.09929682680944, Xa = 0.018053968510807, jt = (e = 0) => {
+}, jn = 1.09929682680944, Ha = 0.018053968510807, jt = (e = 0) => {
   let t = Math.abs(e);
-  return t < Xa * 4.5 ? e / 4.5 : (Math.sign(e) || 1) * Math.pow((t + jn - 1) / jn, 1 / 0.45);
+  return t < Ha * 4.5 ? e / 4.5 : (Math.sign(e) || 1) * Math.pow((t + jn - 1) / jn, 1 / 0.45);
 }, kn = (e) => {
   let t = jt(e.r), n = jt(e.g), i = jt(e.b), a = {
     mode: "xyz65",
@@ -1942,7 +1924,7 @@ const La = {
     z: 0 * t + 0.0280726930490874 * n + 1.0609850577107909 * i
   };
   return e.alpha !== void 0 && (a.alpha = e.alpha), a;
-}, Ha = {
+}, Xa = {
   ...fe,
   mode: "rec2020",
   fromMode: {
@@ -2001,12 +1983,12 @@ const La = {
   parse: ["xyz-d50"],
   serialize: "xyz-d50",
   toMode: {
-    rgb: Te,
+    rgb: $e,
     lab: Wt
   },
   fromMode: {
     rgb: Se,
-    lab: Ht
+    lab: Xt
   },
   channels: ["x", "y", "z", "alpha"],
   ranges: {
@@ -2109,10 +2091,10 @@ const La = {
   let t = Nt(e.r), n = Nt(e.g), i = Nt(e.b);
   return "#" + (1 << 24 | t << 16 | n << 8 | i).toString(16).slice(1);
 }, Ae = (e) => {
-  const t = Tn(e);
+  const t = $n(e);
   if (!t)
     return;
-  const n = zn(t.mode);
+  const n = Pn(t.mode);
   if (!n.serialize || typeof n.serialize == "string") {
     let i = `color(${n.serialize || `--${t.mode}`} `;
     return n.channels.forEach((a, s) => {
@@ -2137,7 +2119,7 @@ N(Yt);
 N(ba);
 N(Ut);
 N(va);
-N(Ta);
+N($a);
 N(Sa);
 N(Ea);
 N(Ra);
@@ -2146,7 +2128,7 @@ N(Ia);
 const ii = N(La);
 N(Ba);
 N(Da);
-N(Ha);
+N(Xa);
 N(fe);
 N(Ua);
 N(Ga);
@@ -2343,11 +2325,11 @@ function ci() {
       }
       if (y) {
         y = console;
-        var T = y.error, P = typeof Symbol == "function" && Symbol.toStringTag && x[Symbol.toStringTag] || x.constructor.name || "Object";
-        return T.call(
+        var $ = y.error, z = typeof Symbol == "function" && Symbol.toStringTag && x[Symbol.toStringTag] || x.constructor.name || "Object";
+        return $.call(
           y,
           "The provided key is an unsupported type %s. This value must be coerced to a string before using it here.",
-          P
+          z
         ), t(x);
       }
     }
@@ -2377,14 +2359,14 @@ function ci() {
       return x.key !== void 0;
     }
     function l(x, y) {
-      function T() {
+      function $() {
         be || (be = !0, console.error(
           "%s: `key` is not a prop. Trying to access it will result in `undefined` being returned. If you need to access the same value within the child component, you should pass it as a different prop. (https://react.dev/link/special-props)",
           y
         ));
       }
-      T.isReactWarning = !0, Object.defineProperty(x, "key", {
-        get: T,
+      $.isReactWarning = !0, Object.defineProperty(x, "key", {
+        get: $,
         configurable: !0
       });
     }
@@ -2394,15 +2376,15 @@ function ci() {
         "Accessing element.ref was removed in React 19. ref is now a regular prop. It will be removed from the JSX Element type in a future release."
       )), x = this.props.ref, x !== void 0 ? x : null;
     }
-    function c(x, y, T, P, ae, ie) {
-      var z = T.ref;
+    function c(x, y, $, z, ae, ie) {
+      var P = $.ref;
       return x = {
         $$typeof: k,
         type: x,
         key: y,
-        props: T,
-        _owner: P
-      }, (z !== void 0 ? z : null) !== null ? Object.defineProperty(x, "ref", {
+        props: $,
+        _owner: z
+      }, (P !== void 0 ? P : null) !== null ? Object.defineProperty(x, "ref", {
         enumerable: !1,
         get: d
       }) : Object.defineProperty(x, "ref", { enumerable: !1, value: null }), x._store = {}, Object.defineProperty(x._store, "validated", {
@@ -2427,49 +2409,49 @@ function ci() {
         value: ie
       }), Object.freeze && (Object.freeze(x.props), Object.freeze(x)), x;
     }
-    function f(x, y, T, P, ae, ie) {
-      var z = y.children;
-      if (z !== void 0)
-        if (P)
-          if (pe(z)) {
-            for (P = 0; P < z.length; P++)
-              m(z[P]);
-            Object.freeze && Object.freeze(z);
+    function f(x, y, $, z, ae, ie) {
+      var P = y.children;
+      if (P !== void 0)
+        if (z)
+          if (pe(P)) {
+            for (z = 0; z < P.length; z++)
+              m(P[z]);
+            Object.freeze && Object.freeze(P);
           } else
             console.error(
               "React.jsx: Static children should always be an array. You are likely explicitly calling React.jsxs or React.jsxDEV. Use the Babel transform instead."
             );
-        else m(z);
+        else m(P);
       if (he.call(y, "key")) {
-        z = e(x);
+        P = e(x);
         var se = Object.keys(y).filter(function(xr) {
           return xr !== "key";
         });
-        P = 0 < se.length ? "{key: someKey, " + se.join(": ..., ") + ": ...}" : "{key: someKey}", Pe[z + P] || (se = 0 < se.length ? "{" + se.join(": ..., ") + ": ...}" : "{}", console.error(
+        z = 0 < se.length ? "{key: someKey, " + se.join(": ..., ") + ": ...}" : "{key: someKey}", ze[P + z] || (se = 0 < se.length ? "{" + se.join(": ..., ") + ": ...}" : "{}", console.error(
           `A props object containing a "key" prop is being spread into JSX:
   let props = %s;
   <%s {...props} />
 React keys must be passed directly to JSX without using spread:
   let props = %s;
   <%s key={someKey} {...props} />`,
-          P,
           z,
+          P,
           se,
-          z
-        ), Pe[z + P] = !0);
+          P
+        ), ze[P + z] = !0);
       }
-      if (z = null, T !== void 0 && (n(T), z = "" + T), o(y) && (n(y.key), z = "" + y.key), "key" in y) {
-        T = {};
+      if (P = null, $ !== void 0 && (n($), P = "" + $), o(y) && (n(y.key), P = "" + y.key), "key" in y) {
+        $ = {};
         for (var tt in y)
-          tt !== "key" && (T[tt] = y[tt]);
-      } else T = y;
-      return z && l(
-        T,
+          tt !== "key" && ($[tt] = y[tt]);
+      } else $ = y;
+      return P && l(
+        $,
         typeof x == "function" ? x.displayName || x.name || "Unknown" : x
       ), c(
         x,
-        z,
-        T,
+        P,
+        $,
         a(),
         ae,
         ie
@@ -2492,26 +2474,26 @@ React keys must be passed directly to JSX without using spread:
     var be, ne = {}, ge = v.react_stack_bottom_frame.bind(
       v,
       s
-    )(), re = me(i(s)), Pe = {};
-    je.Fragment = M, je.jsx = function(x, y, T) {
-      var P = 1e4 > q.recentlyCreatedOwnerStacks++;
+    )(), re = me(i(s)), ze = {};
+    je.Fragment = M, je.jsx = function(x, y, $) {
+      var z = 1e4 > q.recentlyCreatedOwnerStacks++;
       return f(
         x,
         y,
-        T,
+        $,
         !1,
-        P ? Error("react-stack-top-frame") : ge,
-        P ? me(i(x)) : re
+        z ? Error("react-stack-top-frame") : ge,
+        z ? me(i(x)) : re
       );
-    }, je.jsxs = function(x, y, T) {
-      var P = 1e4 > q.recentlyCreatedOwnerStacks++;
+    }, je.jsxs = function(x, y, $) {
+      var z = 1e4 > q.recentlyCreatedOwnerStacks++;
       return f(
         x,
         y,
-        T,
+        $,
         !0,
-        P ? Error("react-stack-top-frame") : ge,
-        P ? me(i(x)) : re
+        z ? Error("react-stack-top-frame") : ge,
+        z ? me(i(x)) : re
       );
     };
   }()), je;
@@ -2568,7 +2550,7 @@ function ss(e) {
 function os() {
   return Vt().config;
 }
-function $({
+function T({
   variant: e = "default",
   size: t = "md",
   icon: n,
@@ -2627,7 +2609,7 @@ function hi({ children: e, tone: t = "default", dot: n, className: i, style: a }
     }
   );
 }
-function $e({ className: e, ...t }) {
+function Te({ className: e, ...t }) {
   return /* @__PURE__ */ r.jsx("input", { className: ["input", e].filter(Boolean).join(" "), ...t });
 }
 function cr({ className: e, style: t, ...n }) {
@@ -2674,7 +2656,7 @@ function pi({
           ]
         }
       ) : /* @__PURE__ */ r.jsx(
-        $e,
+        Te,
         {
           className: "w-full",
           style: {
@@ -2833,7 +2815,7 @@ function ce({ children: e, dot: t }) {
     e
   ] });
 }
-function X({ children: e, tone: t = "default" }) {
+function H({ children: e, tone: t = "default" }) {
   const n = {
     default: "text-ink-dim border-border bg-panel-2",
     accent: "text-primary border-[color-mix(in_oklch,var(--color-primary)_40%,transparent)] bg-primary-soft",
@@ -2891,7 +2873,7 @@ function ds({ label: e }) {
     /* @__PURE__ */ r.jsx("div", { className: "flex-1 h-px bg-border" })
   ] });
 }
-const vi = ["cyan", "magenta", "lime", "amber", "violet"], cs = Xe(function({ badges: t, columns: n = 3 }) {
+const vi = ["cyan", "magenta", "lime", "amber", "violet"], cs = He(function({ badges: t, columns: n = 3 }) {
   return /* @__PURE__ */ r.jsxs("div", { className: "panel p-5", children: [
     /* @__PURE__ */ r.jsxs("div", { className: "font-mono text-[10px] tracking-[0.12em] uppercase text-ink-dim mb-3.5", children: [
       "// badges · ",
@@ -3249,7 +3231,7 @@ function Zt({ seed: e = 1, size: t = 40 }) {
     }
   );
 }
-function $t({ type: e, size: t = 22 }) {
+function Tt({ type: e, size: t = 22 }) {
   const n = t, i = {
     width: n,
     height: n,
@@ -3352,7 +3334,7 @@ const ji = {
   streak: "streak",
   tier: "tier",
   xp: "xp"
-}, us = Xe(function({
+}, us = He(function({
   entries: t,
   streakEmoji: n = "🔥",
   columnLabels: i
@@ -3383,14 +3365,14 @@ const ji = {
           /* @__PURE__ */ r.jsxs("span", { className: "lb-identity", children: [
             /* @__PURE__ */ r.jsx(Zt, { seed: s.seed, size: 28 }),
             /* @__PURE__ */ r.jsx("span", { className: "font-semibold text-[14px]", children: s.handle }),
-            s.me && /* @__PURE__ */ r.jsx(X, { tone: "accent", children: "YOU" })
+            s.me && /* @__PURE__ */ r.jsx(H, { tone: "accent", children: "YOU" })
           ] }),
           /* @__PURE__ */ r.jsxs("span", { className: "mono lb-streak text-[13px] text-accent-amber", children: [
             s.streak,
             n
           ] }),
           /* @__PURE__ */ r.jsx("span", { className: "lb-tier", children: /* @__PURE__ */ r.jsx(
-            X,
+            H,
             {
               tone: s.tier === "Oracle" ? "magenta" : s.tier === "Ascendant" ? "lime" : "accent",
               children: s.tier
@@ -3435,7 +3417,7 @@ function le({
     }
   );
 }
-const Tt = {
+const $t = {
   text: {
     q: "Which metric best captures product-led growth?",
     choices: [
@@ -3471,7 +3453,7 @@ function ki({
   variant: e,
   onComplete: t
 }) {
-  const n = e === "text" ? Tt.text : e === "textImage" ? Tt.textImage : Tt.imageOnly, [i, a] = j(null), [s, o] = j(!1), l = n.correct === i;
+  const n = e === "text" ? $t.text : e === "textImage" ? $t.textImage : $t.imageOnly, [i, a] = j(null), [s, o] = j(!1), l = n.correct === i;
   return /* @__PURE__ */ r.jsxs("div", { className: "p-6 flex flex-col gap-4", children: [
     /* @__PURE__ */ r.jsxs(ce, { children: [
       "// quiz · 1 of 5 ·",
@@ -3598,8 +3580,8 @@ function ki({
         ]
       }
     ),
-    /* @__PURE__ */ r.jsx("div", { className: "flex gap-2", children: s ? /* @__PURE__ */ r.jsx($, { variant: "primary", className: "flex-1", onClick: t, children: "Continue" }) : /* @__PURE__ */ r.jsx(
-      $,
+    /* @__PURE__ */ r.jsx("div", { className: "flex gap-2", children: s ? /* @__PURE__ */ r.jsx(T, { variant: "primary", className: "flex-1", onClick: t, children: "Continue" }) : /* @__PURE__ */ r.jsx(
+      T,
       {
         variant: "primary",
         className: "flex-1",
@@ -3661,7 +3643,7 @@ function Ci({
         ] }),
         /* @__PURE__ */ r.jsx("span", { children: s.length >= n ? "ready to submit" : `${n - s.length} more to go` })
       ] }),
-      /* @__PURE__ */ r.jsx($, { variant: "primary", disabled: s.length < n, onClick: t, children: "Submit feedback" })
+      /* @__PURE__ */ r.jsx(T, { variant: "primary", disabled: s.length < n, onClick: t, children: "Submit feedback" })
     ] });
   const l = e === "text" ? wi : e === "textImage" ? Ni : Mi;
   return /* @__PURE__ */ r.jsxs("div", { className: "p-6 flex flex-col gap-4", children: [
@@ -3715,7 +3697,7 @@ function Ci({
         d.id
       );
     }) }),
-    /* @__PURE__ */ r.jsx($, { variant: "primary", disabled: !i, onClick: t, children: "Submit" })
+    /* @__PURE__ */ r.jsx(T, { variant: "primary", disabled: !i, onClick: t, children: "Submit" })
   ] });
 }
 function _i({
@@ -3793,10 +3775,10 @@ function _i({
         ] })
       }
     ),
-    /* @__PURE__ */ r.jsx($, { variant: "primary", disabled: !l && !d, onClick: e, children: "Continue" })
+    /* @__PURE__ */ r.jsx(T, { variant: "primary", disabled: !l && !d, onClick: e, children: "Continue" })
   ] });
 }
-const $i = [
+const Ti = [
   { q: "How many tiers are in GrowQuest?", choices: ["2", "3", "4", "5"], correct: 2 },
   {
     q: "What currency powers redemptions?",
@@ -3805,9 +3787,9 @@ const $i = [
   },
   { q: "Streak bonus milestone lands at day…", choices: ["3", "5", "7", "10"], correct: 2 }
 ];
-function Ti({
+function $i({
   onComplete: e,
-  questions: t = $i,
+  questions: t = Ti,
   timeLimit: n = 15,
   passScore: i = 2
 }) {
@@ -3871,7 +3853,7 @@ function Ti({
       /* @__PURE__ */ r.jsx("div", { className: "inline-flex items-center gap-2 font-mono text-[11px] tracking-[0.16em] uppercase text-ink-dim mb-1.5", children: "// trivia complete" }),
       /* @__PURE__ */ r.jsx("h3", { className: "display m-0 mb-2 text-[22px] tracking-[-0.02em]", children: _ ? "Nice run!" : "Keep training." }),
       /* @__PURE__ */ r.jsx("p", { className: "text-ink-dim text-[13px] mb-4", children: _ ? "You beat the bar — XP unlocked." : `Needed ${i}/${t.length} to pass. Try again tomorrow for another shot.` }),
-      /* @__PURE__ */ r.jsx($, { variant: "primary", className: "w-full", onClick: e, children: "Continue" })
+      /* @__PURE__ */ r.jsx(T, { variant: "primary", className: "w-full", onClick: e, children: "Continue" })
     ] });
   }
   return /* @__PURE__ */ r.jsxs("div", { className: "p-6 flex flex-col gap-4", children: [
@@ -3925,7 +3907,7 @@ function Ti({
         _
       );
     }) }),
-    b === "reveal" && /* @__PURE__ */ r.jsx($, { variant: "primary", onClick: S, children: a === t.length - 1 ? "See results" : "Next question" })
+    b === "reveal" && /* @__PURE__ */ r.jsx(T, { variant: "primary", onClick: S, children: a === t.length - 1 ? "See results" : "Next question" })
   ] });
 }
 function Si(e) {
@@ -3980,10 +3962,10 @@ function Ei({ url: e, onComplete: t }) {
       a,
       "s"
     ] }),
-    /* @__PURE__ */ r.jsx($, { variant: "primary", disabled: !n, onClick: t, className: "w-full", children: "I've watched it" })
+    /* @__PURE__ */ r.jsx(T, { variant: "primary", disabled: !n, onClick: t, className: "w-full", children: "I've watched it" })
   ] });
 }
-function Pi({
+function zi({
   url: e,
   onComplete: t
 }) {
@@ -4018,7 +4000,7 @@ function Pi({
         }
       ) })
     ] }) : /* @__PURE__ */ r.jsx(
-      $,
+      T,
       {
         variant: "ghost",
         onClick: () => {
@@ -4028,10 +4010,10 @@ function Pi({
         children: "Open article ↗"
       }
     ),
-    /* @__PURE__ */ r.jsx($, { variant: "primary", disabled: !o, onClick: t, className: "w-full", children: "Mark as read" })
+    /* @__PURE__ */ r.jsx(T, { variant: "primary", disabled: !o, onClick: t, className: "w-full", children: "Mark as read" })
   ] });
 }
-function zi({ onComplete: e }) {
+function Pi({ onComplete: e }) {
   const [t, n] = j(""), [i, a] = j(""), s = [t.length > 0, i.length > 0].filter(Boolean).length;
   return /* @__PURE__ */ r.jsxs("div", { className: "flex flex-col gap-4 p-6", children: [
     /* @__PURE__ */ r.jsx(
@@ -4068,7 +4050,7 @@ function zi({ onComplete: e }) {
       ] })
     ] }),
     /* @__PURE__ */ r.jsx(
-      $,
+      T,
       {
         variant: "primary",
         disabled: t.length === 0,
@@ -4148,7 +4130,7 @@ function Ri({ onComplete: e }) {
         ]
       }
     ),
-    /* @__PURE__ */ r.jsx($, { variant: "primary", disabled: !t, onClick: e, className: "w-full", children: "Save photo" })
+    /* @__PURE__ */ r.jsx(T, { variant: "primary", disabled: !t, onClick: e, className: "w-full", children: "Save photo" })
   ] });
 }
 function Ai({
@@ -4169,7 +4151,7 @@ function Ai({
       ] })
     ] }),
     /* @__PURE__ */ r.jsx(
-      $e,
+      Te,
       {
         type: "text",
         inputMode: "numeric",
@@ -4180,7 +4162,7 @@ function Ai({
         className: "font-mono text-[28px] tracking-[0.35em] text-center py-3 px-4"
       }
     ),
-    /* @__PURE__ */ r.jsx($, { variant: "primary", disabled: n.length < 6, onClick: t, className: "w-full", children: "Verify" }),
+    /* @__PURE__ */ r.jsx(T, { variant: "primary", disabled: n.length < 6, onClick: t, className: "w-full", children: "Verify" }),
     /* @__PURE__ */ r.jsx(
       "button",
       {
@@ -4215,7 +4197,7 @@ function Ii({ onComplete: e }) {
       ] })
     ] }),
     /* @__PURE__ */ r.jsx(
-      $e,
+      Te,
       {
         type: "text",
         inputMode: "numeric",
@@ -4226,7 +4208,7 @@ function Ii({ onComplete: e }) {
         className: "font-mono text-[28px] tracking-[0.35em] text-center py-3 px-4"
       }
     ),
-    /* @__PURE__ */ r.jsx($, { variant: "primary", disabled: l.length < 6, onClick: e, className: "w-full", children: "Verify" }),
+    /* @__PURE__ */ r.jsx(T, { variant: "primary", disabled: l.length < 6, onClick: e, className: "w-full", children: "Verify" }),
     /* @__PURE__ */ r.jsx(
       "button",
       {
@@ -4260,7 +4242,7 @@ function Ii({ onComplete: e }) {
     /* @__PURE__ */ r.jsxs("div", { children: [
       /* @__PURE__ */ r.jsx("div", { className: "text-xs text-ink-dim mb-1.5", children: "Phone number" }),
       /* @__PURE__ */ r.jsx(
-        $e,
+        Te,
         {
           type: "tel",
           placeholder: "Phone number",
@@ -4270,7 +4252,7 @@ function Ii({ onComplete: e }) {
       )
     ] }),
     /* @__PURE__ */ r.jsx(
-      $,
+      T,
       {
         variant: "primary",
         disabled: s.length < 6,
@@ -4370,7 +4352,7 @@ function Li({ onComplete: e }) {
       /* @__PURE__ */ r.jsx("div", { className: "text-[13px] text-ink-dim", children: "You got" }),
       /* @__PURE__ */ r.jsx("div", { className: "text-[22px] font-bold text-primary", children: s })
     ] }),
-    s ? /* @__PURE__ */ r.jsx($, { variant: "primary", onClick: e, className: "w-full", children: "Claim reward" }) : /* @__PURE__ */ r.jsx($, { variant: "primary", disabled: t, onClick: l, className: "w-full", children: t ? "Spinning…" : "Spin the wheel" })
+    s ? /* @__PURE__ */ r.jsx(T, { variant: "primary", onClick: e, className: "w-full", children: "Claim reward" }) : /* @__PURE__ */ r.jsx(T, { variant: "primary", disabled: t, onClick: l, className: "w-full", children: t ? "Spinning…" : "Spin the wheel" })
   ] });
 }
 const Oe = 16;
@@ -4479,10 +4461,10 @@ function qi({
       o.id
     )) }),
     !s && /* @__PURE__ */ r.jsx("div", { className: "text-xs text-ink-dim text-center", children: "Keep completing missions to earn more badges" }),
-    /* @__PURE__ */ r.jsx($, { variant: "primary", disabled: !s, onClick: i, className: "w-full", children: s ? "Claim XP" : `Earn ${t - a} more badge${t - a !== 1 ? "s" : ""}` })
+    /* @__PURE__ */ r.jsx(T, { variant: "primary", disabled: !s, onClick: i, className: "w-full", children: s ? "Claim XP" : `Earn ${t - a} more badge${t - a !== 1 ? "s" : ""}` })
   ] });
 }
-function Xi({
+function Hi({
   referralLink: e = "https://app.growquest.io/ref/demo-abc123",
   onComplete: t
 }) {
@@ -4533,10 +4515,10 @@ function Xi({
       )) })
     ] }),
     /* @__PURE__ */ r.jsx("div", { className: "text-xs text-ink-dim", children: "0 friends signed up · goal: 1" }),
-    /* @__PURE__ */ r.jsx($, { variant: "primary", disabled: !o, onClick: t, className: "w-full", children: "Done" })
+    /* @__PURE__ */ r.jsx(T, { variant: "primary", disabled: !o, onClick: t, className: "w-full", children: "Done" })
   ] });
 }
-function Hi({
+function Xi({
   shareText: e = "Check out GrowQuest — earn XP for real actions!",
   shareUrl: t = "https://growquest.io",
   onComplete: n
@@ -4586,7 +4568,7 @@ function Hi({
         }
       )
     ] }),
-    /* @__PURE__ */ r.jsx($, { variant: "primary", disabled: !i, onClick: n, className: "w-full", children: "Done" })
+    /* @__PURE__ */ r.jsx(T, { variant: "primary", disabled: !i, onClick: n, className: "w-full", children: "Done" })
   ] });
 }
 function Wi({ onComplete: e }) {
@@ -4598,7 +4580,7 @@ function Wi({ onComplete: e }) {
   return /* @__PURE__ */ r.jsxs("div", { className: "flex flex-col gap-4 p-6", children: [
     /* @__PURE__ */ r.jsxs("div", { className: "flex gap-2", children: [
       /* @__PURE__ */ r.jsx(
-        $e,
+        Te,
         {
           type: "email",
           placeholder: "friend@example.com",
@@ -4633,7 +4615,7 @@ function Wi({ onComplete: e }) {
       d
     )) }),
     /* @__PURE__ */ r.jsx(
-      $,
+      T,
       {
         variant: "primary",
         disabled: i.length === 0,
@@ -4660,7 +4642,7 @@ function Yi({ onComplete: e }) {
       /* @__PURE__ */ r.jsx("div", { className: "font-semibold text-[15px] mb-1.5", children: "Photo submitted — pending review" }),
       /* @__PURE__ */ r.jsx("div", { className: "text-[13px] text-ink-dim leading-normal", children: "Our team will review your photo and approve it within 24h. You'll be notified when XP is credited." })
     ] }),
-    /* @__PURE__ */ r.jsx($, { variant: "primary", onClick: e, className: "w-full", children: "Got it" })
+    /* @__PURE__ */ r.jsx(T, { variant: "primary", onClick: e, className: "w-full", children: "Got it" })
   ] }) : /* @__PURE__ */ r.jsxs("div", { className: "flex flex-col gap-4 p-6", children: [
     /* @__PURE__ */ r.jsx(
       "input",
@@ -4722,7 +4704,7 @@ function Yi({ onComplete: e }) {
       }
     ),
     /* @__PURE__ */ r.jsx(
-      $,
+      T,
       {
         variant: "primary",
         disabled: !t,
@@ -4799,7 +4781,7 @@ function Gi({
     ] }),
     /* @__PURE__ */ r.jsxs("div", { className: "flex flex-col gap-2 w-full", children: [
       /* @__PURE__ */ r.jsxs(
-        $,
+        T,
         {
           variant: "primary",
           onClick: () => {
@@ -4814,7 +4796,7 @@ function Gi({
         }
       ),
       /* @__PURE__ */ r.jsx(
-        $,
+        T,
         {
           variant: a ? "primary" : "ghost",
           disabled: !a,
@@ -4856,7 +4838,7 @@ function hs({ m: e, onClose: t, onClaim: n }) {
   } else if (e.type === "survey") {
     const l = e.subtype === "survey-textImage" ? "textImage" : e.subtype === "survey-imageOnly" ? "imageOnly" : e.subtype === "survey-textarea" ? "textarea" : "text";
     o = /* @__PURE__ */ r.jsx(Ci, { variant: l, onComplete: s });
-  } else e.type === "hangman" ? o = /* @__PURE__ */ r.jsx(_i, { onComplete: s }) : e.type === "trivia" ? o = /* @__PURE__ */ r.jsx(Ti, { onComplete: s }) : e.type === "video" ? o = /* @__PURE__ */ r.jsx(Ei, { url: e.url ?? "", onComplete: s }) : e.type === "read_article" ? o = /* @__PURE__ */ r.jsx(Pi, { url: e.url, onComplete: s }) : e.type === "profile" ? o = /* @__PURE__ */ r.jsx(zi, { onComplete: s }) : e.type === "avatar" ? o = /* @__PURE__ */ r.jsx(Ri, { onComplete: s }) : e.type === "verify_email" ? o = /* @__PURE__ */ r.jsx(Ai, { onComplete: s }) : e.type === "verify_phone" ? o = /* @__PURE__ */ r.jsx(Ii, { onComplete: s }) : e.type === "spin_wheel" ? o = /* @__PURE__ */ r.jsx(Li, { onComplete: s }) : e.type === "scratch_card" ? o = /* @__PURE__ */ r.jsx(Bi, { onComplete: s }) : e.type === "badge_collect" ? o = /* @__PURE__ */ r.jsx(qi, { onComplete: s }) : e.type === "refer" ? o = /* @__PURE__ */ r.jsx(Xi, { onComplete: s }) : e.type === "share" ? o = /* @__PURE__ */ r.jsx(Hi, { shareUrl: e.url, onComplete: s }) : e.type === "invite" ? o = /* @__PURE__ */ r.jsx(Wi, { onComplete: s }) : e.type === "photo_proof" ? o = /* @__PURE__ */ r.jsx(Yi, { onComplete: s }) : (e.type === "follow_social" || e.type === "social") && (o = /* @__PURE__ */ r.jsx(Gi, { url: e.url, onComplete: s }));
+  } else e.type === "hangman" ? o = /* @__PURE__ */ r.jsx(_i, { onComplete: s }) : e.type === "trivia" ? o = /* @__PURE__ */ r.jsx($i, { onComplete: s }) : e.type === "video" ? o = /* @__PURE__ */ r.jsx(Ei, { url: e.url ?? "", onComplete: s }) : e.type === "read_article" ? o = /* @__PURE__ */ r.jsx(zi, { url: e.url, onComplete: s }) : e.type === "profile" ? o = /* @__PURE__ */ r.jsx(Pi, { onComplete: s }) : e.type === "avatar" ? o = /* @__PURE__ */ r.jsx(Ri, { onComplete: s }) : e.type === "verify_email" ? o = /* @__PURE__ */ r.jsx(Ai, { onComplete: s }) : e.type === "verify_phone" ? o = /* @__PURE__ */ r.jsx(Ii, { onComplete: s }) : e.type === "spin_wheel" ? o = /* @__PURE__ */ r.jsx(Li, { onComplete: s }) : e.type === "scratch_card" ? o = /* @__PURE__ */ r.jsx(Bi, { onComplete: s }) : e.type === "badge_collect" ? o = /* @__PURE__ */ r.jsx(qi, { onComplete: s }) : e.type === "refer" ? o = /* @__PURE__ */ r.jsx(Hi, { onComplete: s }) : e.type === "share" ? o = /* @__PURE__ */ r.jsx(Xi, { shareUrl: e.url, onComplete: s }) : e.type === "invite" ? o = /* @__PURE__ */ r.jsx(Wi, { onComplete: s }) : e.type === "photo_proof" ? o = /* @__PURE__ */ r.jsx(Yi, { onComplete: s }) : (e.type === "follow_social" || e.type === "social") && (o = /* @__PURE__ */ r.jsx(Gi, { url: e.url, onComplete: s }));
   return gr(
     /* @__PURE__ */ r.jsx(
       "div",
@@ -4871,7 +4853,7 @@ function hs({ m: e, onClose: t, onClaim: n }) {
               /* @__PURE__ */ r.jsx("h2", { className: "display m-0 text-[20px] tracking-[-0.02em] text-[color:var(--mission-modal-title)]", children: e.title }),
               /* @__PURE__ */ r.jsxs("div", { className: "flex gap-2 mt-1.5", children: [
                 /* @__PURE__ */ r.jsx(Me, { amount: e.xp }),
-                e.limited && e.endsAt && /* @__PURE__ */ r.jsxs(X, { tone: "magenta", children: [
+                e.limited && e.endsAt && /* @__PURE__ */ r.jsxs(H, { tone: "magenta", children: [
                   "Ends in ",
                   /* @__PURE__ */ r.jsx(fr, { endsAt: e.endsAt })
                 ] })
@@ -4905,7 +4887,7 @@ function hs({ m: e, onClose: t, onClaim: n }) {
 function ke(e) {
   return `var(--tone-${e})`;
 }
-const ps = Xe(function({
+const ps = He(function({
   m: t,
   density: n = "comfortable",
   layout: i = "split",
@@ -4924,10 +4906,10 @@ const ps = Xe(function({
             {
               className: "bg-[var(--mission-card-icon-bg)] border border-[color:var(--mission-card-icon-border)] grid place-items-center w-8 h-8 rounded-md",
               style: { color: ke(t.tone) },
-              children: /* @__PURE__ */ r.jsx($t, { type: t.type, size: 18 })
+              children: /* @__PURE__ */ r.jsx(Tt, { type: t.type, size: 18 })
             }
           ),
-          t.limited && /* @__PURE__ */ r.jsxs(X, { tone: "magenta", children: [
+          t.limited && /* @__PURE__ */ r.jsxs(H, { tone: "magenta", children: [
             "LIMITED",
             t.endsAt ? /* @__PURE__ */ r.jsxs(r.Fragment, { children: [
               " ",
@@ -4968,7 +4950,7 @@ const ps = Xe(function({
           {
             className: "bg-[var(--mission-card-icon-bg)] border border-[color:var(--mission-card-icon-border)] grid place-items-center w-10 h-10 rounded-lg shrink-0",
             style: { color: ke(t.tone) },
-            children: /* @__PURE__ */ r.jsx($t, { type: t.type, size: 20 })
+            children: /* @__PURE__ */ r.jsx(Tt, { type: t.type, size: 20 })
           }
         ),
         /* @__PURE__ */ r.jsxs("div", { className: "flex-1 min-w-0", children: [
@@ -4976,7 +4958,7 @@ const ps = Xe(function({
           /* @__PURE__ */ r.jsx("div", { className: "text-xs text-[color:var(--mission-card-body)] overflow-hidden text-ellipsis whitespace-nowrap", children: t.desc })
         ] }),
         /* @__PURE__ */ r.jsxs("div", { className: "flex items-center gap-2.5 shrink-0", children: [
-          t.limited && /* @__PURE__ */ r.jsx(X, { tone: "magenta", children: "LIMITED" }),
+          t.limited && /* @__PURE__ */ r.jsx(H, { tone: "magenta", children: "LIMITED" }),
           /* @__PURE__ */ r.jsxs("span", { className: "font-mono text-[11px] text-[color:var(--mission-card-body)]", children: [
             s,
             "/",
@@ -5012,10 +4994,10 @@ const ps = Xe(function({
                 {
                   className: "bg-[var(--mission-card-icon-bg)] border border-[color:var(--mission-card-icon-border)] grid place-items-center w-[34px] h-[34px] rounded-[7px]",
                   style: { color: ke(t.tone) },
-                  children: /* @__PURE__ */ r.jsx($t, { type: t.type, size: 18 })
+                  children: /* @__PURE__ */ r.jsx(Tt, { type: t.type, size: 18 })
                 }
               ),
-              t.limited && /* @__PURE__ */ r.jsx(X, { tone: "magenta", children: "⏱ LIMITED" })
+              t.limited && /* @__PURE__ */ r.jsx(H, { tone: "magenta", children: "⏱ LIMITED" })
             ]
           }
         ),
@@ -5121,7 +5103,7 @@ function bs({
                 "@",
                 e.handle
               ] }),
-              /* @__PURE__ */ r.jsx(X, { tone: "accent", children: e.tier })
+              /* @__PURE__ */ r.jsx(H, { tone: "accent", children: e.tier })
             ] }),
             /* @__PURE__ */ r.jsx("div", { className: "font-mono text-[11px] text-[color:var(--profile-card-wallet)]", children: a })
           ] })
@@ -5146,7 +5128,7 @@ function bs({
     }
   );
 }
-const gs = Xe(function({
+const gs = He(function({
   r: t,
   persona: n,
   onRedeem: i,
@@ -5194,8 +5176,8 @@ const gs = Xe(function({
               }
             ) })
           ] }),
-          t.limited && /* @__PURE__ */ r.jsx("div", { className: "absolute top-2.5 left-2.5", children: /* @__PURE__ */ r.jsx(X, { tone: "magenta", children: "LIMITED" }) }),
-          /* @__PURE__ */ r.jsx("div", { className: "absolute top-2.5 right-2.5", children: /* @__PURE__ */ r.jsx(X, { children: t.stock }) })
+          t.limited && /* @__PURE__ */ r.jsx("div", { className: "absolute top-2.5 left-2.5", children: /* @__PURE__ */ r.jsx(H, { tone: "magenta", children: "LIMITED" }) }),
+          /* @__PURE__ */ r.jsx("div", { className: "absolute top-2.5 right-2.5", children: /* @__PURE__ */ r.jsx(H, { children: t.stock }) })
         ]
       }
     ),
@@ -5213,7 +5195,7 @@ const gs = Xe(function({
       ] }),
       /* @__PURE__ */ r.jsxs("div", { className: "flex items-center justify-between gap-2 mt-auto", children: [
         /* @__PURE__ */ r.jsx(Me, { amount: t.cost.toLocaleString() }),
-        /* @__PURE__ */ r.jsx($, { variant: "primary", size: "sm", disabled: !s, onClick: () => i(t), children: s ? "Redeem" : "Locked" })
+        /* @__PURE__ */ r.jsx(T, { variant: "primary", size: "sm", disabled: !s, onClick: () => i(t), children: s ? "Redeem" : "Locked" })
       ] })
     ] })
   ] });
@@ -5272,7 +5254,7 @@ export {
   cs as BadgeGrid,
   ls as BrandLockup,
   rs as BrandProvider,
-  $ as Button,
+  T as Button,
   hi as Chip,
   fr as Countdown,
   we as DEFAULT_CONFIG,
@@ -5285,7 +5267,7 @@ export {
   Gi as FollowSocialExperience,
   _i as HangmanExperience,
   xs as HeroBanner,
-  $e as Input,
+  Te as Input,
   Wi as InviteExperience,
   us as LeaderboardTable,
   bi as Logo,
@@ -5295,22 +5277,22 @@ export {
   Yi as PhotoProofExperience,
   ms as Podium,
   bs as ProfileCard,
-  zi as ProfileCompletionExperience,
+  Pi as ProfileCompletionExperience,
   ki as QuizExperience,
-  Pi as ReadArticleExperience,
-  Xi as ReferralExperience,
+  zi as ReadArticleExperience,
+  Hi as ReferralExperience,
   gs as RewardCard,
   vr as SURFACES,
   Bi as ScratchCardExperience,
-  Hi as ShareExperience,
+  Xi as ShareExperience,
   gi as Sparkline,
   Li as SpinWheelExperience,
   vs as StatCard,
   Ci as SurveyExperience,
-  X as Tag,
+  H as Tag,
   cr as Textarea,
   ys as TierLadder,
-  Ti as TriviaExperience,
+  $i as TriviaExperience,
   Ei as VideoExperience,
   mi as XPBar,
   Me as XPPill,
