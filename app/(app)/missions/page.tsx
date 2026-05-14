@@ -11,8 +11,6 @@ export default function MissionsPage() {
       tweaks={shell.tweaks}
       onClaim={shell.onClaim}
       onRedeem={shell.onRedeem}
-      openSpin={shell.openSpin}
-      openDaily={shell.openDaily}
     />
   )
 }

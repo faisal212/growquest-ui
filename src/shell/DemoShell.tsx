@@ -9,12 +9,6 @@ import { ErrorBoundary } from '../components/ErrorBoundary'
 const CelebrationScreen = lazy(() =>
   import('../screens/celebration').then((m) => ({ default: m.CelebrationScreen }))
 )
-const SpinModal = lazy(() =>
-  import('../screens/celebration').then((m) => ({ default: m.SpinModal }))
-)
-const DailyModal = lazy(() =>
-  import('../screens/celebration').then((m) => ({ default: m.DailyModal }))
-)
 
 function subscribePersonaStorage(cb: () => void): () => void {
   if (typeof window === 'undefined') return () => {}
@@ -66,8 +60,6 @@ interface DemoShellState {
   setEmail: (e: string) => void
   onClaim: (m: Mission | ClaimPayload) => void
   onRedeem: (r: Reward) => void
-  openSpin: () => void
-  openDaily: () => void
   tweaksVisible: boolean
   toggleTweaks: () => void
 }
@@ -100,8 +92,6 @@ export function DemoShell({ children }: { children: ReactNode }) {
   const [overridePersona, setOverridePersona] = useState<Persona | null>(null)
   const persona = overridePersona ?? { ...(PERSONAS[personaKey] ?? PERSONAS.active) }
   const [celebration, setCelebration] = useState<ClaimPayload | null>(null)
-  const [spinOpen, setSpinOpen] = useState(false)
-  const [dailyOpen, setDailyOpen] = useState(false)
   const [email, setEmail] = useState('')
 
   function handleSetPersonaKey(key: string) {
@@ -143,8 +133,6 @@ export function DemoShell({ children }: { children: ReactNode }) {
     setEmail,
     onClaim: handleClaim,
     onRedeem: handleRedeem,
-    openSpin: () => setSpinOpen(true),
-    openDaily: () => setDailyOpen(true),
     tweaksVisible,
     toggleTweaks: () => setTweaksVisible((v) => !v),
   }
@@ -156,19 +144,6 @@ export function DemoShell({ children }: { children: ReactNode }) {
         <Suspense fallback={null}>
           {celebration && (
             <CelebrationScreen reward={celebration} onContinue={() => setCelebration(null)} />
-          )}
-          {spinOpen && (
-            <SpinModal
-              onClose={() => setSpinOpen(false)}
-              onPrize={(p) => handleClaim({ title: 'Spin prize: ' + p.label, xp: p.xp || 0 })}
-            />
-          )}
-          {dailyOpen && (
-            <DailyModal
-              onClose={() => setDailyOpen(false)}
-              streak={persona.streak}
-              onClaim={handleClaim}
-            />
           )}
         </Suspense>
         <TweaksPanel tweaks={tweaks} setTweaks={setTweaks} visible={tweaksVisible} />

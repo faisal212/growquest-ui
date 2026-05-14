@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { MISSIONS, REWARDS } from '../../data'
-import { Eyebrow, Button, Chip } from '../../atoms'
+import { Eyebrow, Chip } from '../../atoms'
 import { MissionCard } from '../../components/MissionCard'
 import { MissionModal } from '../../components/MissionModal'
 import { RewardCard } from '../../components/RewardCard'
@@ -15,8 +15,6 @@ interface MissionsScreenProps {
   tweaks: Tweaks
   onClaim: (m: Mission) => void
   onRedeem: (r: Reward) => void
-  openSpin: () => void
-  openDaily: () => void
 }
 
 export default function MissionsScreen({
@@ -24,8 +22,6 @@ export default function MissionsScreen({
   tweaks,
   onClaim,
   onRedeem,
-  openSpin,
-  openDaily,
 }: MissionsScreenProps) {
   const [active, setActive] = useState<Mission | null>(null)
   const [filter, setFilter] = useState('all')
@@ -33,20 +29,6 @@ export default function MissionsScreen({
   const tileLayout = tweaks.tileLayout
   const density = tweaks.tileDensity
 
-  const dailyEyebrow = useContent<string>('missions.dailyDrop.eyebrow')
-  const dailyTitle = useContent<string>('missions.dailyDrop.title')
-  const dailySubtitle = useContent<string>('missions.dailyDrop.subtitle')
-  const spinEyebrow = useContent<string>('missions.spin.eyebrow')
-  const spinTitle = useContent<string>('missions.spin.title')
-  const spinSubtitle = useContent<string>('missions.spin.subtitle')
-  const spinPrizes = useContent<string>('missions.spin.prizes')
-  const collectEyebrow = useContent<string>('missions.readyToCollect.eyebrow')
-  const collectEmpty = useContent<string>('missions.readyToCollect.empty')
-  const collectButtonEmpty = useContent<string>('missions.readyToCollect.buttonEmpty')
-  const collectButtonReady = useContent<(n: number) => string>(
-    'missions.readyToCollect.buttonReady'
-  )
-  const collectWaiting = useContent<(n: number) => string>('missions.readyToCollect.waiting')
   const sectionEyebrow = useContent<string>('missions.sectionEyebrow')
   const sectionTitle = useContent<string>('missions.sectionTitle')
   const rewardsEyebrow = useContent<string>('missions.rewardsEyebrow')
@@ -66,82 +48,6 @@ export default function MissionsScreen({
       <div className="grid gap-5 grid-cols-[minmax(0,2fr)_minmax(300px,1fr)] [&>*]:min-w-0 max-[720px]:grid-cols-1">
         <HeroBanner heroStyle={tweaks.heroStyle} />
         <ProfileCardFromTweaks persona={persona} tweaks={tweaks} />
-      </div>
-
-      {/* Daily streak · Spin · Ready to collect */}
-      <div className="grid gap-4 grid-cols-[repeat(auto-fit,minmax(260px,1fr))]">
-        <button onClick={openDaily} className="panel p-[18px] text-left relative overflow-hidden">
-          <div className="absolute -top-5 -right-5 w-[120px] h-[120px] rounded-full opacity-30 bg-[image:var(--halo-amber)]" />
-          <Eyebrow>{dailyEyebrow}</Eyebrow>
-          <div className="flex items-center gap-3 mt-[10px] mb-2">
-            <div className="w-[38px] h-[38px] rounded-lg grid place-items-center font-bold font-mono text-base bg-accent-amber text-[#05060A]">
-              {persona.streak}
-            </div>
-            <div>
-              <div className="font-semibold text-sm">{dailyTitle}</div>
-              <div className="text-xs text-ink-dim">{dailySubtitle}</div>
-            </div>
-          </div>
-          <div className="flex gap-1">
-            {Array.from({ length: 7 }).map((_, i) => (
-              <div
-                key={i}
-                className="flex-1 h-[6px] rounded-[2px] border border-border"
-                style={{
-                  background: i < persona.streak % 7 ? 'var(--accent-amber)' : 'var(--panel-2)',
-                }}
-              />
-            ))}
-          </div>
-        </button>
-
-        <button onClick={openSpin} className="panel p-[18px] text-left relative overflow-hidden">
-          <div className="absolute -top-[30px] -right-[30px] w-[120px] h-[120px] rounded-full opacity-30 bg-[image:var(--halo-magenta)]" />
-          <Eyebrow>{spinEyebrow}</Eyebrow>
-          <div className="flex items-center gap-3 mt-[10px] mb-2">
-            <div className="w-[38px] h-[38px] rounded-lg grid place-items-center bg-accent-magenta text-[#05060A] animate-[spinSlow_6s_linear_infinite]">
-              <svg width="22" height="22" viewBox="0 0 22 22">
-                <polygon
-                  points="11,2 20,7 20,15 11,20 2,15 2,7"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                />
-                <circle cx="11" cy="11" r="3" fill="currentColor" />
-              </svg>
-            </div>
-            <div>
-              <div className="font-semibold text-sm">{spinTitle}</div>
-              <div className="text-xs text-ink-dim">{spinSubtitle}</div>
-            </div>
-          </div>
-          <div className="text-[11px] font-mono text-ink-faint">{spinPrizes}</div>
-        </button>
-
-        <div className="panel p-[18px] relative overflow-hidden">
-          <Eyebrow>{collectEyebrow}</Eyebrow>
-          <div className="mt-[10px] mb-[10px] text-[13px] text-ink-dim">
-            {persona.ready > 0 ? collectWaiting(persona.ready) : collectEmpty}
-          </div>
-          <Button
-            variant="primary"
-            className="w-full"
-            disabled={persona.ready === 0}
-            onClick={() =>
-              onClaim({
-                id: 'bundle',
-                type: 'bundle',
-                title: 'Reward bundle',
-                xp: 500,
-                desc: '',
-                progress: [1, 1],
-                tone: 'accent',
-              })
-            }
-          >
-            {persona.ready > 0 ? collectButtonReady(persona.ready) : collectButtonEmpty}
-          </Button>
-        </div>
       </div>
 
       {/* Missions + Rewards (layout-aware) */}

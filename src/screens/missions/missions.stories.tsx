@@ -9,8 +9,6 @@ type MissionsStoryArgs = Persona &
   Tweaks & {
     onClaim: (m: Mission) => void
     onRedeem: (r: Reward) => void
-    openSpin: () => void
-    openDaily: () => void
   }
 
 const PERSONA_ARGS: Persona = {
@@ -139,16 +137,12 @@ const meta = {
     ...TWEAKS_ARGS,
     onClaim: fn(),
     onRedeem: fn(),
-    openSpin: fn(),
-    openDaily: fn(),
   },
   argTypes: {
     ...PERSONA_ARG_TYPES,
     ...TWEAKS_ARG_TYPES,
     onClaim: { action: 'claimed' },
     onRedeem: { action: 'redeemed' },
-    openSpin: { action: 'openSpin' },
-    openDaily: { action: 'openDaily' },
   },
   render: (args: MissionsStoryArgs) => (
     <MissionsScreen
@@ -156,8 +150,6 @@ const meta = {
       tweaks={buildTweaks(args)}
       onClaim={args.onClaim}
       onRedeem={args.onRedeem}
-      openSpin={args.openSpin}
-      openDaily={args.openDaily}
     />
   ),
 } satisfies Meta<any>
