@@ -263,7 +263,13 @@ export const Animations: Story = {
                 marginBottom: 8,
               }}
             >
-              <div style={{ fontFamily: 'var(--font-mono)', fontSize: 20, color: 'var(--accent)' }}>
+              <div
+                style={{
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: 20,
+                  color: 'var(--color-primary)',
+                }}
+              >
                 ✦
               </div>
             </div>
@@ -306,15 +312,21 @@ export const Animations: Story = {
               width: 80,
               height: 80,
               borderRadius: 12,
-              background: 'var(--accent-soft)',
-              border: '1px solid color-mix(in oklch, var(--accent) 40%, transparent)',
+              background: 'var(--color-primary-soft)',
+              border: '1px solid color-mix(in oklch, var(--color-primary) 40%, transparent)',
               display: 'grid',
               placeItems: 'center',
               marginBottom: 8,
               animation: 'pulseGlow 2s ease-in-out infinite',
             }}
           >
-            <div style={{ fontFamily: 'var(--font-mono)', fontSize: 20, color: 'var(--accent)' }}>
+            <div
+              style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: 20,
+                color: 'var(--color-primary)',
+              }}
+            >
               ★
             </div>
           </div>

@@ -15,7 +15,7 @@ describe('deriveTokens — per-component overrides', () => {
     expect(tokens['--mission-modal-bg']).toBe('var(--panel)')
     expect(tokens['--reward-card-bg']).toBe('var(--panel)')
     expect(tokens['--profile-card-bg']).toBe('var(--panel)')
-    expect(tokens['--leaderboard-mine-bg']).toBe('var(--accent-soft)')
+    expect(tokens['--leaderboard-mine-bg']).toBe('var(--color-primary-soft)')
     expect(tokens['--tone-accent']).toBe('var(--accent-cyan)')
     expect(tokens['--tone-lime']).toBe('var(--accent-lime)')
     expect(tokens['--tone-magenta']).toBe('var(--accent-magenta)')

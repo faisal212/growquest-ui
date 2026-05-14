@@ -13,7 +13,12 @@ type StatCardStoryArgs = {
 const meta = {
   title: 'Components/StatCard',
   component: StatCard,
-  args: { label: 'Total XP', value: '9,840', trend: '5,6,7,8,10,12', trendColor: 'var(--accent)' },
+  args: {
+    label: 'Total XP',
+    value: '9,840',
+    trend: '5,6,7,8,10,12',
+    trendColor: 'var(--color-primary)',
+  },
   argTypes: {
     label: { control: 'text' },
     value: { control: 'text' },

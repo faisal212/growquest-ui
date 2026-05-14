@@ -26,7 +26,7 @@ export function ProfileCompletionExperience({ onComplete }: { onComplete: () => 
       <div className="flex items-center gap-2 text-xs text-ink-dim">
         <div className="flex-1 h-1 bg-panel-2 rounded-sm overflow-hidden">
           <div
-            className={`h-full rounded-sm transition-[width] duration-300 ease-out ${filled === 2 ? 'bg-accent-lime' : 'bg-accent'}`}
+            className={`h-full rounded-sm transition-[width] duration-300 ease-out ${filled === 2 ? 'bg-accent-lime' : 'bg-primary'}`}
             style={{ width: `${(filled / 2) * 100}%` }}
           />
         </div>

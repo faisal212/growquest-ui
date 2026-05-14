@@ -105,8 +105,6 @@ export function useTweaks(): [Tweaks, (t: Tweaks) => void] {
     root.dataset.mobileNav = tweaks.mobileNav || 'top'
     root.dataset.mobileDensity = tweaks.mobileDensity || 'comfortable'
     root.dataset.mobileHero = tweaks.mobileHero || 'show'
-    // Route theme + accent through applyBrand so --color-primary and its derived
-    // tokens stay in sync with the legacy --accent var (kept as alias).
     applyBrand({
       mode: tweaks.theme,
       brand: { primary: ACCENTS[tweaks.accent] },

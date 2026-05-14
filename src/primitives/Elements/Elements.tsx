@@ -4,7 +4,7 @@ export function Eyebrow({ children, dot }: { children: React.ReactNode; dot?: bo
   return (
     <div className="inline-flex items-center gap-2 font-mono text-[11px] tracking-[0.16em] uppercase text-ink-dim">
       {dot !== false && (
-        <span className="w-1.5 h-1.5 bg-accent rounded-full shadow-[0_0_8px_var(--accent)]" />
+        <span className="w-1.5 h-1.5 bg-primary rounded-full shadow-[0_0_8px_var(--color-primary)]" />
       )}
       {children}
     </div>
@@ -14,7 +14,8 @@ export function Eyebrow({ children, dot }: { children: React.ReactNode; dot?: bo
 export function Tag({ children, tone = 'default' }: { children: React.ReactNode; tone?: string }) {
   const toneClasses: Record<string, string> = {
     default: 'text-ink-dim border-border bg-panel-2',
-    accent: 'text-accent border-[color-mix(in_oklch,var(--accent)_40%,transparent)] bg-accent-soft',
+    accent:
+      'text-primary border-[color-mix(in_oklch,var(--color-primary)_40%,transparent)] bg-primary-soft',
     lime: 'text-accent-lime border-[color-mix(in_oklch,var(--accent-lime)_40%,transparent)] bg-[color-mix(in_oklch,var(--accent-lime)_14%,transparent)]',
     magenta:
       'text-accent-magenta border-[color-mix(in_oklch,var(--accent-magenta)_40%,transparent)] bg-[color-mix(in_oklch,var(--accent-magenta)_14%,transparent)]',
@@ -28,7 +29,7 @@ export function Tag({ children, tone = 'default' }: { children: React.ReactNode;
 
 export function XPPill({ amount, icon = true }: { amount: number | string; icon?: boolean }) {
   return (
-    <span className="chip accent gap-1.5 font-semibold">
+    <span className="chip primary gap-1.5 font-semibold">
       {icon && (
         <svg width="10" height="10" viewBox="0 0 10 10">
           <polygon
@@ -67,7 +68,7 @@ export function Countdown({ endsAt }: { endsAt: number }) {
 
 export function Sparkline({
   values,
-  color = 'var(--accent)',
+  color = 'var(--color-primary)',
   w = 80,
   h = 24,
 }: {

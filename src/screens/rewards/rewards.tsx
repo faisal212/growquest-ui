@@ -25,7 +25,7 @@ export default function RewardsScreen({ persona, onRedeem }: RewardsScreenProps)
           <span className="inline-flex items-center gap-2 font-mono text-[11px] tracking-[0.16em] uppercase text-ink-dim">
             balance
           </span>
-          <span className="mono text-lg font-bold text-accent">
+          <span className="mono text-lg font-bold text-primary">
             {persona.xp.toLocaleString()} XP
           </span>
         </div>

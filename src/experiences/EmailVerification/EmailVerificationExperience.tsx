@@ -42,7 +42,7 @@ export function EmailVerificationExperience({
       <button
         disabled={countdown > 0}
         onClick={() => setCountdown(30)}
-        className={`bg-transparent border-none text-xs text-center ${countdown > 0 ? 'cursor-not-allowed text-ink-dim no-underline' : 'cursor-pointer text-accent underline'}`}
+        className={`bg-transparent border-none text-xs text-center ${countdown > 0 ? 'cursor-not-allowed text-ink-dim no-underline' : 'cursor-pointer text-primary underline'}`}
       >
         {countdown > 0 ? `Resend in ${countdown}s` : 'Resend code'}
       </button>

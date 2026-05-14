@@ -21,15 +21,6 @@ describe('applyBrand', () => {
     expect(style.getPropertyValue('--on-primary')).not.toBe('')
   })
 
-  it('mirrors --color-primary into legacy --accent alias', () => {
-    applyBrand({ mode: 'dark', brand: { primary: '#FF8C00' } })
-    const style = document.documentElement.style
-    const primary = style.getPropertyValue('--color-primary')
-    const accent = style.getPropertyValue('--accent')
-    expect(accent).toBe(primary)
-    expect(accent.length).toBeGreaterThan(0)
-  })
-
   it('removes stale CSS vars when a subsequent call drops them', () => {
     applyBrand({
       mode: 'dark',
@@ -67,7 +58,7 @@ describe('applyBrand', () => {
     // overrides are gone, but the slots themselves point back at their default
     // semantic-token values (BrandStyles is the single source of truth).
     expect(style.getPropertyValue('--mission-tile-bg')).toBe('var(--panel)')
-    expect(style.getPropertyValue('--leaderboard-mine-bg')).toBe('var(--accent-soft)')
+    expect(style.getPropertyValue('--leaderboard-mine-bg')).toBe('var(--color-primary-soft)')
     expect(style.getPropertyValue('--tone-accent')).toBe('var(--accent-cyan)')
   })
 })

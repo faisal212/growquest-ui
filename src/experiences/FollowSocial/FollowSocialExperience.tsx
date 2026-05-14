@@ -76,7 +76,7 @@ export function FollowSocialExperience({
 
   return (
     <div className="flex flex-col items-center gap-6 py-8 px-6">
-      <div className="w-[72px] h-[72px] rounded-[18px] bg-panel-2 border border-border grid place-items-center text-accent">
+      <div className="w-[72px] h-[72px] rounded-[18px] bg-panel-2 border border-border grid place-items-center text-primary">
         <PlatformIcon platform={platform} />
       </div>
 

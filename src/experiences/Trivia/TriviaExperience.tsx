@@ -140,7 +140,7 @@ export function TriviaExperience({
 
       <div className="h-1 bg-panel-2 rounded-full overflow-hidden">
         <div
-          className={`h-full transition-[width] duration-1000 ease-linear ${time < 5 ? 'bg-danger' : 'bg-accent'}`}
+          className={`h-full transition-[width] duration-1000 ease-linear ${time < 5 ? 'bg-danger' : 'bg-primary'}`}
           style={{ width: `${(time / timeLimit) * 100}%` }}
         />
       </div>

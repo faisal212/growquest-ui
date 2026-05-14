@@ -40,7 +40,7 @@ export function SpinWheelExperience({ onComplete }: { onComplete: () => void }) 
           style={{
             borderLeft: '8px solid transparent',
             borderRight: '8px solid transparent',
-            borderTop: '18px solid var(--accent)',
+            borderTop: '18px solid var(--color-primary)',
           }}
         />
         <svg
@@ -95,14 +95,14 @@ export function SpinWheelExperience({ onComplete }: { onComplete: () => void }) 
             stroke="var(--border)"
             strokeWidth="2"
           />
-          <circle cx={cx} cy={cx} r={6} fill="var(--accent)" />
+          <circle cx={cx} cy={cx} r={6} fill="var(--color-primary)" />
         </svg>
       </div>
 
       {result && (
         <div className="text-center">
           <div className="text-[13px] text-ink-dim">You got</div>
-          <div className="text-[22px] font-bold text-accent">{result}</div>
+          <div className="text-[22px] font-bold text-primary">{result}</div>
         </div>
       )}
 

@@ -25,13 +25,13 @@ export const Overview: Story = {
         <svg width="36" height="36" viewBox="0 0 32 32">
           <defs>
             <linearGradient id="lg-intro" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0" stopColor="var(--accent)" />
+              <stop offset="0" stopColor="var(--color-primary)" />
               <stop offset="1" stopColor="var(--accent-magenta)" />
             </linearGradient>
           </defs>
           <polygon points="16,2 28,9 28,23 16,30 4,23 4,9" fill="url(#lg-intro)" />
           <polygon points="16,8 22,11.5 22,20.5 16,24 10,20.5 10,11.5" fill="var(--bg)" />
-          <circle cx="16" cy="16" r="3.5" fill="var(--accent)" />
+          <circle cx="16" cy="16" r="3.5" fill="var(--color-primary)" />
         </svg>
         <h1 style={{ margin: 0, fontSize: 32, fontWeight: 700, letterSpacing: '-0.025em' }}>
           GrowQuest Design System
@@ -125,7 +125,7 @@ export const Overview: Story = {
         }}
       >
         {[
-          { token: '--accent', usage: 'Primary brand color (oklch)' },
+          { token: '--color-primary', usage: 'Primary brand color (oklch)' },
           { token: '--accent-lime / -magenta / -amber', usage: 'Secondary palette' },
           { token: '--ink / --ink-dim', usage: 'Text — primary / secondary' },
           { token: '--bg / --bg-2', usage: 'Page background levels' },
@@ -143,7 +143,13 @@ export const Overview: Story = {
               borderBottom: i < 6 ? '1px solid var(--border)' : 'none',
             }}
           >
-            <code style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--accent)' }}>
+            <code
+              style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: 12,
+                color: 'var(--color-primary)',
+              }}
+            >
               {token}
             </code>
             <span style={{ fontSize: 13, color: 'var(--ink-dim)' }}>{usage}</span>

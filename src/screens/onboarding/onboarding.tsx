@@ -29,7 +29,7 @@ export default function OnboardingScreen({ onEnter, heroStyle }: OnboardingScree
           <Eyebrow>// onboarding · step 1 / 3</Eyebrow>
           <h1 className="display text-[36px] leading-[1.05] m-0 tracking-[-0.03em]">
             Become a<br />
-            <span className="text-accent">GrowQuest</span> insider.
+            <span className="text-primary">GrowQuest</span> insider.
           </h1>
           <p className="text-[15px] leading-[1.6] m-0 text-ink-dim">
             Unlock exclusive perks, shape the roadmap, and earn XP toward rewards. Daily missions,
@@ -77,14 +77,14 @@ export default function OnboardingScreen({ onEnter, heroStyle }: OnboardingScree
               I agree to the{' '}
               <button
                 type="button"
-                className="bg-transparent border-0 p-0 text-accent cursor-pointer [font:inherit]"
+                className="bg-transparent border-0 p-0 text-primary cursor-pointer [font:inherit]"
               >
                 Terms
               </button>{' '}
               and acknowledge the{' '}
               <button
                 type="button"
-                className="bg-transparent border-0 p-0 text-accent cursor-pointer [font:inherit]"
+                className="bg-transparent border-0 p-0 text-primary cursor-pointer [font:inherit]"
               >
                 Privacy Policy
               </button>

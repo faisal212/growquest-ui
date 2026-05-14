@@ -4,7 +4,7 @@ import { HeroArt, Avatar, MissionIcon } from './Art'
 const meta = {
   title: 'Foundations/Art',
   component: HeroArt,
-  args: { variant: 'isometric', accent: 'var(--accent)' },
+  args: { variant: 'isometric', accent: 'var(--color-primary)' },
   argTypes: {
     variant: {
       control: 'radio',
@@ -135,7 +135,7 @@ export const MissionIconPlayground: Story = {
         border: '1px solid var(--border)',
         display: 'grid',
         placeItems: 'center',
-        color: 'var(--accent)',
+        color: 'var(--color-primary)',
       }}
     >
       <MissionIcon type={args.type} size={args.size} />
@@ -160,7 +160,7 @@ export const MissionIconAllTypes: Story = {
                 border: '1px solid var(--border)',
                 display: 'grid',
                 placeItems: 'center',
-                color: 'var(--accent)',
+                color: 'var(--color-primary)',
               }}
             >
               <MissionIcon type={type} size={22} />

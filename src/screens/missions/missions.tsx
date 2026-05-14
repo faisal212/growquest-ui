@@ -222,7 +222,7 @@ export default function MissionsScreen({
                   <span className="inline-flex items-center gap-2 font-mono text-[11px] tracking-[0.16em] uppercase text-ink-dim mr-[6px]">
                     {rewardsBalanceLabel}
                   </span>
-                  <span className="mono font-bold text-accent">
+                  <span className="mono font-bold text-primary">
                     {persona.xp.toLocaleString()} XP
                   </span>
                 </Chip>

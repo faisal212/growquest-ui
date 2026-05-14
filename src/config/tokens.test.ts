@@ -27,13 +27,6 @@ describe('deriveTokens', () => {
     expect(lightPrim['--on-primary']).toBe('#0A0B10')
   })
 
-  it('mirrors --color-primary to --accent (legacy alias)', () => {
-    const tokens = deriveTokens({ mode: 'dark', brand: { primary: '#FF8C00' } })
-    expect(tokens['--accent']).toBe(tokens['--color-primary'])
-    expect(tokens['--accent-soft']).toBe(tokens['--color-primary-soft'])
-    expect(tokens['--accent-faint']).toBe(tokens['--color-primary-faint'])
-  })
-
   it('emits halo gradient tokens', () => {
     const tokens = deriveTokens({ mode: 'dark', brand: { primary: '#FF8C00' } })
     expect(tokens['--halo-amber']).toContain('radial-gradient')

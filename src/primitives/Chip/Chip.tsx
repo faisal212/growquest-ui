@@ -2,9 +2,9 @@ export type ChipTone = 'default' | 'accent' | 'lime' | 'magenta' | 'amber'
 
 export const CHIP_TONES: Record<string, React.CSSProperties> = {
   accent: {
-    color: 'var(--accent)',
-    borderColor: 'color-mix(in oklch, var(--accent) 40%, transparent)',
-    background: 'var(--accent-soft)',
+    color: 'var(--color-primary)',
+    borderColor: 'color-mix(in oklch, var(--color-primary) 40%, transparent)',
+    background: 'var(--color-primary-soft)',
   },
   lime: {
     color: 'var(--accent-lime)',

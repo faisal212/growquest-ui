@@ -11,10 +11,6 @@
   --accent-magenta: oklch(0.72 0.25 340);
   --accent-amber: oklch(0.83 0.18 75);
   --accent-violet: oklch(0.72 0.22 290);
-
-  --accent: var(--accent-cyan);
-  --accent-soft: color-mix(in oklch, var(--accent) 18%, transparent);
-  --accent-faint: color-mix(in oklch, var(--accent) 8%, transparent);
 }
 
 /* Component-scoped + tone + halo fallbacks. Lives inside @layer base so
@@ -26,7 +22,7 @@
   :root {
     --halo-amber: radial-gradient(circle, var(--accent-amber) 0%, transparent 70%);
     --halo-magenta: radial-gradient(circle, var(--accent-magenta) 0%, transparent 70%);
-    --halo-primary: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+    --halo-primary: radial-gradient(circle, var(--color-primary) 0%, transparent 70%);
 
     --tone-accent: var(--accent-cyan);
     --tone-lime: var(--accent-lime);
@@ -71,8 +67,8 @@
     --leaderboard-row-border: var(--border);
     --leaderboard-head-bg: transparent;
     --leaderboard-head-text: var(--ink-dim);
-    --leaderboard-mine-bg: var(--accent-soft);
-    --leaderboard-top-rank: var(--accent);
+    --leaderboard-mine-bg: var(--color-primary-soft);
+    --leaderboard-top-rank: var(--color-primary);
   }
 }
 
@@ -81,9 +77,6 @@
    New brand tokens (--color-primary*, --color-secondary*, --on-primary, halos)
    are written by applyBrand() at runtime in src/config/apply.ts. */
 @theme {
-  --color-accent: var(--accent);
-  --color-accent-soft: var(--accent-soft);
-  --color-accent-faint: var(--accent-faint);
   --color-accent-cyan: var(--accent-cyan);
   --color-accent-lime: var(--accent-lime);
   --color-accent-magenta: var(--accent-magenta);
@@ -101,15 +94,16 @@
   --color-border-strong: var(--border-strong);
   --color-danger: var(--danger);
 
-  /* Brand tokens (resolved at runtime by applyBrand). */
-  --color-primary: var(--accent);
-  --color-primary-hover: var(--accent);
-  --color-primary-soft: var(--accent-soft);
-  --color-primary-faint: var(--accent-faint);
+  /* Brand tokens (resolved at runtime by applyBrand). Direct values here so
+     the canonical name owns the source; BrandStyles overrides at runtime. */
+  --color-primary: var(--accent-cyan);
+  --color-primary-hover: var(--accent-cyan);
+  --color-primary-soft: color-mix(in oklch, var(--accent-cyan) 18%, transparent);
+  --color-primary-faint: color-mix(in oklch, var(--accent-cyan) 8%, transparent);
   --color-on-primary: #0A0B10;
   --color-secondary: var(--accent-magenta);
   --color-secondary-hover: var(--accent-magenta);
-  --color-secondary-soft: var(--accent-faint);
+  --color-secondary-soft: color-mix(in oklch, var(--accent-cyan) 8%, transparent);
   --color-on-secondary: #FFFFFF;
 
   --font-display: 'Space Grotesk', system-ui, sans-serif;
@@ -172,13 +166,13 @@ body::before {
   z-index: -1;
   pointer-events: none;
   background-image:
-    radial-gradient(1200px 600px at 80% -10%, var(--accent-faint), transparent 70%),
+    radial-gradient(1200px 600px at 80% -10%, var(--color-primary-faint), transparent 70%),
     radial-gradient(900px 500px at -10% 110%, color-mix(in oklch, var(--accent-magenta) 6%, transparent), transparent 60%);
 }
 
 html[data-theme="light"] body::before {
   background-image:
-    radial-gradient(1200px 600px at 80% -10%, color-mix(in oklch, var(--accent) 10%, transparent), transparent 70%),
+    radial-gradient(1200px 600px at 80% -10%, color-mix(in oklch, var(--color-primary) 10%, transparent), transparent 70%),
     radial-gradient(900px 500px at -10% 110%, color-mix(in oklch, var(--accent-magenta) 5%, transparent), transparent 60%);
 }
 
@@ -213,10 +207,10 @@ html[data-theme="light"] body::before {
   background: var(--panel-2);
 }
 
-.chip.accent {
-  color: var(--accent);
-  border-color: color-mix(in oklch, var(--accent) 40%, transparent);
-  background: var(--accent-soft);
+.chip.primary {
+  color: var(--color-primary);
+  border-color: color-mix(in oklch, var(--color-primary) 40%, transparent);
+  background: var(--color-primary-soft);
 }
 
 .btn {
@@ -238,12 +232,12 @@ html[data-theme="light"] body::before {
 .btn:active { transform: translateY(1px); }
 
 .btn.primary {
-  background: var(--accent);
+  background: var(--color-primary);
   color: #05060A;
-  border-color: var(--accent);
-  box-shadow: 0 0 0 1px color-mix(in oklch, var(--accent) 30%, transparent), 0 10px 32px -8px color-mix(in oklch, var(--accent) 50%, transparent);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 1px color-mix(in oklch, var(--color-primary) 30%, transparent), 0 10px 32px -8px color-mix(in oklch, var(--color-primary) 50%, transparent);
 }
-.btn.primary:hover { background: color-mix(in oklch, var(--accent) 92%, white); }
+.btn.primary:hover { background: color-mix(in oklch, var(--color-primary) 92%, white); }
 .btn.primary:disabled { opacity: 0.4; cursor: not-allowed; box-shadow: none; }
 
 .btn.ghost { background: transparent; }
@@ -260,8 +254,8 @@ html[data-theme="light"] body::before {
   transition: border-color 120ms ease, box-shadow 120ms ease;
 }
 .input:focus {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px color-mix(in oklch, var(--accent) 20%, transparent);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px color-mix(in oklch, var(--color-primary) 20%, transparent);
 }
 
 /* Scrollbar */
@@ -288,7 +282,7 @@ html[data-theme="light"] body::before {
   100% { background-position: 200% 0; }
 }
 @keyframes pulseGlow {
-  0%, 100% { box-shadow: 0 0 0 0 color-mix(in oklch, var(--accent) 40%, transparent); }
+  0%, 100% { box-shadow: 0 0 0 0 color-mix(in oklch, var(--color-primary) 40%, transparent); }
   50% { box-shadow: 0 0 0 12px transparent; }
 }
 @keyframes spinSlow {
@@ -369,8 +363,8 @@ html[data-theme="light"] body::before {
 .xpbar { position: relative; height: 8px; border-radius: 99px; overflow: hidden; background: var(--panel-2); border: 1px solid var(--border); }
 .xpbar .fill {
   height: 100%;
-  background: linear-gradient(90deg, var(--accent), color-mix(in oklch, var(--accent) 50%, var(--accent-magenta)));
-  box-shadow: 0 0 12px color-mix(in oklch, var(--accent) 60%, transparent);
+  background: linear-gradient(90deg, var(--color-primary), color-mix(in oklch, var(--color-primary) 50%, var(--accent-magenta)));
+  box-shadow: 0 0 12px color-mix(in oklch, var(--color-primary) 60%, transparent);
   transition: width 600ms cubic-bezier(.2,.7,.2,1);
 }
 
@@ -384,16 +378,16 @@ html[data-theme="light"] body::before {
   border-radius: 2px;
 }
 .xp-seg .seg.on {
-  background: var(--accent);
-  border-color: var(--accent);
-  box-shadow: inset 0 0 6px color-mix(in oklch, var(--accent) 50%, white);
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  box-shadow: inset 0 0 6px color-mix(in oklch, var(--color-primary) 50%, white);
 }
 
 /* Grid bg for illustration area */
 .grid-bg {
   background-image:
-    linear-gradient(color-mix(in oklch, var(--accent) 18%, transparent) 1px, transparent 1px),
-    linear-gradient(90deg, color-mix(in oklch, var(--accent) 18%, transparent) 1px, transparent 1px);
+    linear-gradient(color-mix(in oklch, var(--color-primary) 18%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in oklch, var(--color-primary) 18%, transparent) 1px, transparent 1px);
   background-size: 32px 32px;
 }
 
@@ -435,7 +429,7 @@ html[data-theme="light"] body::before {
   font-family: var(--font-mono);
   cursor: pointer;
 }
-.tweaks .pill.on { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+.tweaks .pill.on { background: var(--color-primary-soft); border-color: var(--color-primary); color: var(--color-primary); }
 
 /* Responsive helpers */
 @media (max-width: 1024px) {
@@ -514,7 +508,7 @@ html[data-mobile-nav="bottom"] .bottom-nav { display: flex; }
     padding: 6px 4px; font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.1em;
     text-transform: uppercase; color: var(--ink-dim); border-radius: 6px;
   }
-  html[data-mobile-nav="bottom"] .bottom-nav button.active { color: var(--accent); }
+  html[data-mobile-nav="bottom"] .bottom-nav button.active { color: var(--color-primary); }
   html[data-mobile-nav="bottom"] .bottom-nav button svg { width: 20px; height: 20px; }
   html[data-mobile-hero="hide"] .hero-banner { display: none; }
   html[data-mobile-hero="hide"] .onboarding-hero { display: none; }

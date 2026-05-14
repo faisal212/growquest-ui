@@ -58,7 +58,7 @@ export function CelebrationScreen({
           <div
             className="absolute inset-0 rounded-full opacity-40 animate-[float_3s_ease-in-out_infinite]"
             style={{
-              background: 'radial-gradient(circle, var(--accent) 0%, transparent 70%)',
+              background: 'radial-gradient(circle, var(--color-primary) 0%, transparent 70%)',
             }}
           />
           <svg
@@ -69,7 +69,7 @@ export function CelebrationScreen({
           >
             <defs>
               <linearGradient id="cel-grad" x1="0" x2="1" y1="0" y2="1">
-                <stop offset="0" stopColor="var(--accent)" />
+                <stop offset="0" stopColor="var(--color-primary)" />
                 <stop offset="1" stopColor="var(--accent-magenta)" />
               </linearGradient>
             </defs>
@@ -96,7 +96,7 @@ export function CelebrationScreen({
 
         <Eyebrow>// quest complete</Eyebrow>
         <h1 className="display text-[32px] mt-2 mb-[10px]">
-          <span className="text-accent">Level up!</span>
+          <span className="text-primary">Level up!</span>
         </h1>
         <p className="text-sm leading-[1.6] mx-auto mb-5 max-w-[360px] text-ink-dim">
           You earned <strong className="text-ink">{(reward?.xp ?? 500).toLocaleString()} XP</strong>
@@ -169,7 +169,7 @@ export function SpinModal({
         <h2 className="display mt-2 mb-5 text-[24px]">Take your spin</h2>
 
         <div className="relative w-[280px] h-[280px] mx-auto mb-5">
-          <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-0 h-0 z-[2] border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-t-[18px] border-t-accent [filter:drop-shadow(0_0_6px_var(--accent))]" />
+          <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-0 h-0 z-[2] border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-t-[18px] border-t-primary [filter:drop-shadow(0_0_6px_var(--color-primary))]" />
           <svg
             viewBox="-100 -100 200 200"
             width="280"
@@ -216,7 +216,7 @@ export function SpinModal({
               )
             })}
             <circle r="20" fill="var(--bg)" stroke="var(--border)" />
-            <circle r="6" fill="var(--accent)" />
+            <circle r="6" fill="var(--color-primary)" />
           </svg>
         </div>
 
@@ -225,7 +225,7 @@ export function SpinModal({
             <div className="inline-flex items-center gap-2 font-mono text-[11px] tracking-[0.16em] uppercase text-ink-dim mb-[6px]">
               // you won
             </div>
-            <div className="text-[24px] font-bold text-accent">{result.label}</div>
+            <div className="text-[24px] font-bold text-primary">{result.label}</div>
           </div>
         ) : (
           <div className="mb-4 text-[13px] text-ink-dim">1 spin remaining · free</div>
@@ -287,9 +287,9 @@ export function DailyModal({
                 key={i}
                 className="p-[10px] text-center rounded-lg"
                 style={{
-                  border: `1px solid ${isToday ? 'var(--accent)' : 'var(--border)'}`,
+                  border: `1px solid ${isToday ? 'var(--color-primary)' : 'var(--border)'}`,
                   background: done
-                    ? 'var(--accent-soft)'
+                    ? 'var(--color-primary-soft)'
                     : isToday
                       ? 'var(--panel-2)'
                       : 'transparent',
@@ -299,7 +299,11 @@ export function DailyModal({
                 <div
                   className="font-bold text-[13px] mt-1"
                   style={{
-                    color: done ? 'var(--accent)' : isToday ? 'var(--ink)' : 'var(--ink-faint)',
+                    color: done
+                      ? 'var(--color-primary)'
+                      : isToday
+                        ? 'var(--ink)'
+                        : 'var(--ink-faint)',
                   }}
                 >
                   +{i === 6 ? '500' : '50'}

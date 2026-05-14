@@ -44,13 +44,6 @@ export function deriveTokens(cfg: BrandConfig): Record<string, string> {
     }
   }
 
-  // Legacy aliases (kept for back-compat until --accent is fully removed).
-  // The rest of styles.css references --accent / --accent-soft / --accent-faint;
-  // map them to the new primary so existing components retint automatically.
-  out['--accent'] = out['--color-primary']
-  out['--accent-soft'] = out['--color-primary-soft']
-  out['--accent-faint'] = out['--color-primary-faint']
-
   // Halo gradient recipes (precomputed, written as full gradient values so
   // components can use bg-[var(--halo-amber)] without runtime color-mix).
   out['--halo-amber'] = `radial-gradient(circle, var(--accent-amber) 0%, transparent 70%)`
@@ -116,8 +109,8 @@ export function deriveTokens(cfg: BrandConfig): Record<string, string> {
   out['--leaderboard-row-border'] = 'var(--border)'
   out['--leaderboard-head-bg'] = 'transparent'
   out['--leaderboard-head-text'] = 'var(--ink-dim)'
-  out['--leaderboard-mine-bg'] = 'var(--accent-soft)'
-  out['--leaderboard-top-rank'] = 'var(--accent)'
+  out['--leaderboard-mine-bg'] = 'var(--color-primary-soft)'
+  out['--leaderboard-top-rank'] = 'var(--color-primary)'
 
   // Per-component override slots. Each var only overwrites the default above
   // when explicitly supplied in cfg.overrides.*.

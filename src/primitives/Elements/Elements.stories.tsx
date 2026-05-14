@@ -125,7 +125,7 @@ export const CountdownStory: Story = {
 
 export const SparklinePlayground: Story = {
   name: 'Sparkline · Playground',
-  args: { values: '2,4,3,6,5,8,9,12,14', color: 'var(--accent)', w: 80, h: 24 } as any,
+  args: { values: '2,4,3,6,5,8,9,12,14', color: 'var(--color-primary)', w: 80, h: 24 } as any,
   argTypes: {
     values: { control: 'text', description: 'Comma-separated data points.' },
     color: { control: 'color', description: 'Stroke color — accepts any CSS color.' },

@@ -31,12 +31,12 @@ export default function WelcomeScreen({ onContinue, email }: WelcomeScreenProps)
             <svg viewBox="0 0 180 180" width="180" height="180">
               <defs>
                 <linearGradient id="wg-grad" x1="0" x2="1" y1="0" y2="1">
-                  <stop offset="0" stopColor="var(--accent)" />
+                  <stop offset="0" stopColor="var(--color-primary)" />
                   <stop offset="1" stopColor="var(--accent-magenta)" />
                 </linearGradient>
                 <radialGradient id="wg-glow">
-                  <stop offset="0" stopColor="var(--accent)" stopOpacity="0.5" />
-                  <stop offset="1" stopColor="var(--accent)" stopOpacity="0" />
+                  <stop offset="0" stopColor="var(--color-primary)" stopOpacity="0.5" />
+                  <stop offset="1" stopColor="var(--color-primary)" stopOpacity="0" />
                 </radialGradient>
               </defs>
               <circle cx="90" cy="110" r="85" fill="url(#wg-glow)" />
@@ -54,7 +54,7 @@ export default function WelcomeScreen({ onContinue, email }: WelcomeScreenProps)
                 fontFamily="JetBrains Mono"
                 fontSize="9"
                 letterSpacing="2"
-                fill="var(--accent)"
+                fill="var(--color-primary)"
               >
                 // REENTRY.OK
               </text>
@@ -65,7 +65,7 @@ export default function WelcomeScreen({ onContinue, email }: WelcomeScreenProps)
             // session restored
           </div>
           <h1 className="display text-[28px] mt-0 mb-[10px]">
-            Welcome back, <span className="text-accent">Alpha</span>.
+            Welcome back, <span className="text-primary">Alpha</span>.
           </h1>
           <p className="text-sm leading-[1.6] mx-auto mb-6 max-w-[360px] text-ink-dim">
             Dive into exclusive content, join the discussion, and unlock rewards. Synchronizing

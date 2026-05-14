@@ -34,7 +34,7 @@ export function BadgeCollectExperience({
         </div>
         <div className="h-1.5 bg-panel-2 rounded-[3px] overflow-hidden">
           <div
-            className={`h-full rounded-[3px] transition-[width] duration-[400ms] ease-out ${done ? 'bg-accent-lime' : 'bg-accent'}`}
+            className={`h-full rounded-[3px] transition-[width] duration-[400ms] ease-out ${done ? 'bg-accent-lime' : 'bg-primary'}`}
             style={{
               width: `${Math.min(100, (earnedCount / goal) * 100)}%`,
             }}
@@ -52,7 +52,7 @@ export function BadgeCollectExperience({
             <div className="flex justify-between items-center">
               <span className="text-[18px]">🏅</span>
               {badge.got && (
-                <span className="text-[10px] text-[#05060A] bg-accent py-px px-1.5 rounded-[4px] font-bold">
+                <span className="text-[10px] text-[#05060A] bg-primary py-px px-1.5 rounded-[4px] font-bold">
                   ✓
                 </span>
               )}

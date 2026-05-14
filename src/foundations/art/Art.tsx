@@ -1,5 +1,5 @@
 export function HeroArt({ variant = 'isometric', accent }: { variant?: string; accent?: string }) {
-  const a = accent || 'var(--accent)'
+  const a = accent || 'var(--color-primary)'
 
   if (variant === 'grid-poster') {
     return (

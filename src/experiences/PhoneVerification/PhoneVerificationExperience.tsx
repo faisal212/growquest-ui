@@ -48,7 +48,7 @@ export function PhoneVerificationExperience({ onComplete }: { onComplete: () => 
             setStep('phone')
             setOtp('')
           }}
-          className="bg-transparent border-none cursor-pointer text-xs text-accent underline text-center"
+          className="bg-transparent border-none cursor-pointer text-xs text-primary underline text-center"
         >
           Change number
         </button>

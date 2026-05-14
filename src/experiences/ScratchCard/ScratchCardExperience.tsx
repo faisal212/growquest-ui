@@ -44,7 +44,7 @@ export function ScratchCardExperience({
             <div className="text-[11px] text-ink-dim mb-1 font-mono uppercase tracking-[0.06em]">
               You won
             </div>
-            <div className="text-[32px] font-extrabold text-accent">{reward}</div>
+            <div className="text-[32px] font-extrabold text-primary">{reward}</div>
           </div>
         </div>
         {/* Scratch overlay */}
@@ -70,7 +70,7 @@ export function ScratchCardExperience({
         </div>
       </div>
 
-      <div className={`text-xs text-center ${completed ? 'text-accent' : 'text-ink-dim'}`}>
+      <div className={`text-xs text-center ${completed ? 'text-primary' : 'text-ink-dim'}`}>
         {completed ? `🎉 You revealed: ${reward}` : `Scratch to reveal… ${pct}% uncovered`}
       </div>
 

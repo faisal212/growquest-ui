@@ -56,7 +56,7 @@ export function ReadArticleExperience({
           </div>
           <div className="h-1 bg-panel-2 rounded-sm overflow-hidden">
             <div
-              className="h-full bg-accent rounded-sm transition-[width] duration-1000 ease-linear"
+              className="h-full bg-primary rounded-sm transition-[width] duration-1000 ease-linear"
               style={{ width: `${progress}%` }}
             />
           </div>

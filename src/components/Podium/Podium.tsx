@@ -24,7 +24,7 @@ export function Podium({ entries, rankColors, platformHeights }: PodiumProps) {
   return (
     <div className="grid grid-cols-3 gap-3.5 mb-7">
       {display.map((p) => {
-        const color = colors[p.rank] ?? 'var(--accent)'
+        const color = colors[p.rank] ?? 'var(--color-primary)'
         const height = heights[p.rank] ?? 120
         return (
           <div key={p.rank} className="flex flex-col items-center gap-2.5">

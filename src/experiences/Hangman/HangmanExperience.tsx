@@ -53,7 +53,7 @@ export function HangmanExperience({
           {word.split('').map((l, i) => (
             <span
               key={i}
-              className={`w-7 h-9 border-b-2 border-ink-dim grid place-items-center font-mono text-xl font-bold ${guesses.includes(l) ? 'text-accent' : 'text-transparent'}`}
+              className={`w-7 h-9 border-b-2 border-ink-dim grid place-items-center font-mono text-xl font-bold ${guesses.includes(l) ? 'text-primary' : 'text-transparent'}`}
             >
               {l}
             </span>
@@ -71,7 +71,7 @@ export function HangmanExperience({
               key={l}
               disabled={used || solved || lost}
               onClick={() => setGuesses([...guesses, l])}
-              className={`py-2 px-0 rounded-[5px] border border-border font-mono text-xs font-bold ${used ? 'opacity-70' : 'opacity-100'} ${isRight ? 'bg-accent-soft text-accent' : isWrong ? 'text-danger' : 'bg-panel-2 text-ink'}`}
+              className={`py-2 px-0 rounded-[5px] border border-border font-mono text-xs font-bold ${used ? 'opacity-70' : 'opacity-100'} ${isRight ? 'bg-primary-soft text-primary' : isWrong ? 'text-danger' : 'bg-panel-2 text-ink'}`}
               style={{
                 background: isWrong
                   ? 'color-mix(in oklch, var(--danger) 18%, transparent)'

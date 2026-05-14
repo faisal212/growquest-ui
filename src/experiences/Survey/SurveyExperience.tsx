@@ -100,7 +100,7 @@ export function SurveyExperience({
                 <span
                   className={`w-[18px] h-[18px] rounded-full border-2 grid place-items-center shrink-0 ${isPick ? 'border-accent' : 'border-border'}`}
                 >
-                  {isPick && <span className="w-2 h-2 rounded-full bg-accent" />}
+                  {isPick && <span className="w-2 h-2 rounded-full bg-primary" />}
                 </span>
                 <span className="flex-1 text-sm">{c.label}</span>
               </ChoiceShell>

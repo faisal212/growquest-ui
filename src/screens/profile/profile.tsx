@@ -79,7 +79,7 @@ export default function ProfileScreen({ persona, tweaks }: ProfileScreenProps) {
                   style={{
                     height: `${(v / 14) * 100}%`,
                     background:
-                      'linear-gradient(180deg, var(--accent) 0%, color-mix(in oklch, var(--accent) 40%, var(--accent-magenta)) 100%)',
+                      'linear-gradient(180deg, var(--color-primary) 0%, color-mix(in oklch, var(--color-primary) 40%, var(--accent-magenta)) 100%)',
                   }}
                 />
               ))}

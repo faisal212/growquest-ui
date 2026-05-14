@@ -60,14 +60,14 @@ export function XPBar({ value, max, style = 'segmented', segments = 10, label }:
             cy="40"
             r={r}
             fill="none"
-            stroke="var(--accent)"
+            stroke="var(--color-primary)"
             strokeWidth="6"
             strokeDasharray={c}
             strokeDashoffset={c * (1 - pct)}
             transform="rotate(-90 40 40)"
             strokeLinecap="round"
             style={{
-              filter: 'drop-shadow(0 0 6px var(--accent))',
+              filter: 'drop-shadow(0 0 6px var(--color-primary))',
               transition: 'stroke-dashoffset 800ms ease',
             }}
           />
@@ -112,7 +112,7 @@ export function XPBar({ value, max, style = 'segmented', segments = 10, label }:
         <div
           className="absolute inset-0.5 rounded-sm"
           style={{
-            background: `linear-gradient(90deg, var(--accent) 0%, var(--accent) ${pct * 100}%, transparent ${pct * 100}%)`,
+            background: `linear-gradient(90deg, var(--color-primary) 0%, var(--color-primary) ${pct * 100}%, transparent ${pct * 100}%)`,
           }}
         />
         <div

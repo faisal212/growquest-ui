@@ -43,7 +43,7 @@ export function ReferralExperience({
           </span>
           <button
             onClick={copyLink}
-            className={`py-1 px-2.5 rounded-[5px] border border-border text-[11px] font-semibold cursor-pointer whitespace-nowrap transition-all duration-150 ${copied ? 'bg-accent' : 'bg-panel text-ink'}`}
+            className={`py-1 px-2.5 rounded-[5px] border border-border text-[11px] font-semibold cursor-pointer whitespace-nowrap transition-all duration-150 ${copied ? 'bg-primary' : 'bg-panel text-ink'}`}
             style={copied ? { color: '#05060A' } : undefined}
           >
             {copied ? 'Copied ✓' : 'Copy'}
