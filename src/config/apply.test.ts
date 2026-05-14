@@ -47,7 +47,7 @@ describe('applyBrand', () => {
     expect(document.documentElement.style.cssText).toBe(first)
   })
 
-  it('removes component-scoped override vars when a subsequent call drops the recipe', () => {
+  it('drops a tenant override back to the unconditional default on a subsequent apply', () => {
     applyBrand({
       mode: 'dark',
       brand: { primary: '#FF8C00' },
@@ -63,8 +63,11 @@ describe('applyBrand', () => {
     expect(style.getPropertyValue('--tone-accent')).toBe('#FF00FF')
 
     applyBrand({ mode: 'dark', brand: { primary: '#FF8C00' } })
-    expect(style.getPropertyValue('--mission-tile-bg')).toBe('')
-    expect(style.getPropertyValue('--leaderboard-mine-bg')).toBe('')
-    expect(style.getPropertyValue('--tone-accent')).toBe('')
+    // Without overrides, deriveTokens emits the unconditional fallbacks. The
+    // overrides are gone, but the slots themselves point back at their default
+    // semantic-token values (BrandStyles is the single source of truth).
+    expect(style.getPropertyValue('--mission-tile-bg')).toBe('var(--panel)')
+    expect(style.getPropertyValue('--leaderboard-mine-bg')).toBe('var(--accent-soft)')
+    expect(style.getPropertyValue('--tone-accent')).toBe('var(--accent-cyan)')
   })
 })

@@ -12,14 +12,16 @@ describe('tone palette override', () => {
     expect(toneColor('amber')).toBe('var(--tone-amber)')
   })
 
-  it('emits --tone-lime when overrides.tones.lime is supplied', () => {
+  it('emits --tone-lime when overrides.tones.lime is supplied, leaves other tones at defaults', () => {
     const tokens = deriveTokens({
       ...BASE,
       overrides: { tones: { lime: '#00FF00' } },
     })
     expect(tokens['--tone-lime']).toBe('#00FF00')
-    // Other tones not emitted (defaults from :root take over).
-    expect(tokens['--tone-accent']).toBeUndefined()
+    // Other tones retain their unconditional defaults from deriveTokens.
+    expect(tokens['--tone-accent']).toBe('var(--accent-cyan)')
+    expect(tokens['--tone-magenta']).toBe('var(--accent-magenta)')
+    expect(tokens['--tone-amber']).toBe('var(--accent-amber)')
   })
 
   it('emits all four tone overrides independently', () => {

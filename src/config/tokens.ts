@@ -68,8 +68,59 @@ export function deriveTokens(cfg: BrandConfig): Record<string, string> {
   if (cfg.overrides?.fonts?.ui) out['--font-ui'] = cfg.overrides.fonts.ui
   if (cfg.overrides?.fonts?.mono) out['--font-mono'] = cfg.overrides.fonts.mono
 
-  // Per-component override slots. Each var only emitted when supplied;
-  // styles.css :root provides the default fallback otherwise.
+  // Component-scoped + tone fallbacks. These MUST be emitted unconditionally
+  // because Tailwind v4's PostCSS preprocessing drops :root declarations in
+  // styles.css after the first block. Owning the fallback values here makes
+  // BrandStyles the single source of truth and survives any CSS-pipeline
+  // pruning. cfg.overrides.* blocks below overwrite these when supplied.
+  out['--tone-accent'] = 'var(--accent-cyan)'
+  out['--tone-lime'] = 'var(--accent-lime)'
+  out['--tone-magenta'] = 'var(--accent-magenta)'
+  out['--tone-amber'] = 'var(--accent-amber)'
+
+  out['--mission-tile-bg'] = 'var(--panel)'
+  out['--mission-tile-border'] = 'var(--border)'
+  out['--mission-tile-icon-bg'] = 'var(--panel-2)'
+  out['--mission-tile-icon-border'] = 'var(--border)'
+  out['--mission-tile-title'] = 'var(--ink)'
+  out['--mission-tile-body'] = 'var(--ink-dim)'
+  out['--mission-tile-cta-fg'] = '#05060A'
+  out['--mission-tile-halo-opacity'] = '0.25'
+
+  out['--mission-modal-backdrop'] = 'color-mix(in oklch, #000 60%, transparent)'
+  out['--mission-modal-bg'] = 'var(--panel)'
+  out['--mission-modal-border'] = 'var(--border)'
+  out['--mission-modal-header-border'] = 'var(--border)'
+  out['--mission-modal-title'] = 'var(--ink)'
+  out['--mission-modal-body'] = 'var(--ink-dim)'
+  out['--mission-modal-close-bg'] = 'var(--panel-2)'
+  out['--mission-modal-close-border'] = 'var(--border)'
+  out['--mission-modal-close-icon'] = 'var(--ink)'
+
+  out['--reward-card-bg'] = 'var(--panel)'
+  out['--reward-card-border'] = 'var(--border)'
+  out['--reward-card-image-bg'] = 'var(--panel-2)'
+  out['--reward-card-image-border'] = 'var(--border)'
+  out['--reward-card-title'] = 'var(--ink)'
+  out['--reward-card-body'] = 'var(--ink-dim)'
+
+  out['--profile-card-bg'] = 'var(--panel)'
+  out['--profile-card-border'] = 'var(--border)'
+  out['--profile-card-title'] = 'var(--ink)'
+  out['--profile-card-body'] = 'var(--ink-dim)'
+  out['--profile-card-stat-bg'] = 'var(--panel-2)'
+  out['--profile-card-stat-border'] = 'var(--border)'
+  out['--profile-card-wallet'] = 'var(--ink-faint)'
+
+  out['--leaderboard-row-bg'] = 'transparent'
+  out['--leaderboard-row-border'] = 'var(--border)'
+  out['--leaderboard-head-bg'] = 'transparent'
+  out['--leaderboard-head-text'] = 'var(--ink-dim)'
+  out['--leaderboard-mine-bg'] = 'var(--accent-soft)'
+  out['--leaderboard-top-rank'] = 'var(--accent)'
+
+  // Per-component override slots. Each var only overwrites the default above
+  // when explicitly supplied in cfg.overrides.*.
   const ov = cfg.overrides
   if (ov?.missionTile) {
     const r = ov.missionTile

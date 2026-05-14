@@ -4,14 +4,22 @@ import { deriveTokens } from './tokens'
 const BASE = { mode: 'dark' as const, brand: { primary: '#FF8C00' } }
 
 describe('deriveTokens — per-component overrides', () => {
-  it('emits no component-scoped vars when no overrides supplied', () => {
+  it('emits component-scoped + tone defaults unconditionally', () => {
+    // BrandStyles is the single source of truth for these vars — Tailwind v4
+    // drops them from styles.css :root, so they must always land in the
+    // server-rendered <style> block.
     const tokens = deriveTokens(BASE)
-    expect(tokens['--mission-tile-bg']).toBeUndefined()
-    expect(tokens['--mission-modal-bg']).toBeUndefined()
-    expect(tokens['--reward-card-bg']).toBeUndefined()
-    expect(tokens['--profile-card-bg']).toBeUndefined()
-    expect(tokens['--leaderboard-mine-bg']).toBeUndefined()
-    expect(tokens['--tone-accent']).toBeUndefined()
+    expect(tokens['--mission-tile-bg']).toBe('var(--panel)')
+    expect(tokens['--mission-tile-halo-opacity']).toBe('0.25')
+    expect(tokens['--mission-tile-cta-fg']).toBe('#05060A')
+    expect(tokens['--mission-modal-bg']).toBe('var(--panel)')
+    expect(tokens['--reward-card-bg']).toBe('var(--panel)')
+    expect(tokens['--profile-card-bg']).toBe('var(--panel)')
+    expect(tokens['--leaderboard-mine-bg']).toBe('var(--accent-soft)')
+    expect(tokens['--tone-accent']).toBe('var(--accent-cyan)')
+    expect(tokens['--tone-lime']).toBe('var(--accent-lime)')
+    expect(tokens['--tone-magenta']).toBe('var(--accent-magenta)')
+    expect(tokens['--tone-amber']).toBe('var(--accent-amber)')
   })
 
   it('emits MissionTile slots when missionTile override is supplied', () => {

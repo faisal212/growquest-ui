@@ -15,60 +15,65 @@
   --accent: var(--accent-cyan);
   --accent-soft: color-mix(in oklch, var(--accent) 18%, transparent);
   --accent-faint: color-mix(in oklch, var(--accent) 8%, transparent);
+}
 
-  /* Halo gradient fallbacks. applyBrand() overwrites with precomputed values. */
-  --halo-amber: radial-gradient(circle, var(--accent-amber) 0%, transparent 70%);
-  --halo-magenta: radial-gradient(circle, var(--accent-magenta) 0%, transparent 70%);
-  --halo-primary: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+/* Component-scoped + tone + halo fallbacks. Lives inside @layer base so
+   Tailwind v4's PostCSS preprocessor preserves the declarations (plain :root
+   blocks past the theme prelude get pruned). BrandStyles still emits the same
+   vars inline at SSR for the actual app render; this layer is the safety net
+   for Storybook + any consumer that mounts components outside BrandProvider. */
+@layer base {
+  :root {
+    --halo-amber: radial-gradient(circle, var(--accent-amber) 0%, transparent 70%);
+    --halo-magenta: radial-gradient(circle, var(--accent-magenta) 0%, transparent 70%);
+    --halo-primary: radial-gradient(circle, var(--accent) 0%, transparent 70%);
 
-  /* Tone palette. Remappable via BrandConfig.overrides.tones. */
-  --tone-accent: var(--accent-cyan);
-  --tone-lime: var(--accent-lime);
-  --tone-magenta: var(--accent-magenta);
-  --tone-amber: var(--accent-amber);
+    --tone-accent: var(--accent-cyan);
+    --tone-lime: var(--accent-lime);
+    --tone-magenta: var(--accent-magenta);
+    --tone-amber: var(--accent-amber);
 
-  /* Component-scoped fallbacks. Each var defaults to a semantic token;
-     BrandConfig.overrides.<component> writes per-component overrides. */
-  --mission-tile-bg: var(--panel);
-  --mission-tile-border: var(--border);
-  --mission-tile-icon-bg: var(--panel-2);
-  --mission-tile-icon-border: var(--border);
-  --mission-tile-title: var(--ink);
-  --mission-tile-body: var(--ink-dim);
-  --mission-tile-cta-fg: #05060A;
-  --mission-tile-halo-opacity: 0.25;
+    --mission-tile-bg: var(--panel);
+    --mission-tile-border: var(--border);
+    --mission-tile-icon-bg: var(--panel-2);
+    --mission-tile-icon-border: var(--border);
+    --mission-tile-title: var(--ink);
+    --mission-tile-body: var(--ink-dim);
+    --mission-tile-cta-fg: #05060A;
+    --mission-tile-halo-opacity: 0.25;
 
-  --mission-modal-backdrop: color-mix(in oklch, #000 60%, transparent);
-  --mission-modal-bg: var(--panel);
-  --mission-modal-border: var(--border);
-  --mission-modal-header-border: var(--border);
-  --mission-modal-title: var(--ink);
-  --mission-modal-body: var(--ink-dim);
-  --mission-modal-close-bg: var(--panel-2);
-  --mission-modal-close-border: var(--border);
-  --mission-modal-close-icon: var(--ink);
+    --mission-modal-backdrop: color-mix(in oklch, #000 60%, transparent);
+    --mission-modal-bg: var(--panel);
+    --mission-modal-border: var(--border);
+    --mission-modal-header-border: var(--border);
+    --mission-modal-title: var(--ink);
+    --mission-modal-body: var(--ink-dim);
+    --mission-modal-close-bg: var(--panel-2);
+    --mission-modal-close-border: var(--border);
+    --mission-modal-close-icon: var(--ink);
 
-  --reward-card-bg: var(--panel);
-  --reward-card-border: var(--border);
-  --reward-card-image-bg: var(--panel-2);
-  --reward-card-image-border: var(--border);
-  --reward-card-title: var(--ink);
-  --reward-card-body: var(--ink-dim);
+    --reward-card-bg: var(--panel);
+    --reward-card-border: var(--border);
+    --reward-card-image-bg: var(--panel-2);
+    --reward-card-image-border: var(--border);
+    --reward-card-title: var(--ink);
+    --reward-card-body: var(--ink-dim);
 
-  --profile-card-bg: var(--panel);
-  --profile-card-border: var(--border);
-  --profile-card-title: var(--ink);
-  --profile-card-body: var(--ink-dim);
-  --profile-card-stat-bg: var(--panel-2);
-  --profile-card-stat-border: var(--border);
-  --profile-card-wallet: var(--ink-faint);
+    --profile-card-bg: var(--panel);
+    --profile-card-border: var(--border);
+    --profile-card-title: var(--ink);
+    --profile-card-body: var(--ink-dim);
+    --profile-card-stat-bg: var(--panel-2);
+    --profile-card-stat-border: var(--border);
+    --profile-card-wallet: var(--ink-faint);
 
-  --leaderboard-row-bg: transparent;
-  --leaderboard-row-border: var(--border);
-  --leaderboard-head-bg: transparent;
-  --leaderboard-head-text: var(--ink-dim);
-  --leaderboard-mine-bg: var(--accent-soft);
-  --leaderboard-top-rank: var(--accent);
+    --leaderboard-row-bg: transparent;
+    --leaderboard-row-border: var(--border);
+    --leaderboard-head-bg: transparent;
+    --leaderboard-head-text: var(--ink-dim);
+    --leaderboard-mine-bg: var(--accent-soft);
+    --leaderboard-top-rank: var(--accent);
+  }
 }
 
 /* Bridge custom properties into Tailwind v4 theme so utilities like
