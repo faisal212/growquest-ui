@@ -1,0 +1,178 @@
+// ─────────────────────────────────────────────────────────────────────────────
+// BrandConfig reference — every overridable field populated
+//
+// This is a fully-exhaustive example. In production, tenant configs are SPARSE:
+// only override what differs from defaults. The shape here mirrors
+// `src/config/schema.ts` 1:1 so backend devs implementing the real brand API
+// (or a CMS UI exposing these knobs) can see the complete contract in one place.
+//
+// Defaults for every field live in:
+//   - `src/config/defaults.ts`       — mode, brand colors, surface palette, content
+//   - `src/config/tokens.ts`         — per-component CSS-var defaults
+//   - `styles.css` @layer base block — Storybook safety net (mirrors tokens.ts)
+//
+// The runtime path: tenant JSON → `validate.ts` (shape check) → `deriveTokens`
+// (config → CSS vars) → `<BrandStyles>` inline <style id="__brand"> at SSR.
+// ─────────────────────────────────────────────────────────────────────────────
+
+{
+  // ─── Top-level identity ───────────────────────────────────────────────────
+  "schemaVersion": 1,                              // optional; defaults to 1
+  "tenantId": "example-corp",                      // echoed for debugging; not rendered
+
+  // ─── Required: theme mode + brand colors ──────────────────────────────────
+  "mode": "dark",                                  // "dark" | "light" — REQUIRED
+  "brand": {
+    "primary":   "#FF8C00",                        // REQUIRED. hex or oklch() string.
+                                                   // Hover/soft/faint/on-primary are derived.
+    "secondary": "#2DACA9"                         // optional; same derivation rules.
+  },
+
+  // ─── Logos (all optional) ─────────────────────────────────────────────────
+  "logos": {
+    "onboarding": "/logos/onboarding.svg",         // Onboarding hero (mobile + desktop)
+    "nav":        "/logos/nav.svg",                // Top-nav logo
+    "endGame":    "/logos/endgame.svg"             // Celebration / completion screen
+  },
+
+  // ─── Copy strings (sparse — falls back to defaults for unset keys) ────────
+  "content": {
+    "missions": {
+      "sectionEyebrow":  "// missions",
+      "sectionTitle":    "Daily quests",
+      "rewardsEyebrow":  "// rewards marketplace",
+      "rewardsTitle":    "Spend your XP",
+      "rewardsBalance":  "balance",
+      "dailyDrop": {
+        "eyebrow":  "// daily drop",
+        "title":    "Daily streak",
+        "subtitle": "Claim +50 XP every 24h"
+      },
+      "spin": {
+        "eyebrow":  "// lootbox",
+        "title":    "Spin-to-win",
+        "subtitle": "1 free spin available",
+        "prizes":   "PRIZES: XP · MERCH · RARE DROP"
+      },
+      "readyToCollect": {
+        "eyebrow":     "// ready to collect",
+        "empty":       "Complete a mission to collect rewards.",
+        "buttonEmpty": "No rewards yet"
+        // NOTE: `buttonReady(n)` and `waiting(n)` are functions, NOT strings.
+        // They cannot be expressed as pure JSON. A real backend can ship
+        // string templates (e.g. "Collect ({n})") and the client interpolates;
+        // the current code path supplies the functions directly in TS.
+      }
+    }
+  },
+
+  // ─── Media assets ─────────────────────────────────────────────────────────
+  "assets": {
+    "onboardingHero":   { "src": "/assets/onboarding-hero.gif", "type": "GIF" },
+    "navBackground":    { "src": "/assets/nav-bg.json",         "type": "JSON" },
+    "endGameImage":     { "src": "/assets/endgame.png",         "type": "IMG" },
+    "nftMinting":       { "src": "/assets/nft-mint.json",       "type": "JSON" },
+    "onboardWelcoming": { "src": "/assets/welcome.gif",         "type": "GIF" }
+  },
+
+  // ─── Overrides: every field optional; supply only what differs ────────────
+  "overrides": {
+
+    // Per-mode surface/ink palette. Rarely needed — `mode: "dark"` or "light"
+    // already selects a sensible palette (see defaults.ts:SURFACES).
+    "surface": {
+      "surface":        "#0E1018",                 // → --surface
+      "surface2":       "#141722",                 // → --surface-2
+      "surface3":       "#1A1E2C",                 // → --surface-3
+      "surfaceHover":   "#1A1E2C",                 // → --surface-hover
+      "onSurface":      "#E8EBF2",                 // → --on-surface (primary text)
+      "onSurfaceDim":   "#8B93A7",                 // → --on-surface-dim
+      "onSurfaceFaint": "#555C6E",                 // → --on-surface-faint
+      "border":         "oklch(0.28 0.015 270)",   // → --border-token
+      "borderStrong":   "oklch(0.38 0.02 270)"     // → --border-strong-token
+    },
+
+    // Corner radii (defaults: 14px / 8px / 4px / 16px).
+    "radius": {
+      "card":   "14px",                            // → --radius-card
+      "button": "8px",                             // → --radius-button
+      "tag":    "4px",                             // → --radius-tag
+      "modal":  "16px"                             // → --radius-modal
+    },
+
+    // Font stacks. Each is a full `font-family` value.
+    "fonts": {
+      "display": "'Space Grotesk', system-ui, sans-serif",
+      "ui":      "'Inter', system-ui, sans-serif",
+      "mono":    "ui-monospace, 'Cascadia Code', 'Fira Mono', monospace"
+    },
+
+    // Mission card (the tappable item on /missions). Maps to --mission-card-*.
+    "missionCard": {
+      "surface":       "#FFFFFF",                  // → --mission-card-bg
+      "surface2":      "#F9F8F4",                  // fallback for iconBoxBg if unset
+      "border":        "#FF8C00",                  // → --mission-card-border
+      "title":         "#0A0B10",                  // → --mission-card-title
+      "body":          "#5A6275",                  // → --mission-card-body
+      "iconBoxBg":     "#F9F8F4",                  // → --mission-card-icon-bg
+      "iconBoxBorder": "#FF8C00",                  // → --mission-card-icon-border
+      "ctaFg":         "#FFFFFF",                  // → --mission-card-cta-fg
+      "haloOpacity":   0.4                         // → --mission-card-halo-opacity (0–1)
+    },
+
+    // Mission detail modal. Maps to --mission-modal-*.
+    "missionModal": {
+      "surface":      "#FFFFFF",                   // → --mission-modal-bg
+      "border":       "#FF8C00",
+      "title":        "#0A0B10",
+      "body":         "#5A6275",
+      "backdrop":     "rgba(0, 0, 0, 0.7)",        // → --mission-modal-backdrop
+      "headerBorder": "#E8EBF2",
+      "closeBg":      "#FF8C00",
+      "closeBorder":  "#FF8C00",
+      "closeIcon":    "#FFFFFF"
+    },
+
+    // Reward marketplace card. Maps to --reward-card-*.
+    "rewardCard": {
+      "surface":         "#FFFFFF",
+      "surface2":        "#F9F8F4",                // fallback for imageArea if unset
+      "border":          "#E8EBF2",
+      "title":           "#0A0B10",
+      "body":            "#5A6275",
+      "imageArea":       "#F9F8F4",                // background behind artwork
+      "imageAreaBorder": "#E8EBF2"
+    },
+
+    // Profile snapshot card (on /profile). Maps to --profile-card-*.
+    "profileCard": {
+      "surface":     "#FFFFFF",
+      "surface2":    "#F9F8F4",                    // fallback for statBg
+      "border":      "#E8EBF2",
+      "title":       "#0A0B10",
+      "body":        "#5A6275",
+      "statBg":      "#F9F8F4",                    // → --profile-card-stat-bg
+      "statBorder":  "#E8EBF2",
+      "walletColor": "#9099AA"                     // color of mono wallet-address line
+    },
+
+    // Leaderboard table rows. Maps to --leaderboard-*.
+    "leaderboardRow": {
+      "rowSurface":    "transparent",              // → --leaderboard-row-bg
+      "rowBorder":     "#E8EBF2",
+      "headSurface":   "transparent",
+      "headText":      "#5A6275",
+      "mineHighlight": "#FF8C0030",                // bg behind current user's row
+      "topRankColor":  "#FF8C00"                   // rank number color for top 3
+    },
+
+    // Tone palette remap. Affects every component that calls toneColor().
+    // Maps to --tone-accent / --tone-lime / --tone-magenta / --tone-amber.
+    "tones": {
+      "accent":  "#FF8C00",
+      "lime":    "#2DACA9",
+      "magenta": "#FF1493",
+      "amber":   "#FFA500"
+    }
+  }
+}
