@@ -8,8 +8,8 @@ import { DEFAULT_CONFIG } from './defaults'
  * DEFAULT_CONFIG — never throws. Caller sees a always-renderable config.
  *
  * Works from both Next.js Server Components (during SSR) and Client Components
- * (for runtime revalidation). Server-side caching: Next.js's fetch() cache
- * extends Response with `revalidate` — we accept 5 min freshness, 1h stale.
+ * (for runtime revalidation). Server-side caching: 24h freshness, busted on
+ * demand via POST /api/brand/[tenantId]/invalidate from the admin panel.
  */
 export async function fetchBrand(tenantId: string): Promise<BrandConfig> {
   const base = getBaseUrl()
@@ -17,7 +17,7 @@ export async function fetchBrand(tenantId: string): Promise<BrandConfig> {
 
   try {
     const res = await fetch(url, {
-      next: { revalidate: 300, tags: [`brand:${tenantId}`] },
+      next: { revalidate: 86400, tags: [`brand:${tenantId}`] },
       headers: { Accept: 'application/json' },
     })
     if (!res.ok) {

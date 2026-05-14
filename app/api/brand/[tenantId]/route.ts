@@ -20,7 +20,7 @@ export async function GET(_req: Request, { params }: { params: Promise<{ tenantI
   return NextResponse.json(config, {
     status: 200,
     headers: {
-      'Cache-Control': 'public, s-maxage=300, stale-while-revalidate=3600',
+      'Cache-Control': 'public, s-maxage=86400, stale-while-revalidate=86400',
       ETag: `"${tenantId}-v${config.schemaVersion ?? 1}"`,
     },
   })
