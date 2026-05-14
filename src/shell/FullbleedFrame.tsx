@@ -1,21 +1,22 @@
-import { Outlet, useNavigate } from 'react-router-dom'
+'use client'
+
+import type { ReactNode } from 'react'
+import { useRouter } from 'next/navigation'
 import { Button } from '../atoms'
+import { useDemoShell } from './DemoShell'
 
-interface FullbleedLayoutProps {
-  onToggleTweaks: () => void
-}
-
-export function FullbleedLayout({ onToggleTweaks }: FullbleedLayoutProps) {
-  const navigate = useNavigate()
+export function FullbleedFrame({ children }: { children: ReactNode }) {
+  const router = useRouter()
+  const shell = useDemoShell()
   return (
     <div className="flex-1 grid place-items-center px-6 py-8 max-[720px]:px-3 max-[720px]:py-4">
-      <Outlet />
+      {children}
       <div className="fixed top-4 right-4 flex gap-1.5">
-        <Button variant="ghost" size="sm" onClick={() => navigate('/missions')}>
+        <Button variant="ghost" size="sm" onClick={() => router.push('/missions')}>
           Skip →
         </Button>
         <button
-          onClick={onToggleTweaks}
+          onClick={shell.toggleTweaks}
           title="Toggle tweaks"
           className="w-8 h-8 rounded-md bg-panel border border-border grid place-items-center"
         >

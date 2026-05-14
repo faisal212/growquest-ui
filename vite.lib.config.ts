@@ -18,7 +18,7 @@ export default defineConfig({
       fileName: () => 'index.js',
     },
     rollupOptions: {
-      external: ['react', 'react-dom', 'react-router-dom'],
+      external: ['react', 'react-dom'],
     },
     cssCodeSplit: false,
     outDir: 'dist',

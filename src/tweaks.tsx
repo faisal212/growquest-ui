@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import type { Tweaks } from './types'
+import { applyBrand } from './config'
 
 const ACCENTS: Record<string, string> = {
   cyan: 'oklch(0.86 0.18 200)',
@@ -77,38 +78,47 @@ export function TweaksPanel({ tweaks, setTweaks, visible }: TweaksPanelProps) {
   )
 }
 
+const DEFAULT_TWEAKS: Tweaks = {
+  theme: 'dark',
+  accent: 'cyan',
+  tileLayout: 'split',
+  xpStyle: 'segmented',
+  tileDensity: 'comfortable',
+  heroStyle: 'isometric',
+  rewardsLayout: 'stacked',
+  rewardsRatio: 'balanced',
+  mobileNav: 'top',
+  mobileDensity: 'comfortable',
+  mobileHero: 'show',
+}
+
 export function useTweaks(): [Tweaks, (t: Tweaks) => void] {
-  const [tweaks, setTweaks] = useState<Tweaks>(
-    () =>
-      ({
-        mobileNav: 'top',
-        mobileDensity: 'comfortable',
-        mobileHero: 'show',
-        ...(window.__TWEAKS as Partial<Tweaks>),
-      }) as Tweaks
-  )
+  const [tweaks, setTweaks] = useState<Tweaks>(() => ({
+    ...DEFAULT_TWEAKS,
+    ...(typeof window !== 'undefined'
+      ? (window.__TWEAKS as Partial<Tweaks> | undefined)
+      : undefined),
+  }))
 
   useEffect(() => {
     const root = document.documentElement
-    root.dataset.theme = tweaks.theme
     root.dataset.mobileNav = tweaks.mobileNav || 'top'
     root.dataset.mobileDensity = tweaks.mobileDensity || 'comfortable'
     root.dataset.mobileHero = tweaks.mobileHero || 'show'
-    root.style.setProperty('--accent', ACCENTS[tweaks.accent])
-    root.style.setProperty(
-      '--accent-soft',
-      `color-mix(in oklch, ${ACCENTS[tweaks.accent]} 18%, transparent)`
-    )
-    root.style.setProperty(
-      '--accent-faint',
-      `color-mix(in oklch, ${ACCENTS[tweaks.accent]} 8%, transparent)`
-    )
+    // Route theme + accent through applyBrand so --color-primary and its derived
+    // tokens stay in sync with the legacy --accent var (kept as alias).
+    applyBrand({
+      mode: tweaks.theme,
+      brand: { primary: ACCENTS[tweaks.accent] },
+    })
   }, [tweaks])
 
   const set = (t: Tweaks) => {
     setTweaks(t)
-    window.__TWEAKS = t as unknown as Record<string, string> // safe: Tweaks values are all strings
-    window.parent.postMessage({ type: '__edit_mode_set_keys', edits: t }, '*')
+    if (typeof window !== 'undefined') {
+      window.__TWEAKS = t as unknown as Record<string, string>
+      window.parent.postMessage({ type: '__edit_mode_set_keys', edits: t }, '*')
+    }
   }
 
   return [tweaks, set]

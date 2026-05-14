@@ -1,3 +1,33 @@
+// Brand config — applyBrand, BrandProvider, hooks, types
+export {
+  applyBrand,
+  getCurrentBrand,
+  subscribeBrand,
+  BrandProvider,
+  useBrandState,
+  useBrand,
+  useContent,
+  useAsset,
+  preloadAssets,
+  deriveTokens,
+  DEFAULT_CONFIG,
+  DEFAULT_CONTENT,
+  SURFACES,
+} from './config'
+export type {
+  BrandConfig,
+  BrandColors,
+  ContentMap,
+  AssetMap,
+  AssetEntry,
+  Mode,
+  Overrides,
+  SurfacePalette,
+  LogoSet,
+  RadiusSet,
+  FontSet,
+} from './config'
+
 // Primitives
 export { Button } from './primitives/Button'
 export type { ButtonProps } from './primitives/Button'
