@@ -5,6 +5,25 @@ const LAUNCH_EVENT_ENDS = Date.now() + 3600 * 1000 * 26
 
 export const MISSIONS: Mission[] = [
   {
+    id: 'mev1',
+    type: 'verify_email',
+    title: 'Verify your email',
+    desc: 'Confirm your address with a 6-digit code to claim XP.',
+    xp: 80,
+    progress: [0, 1],
+    tone: 'accent',
+  },
+  {
+    id: 'mav1',
+    type: 'avatar',
+    title: 'Upload your profile picture',
+    desc: 'Add a face to your handle — drag in a photo to claim XP.',
+    xp: 120,
+    progress: [0, 1],
+    tone: 'magenta',
+  },
+
+  {
     id: 'm1',
     type: 'social',
     title: 'Follow GrowQuest on X',
