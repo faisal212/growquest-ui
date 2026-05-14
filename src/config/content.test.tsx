@@ -14,15 +14,6 @@ describe('useContent', () => {
     expect(screen.getByText('Daily quests')).toBeInTheDocument()
   })
 
-  it('returns a function value when the path resolves to a function', () => {
-    function Probe() {
-      const fn = useContent<(n: number) => string>('missions.readyToCollect.buttonReady')
-      return <span>{fn(3)}</span>
-    }
-    renderWithBrand(<Probe />)
-    expect(screen.getByText('Collect (3)')).toBeInTheDocument()
-  })
-
   it('overrides resolve when supplied via BrandProvider value', () => {
     function Title() {
       return <span data-testid="title">{useContent<string>('missions.sectionTitle')}</span>

@@ -6,7 +6,7 @@ import { useBrandState } from './BrandProvider'
  *
  * @example
  *   const title = useContent<string>('missions.sectionTitle')
- *   const buttonReady = useContent<(n: number) => string>('missions.readyToCollect.buttonReady')
+ *   const balance = useContent<string>('missions.rewardsBalance')
  */
 export function useContent<T = string>(path: string): T {
   const { content } = useBrandState()

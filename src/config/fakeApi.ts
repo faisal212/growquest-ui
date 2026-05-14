@@ -31,10 +31,6 @@ export const TENANTS: Record<string, BrandConfig> = {
       missions: {
         sectionTitle: 'Acme Quests',
         sectionEyebrow: '// acme campaign',
-        dailyDrop: {
-          title: 'Acme daily',
-          subtitle: 'Claim +50 XP every 24h',
-        },
         rewardsTitle: 'Acme rewards',
       },
     },

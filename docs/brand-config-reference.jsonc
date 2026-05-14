@@ -38,31 +38,11 @@
   // ─── Copy strings (sparse — falls back to defaults for unset keys) ────────
   "content": {
     "missions": {
-      "sectionEyebrow":  "// missions",
-      "sectionTitle":    "Daily quests",
-      "rewardsEyebrow":  "// rewards marketplace",
-      "rewardsTitle":    "Spend your XP",
-      "rewardsBalance":  "balance",
-      "dailyDrop": {
-        "eyebrow":  "// daily drop",
-        "title":    "Daily streak",
-        "subtitle": "Claim +50 XP every 24h"
-      },
-      "spin": {
-        "eyebrow":  "// lootbox",
-        "title":    "Spin-to-win",
-        "subtitle": "1 free spin available",
-        "prizes":   "PRIZES: XP · MERCH · RARE DROP"
-      },
-      "readyToCollect": {
-        "eyebrow":     "// ready to collect",
-        "empty":       "Complete a mission to collect rewards.",
-        "buttonEmpty": "No rewards yet"
-        // NOTE: `buttonReady(n)` and `waiting(n)` are functions, NOT strings.
-        // They cannot be expressed as pure JSON. A real backend can ship
-        // string templates (e.g. "Collect ({n})") and the client interpolates;
-        // the current code path supplies the functions directly in TS.
-      }
+      "sectionEyebrow": "// missions",
+      "sectionTitle":   "Daily quests",
+      "rewardsEyebrow": "// rewards marketplace",
+      "rewardsTitle":   "Spend your XP",
+      "rewardsBalance": "balance"
     }
   },
 

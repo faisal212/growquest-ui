@@ -32,24 +32,6 @@ export interface ContentMap {
     rewardsEyebrow: string
     rewardsTitle: string
     rewardsBalance: string
-    dailyDrop: {
-      eyebrow: string
-      title: string
-      subtitle: string
-    }
-    spin: {
-      eyebrow: string
-      title: string
-      subtitle: string
-      prizes: string
-    }
-    readyToCollect: {
-      eyebrow: string
-      empty: string
-      buttonEmpty: string
-      buttonReady: (n: number) => string
-      waiting: (n: number) => string
-    }
   }
 }
 

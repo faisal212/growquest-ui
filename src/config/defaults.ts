@@ -33,24 +33,6 @@ export const DEFAULT_CONTENT: ContentMap = {
     rewardsEyebrow: '// rewards marketplace',
     rewardsTitle: 'Spend your XP',
     rewardsBalance: 'balance',
-    dailyDrop: {
-      eyebrow: '// daily drop',
-      title: 'Daily streak',
-      subtitle: 'Claim +50 XP every 24h',
-    },
-    spin: {
-      eyebrow: '// lootbox',
-      title: 'Spin-to-win',
-      subtitle: '1 free spin available',
-      prizes: 'PRIZES: XP · MERCH · RARE DROP',
-    },
-    readyToCollect: {
-      eyebrow: '// ready to collect',
-      empty: 'Complete a mission to collect rewards.',
-      buttonEmpty: 'No rewards yet',
-      buttonReady: (n: number) => `Collect (${n})`,
-      waiting: (n: number) => `${n} reward${n > 1 ? 's' : ''} waiting.`,
-    },
   },
 }
 
