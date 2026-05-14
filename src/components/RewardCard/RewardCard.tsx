@@ -16,12 +16,12 @@ export const RewardCard = memo(function RewardCard({
   compact = false,
 }: RewardCardProps) {
   const canAfford = persona.xp >= r.cost
-  const tone = r.tone === 'accent' ? 'cyan' : r.tone
+  const toneVar = `var(--tone-${r.tone})`
 
   return (
-    <div className="panel overflow-hidden flex flex-col">
+    <div className="bg-[var(--reward-card-bg)] border border-[color:var(--reward-card-border)] rounded-[var(--radius-card,14px)] overflow-hidden flex flex-col">
       <div
-        className="relative bg-panel-2 border-b border-border overflow-hidden"
+        className="relative bg-[var(--reward-card-image-bg)] border-b border-[color:var(--reward-card-image-border)] overflow-hidden"
         style={{ aspectRatio: compact ? '2 / 1' : '4 / 3' }}
       >
         {r.imageUrl ? (
@@ -38,7 +38,7 @@ export const RewardCard = memo(function RewardCard({
             <div
               className="absolute inset-0"
               style={{
-                backgroundImage: `repeating-linear-gradient(135deg, color-mix(in oklch, var(--accent-${tone}) 20%, transparent) 0 8px, transparent 8px 18px)`,
+                backgroundImage: `repeating-linear-gradient(135deg, color-mix(in oklch, ${toneVar} 20%, transparent) 0 8px, transparent 8px 18px)`,
               }}
             />
             <div className="absolute inset-0 grid place-items-center">
@@ -47,7 +47,7 @@ export const RewardCard = memo(function RewardCard({
                 style={{
                   width: compact ? 52 : 68,
                   height: compact ? 52 : 68,
-                  background: `var(--accent-${tone})`,
+                  background: toneVar,
                   fontSize: compact ? 9 : 11,
                 }}
               >
@@ -67,10 +67,13 @@ export const RewardCard = memo(function RewardCard({
       </div>
       <div className="flex flex-col gap-2 flex-1" style={{ padding: compact ? 10 : 14 }}>
         <div>
-          <div className="font-semibold" style={{ fontSize: compact ? 13 : 14 }}>
+          <div
+            className="font-semibold text-[color:var(--reward-card-title)]"
+            style={{ fontSize: compact ? 13 : 14 }}
+          >
             {r.title}
           </div>
-          <div className="text-[11px] text-ink-dim font-mono uppercase tracking-[0.1em] mt-0.5">
+          <div className="text-[11px] text-[color:var(--reward-card-body)] font-mono uppercase tracking-[0.1em] mt-0.5">
             {r.kind}
           </div>
         </div>

@@ -44,11 +44,11 @@ export const LeaderboardTable = memo(function LeaderboardTable({
         <div
           key={p.rank}
           className="lb-row"
-          style={{ background: p.me ? 'var(--accent-soft)' : 'transparent' }}
+          style={{ background: p.me ? 'var(--leaderboard-mine-bg)' : 'var(--leaderboard-row-bg)' }}
         >
           <span
             className="mono font-bold"
-            style={{ color: p.rank <= 3 ? 'var(--accent)' : 'var(--ink)' }}
+            style={{ color: p.rank <= 3 ? 'var(--leaderboard-top-rank)' : 'var(--ink)' }}
           >
             {String(p.rank).padStart(2, '0')}
           </span>

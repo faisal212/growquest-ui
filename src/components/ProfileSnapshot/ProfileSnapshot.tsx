@@ -19,15 +19,22 @@ export function ProfileSnapshot({
   walletAddress = '0xE63F6A · 356C10AC',
 }: ProfileSnapshotProps) {
   return (
-    <div className="panel p-[18px] flex flex-col gap-3.5">
+    <div
+      className="bg-[var(--profile-card-bg)] border border-[color:var(--profile-card-border)] rounded-[var(--radius-card,14px)] p-[18px] flex flex-col gap-3.5"
+      style={{ containerType: 'inline-size' }}
+    >
       <div className="flex items-center gap-3">
         <Avatar seed={7} size={44} />
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2">
-            <span className="font-bold">@{persona.handle}</span>
+            <span className="font-bold text-[color:var(--profile-card-title)]">
+              @{persona.handle}
+            </span>
             <Tag tone="accent">{persona.tier}</Tag>
           </div>
-          <div className="font-mono text-[11px] text-ink-faint">{walletAddress}</div>
+          <div className="font-mono text-[11px] text-[color:var(--profile-card-wallet)]">
+            {walletAddress}
+          </div>
         </div>
       </div>
       <XPBar value={persona.xp} max={xpMax} style={xpStyle} label={label} />
@@ -37,11 +44,16 @@ export function ProfileSnapshot({
           { k: 'XP', v: persona.xp.toLocaleString() },
           { k: 'Streak', v: `${persona.streak}d` },
         ].map((s) => (
-          <div key={s.k} className="p-2.5 bg-panel-2 border border-border rounded-lg text-center">
-            <div className="font-mono text-[9px] tracking-[0.12em] uppercase text-ink-faint">
+          <div
+            key={s.k}
+            className="p-2.5 bg-[var(--profile-card-stat-bg)] border border-[color:var(--profile-card-stat-border)] rounded-lg text-center"
+          >
+            <div className="font-mono text-[9px] tracking-[0.12em] uppercase text-[color:var(--profile-card-wallet)]">
               {s.k}
             </div>
-            <div className="font-bold text-[14px] mt-0.5">{s.v}</div>
+            <div className="font-bold text-[14px] mt-0.5 text-[color:var(--profile-card-title)]">
+              {s.v}
+            </div>
           </div>
         ))}
       </div>

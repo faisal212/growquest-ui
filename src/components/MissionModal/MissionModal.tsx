@@ -107,9 +107,11 @@ export function MissionModal({ m, onClose, onClaim }: MissionModalProps) {
       onKeyDown={(e) => e.key === 'Escape' && onClose()}
     >
       <div ref={dialogRef} className="modal max-w-[560px]" role="dialog" aria-modal="true">
-        <div className="relative px-6 py-5 border-b border-border flex items-center gap-3">
+        <div className="relative px-6 py-5 border-b border-[color:var(--mission-modal-header-border)] flex items-center gap-3">
           <div className="flex-1">
-            <h2 className="display m-0 text-[20px] tracking-[-0.02em]">{m.title}</h2>
+            <h2 className="display m-0 text-[20px] tracking-[-0.02em] text-[color:var(--mission-modal-title)]">
+              {m.title}
+            </h2>
             <div className="flex gap-2 mt-1.5">
               <XPPill amount={m.xp} />
               {m.limited && m.endsAt && (
@@ -122,7 +124,7 @@ export function MissionModal({ m, onClose, onClaim }: MissionModalProps) {
           <button
             onClick={onClose}
             aria-label="Close"
-            className="bg-panel-2 border border-border grid place-items-center w-7 h-7 rounded-md"
+            className="bg-[var(--mission-modal-close-bg)] border border-[color:var(--mission-modal-close-border)] text-[color:var(--mission-modal-close-icon)] grid place-items-center w-7 h-7 rounded-md"
           >
             <svg width="12" height="12" viewBox="0 0 12 12">
               <path

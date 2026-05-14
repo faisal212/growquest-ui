@@ -2,19 +2,19 @@ import { describe, it, expect } from 'vitest'
 import { toneColor } from './toneColor'
 
 describe('toneColor', () => {
-  it('maps accent to cyan variable', () => {
-    expect(toneColor('accent')).toBe('var(--accent-cyan)')
+  it('maps accent to --tone-accent var (remappable via overrides.tones)', () => {
+    expect(toneColor('accent')).toBe('var(--tone-accent)')
   })
 
-  it('passes through lime', () => {
-    expect(toneColor('lime')).toBe('var(--accent-lime)')
+  it('maps lime to --tone-lime', () => {
+    expect(toneColor('lime')).toBe('var(--tone-lime)')
   })
 
-  it('passes through magenta', () => {
-    expect(toneColor('magenta')).toBe('var(--accent-magenta)')
+  it('maps magenta to --tone-magenta', () => {
+    expect(toneColor('magenta')).toBe('var(--tone-magenta)')
   })
 
-  it('passes through amber', () => {
-    expect(toneColor('amber')).toBe('var(--accent-amber)')
+  it('maps amber to --tone-amber', () => {
+    expect(toneColor('amber')).toBe('var(--tone-amber)')
   })
 })

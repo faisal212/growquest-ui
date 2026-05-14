@@ -7,6 +7,7 @@ import { RewardCard } from '../../components/RewardCard'
 import { FilterTabs } from '../../components/FilterTabs'
 import { HeroBanner } from '../../components/HeroBanner'
 import { ProfileSnapshotFromTweaks } from '../../components/ProfileSnapshot'
+import { useContent } from '../../config'
 import type { Mission, Persona, Tweaks, Reward } from '../../types'
 
 interface MissionsScreenProps {
@@ -32,6 +33,26 @@ export default function MissionsScreen({
   const tileLayout = tweaks.tileLayout
   const density = tweaks.tileDensity
 
+  const dailyEyebrow = useContent<string>('missions.dailyDrop.eyebrow')
+  const dailyTitle = useContent<string>('missions.dailyDrop.title')
+  const dailySubtitle = useContent<string>('missions.dailyDrop.subtitle')
+  const spinEyebrow = useContent<string>('missions.spin.eyebrow')
+  const spinTitle = useContent<string>('missions.spin.title')
+  const spinSubtitle = useContent<string>('missions.spin.subtitle')
+  const spinPrizes = useContent<string>('missions.spin.prizes')
+  const collectEyebrow = useContent<string>('missions.readyToCollect.eyebrow')
+  const collectEmpty = useContent<string>('missions.readyToCollect.empty')
+  const collectButtonEmpty = useContent<string>('missions.readyToCollect.buttonEmpty')
+  const collectButtonReady = useContent<(n: number) => string>(
+    'missions.readyToCollect.buttonReady'
+  )
+  const collectWaiting = useContent<(n: number) => string>('missions.readyToCollect.waiting')
+  const sectionEyebrow = useContent<string>('missions.sectionEyebrow')
+  const sectionTitle = useContent<string>('missions.sectionTitle')
+  const rewardsEyebrow = useContent<string>('missions.rewardsEyebrow')
+  const rewardsTitle = useContent<string>('missions.rewardsTitle')
+  const rewardsBalanceLabel = useContent<string>('missions.rewardsBalance')
+
   const filtered = MISSIONS.filter((m) => {
     if (filter === 'ready') return m.progress[0] >= m.progress[1]
     if (filter === 'ongoing') return m.progress[0] < m.progress[1] && m.progress[0] > 0
@@ -50,20 +71,15 @@ export default function MissionsScreen({
       {/* Daily streak · Spin · Ready to collect */}
       <div className="grid gap-4 grid-cols-[repeat(auto-fit,minmax(260px,1fr))]">
         <button onClick={openDaily} className="panel p-[18px] text-left relative overflow-hidden">
-          <div
-            className="absolute -top-5 -right-5 w-[120px] h-[120px] rounded-full opacity-30"
-            style={{
-              background: 'radial-gradient(circle, var(--accent-amber) 0%, transparent 70%)',
-            }}
-          />
-          <Eyebrow>// daily drop</Eyebrow>
+          <div className="absolute -top-5 -right-5 w-[120px] h-[120px] rounded-full opacity-30 bg-[image:var(--halo-amber)]" />
+          <Eyebrow>{dailyEyebrow}</Eyebrow>
           <div className="flex items-center gap-3 mt-[10px] mb-2">
             <div className="w-[38px] h-[38px] rounded-lg grid place-items-center font-bold font-mono text-base bg-accent-amber text-[#05060A]">
               {persona.streak}
             </div>
             <div>
-              <div className="font-semibold text-sm">Daily streak</div>
-              <div className="text-xs text-ink-dim">Claim +50 XP every 24h</div>
+              <div className="font-semibold text-sm">{dailyTitle}</div>
+              <div className="text-xs text-ink-dim">{dailySubtitle}</div>
             </div>
           </div>
           <div className="flex gap-1">
@@ -80,13 +96,8 @@ export default function MissionsScreen({
         </button>
 
         <button onClick={openSpin} className="panel p-[18px] text-left relative overflow-hidden">
-          <div
-            className="absolute -top-[30px] -right-[30px] w-[120px] h-[120px] rounded-full opacity-30"
-            style={{
-              background: 'radial-gradient(circle, var(--accent-magenta) 0%, transparent 70%)',
-            }}
-          />
-          <Eyebrow>// lootbox</Eyebrow>
+          <div className="absolute -top-[30px] -right-[30px] w-[120px] h-[120px] rounded-full opacity-30 bg-[image:var(--halo-magenta)]" />
+          <Eyebrow>{spinEyebrow}</Eyebrow>
           <div className="flex items-center gap-3 mt-[10px] mb-2">
             <div className="w-[38px] h-[38px] rounded-lg grid place-items-center bg-accent-magenta text-[#05060A] animate-[spinSlow_6s_linear_infinite]">
               <svg width="22" height="22" viewBox="0 0 22 22">
@@ -100,19 +111,17 @@ export default function MissionsScreen({
               </svg>
             </div>
             <div>
-              <div className="font-semibold text-sm">Spin-to-win</div>
-              <div className="text-xs text-ink-dim">1 free spin available</div>
+              <div className="font-semibold text-sm">{spinTitle}</div>
+              <div className="text-xs text-ink-dim">{spinSubtitle}</div>
             </div>
           </div>
-          <div className="text-[11px] font-mono text-ink-faint">PRIZES: XP · MERCH · RARE DROP</div>
+          <div className="text-[11px] font-mono text-ink-faint">{spinPrizes}</div>
         </button>
 
         <div className="panel p-[18px] relative overflow-hidden">
-          <Eyebrow>// ready to collect</Eyebrow>
+          <Eyebrow>{collectEyebrow}</Eyebrow>
           <div className="mt-[10px] mb-[10px] text-[13px] text-ink-dim">
-            {persona.ready > 0
-              ? `${persona.ready} reward${persona.ready > 1 ? 's' : ''} waiting.`
-              : 'Complete a mission to collect rewards.'}
+            {persona.ready > 0 ? collectWaiting(persona.ready) : collectEmpty}
           </div>
           <Button
             variant="primary"
@@ -130,7 +139,7 @@ export default function MissionsScreen({
               })
             }
           >
-            {persona.ready > 0 ? `Collect (${persona.ready})` : 'No rewards yet'}
+            {persona.ready > 0 ? collectButtonReady(persona.ready) : collectButtonEmpty}
           </Button>
         </div>
       </div>
@@ -159,8 +168,8 @@ export default function MissionsScreen({
           <div key="missions">
             <div className="flex justify-between items-center gap-[14px] mb-[14px] flex-wrap">
               <div>
-                <Eyebrow>// missions</Eyebrow>
-                <h2 className="display mt-1 text-[22px]">Daily quests</h2>
+                <Eyebrow>{sectionEyebrow}</Eyebrow>
+                <h2 className="display mt-1 text-[22px]">{sectionTitle}</h2>
               </div>
               <FilterTabs
                 options={['all', 'new', 'ongoing', 'ready']}
@@ -205,13 +214,13 @@ export default function MissionsScreen({
           <div key="rewards">
             <div className="flex justify-between items-center gap-[14px] mb-[14px] flex-wrap">
               <div>
-                <Eyebrow>// rewards marketplace</Eyebrow>
-                <h2 className="display mt-1 text-[22px]">Spend your XP</h2>
+                <Eyebrow>{rewardsEyebrow}</Eyebrow>
+                <h2 className="display mt-1 text-[22px]">{rewardsTitle}</h2>
               </div>
               <div className="flex gap-2 items-center flex-wrap">
                 <Chip className="!py-[6px] !px-[10px]">
                   <span className="inline-flex items-center gap-2 font-mono text-[11px] tracking-[0.16em] uppercase text-ink-dim mr-[6px]">
-                    balance
+                    {rewardsBalanceLabel}
                   </span>
                   <span className="mono font-bold text-accent">
                     {persona.xp.toLocaleString()} XP

@@ -30,11 +30,11 @@ export const MissionTile = memo(function MissionTile({
     return (
       <button
         onClick={() => onOpen(m)}
-        className={`mission-tile text-left flex flex-col gap-2.5 ${padCls} bg-panel border border-border rounded-xl transition-all duration-150`}
+        className={`mission-tile text-left flex flex-col gap-2.5 ${padCls} bg-[var(--mission-tile-bg)] border border-[color:var(--mission-tile-border)] rounded-xl transition-all duration-150`}
       >
         <div className="flex justify-between items-center">
           <div
-            className="bg-panel-2 border border-border grid place-items-center w-8 h-8 rounded-md"
+            className="bg-[var(--mission-tile-icon-bg)] border border-[color:var(--mission-tile-icon-border)] grid place-items-center w-8 h-8 rounded-md"
             style={{ color: toneColor(m.tone) }}
           >
             <MissionIcon type={m.type} size={18} />
@@ -52,14 +52,20 @@ export const MissionTile = memo(function MissionTile({
           )}
         </div>
         <div>
-          <div className={`font-semibold mb-1 ${compact ? 'text-[13px]' : 'text-[15px]'}`}>
+          <div
+            className={`font-semibold mb-1 text-[color:var(--mission-tile-title)] ${compact ? 'text-[13px]' : 'text-[15px]'}`}
+          >
             {m.title}
           </div>
-          {!compact && <div className="text-xs text-ink-dim leading-relaxed">{m.desc}</div>}
+          {!compact && (
+            <div className="text-xs text-[color:var(--mission-tile-body)] leading-relaxed">
+              {m.desc}
+            </div>
+          )}
         </div>
         <div className="flex justify-between items-center gap-2.5 mt-auto">
           <XPPill amount={m.xp} />
-          <span className="font-mono text-[11px] text-ink-dim">
+          <span className="font-mono text-[11px] text-[color:var(--mission-tile-body)]">
             {done}/{total}
           </span>
         </div>
@@ -74,23 +80,25 @@ export const MissionTile = memo(function MissionTile({
     return (
       <button
         onClick={() => onOpen(m)}
-        className={`mission-tile text-left flex items-center gap-3.5 ${padCls} bg-panel border border-border rounded-[10px] w-full`}
+        className={`mission-tile text-left flex items-center gap-3.5 ${padCls} bg-[var(--mission-tile-bg)] border border-[color:var(--mission-tile-border)] rounded-[10px] w-full`}
       >
         <div
-          className="bg-panel-2 border border-border grid place-items-center w-10 h-10 rounded-lg shrink-0"
+          className="bg-[var(--mission-tile-icon-bg)] border border-[color:var(--mission-tile-icon-border)] grid place-items-center w-10 h-10 rounded-lg shrink-0"
           style={{ color: toneColor(m.tone) }}
         >
           <MissionIcon type={m.type} size={20} />
         </div>
         <div className="flex-1 min-w-0">
-          <div className="font-semibold text-sm mb-0.5">{m.title}</div>
-          <div className="text-xs text-ink-dim overflow-hidden text-ellipsis whitespace-nowrap">
+          <div className="font-semibold text-sm mb-0.5 text-[color:var(--mission-tile-title)]">
+            {m.title}
+          </div>
+          <div className="text-xs text-[color:var(--mission-tile-body)] overflow-hidden text-ellipsis whitespace-nowrap">
             {m.desc}
           </div>
         </div>
         <div className="flex items-center gap-2.5 shrink-0">
           {m.limited && <Tag tone="magenta">LIMITED</Tag>}
-          <span className="font-mono text-[11px] text-ink-dim">
+          <span className="font-mono text-[11px] text-[color:var(--mission-tile-body)]">
             {done}/{total}
           </span>
           <XPPill amount={m.xp} />
@@ -103,34 +111,43 @@ export const MissionTile = memo(function MissionTile({
   return (
     <button
       onClick={() => onOpen(m)}
-      className={`mission-tile text-left flex flex-col ${padCls} bg-panel border border-border rounded-xl relative overflow-hidden`}
+      className={`mission-tile text-left flex flex-col ${padCls} bg-[var(--mission-tile-bg)] border border-[color:var(--mission-tile-border)] rounded-xl relative overflow-hidden`}
     >
       <div
-        className="absolute top-0 right-0 w-20 h-20 opacity-25"
+        className="absolute top-0 right-0 w-20 h-20"
         style={{
-          background: `radial-gradient(circle at 100% 0, var(--accent-${m.tone === 'accent' ? 'cyan' : m.tone}) 0%, transparent 70%)`,
+          opacity: 'var(--mission-tile-halo-opacity)',
+          background: `radial-gradient(circle at 100% 0, ${toneColor(m.tone)} 0%, transparent 70%)`,
         }}
       />
       <div
         className={`flex justify-between items-start gap-2 relative ${compact ? 'mb-2.5' : 'mb-3.5'}`}
       >
         <div
-          className="bg-panel-2 border border-border grid place-items-center w-[34px] h-[34px] rounded-[7px]"
+          className="bg-[var(--mission-tile-icon-bg)] border border-[color:var(--mission-tile-icon-border)] grid place-items-center w-[34px] h-[34px] rounded-[7px]"
           style={{ color: toneColor(m.tone) }}
         >
           <MissionIcon type={m.type} size={18} />
         </div>
         {m.limited && <Tag tone="magenta">⏱ LIMITED</Tag>}
       </div>
-      <div className={`font-semibold mb-1 ${compact ? 'text-sm' : 'text-base'}`}>{m.title}</div>
-      {!compact && <div className="text-xs text-ink-dim leading-relaxed mb-3.5">{m.desc}</div>}
+      <div
+        className={`font-semibold mb-1 text-[color:var(--mission-tile-title)] ${compact ? 'text-sm' : 'text-base'}`}
+      >
+        {m.title}
+      </div>
+      {!compact && (
+        <div className="text-xs text-[color:var(--mission-tile-body)] leading-relaxed mb-3.5">
+          {m.desc}
+        </div>
+      )}
       <div className={`flex justify-between items-center gap-2.5 ${compact ? 'mt-2' : 'mt-auto'}`}>
         <XPPill amount={m.xp} />
         <span
           className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-xs font-bold tracking-[0.04em]"
           style={{
             background: toneColor(m.tone),
-            color: '#05060A',
+            color: 'var(--mission-tile-cta-fg)',
           }}
         >
           GO

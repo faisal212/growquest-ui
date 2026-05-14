@@ -15,10 +15,66 @@
   --accent: var(--accent-cyan);
   --accent-soft: color-mix(in oklch, var(--accent) 18%, transparent);
   --accent-faint: color-mix(in oklch, var(--accent) 8%, transparent);
+
+  /* Halo gradient fallbacks. applyBrand() overwrites with precomputed values. */
+  --halo-amber: radial-gradient(circle, var(--accent-amber) 0%, transparent 70%);
+  --halo-magenta: radial-gradient(circle, var(--accent-magenta) 0%, transparent 70%);
+  --halo-primary: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+
+  /* Tone palette. Remappable via BrandConfig.overrides.tones. */
+  --tone-accent: var(--accent-cyan);
+  --tone-lime: var(--accent-lime);
+  --tone-magenta: var(--accent-magenta);
+  --tone-amber: var(--accent-amber);
+
+  /* Component-scoped fallbacks. Each var defaults to a semantic token;
+     BrandConfig.overrides.<component> writes per-component overrides. */
+  --mission-tile-bg: var(--panel);
+  --mission-tile-border: var(--border);
+  --mission-tile-icon-bg: var(--panel-2);
+  --mission-tile-icon-border: var(--border);
+  --mission-tile-title: var(--ink);
+  --mission-tile-body: var(--ink-dim);
+  --mission-tile-cta-fg: #05060A;
+  --mission-tile-halo-opacity: 0.25;
+
+  --mission-modal-backdrop: color-mix(in oklch, #000 60%, transparent);
+  --mission-modal-bg: var(--panel);
+  --mission-modal-border: var(--border);
+  --mission-modal-header-border: var(--border);
+  --mission-modal-title: var(--ink);
+  --mission-modal-body: var(--ink-dim);
+  --mission-modal-close-bg: var(--panel-2);
+  --mission-modal-close-border: var(--border);
+  --mission-modal-close-icon: var(--ink);
+
+  --reward-card-bg: var(--panel);
+  --reward-card-border: var(--border);
+  --reward-card-image-bg: var(--panel-2);
+  --reward-card-image-border: var(--border);
+  --reward-card-title: var(--ink);
+  --reward-card-body: var(--ink-dim);
+
+  --profile-card-bg: var(--panel);
+  --profile-card-border: var(--border);
+  --profile-card-title: var(--ink);
+  --profile-card-body: var(--ink-dim);
+  --profile-card-stat-bg: var(--panel-2);
+  --profile-card-stat-border: var(--border);
+  --profile-card-wallet: var(--ink-faint);
+
+  --leaderboard-row-bg: transparent;
+  --leaderboard-row-border: var(--border);
+  --leaderboard-head-bg: transparent;
+  --leaderboard-head-text: var(--ink-dim);
+  --leaderboard-mine-bg: var(--accent-soft);
+  --leaderboard-top-rank: var(--accent);
 }
 
 /* Bridge custom properties into Tailwind v4 theme so utilities like
-   bg-panel, text-ink-dim, border-border, font-mono resolve to our tokens. */
+   bg-panel, text-ink-dim, border-border, font-mono resolve to our tokens.
+   New brand tokens (--color-primary*, --color-secondary*, --on-primary, halos)
+   are written by applyBrand() at runtime in src/config/apply.ts. */
 @theme {
   --color-accent: var(--accent);
   --color-accent-soft: var(--accent-soft);
@@ -39,6 +95,17 @@
   --color-border: var(--border);
   --color-border-strong: var(--border-strong);
   --color-danger: var(--danger);
+
+  /* Brand tokens (resolved at runtime by applyBrand). */
+  --color-primary: var(--accent);
+  --color-primary-hover: var(--accent);
+  --color-primary-soft: var(--accent-soft);
+  --color-primary-faint: var(--accent-faint);
+  --color-on-primary: #0A0B10;
+  --color-secondary: var(--accent-magenta);
+  --color-secondary-hover: var(--accent-magenta);
+  --color-secondary-soft: var(--accent-faint);
+  --color-on-secondary: #FFFFFF;
 
   --font-display: 'Space Grotesk', system-ui, sans-serif;
   --font-ui: 'Inter', system-ui, sans-serif;
@@ -276,7 +343,7 @@ html[data-theme="light"] body::before {
   position: fixed;
   inset: 0;
   z-index: 80;
-  background: color-mix(in oklch, #000 60%, transparent);
+  background: var(--mission-modal-backdrop);
   backdrop-filter: blur(6px);
   display: grid;
   place-items: center;
@@ -284,9 +351,9 @@ html[data-theme="light"] body::before {
   animation: fadeIn 180ms ease both;
 }
 .modal {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 16px;
+  background: var(--mission-modal-bg);
+  border: 1px solid var(--mission-modal-border);
+  border-radius: var(--radius-modal, 16px);
   width: min(560px, 100%);
   max-height: 90vh;
   overflow: auto;
@@ -474,7 +541,7 @@ html[data-mobile-nav="bottom"] .bottom-nav { display: flex; }
   grid-template-columns: 60px 1fr 100px 100px 120px;
   padding: 14px 18px;
   align-items: center;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid var(--leaderboard-row-border);
 }
 .lb-head {
   padding: 10px 18px;
@@ -482,7 +549,8 @@ html[data-mobile-nav="bottom"] .bottom-nav { display: flex; }
   font-size: 10px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--ink-dim);
+  color: var(--leaderboard-head-text);
+  background: var(--leaderboard-head-bg);
   align-items: unset;
 }
 .lb-identity { display: flex; align-items: center; gap: 10px; min-width: 0; }
