@@ -9,8 +9,10 @@ export type TextareaProps = React.TextareaHTMLAttributes<HTMLTextAreaElement>
 export function Textarea({ className, style, ...rest }: TextareaProps) {
   return (
     <textarea
-      className={['input', className].filter(Boolean).join(' ')}
-      style={{ resize: 'vertical', minHeight: 120, lineHeight: 1.6, ...style }}
+      className={['input resize-y min-h-[120px] leading-relaxed', className]
+        .filter(Boolean)
+        .join(' ')}
+      style={style}
       {...rest}
     />
   )
@@ -38,82 +40,42 @@ export function Field({
   ...inputProps
 }: FieldProps) {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+    <div className="flex flex-col gap-1.5">
       {label && (
-        <span
-          style={{
-            fontFamily: 'var(--font-mono)',
-            fontSize: 10,
-            letterSpacing: '0.12em',
-            textTransform: 'uppercase',
-            color: 'var(--ink-dim)',
-          }}
-        >
+        <span className="font-mono text-[10px] tracking-[0.12em] uppercase text-ink-dim">
           {label}
         </span>
       )}
 
-      <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
+      <div className="relative flex items-center">
         {adornmentLeft && (
-          <div
-            style={{
-              position: 'absolute',
-              left: 12,
-              zIndex: 1,
-              color: 'var(--ink-dim)',
-              display: 'flex',
-              alignItems: 'center',
-              pointerEvents: 'none',
-            }}
-          >
+          <div className="absolute left-3 z-[1] text-ink-dim flex items-center pointer-events-none">
             {adornmentLeft}
           </div>
         )}
 
         {labelInside ? (
           <div
-            className="input"
+            className="input flex flex-col gap-0.5 py-2 px-3.5 cursor-text w-full"
             style={{
-              display: 'flex',
-              flexDirection: 'column',
-              gap: 2,
-              padding: '8px 14px',
-              cursor: 'text',
-              width: '100%',
               paddingLeft: adornmentLeft ? 38 : undefined,
               paddingRight: adornmentRight ? 38 : undefined,
             }}
           >
-            <span
-              style={{
-                fontFamily: 'var(--font-mono)',
-                fontSize: 9,
-                letterSpacing: '0.1em',
-                textTransform: 'uppercase',
-                color: 'var(--ink-dim)',
-                lineHeight: 1,
-              }}
-            >
+            <span className="font-mono text-[9px] tracking-[0.1em] uppercase text-ink-dim leading-none">
               {labelInside}
             </span>
             <input
-              style={{
-                background: 'transparent',
-                border: 'none',
-                outline: 'none',
-                color: 'var(--ink)',
-                fontSize: 14,
-                padding: 0,
-              }}
+              className="bg-transparent border-none outline-none text-ink text-sm p-0"
               {...inputProps}
             />
           </div>
         ) : (
           <Input
+            className="w-full"
             style={{
               paddingLeft: adornmentLeft ? 38 : undefined,
               paddingRight: adornmentRight ? 38 : undefined,
-              width: '100%',
               ...style,
             }}
             {...inputProps}
@@ -121,16 +83,7 @@ export function Field({
         )}
 
         {adornmentRight && (
-          <div
-            style={{
-              position: 'absolute',
-              right: 12,
-              zIndex: 1,
-              color: 'var(--ink-dim)',
-              display: 'flex',
-              alignItems: 'center',
-            }}
-          >
+          <div className="absolute right-3 z-[1] text-ink-dim flex items-center">
             {adornmentRight}
           </div>
         )}
@@ -138,12 +91,7 @@ export function Field({
 
       {(hint || error) && (
         <span
-          style={{
-            fontSize: 11,
-            fontFamily: 'var(--font-mono)',
-            lineHeight: 1.4,
-            color: error ? 'var(--danger)' : 'var(--ink-faint)',
-          }}
+          className={`text-[11px] font-mono leading-tight ${error ? 'text-danger' : 'text-ink-faint'}`}
         >
           {error ?? hint}
         </span>

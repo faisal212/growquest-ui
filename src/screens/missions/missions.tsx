@@ -40,9 +40,9 @@ export default function MissionsScreen({
   })
 
   return (
-    <div className="fade-up screen-root w-full max-w-[1280px] mx-auto px-6 pt-6 pb-10 grid gap-5 grid-cols-1">
+    <div className="animate-fade-up w-full max-w-[1280px] mx-auto px-6 pt-6 pb-10 max-[720px]:px-3 max-[720px]:pt-4 max-[720px]:pb-8 grid gap-5 grid-cols-1">
       {/* Hero + profile snapshot */}
-      <div className="responsive-2col grid gap-5 grid-cols-[minmax(0,2fr)_minmax(300px,1fr)]">
+      <div className="grid gap-5 grid-cols-[minmax(0,2fr)_minmax(300px,1fr)] [&>*]:min-w-0 max-[720px]:grid-cols-1">
         <HeroBanner heroStyle={tweaks.heroStyle} />
         <ProfileSnapshotFromTweaks persona={persona} tweaks={tweaks} />
       </div>
@@ -58,27 +58,21 @@ export default function MissionsScreen({
           />
           <Eyebrow>// daily drop</Eyebrow>
           <div className="flex items-center gap-3 mt-[10px] mb-2">
-            <div
-              className="w-[38px] h-[38px] rounded-lg grid place-items-center font-bold font-mono text-base"
-              style={{ background: 'var(--accent-amber)', color: '#05060A' }}
-            >
+            <div className="w-[38px] h-[38px] rounded-lg grid place-items-center font-bold font-mono text-base bg-accent-amber text-[#05060A]">
               {persona.streak}
             </div>
             <div>
               <div className="font-semibold text-sm">Daily streak</div>
-              <div className="text-xs" style={{ color: 'var(--ink-dim)' }}>
-                Claim +50 XP every 24h
-              </div>
+              <div className="text-xs text-ink-dim">Claim +50 XP every 24h</div>
             </div>
           </div>
           <div className="flex gap-1">
             {Array.from({ length: 7 }).map((_, i) => (
               <div
                 key={i}
-                className="flex-1 h-[6px] rounded-[2px]"
+                className="flex-1 h-[6px] rounded-[2px] border border-border"
                 style={{
                   background: i < persona.streak % 7 ? 'var(--accent-amber)' : 'var(--panel-2)',
-                  border: '1px solid var(--border)',
                 }}
               />
             ))}
@@ -94,14 +88,7 @@ export default function MissionsScreen({
           />
           <Eyebrow>// lootbox</Eyebrow>
           <div className="flex items-center gap-3 mt-[10px] mb-2">
-            <div
-              className="w-[38px] h-[38px] rounded-lg grid place-items-center"
-              style={{
-                background: 'var(--accent-magenta)',
-                color: '#05060A',
-                animation: 'spinSlow 6s linear infinite',
-              }}
-            >
+            <div className="w-[38px] h-[38px] rounded-lg grid place-items-center bg-accent-magenta text-[#05060A] animate-[spinSlow_6s_linear_infinite]">
               <svg width="22" height="22" viewBox="0 0 22 22">
                 <polygon
                   points="11,2 20,7 20,15 11,20 2,15 2,7"
@@ -114,26 +101,22 @@ export default function MissionsScreen({
             </div>
             <div>
               <div className="font-semibold text-sm">Spin-to-win</div>
-              <div className="text-xs" style={{ color: 'var(--ink-dim)' }}>
-                1 free spin available
-              </div>
+              <div className="text-xs text-ink-dim">1 free spin available</div>
             </div>
           </div>
-          <div className="text-[11px] font-mono" style={{ color: 'var(--ink-faint)' }}>
-            PRIZES: XP · MERCH · RARE DROP
-          </div>
+          <div className="text-[11px] font-mono text-ink-faint">PRIZES: XP · MERCH · RARE DROP</div>
         </button>
 
         <div className="panel p-[18px] relative overflow-hidden">
           <Eyebrow>// ready to collect</Eyebrow>
-          <div className="mt-[10px] mb-[10px] text-[13px]" style={{ color: 'var(--ink-dim)' }}>
+          <div className="mt-[10px] mb-[10px] text-[13px] text-ink-dim">
             {persona.ready > 0
               ? `${persona.ready} reward${persona.ready > 1 ? 's' : ''} waiting.`
               : 'Complete a mission to collect rewards.'}
           </div>
           <Button
             variant="primary"
-            style={{ width: '100%' }}
+            className="w-full"
             disabled={persona.ready === 0}
             onClick={() =>
               onClaim({
@@ -199,9 +182,8 @@ export default function MissionsScreen({
               </div>
             ) : (
               <div
+                className="grid gap-[14px]"
                 style={{
-                  display: 'grid',
-                  gap: 14,
                   gridTemplateColumns: `repeat(auto-fill, minmax(${colMin}px, 1fr))`,
                 }}
               >
@@ -227,9 +209,11 @@ export default function MissionsScreen({
                 <h2 className="display mt-1 text-[22px]">Spend your XP</h2>
               </div>
               <div className="flex gap-2 items-center flex-wrap">
-                <Chip style={{ padding: '6px 10px' }}>
-                  <span className="eyebrow mr-[6px]">balance</span>
-                  <span className="mono font-bold" style={{ color: 'var(--accent)' }}>
+                <Chip className="!py-[6px] !px-[10px]">
+                  <span className="inline-flex items-center gap-2 font-mono text-[11px] tracking-[0.16em] uppercase text-ink-dim mr-[6px]">
+                    balance
+                  </span>
+                  <span className="mono font-bold text-accent">
                     {persona.xp.toLocaleString()} XP
                   </span>
                 </Chip>
@@ -241,9 +225,8 @@ export default function MissionsScreen({
               </div>
             </div>
             <div
+              className="grid gap-[14px]"
               style={{
-                display: 'grid',
-                gap: 14,
                 gridTemplateColumns: sideBySide
                   ? 'repeat(2, minmax(0, 1fr))'
                   : `repeat(auto-fill, minmax(${rewardColMin}px, 1fr))`,
@@ -278,13 +261,10 @@ export default function MissionsScreen({
                 : 'minmax(0, 1fr) minmax(0, 1.4fr)'
           return (
             <div
+              className="grid gap-5 items-start max-[720px]:!grid-cols-1"
               style={{
-                display: 'grid',
-                gap: 20,
                 gridTemplateColumns: rewardsFirst ? colsRL : cols,
-                alignItems: 'start',
               }}
-              className="m-and-r"
             >
               {rewardsFirst ? rewardsBlock : missionsBlock}
               {rewardsFirst ? missionsBlock : rewardsBlock}

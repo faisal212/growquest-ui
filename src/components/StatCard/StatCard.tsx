@@ -10,8 +10,8 @@ export interface StatCardProps {
 /** Single metric card with a label, large value, and a sparkline trend chart. Used in the profile activity grid. */
 export function StatCard({ label, value, trend, trendColor }: StatCardProps) {
   return (
-    <div className="stat-card">
-      <div className="mono-label" style={{ marginBottom: 6 }}>
+    <div className="p-3.5 bg-panel-2 border border-border rounded-[10px]">
+      <div className="font-mono text-[10px] tracking-[0.12em] uppercase text-ink-dim mb-1.5">
         {label}
       </div>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>

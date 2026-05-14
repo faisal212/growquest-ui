@@ -32,58 +32,19 @@ export function ReferralExperience({
   }
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 24 }}>
+    <div className="flex flex-col gap-4 p-6">
       <div>
-        <div
-          style={{
-            fontSize: 11,
-            color: 'var(--ink-dim)',
-            fontFamily: 'var(--font-mono)',
-            textTransform: 'uppercase',
-            letterSpacing: '0.06em',
-            marginBottom: 6,
-          }}
-        >
+        <div className="text-[11px] text-ink-dim font-mono uppercase tracking-[0.06em] mb-1.5">
           Your referral link
         </div>
-        <div
-          style={{
-            display: 'flex',
-            gap: 8,
-            padding: '10px 12px',
-            background: 'var(--panel-2)',
-            border: '1px solid var(--border)',
-            borderRadius: 8,
-            alignItems: 'center',
-          }}
-        >
-          <span
-            style={{
-              flex: 1,
-              fontFamily: 'var(--font-mono)',
-              fontSize: 12,
-              color: 'var(--ink-dim)',
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
-              whiteSpace: 'nowrap',
-            }}
-          >
+        <div className="flex gap-2 py-2.5 px-3 bg-panel-2 border border-border rounded-lg items-center">
+          <span className="flex-1 font-mono text-xs text-ink-dim overflow-hidden text-ellipsis whitespace-nowrap">
             {referralLink}
           </span>
           <button
             onClick={copyLink}
-            style={{
-              padding: '4px 10px',
-              borderRadius: 5,
-              border: '1px solid var(--border)',
-              background: copied ? 'var(--accent)' : 'var(--panel)',
-              color: copied ? '#05060A' : 'var(--ink)',
-              fontSize: 11,
-              fontWeight: 600,
-              cursor: 'pointer',
-              whiteSpace: 'nowrap',
-              transition: 'all 0.15s',
-            }}
+            className={`py-1 px-2.5 rounded-[5px] border border-border text-[11px] font-semibold cursor-pointer whitespace-nowrap transition-all duration-150 ${copied ? 'bg-accent' : 'bg-panel text-ink'}`}
+            style={copied ? { color: '#05060A' } : undefined}
           >
             {copied ? 'Copied ✓' : 'Copy'}
           </button>
@@ -91,8 +52,8 @@ export function ReferralExperience({
       </div>
 
       <div>
-        <div style={{ fontSize: 11, color: 'var(--ink-dim)', marginBottom: 8 }}>Share via</div>
-        <div style={{ display: 'flex', gap: 8 }}>
+        <div className="text-[11px] text-ink-dim mb-2">Share via</div>
+        <div className="flex gap-2">
           {[
             { id: 'x', label: '𝕏' },
             { id: 'whatsapp', label: '💬' },
@@ -101,16 +62,7 @@ export function ReferralExperience({
             <button
               key={id}
               onClick={() => openShare(id)}
-              style={{
-                padding: '8px 14px',
-                borderRadius: 6,
-                border: '1px solid var(--border)',
-                background: 'var(--panel-2)',
-                color: 'var(--ink)',
-                fontSize: 14,
-                fontWeight: 700,
-                cursor: 'pointer',
-              }}
+              className="py-2 px-3.5 rounded-md border border-border bg-panel-2 text-ink text-sm font-bold cursor-pointer"
             >
               {label}
             </button>
@@ -118,9 +70,9 @@ export function ReferralExperience({
         </div>
       </div>
 
-      <div style={{ fontSize: 12, color: 'var(--ink-dim)' }}>0 friends signed up · goal: 1</div>
+      <div className="text-xs text-ink-dim">0 friends signed up · goal: 1</div>
 
-      <Button variant="primary" disabled={!ready} onClick={onComplete} style={{ width: '100%' }}>
+      <Button variant="primary" disabled={!ready} onClick={onComplete} className="w-full">
         Done
       </Button>
     </div>

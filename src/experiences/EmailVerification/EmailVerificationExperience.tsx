@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Button } from '../../primitives/Button'
-import { MissionIcon } from '../../art'
+import { Input } from '../../primitives/Input'
 
 export function EmailVerificationExperience({
   email,
@@ -9,6 +9,7 @@ export function EmailVerificationExperience({
   email?: string
   onComplete: () => void
 }) {
+  const [otp, setOtp] = useState('')
   const [countdown, setCountdown] = useState(0)
 
   useEffect(() => {
@@ -18,58 +19,33 @@ export function EmailVerificationExperience({
   }, [countdown])
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        gap: 20,
-        padding: '32px 24px',
-      }}
-    >
-      <div
-        style={{
-          width: 64,
-          height: 64,
-          borderRadius: 14,
-          background: 'var(--panel-2)',
-          border: '1px solid var(--border)',
-          display: 'grid',
-          placeItems: 'center',
-          color: 'var(--accent)',
-        }}
-      >
-        <MissionIcon type="verify_email" size={32} />
+    <div className="flex flex-col gap-5 p-6">
+      <div className="text-center">
+        <div className="font-semibold text-[15px] mb-1">Enter the 6-digit code</div>
+        <div className="text-[13px] text-ink-dim">Sent to {email ?? 'your email'}</div>
       </div>
 
-      <div style={{ textAlign: 'center' }}>
-        <div style={{ fontWeight: 600, fontSize: 16, marginBottom: 6 }}>Check your inbox</div>
-        <div style={{ fontSize: 13, color: 'var(--ink-dim)', lineHeight: 1.5 }}>
-          We sent a verification link to{' '}
-          {email ? <strong style={{ color: 'var(--ink)' }}>{email}</strong> : 'your email address'}.
-          <br />
-          Click the link to verify your address.
-        </div>
-      </div>
+      <Input
+        type="text"
+        inputMode="numeric"
+        maxLength={6}
+        placeholder="000000"
+        value={otp}
+        onChange={(e) => setOtp(e.target.value.replace(/\D/g, '').slice(0, 6))}
+        className="font-mono text-[28px] tracking-[0.35em] text-center py-3 px-4"
+      />
+
+      <Button variant="primary" disabled={otp.length < 6} onClick={onComplete} className="w-full">
+        Verify
+      </Button>
 
       <button
         disabled={countdown > 0}
         onClick={() => setCountdown(30)}
-        style={{
-          background: 'none',
-          border: 'none',
-          cursor: countdown > 0 ? 'not-allowed' : 'pointer',
-          fontSize: 12,
-          color: countdown > 0 ? 'var(--ink-dim)' : 'var(--accent)',
-          textDecoration: countdown > 0 ? 'none' : 'underline',
-        }}
+        className={`bg-transparent border-none text-xs text-center ${countdown > 0 ? 'cursor-not-allowed text-ink-dim no-underline' : 'cursor-pointer text-accent underline'}`}
       >
-        {countdown > 0 ? `Resend in ${countdown}s` : 'Resend email'}
+        {countdown > 0 ? `Resend in ${countdown}s` : 'Resend code'}
       </button>
-
-      <Button variant="primary" onClick={onComplete} style={{ width: '100%' }}>
-        I've verified my email
-      </Button>
     </div>
   )
 }

@@ -17,6 +17,37 @@
   --accent-faint: color-mix(in oklch, var(--accent) 8%, transparent);
 }
 
+/* Bridge custom properties into Tailwind v4 theme so utilities like
+   bg-panel, text-ink-dim, border-border, font-mono resolve to our tokens. */
+@theme {
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-faint: var(--accent-faint);
+  --color-accent-cyan: var(--accent-cyan);
+  --color-accent-lime: var(--accent-lime);
+  --color-accent-magenta: var(--accent-magenta);
+  --color-accent-amber: var(--accent-amber);
+  --color-accent-violet: var(--accent-violet);
+  --color-bg: var(--bg);
+  --color-bg-2: var(--bg-2);
+  --color-panel: var(--panel);
+  --color-panel-2: var(--panel-2);
+  --color-panel-hover: var(--panel-hover);
+  --color-ink: var(--ink);
+  --color-ink-dim: var(--ink-dim);
+  --color-ink-faint: var(--ink-faint);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-danger: var(--danger);
+
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  --font-ui: 'Inter', system-ui, sans-serif;
+  --font-mono: ui-monospace, 'Cascadia Code', 'Fira Mono', monospace;
+
+  --animate-fade-up: fadeUp 420ms ease both;
+  --animate-fade-in: fadeIn 300ms ease both;
+}
+
 html[data-theme="dark"] {
   --bg: #05060A;
   --bg-2: #0B0D14;
@@ -79,24 +110,15 @@ html[data-theme="light"] body::before {
     radial-gradient(900px 500px at -10% 110%, color-mix(in oklch, var(--accent-magenta) 5%, transparent), transparent 60%);
 }
 
-button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
-input, textarea { font-family: inherit; }
-a { color: inherit; }
+@layer base {
+  button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+  input, textarea { font-family: inherit; }
+  a { color: inherit; }
+}
 
 /* Shared utility classes */
 .mono { font-family: var(--font-mono); font-feature-settings: "ss01","ss02"; letter-spacing: 0.01em; }
 .display { font-family: var(--font-display); letter-spacing: -0.02em; }
-.eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--ink-dim);
-}
-
 .panel {
   background: var(--panel);
   border: 1px solid var(--border);
@@ -206,16 +228,7 @@ a { color: inherit; }
   100% { transform: translateY(100%); }
 }
 
-.fade-up { animation: fadeUp 420ms ease both; }
-.fade-in { animation: fadeIn 300ms ease both; }
-
 /* App shell */
-.app {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
 .topbar {
   position: sticky;
   top: 0;
@@ -244,22 +257,6 @@ a { color: inherit; }
 .topbar .nav button:hover { color: var(--ink); background: var(--panel-2); }
 .topbar .nav button.active { color: var(--ink); background: var(--panel); border: 1px solid var(--border); }
 
-.brand-lockup {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 18px;
-  letter-spacing: -0.02em;
-}
-.brand-lockup .logo {
-  width: 28px;
-  height: 28px;
-  display: inline-grid;
-  place-items: center;
-}
-
 /* Footer */
 .app-footer {
   margin-top: auto;
@@ -273,14 +270,6 @@ a { color: inherit; }
 }
 .app-footer a { color: var(--ink-dim); text-decoration: none; }
 .app-footer a:hover { color: var(--ink); }
-
-/* Viewport containers */
-.center-stage {
-  flex: 1;
-  display: grid;
-  place-items: center;
-  padding: 32px 24px;
-}
 
 /* Modal */
 .modal-backdrop {
@@ -385,8 +374,6 @@ a { color: inherit; }
 /* ───── Mobile (≤720px) ───── */
 @media (max-width: 720px) {
   .topbar { padding: 10px 14px; gap: 10px; flex-wrap: wrap; }
-  .topbar .brand-lockup { font-size: 16px; }
-  .topbar .brand-lockup .logo { width: 24px; height: 24px; }
   .topbar .brand-version { display: none; }
   .topbar .topbar-actions { margin-left: auto; gap: 6px; }
   .topbar .nav { order: 10; width: 100%; margin-left: 0; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
@@ -398,38 +385,17 @@ a { color: inherit; }
 
   .app-footer { flex-direction: column; gap: 10px; padding: 16px 14px; text-align: left; }
   .app-footer > div:first-child { flex-wrap: wrap; gap: 12px; }
-  .center-stage { padding: 16px 12px; }
   .modal-backdrop { padding: 12px; align-items: flex-end; }
   .modal { max-height: 94vh; border-radius: 14px; }
   .tweaks { width: calc(100vw - 24px); max-width: 320px; max-height: 70vh; overflow-y: auto; right: 12px; bottom: 12px; }
 
-  .screen-root { padding: 16px 12px 32px !important; }
-  .responsive-2col { grid-template-columns: 1fr !important; }
-  .responsive-stack { grid-template-columns: 1fr !important; }
-  .responsive-2col > * { min-width: 0; }
-
+  /* Hero banner mobile (.hero-banner is a structural component class) */
   .hero-banner { min-height: 180px !important; }
-  .mission-hud { order: -1; }
-  .m-and-r { grid-template-columns: 1fr !important; }
 
-  /* Onboarding stacks */
-  .onboarding-split { grid-template-columns: 1fr !important; }
-  .onboarding-hero { min-height: 220px !important; }
-
-  /* Leaderboard table collapses to 3 columns */
+  /* Leaderboard table collapses to 3 columns (covered by container query too but viewport fallback) */
   .lb-row { grid-template-columns: 40px 1fr 80px !important; padding: 10px 12px !important; }
   .lb-row .lb-tier, .lb-row .lb-streak { display: none; }
   .lb-head { display: none !important; }
-
-  /* Profile */
-  .profile-identity { grid-template-columns: 1fr !important; text-align: center; }
-  .profile-grid { grid-template-columns: 1fr !important; }
-  .profile-tier-ladder { grid-auto-flow: column; grid-auto-columns: minmax(120px, 1fr); grid-template-columns: unset !important; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 4px; }
-  .profile-tier-ladder > * { scroll-snap-align: start; }
-
-  /* Hangman fits small screens */
-  .hangman-stage { grid-template-columns: 80px 1fr !important; gap: 10px !important; }
-  .hangman-keys { grid-template-columns: repeat(7, 1fr) !important; }
 
   /* Display type scales down */
   .display { letter-spacing: -0.015em; }
@@ -442,14 +408,10 @@ a { color: inherit; }
 /* ───── Small phones (≤420px) ───── */
 @media (max-width: 420px) {
   .topbar .persona-switch { display: none !important; }
-  .topbar .brand-lockup span:last-of-type { font-size: 14px; }
   .topbar { padding: 10px 12px; }
   .topbar .nav { width: 100%; }
   .topbar .topbar-actions { margin-left: auto; }
   .nav button { padding: 6px 8px !important; font-size: 11px !important; }
-  .hangman-keys { grid-template-columns: repeat(6, 1fr) !important; }
-  .mission-stats-3 { grid-template-columns: 1fr 1fr !important; }
-  .mission-stats-3 > :nth-child(3) { grid-column: 1 / -1; }
 }
 
 /* ───── LeaderboardTable container query (fires when the panel itself is narrow) ───── */
@@ -468,7 +430,7 @@ html[data-mobile-nav="bottom"] .topbar .nav { display: none; }
 html[data-mobile-nav="bottom"] .bottom-nav { display: flex; }
 .bottom-nav { display: none; }
 @media (max-width: 720px) {
-  html[data-mobile-nav="bottom"] .app { padding-bottom: 68px; }
+  html[data-mobile-nav="bottom"] [data-app-root] { padding-bottom: 68px; }
   html[data-mobile-nav="bottom"] .bottom-nav {
     position: fixed; left: 0; right: 0; bottom: 0; z-index: 50;
     display: flex; justify-content: space-around; align-items: center;
@@ -484,73 +446,6 @@ html[data-mobile-nav="bottom"] .bottom-nav { display: flex; }
   html[data-mobile-nav="bottom"] .bottom-nav button svg { width: 20px; height: 20px; }
   html[data-mobile-hero="hide"] .hero-banner { display: none; }
   html[data-mobile-hero="hide"] .onboarding-hero { display: none; }
-}
-
-/* ── Utility classes extracted from component inline styles ────────── */
-
-/* Mono uppercase label — used in BadgeGrid, TierLadder, StatCard, MissionTile, etc. */
-.mono-label {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--ink-dim);
-}
-
-/* Icon box — used in MissionTile, MissionModal, badge cells */
-.icon-box {
-  background: var(--panel-2);
-  border: 1px solid var(--border);
-  display: grid;
-  place-items: center;
-}
-
-/* Stat cell — used in ProfileSnapshot stats grid */
-.stat-cell {
-  padding: 10px;
-  background: var(--panel-2);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  text-align: center;
-}
-
-/* Stat card — used in StatCard component */
-.stat-card {
-  padding: 14px;
-  background: var(--panel-2);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-}
-
-/* Divider — used in Elements.tsx */
-.divider { display: flex; align-items: center; gap: 12px; margin: 20px 0; }
-.divider-line { flex: 1; height: 1px; background: var(--border); }
-
-/* XP bar label row — used 3× in XPBar.tsx */
-.xpbar-label {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 6px;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: var(--ink-dim);
-}
-
-/* XP pill — extends .chip.accent */
-.xp-pill { gap: 6px; font-weight: 600; }
-
-/* Button size variant */
-.btn-sm { padding: 8px 12px; font-size: 12px; }
-
-/* Filter tabs container */
-.filter-tabs {
-  display: flex;
-  gap: 4px;
-  padding: 4px;
-  background: var(--panel-2);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  flex-wrap: wrap;
 }
 
 /* HeroBanner structure */

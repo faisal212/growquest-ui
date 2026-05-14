@@ -92,7 +92,7 @@ export default function App() {
   const toggleTweaks = () => setTweaksVisible((v) => !v)
 
   return (
-    <div className="app">
+    <div className="min-h-screen flex flex-col" data-app-root>
       <ErrorBoundary>
         <Suspense fallback={null}>
           <Routes>
@@ -156,47 +156,28 @@ export default function App() {
       </ErrorBoundary>
 
       <div className="app-footer">
-        <div style={{ display: 'flex', gap: 18 }}>
+        <div className="flex gap-[18px]">
           <button
             type="button"
-            style={{
-              background: 'none',
-              border: 'none',
-              color: 'inherit',
-              cursor: 'pointer',
-              font: 'inherit',
-            }}
+            className="bg-none border-0 text-inherit cursor-pointer [font:inherit]"
           >
             Terms of Service
           </button>
           <button
             type="button"
-            style={{
-              background: 'none',
-              border: 'none',
-              color: 'inherit',
-              cursor: 'pointer',
-              font: 'inherit',
-            }}
+            className="bg-none border-0 text-inherit cursor-pointer [font:inherit]"
           >
             Privacy Policy
           </button>
           <button
             type="button"
-            style={{
-              background: 'none',
-              border: 'none',
-              color: 'inherit',
-              cursor: 'pointer',
-              font: 'inherit',
-            }}
+            className="bg-none border-0 text-inherit cursor-pointer [font:inherit]"
           >
             Changelog
           </button>
         </div>
-        <div style={{ fontFamily: 'var(--font-mono)' }}>
-          Powered by <strong style={{ color: 'var(--ink)' }}>GrowQuest</strong> · multi-tenant
-          growth OS
+        <div className="font-mono">
+          Powered by <strong className="text-ink">GrowQuest</strong> · multi-tenant growth OS
         </div>
       </div>
 

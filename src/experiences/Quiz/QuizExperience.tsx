@@ -67,7 +67,7 @@ export function QuizExperience({
   const correct = quiz.correct === pick
 
   return (
-    <div style={{ padding: 24, display: 'flex', flexDirection: 'column', gap: 16 }}>
+    <div className="p-6 flex flex-col gap-4">
       <Eyebrow>
         // quiz · 1 of 5 ·{' '}
         {variant === 'text'
@@ -76,10 +76,10 @@ export function QuizExperience({
             ? 'text + image'
             : 'images only'}
       </Eyebrow>
-      <div style={{ fontSize: 17, fontWeight: 600, lineHeight: 1.4 }}>{quiz.q}</div>
+      <div className="text-[17px] font-semibold leading-snug">{quiz.q}</div>
 
       {variant === 'text' && (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+        <div className="flex flex-col gap-2">
           {quiz.choices.map((c) => {
             const isPick = pick === c.id
             const good = submitted && c.id === quiz.correct
@@ -94,24 +94,10 @@ export function QuizExperience({
                 onClick={() => setPick(c.id)}
                 layout="row"
               >
-                <span
-                  className="mono"
-                  style={{
-                    width: 24,
-                    height: 24,
-                    borderRadius: 5,
-                    border: '1px solid var(--border)',
-                    background: 'var(--panel)',
-                    display: 'grid',
-                    placeItems: 'center',
-                    fontSize: 11,
-                    fontWeight: 700,
-                    flexShrink: 0,
-                  }}
-                >
+                <span className="mono w-6 h-6 rounded-[5px] border border-border bg-panel grid place-items-center text-[11px] font-bold shrink-0">
                   {c.id.toUpperCase()}
                 </span>
-                <span style={{ flex: 1, fontSize: 14 }}>{c.label}</span>
+                <span className="flex-1 text-sm">{c.label}</span>
                 {good && (
                   <svg
                     width="16"
@@ -143,7 +129,7 @@ export function QuizExperience({
       )}
 
       {variant === 'textImage' && (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 10 }}>
+        <div className="grid grid-cols-2 gap-2.5">
           {quiz.choices.map((c) => {
             const isPick = pick === c.id
             const good = submitted && c.id === quiz.correct
@@ -158,70 +144,27 @@ export function QuizExperience({
                 onClick={() => setPick(c.id)}
                 layout="column"
               >
-                <div
-                  style={{
-                    aspectRatio: '16/10',
-                    borderRadius: 6,
-                    overflow: 'hidden',
-                    background: 'var(--panel)',
-                    position: 'relative',
-                  }}
-                >
+                <div className="aspect-[16/10] rounded-md overflow-hidden bg-panel relative">
                   <div
+                    className="absolute inset-0"
                     style={{
-                      position: 'absolute',
-                      inset: 0,
                       backgroundImage: `repeating-linear-gradient(135deg, color-mix(in oklch, var(--accent-${c.tint}) 30%, transparent) 0 6px, transparent 6px 14px)`,
                     }}
                   />
-                  <div
-                    style={{
-                      position: 'absolute',
-                      inset: 0,
-                      display: 'grid',
-                      placeItems: 'center',
-                    }}
-                  >
+                  <div className="absolute inset-0 grid place-items-center">
                     <div
+                      className="font-mono text-[10px] tracking-[0.12em] uppercase py-1 px-2 bg-panel border rounded-[4px]"
                       style={{
-                        fontFamily: 'var(--font-mono)',
-                        fontSize: 10,
-                        letterSpacing: '0.12em',
-                        textTransform: 'uppercase',
                         color: `var(--accent-${c.tint})`,
-                        padding: '4px 8px',
-                        background: 'var(--panel)',
-                        border: `1px solid color-mix(in oklch, var(--accent-${c.tint}) 40%, transparent)`,
-                        borderRadius: 4,
+                        borderColor: `color-mix(in oklch, var(--accent-${c.tint}) 40%, transparent)`,
                       }}
                     >
                       OPT {c.id.toUpperCase()}
                     </div>
                   </div>
                 </div>
-                <div
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 8,
-                    fontSize: 13,
-                    textAlign: 'left',
-                  }}
-                >
-                  <span
-                    className="mono"
-                    style={{
-                      width: 20,
-                      height: 20,
-                      borderRadius: 4,
-                      border: '1px solid var(--border)',
-                      display: 'grid',
-                      placeItems: 'center',
-                      fontSize: 10,
-                      fontWeight: 700,
-                      flexShrink: 0,
-                    }}
-                  >
+                <div className="flex items-center gap-2 text-[13px] text-left">
+                  <span className="mono w-5 h-5 rounded-[4px] border border-border grid place-items-center text-[10px] font-bold shrink-0">
                     {c.id.toUpperCase()}
                   </span>
                   <span>{c.label}</span>
@@ -233,7 +176,7 @@ export function QuizExperience({
       )}
 
       {variant === 'imageOnly' && (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 10 }}>
+        <div className="grid grid-cols-2 gap-2.5">
           {quiz.choices.map((c) => {
             const isPick = pick === c.id
             const good = submitted && c.id === quiz.correct
@@ -248,7 +191,7 @@ export function QuizExperience({
                 onClick={() => setPick(c.id)}
                 layout="column"
               >
-                <div style={{ aspectRatio: '1/1' }}>
+                <div className="aspect-square">
                   <ShapeArt shape={c.shape!} tint={c.tint!} />
                 </div>
               </ChoiceShell>
@@ -259,14 +202,11 @@ export function QuizExperience({
 
       {submitted && (
         <div
+          className={`p-3 rounded-lg text-[13px] border ${correct ? 'border-accent-lime' : 'border-danger'}`}
           style={{
-            padding: 12,
-            borderRadius: 8,
             background: correct
               ? 'color-mix(in oklch, var(--accent-lime) 14%, transparent)'
               : 'color-mix(in oklch, var(--danger) 14%, transparent)',
-            border: `1px solid ${correct ? 'var(--accent-lime)' : 'var(--danger)'}`,
-            fontSize: 13,
           }}
         >
           <strong>{correct ? 'Correct!' : 'Not quite.'}</strong>{' '}
@@ -274,18 +214,18 @@ export function QuizExperience({
         </div>
       )}
 
-      <div style={{ display: 'flex', gap: 8 }}>
+      <div className="flex gap-2">
         {!submitted ? (
           <Button
             variant="primary"
-            style={{ flex: 1 }}
+            className="flex-1"
             disabled={!pick}
             onClick={() => setSubmitted(true)}
           >
             Submit answer
           </Button>
         ) : (
-          <Button variant="primary" style={{ flex: 1 }} onClick={onComplete}>
+          <Button variant="primary" className="flex-1" onClick={onComplete}>
             Continue
           </Button>
         )}

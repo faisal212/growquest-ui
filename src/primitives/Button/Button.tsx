@@ -25,7 +25,7 @@ export function Button({
   const cls = [
     'btn',
     variant !== 'default' ? variant : '',
-    size === 'sm' ? 'btn-sm' : '',
+    size === 'sm' ? 'px-3 py-2 text-xs' : '',
     className,
   ]
     .filter(Boolean)

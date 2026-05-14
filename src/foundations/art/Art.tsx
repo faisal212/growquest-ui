@@ -3,7 +3,7 @@ export function HeroArt({ variant = 'isometric', accent }: { variant?: string; a
 
   if (variant === 'grid-poster') {
     return (
-      <svg viewBox="0 0 480 480" style={{ width: '100%', height: '100%', display: 'block' }}>
+      <svg viewBox="0 0 480 480" className="block w-full h-full">
         <defs>
           <pattern id="gp-grid" width="24" height="24" patternUnits="userSpaceOnUse">
             <path d="M24 0H0V24" fill="none" stroke={a} strokeOpacity="0.18" strokeWidth="1" />
@@ -65,7 +65,7 @@ export function HeroArt({ variant = 'isometric', accent }: { variant?: string; a
 
   if (variant === 'orbital') {
     return (
-      <svg viewBox="0 0 480 480" style={{ width: '100%', height: '100%', display: 'block' }}>
+      <svg viewBox="0 0 480 480" className="block w-full h-full">
         <defs>
           <radialGradient id="orb-glow">
             <stop offset="0" stopColor={a} stopOpacity="0.55" />
@@ -125,7 +125,7 @@ export function HeroArt({ variant = 'isometric', accent }: { variant?: string; a
       }
     }
     return (
-      <svg viewBox="0 0 480 480" style={{ width: '100%', height: '100%', display: 'block' }}>
+      <svg viewBox="0 0 480 480" className="block w-full h-full">
         {cells.map((cell, i) => (
           <rect
             key={i}
@@ -148,7 +148,7 @@ export function HeroArt({ variant = 'isometric', accent }: { variant?: string; a
 
   // default: isometric
   return (
-    <svg viewBox="0 0 480 480" style={{ width: '100%', height: '100%', display: 'block' }}>
+    <svg viewBox="0 0 480 480" className="block w-full h-full">
       <defs>
         <pattern
           id="iso-grid"
@@ -203,7 +203,7 @@ export function HeroArt({ variant = 'isometric', accent }: { variant?: string; a
       </g>
       <g
         transform="translate(90 140)"
-        style={{ animation: 'float 4s ease-in-out infinite', willChange: 'transform' }}
+        className="animate-[float_4s_ease-in-out_infinite] will-change-transform"
       >
         <polygon points="0,0 40,16 40,56 0,40" fill={a} opacity="0.9" />
         <polygon points="0,0 -40,16 -40,56 0,40" fill={a} opacity="0.65" />
@@ -211,7 +211,7 @@ export function HeroArt({ variant = 'isometric', accent }: { variant?: string; a
       </g>
       <g
         transform="translate(380 120)"
-        style={{ animation: 'float 5s ease-in-out infinite', willChange: 'transform' }}
+        className="animate-[float_5s_ease-in-out_infinite] will-change-transform"
       >
         <circle r="26" fill="var(--accent-magenta)" opacity="0.85" />
         <circle r="26" fill="none" stroke="#fff" strokeOpacity="0.45" strokeWidth="1" />
@@ -224,7 +224,7 @@ export function HeroArt({ variant = 'isometric', accent }: { variant?: string; a
       </g>
       <g
         transform="translate(380 380)"
-        style={{ animation: 'float 3.5s ease-in-out infinite', willChange: 'transform' }}
+        className="animate-[float_3.5s_ease-in-out_infinite] will-change-transform"
       >
         <polygon points="0,0 18,8 18,26 0,18" fill={a} />
         <polygon points="0,0 -18,8 -18,26 0,18" fill={a} opacity="0.7" />
@@ -275,12 +275,7 @@ export function Avatar({ seed = 1, size = 40 }: { seed?: number; size?: number }
       width={size}
       height={size}
       viewBox="0 0 40 40"
-      style={{
-        display: 'block',
-        borderRadius: 6,
-        border: '1px solid var(--border)',
-        background: 'var(--panel-2)',
-      }}
+      className="block rounded-md border border-border bg-panel-2"
     >
       <rect width="40" height="40" fill="var(--panel-2)" />
       {shape === 0 && (

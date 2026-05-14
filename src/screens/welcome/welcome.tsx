@@ -23,14 +23,11 @@ export default function WelcomeScreen({ onContinue, email }: WelcomeScreenProps)
   }, [onContinue])
 
   return (
-    <div className="fade-up w-[min(540px,100%)]">
+    <div className="animate-fade-up w-[min(540px,100%)]">
       <div className="panel px-8 py-10 text-center relative overflow-hidden">
         <div className="absolute inset-0 opacity-25 grid-bg" />
         <div className="relative">
-          <div
-            className="w-[180px] h-[180px] mx-auto mb-5"
-            style={{ animation: 'float 3s ease-in-out infinite' }}
-          >
+          <div className="w-[180px] h-[180px] mx-auto mb-5 animate-[float_3s_ease-in-out_infinite]">
             <svg viewBox="0 0 180 180" width="180" height="180">
               <defs>
                 <linearGradient id="wg-grad" x1="0" x2="1" y1="0" y2="1">
@@ -64,40 +61,33 @@ export default function WelcomeScreen({ onContinue, email }: WelcomeScreenProps)
             </svg>
           </div>
 
-          <div className="eyebrow mb-[10px]">// session restored</div>
+          <div className="inline-flex items-center gap-2 font-mono text-[11px] tracking-[0.16em] uppercase text-ink-dim mb-[10px]">
+            // session restored
+          </div>
           <h1 className="display text-[28px] mt-0 mb-[10px]">
-            Welcome back, <span style={{ color: 'var(--accent)' }}>Alpha</span>.
+            Welcome back, <span className="text-accent">Alpha</span>.
           </h1>
-          <p
-            className="text-sm leading-[1.6] mx-auto mb-6 max-w-[360px]"
-            style={{ color: 'var(--ink-dim)' }}
-          >
+          <p className="text-sm leading-[1.6] mx-auto mb-6 max-w-[360px] text-ink-dim">
             Dive into exclusive content, join the discussion, and unlock rewards. Synchronizing
             quest state…
           </p>
 
-          <div
-            className="px-4 py-[14px] text-left rounded-lg"
-            style={{ background: 'var(--panel-2)', border: '1px solid var(--border)' }}
-          >
-            <div
-              className="flex justify-between font-mono text-[10px] tracking-[0.12em] uppercase mb-2"
-              style={{ color: 'var(--ink-dim)' }}
-            >
+          <div className="px-4 py-[14px] text-left rounded-lg bg-panel-2 border border-border">
+            <div className="flex justify-between font-mono text-[10px] tracking-[0.12em] uppercase mb-2 text-ink-dim">
               <span>loading quest data</span>
               <span>{Math.round(pct)}%</span>
             </div>
             <div className="xpbar">
               <div className="fill" style={{ width: `${pct}%` }} />
             </div>
-            <div className="font-mono text-[10px] mt-2" style={{ color: 'var(--ink-faint)' }}>
+            <div className="font-mono text-[10px] mt-2 text-ink-faint">
               {pct < 40 && '> verifying credentials…'}
               {pct >= 40 && pct < 80 && '> fetching mission manifest…'}
               {pct >= 80 && '> priming XP engine…'}
             </div>
           </div>
 
-          <div className="mt-4 text-[11px] font-mono" style={{ color: 'var(--ink-faint)' }}>
+          <div className="mt-4 text-[11px] font-mono text-ink-faint">
             {email || 'alpha@growquest.io'}
           </div>
         </div>

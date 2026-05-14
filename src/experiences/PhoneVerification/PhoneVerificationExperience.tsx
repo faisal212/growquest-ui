@@ -21,12 +21,10 @@ export function PhoneVerificationExperience({ onComplete }: { onComplete: () => 
 
   if (step === 'otp') {
     return (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 20, padding: 24 }}>
-        <div style={{ textAlign: 'center' }}>
-          <div style={{ fontWeight: 600, fontSize: 15, marginBottom: 4 }}>
-            Enter the 6-digit code
-          </div>
-          <div style={{ fontSize: 13, color: 'var(--ink-dim)' }}>
+      <div className="flex flex-col gap-5 p-6">
+        <div className="text-center">
+          <div className="font-semibold text-[15px] mb-1">Enter the 6-digit code</div>
+          <div className="text-[13px] text-ink-dim">
             Sent to {countryCode} {phone}
           </div>
         </div>
@@ -38,21 +36,10 @@ export function PhoneVerificationExperience({ onComplete }: { onComplete: () => 
           placeholder="000000"
           value={otp}
           onChange={(e) => setOtp(e.target.value.replace(/\D/g, '').slice(0, 6))}
-          style={{
-            fontFamily: 'var(--font-mono)',
-            fontSize: 28,
-            letterSpacing: '0.35em',
-            textAlign: 'center',
-            padding: '12px 16px',
-          }}
+          className="font-mono text-[28px] tracking-[0.35em] text-center py-3 px-4"
         />
 
-        <Button
-          variant="primary"
-          disabled={otp.length < 6}
-          onClick={onComplete}
-          style={{ width: '100%' }}
-        >
+        <Button variant="primary" disabled={otp.length < 6} onClick={onComplete} className="w-full">
           Verify
         </Button>
 
@@ -61,15 +48,7 @@ export function PhoneVerificationExperience({ onComplete }: { onComplete: () => 
             setStep('phone')
             setOtp('')
           }}
-          style={{
-            background: 'none',
-            border: 'none',
-            cursor: 'pointer',
-            fontSize: 12,
-            color: 'var(--accent)',
-            textDecoration: 'underline',
-            textAlign: 'center',
-          }}
+          className="bg-transparent border-none cursor-pointer text-xs text-accent underline text-center"
         >
           Change number
         </button>
@@ -78,14 +57,13 @@ export function PhoneVerificationExperience({ onComplete }: { onComplete: () => 
   }
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 24 }}>
+    <div className="flex flex-col gap-4 p-6">
       <div>
-        <div style={{ fontSize: 12, color: 'var(--ink-dim)', marginBottom: 6 }}>Country</div>
+        <div className="text-xs text-ink-dim mb-1.5">Country</div>
         <select
-          className="input"
+          className="input w-full"
           value={countryCode}
           onChange={(e) => setCountryCode(e.target.value)}
-          style={{ width: '100%' }}
         >
           {COUNTRY_CODES.map(({ code, flag, name }) => (
             <option key={code} value={code}>
@@ -96,7 +74,7 @@ export function PhoneVerificationExperience({ onComplete }: { onComplete: () => 
       </div>
 
       <div>
-        <div style={{ fontSize: 12, color: 'var(--ink-dim)', marginBottom: 6 }}>Phone number</div>
+        <div className="text-xs text-ink-dim mb-1.5">Phone number</div>
         <Input
           type="tel"
           placeholder="Phone number"
@@ -109,7 +87,7 @@ export function PhoneVerificationExperience({ onComplete }: { onComplete: () => 
         variant="primary"
         disabled={phone.length < 6}
         onClick={() => setStep('otp')}
-        style={{ width: '100%' }}
+        className="w-full"
       >
         Send OTP
       </Button>

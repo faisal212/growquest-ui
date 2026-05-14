@@ -75,47 +75,24 @@ export function FollowSocialExperience({
   const [clicked, setClicked] = useState(false)
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        gap: 24,
-        padding: '32px 24px',
-      }}
-    >
-      <div
-        style={{
-          width: 72,
-          height: 72,
-          borderRadius: 18,
-          background: 'var(--panel-2)',
-          border: '1px solid var(--border)',
-          display: 'grid',
-          placeItems: 'center',
-          color: 'var(--accent)',
-        }}
-      >
+    <div className="flex flex-col items-center gap-6 py-8 px-6">
+      <div className="w-[72px] h-[72px] rounded-[18px] bg-panel-2 border border-border grid place-items-center text-accent">
         <PlatformIcon platform={platform} />
       </div>
 
-      <div style={{ textAlign: 'center' }}>
-        <div style={{ fontWeight: 700, fontSize: 22, letterSpacing: '-0.02em', marginBottom: 4 }}>
-          {handle}
-        </div>
-        <div style={{ fontSize: 13, color: 'var(--ink-dim)' }}>
-          Follow us on {platform} to earn XP
-        </div>
+      <div className="text-center">
+        <div className="font-bold text-[22px] tracking-[-0.02em] mb-1">{handle}</div>
+        <div className="text-[13px] text-ink-dim">Follow us on {platform} to earn XP</div>
       </div>
 
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 8, width: '100%' }}>
+      <div className="flex flex-col gap-2 w-full">
         <Button
           variant="primary"
           onClick={() => {
             window.open(url, '_blank')
             setClicked(true)
           }}
-          style={{ width: '100%' }}
+          className="w-full"
         >
           Open {platform} ↗
         </Button>
@@ -123,7 +100,7 @@ export function FollowSocialExperience({
           variant={clicked ? 'primary' : 'ghost'}
           disabled={!clicked}
           onClick={onComplete}
-          style={{ width: '100%' }}
+          className="w-full"
         >
           I've followed
         </Button>

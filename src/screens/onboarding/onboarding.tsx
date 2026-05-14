@@ -13,15 +13,9 @@ export default function OnboardingScreen({ onEnter, heroStyle }: OnboardingScree
   const valid = /^\S+@\S+\.\S+$/.test(email) && agree
 
   return (
-    <div className="fade-up w-[min(1040px,100%)] mx-auto">
-      <div
-        className="onboarding-split grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] gap-0 rounded-2xl overflow-hidden"
-        style={{ border: '1px solid var(--border)', background: 'var(--panel)' }}
-      >
-        <div
-          className="onboarding-hero relative min-h-[440px]"
-          style={{ background: 'var(--bg-2)' }}
-        >
+    <div className="animate-fade-up w-[min(1040px,100%)] mx-auto">
+      <div className="grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] gap-0 rounded-2xl overflow-hidden max-[720px]:grid-cols-1 border border-border bg-panel">
+        <div className="onboarding-hero relative min-h-[440px] max-[720px]:min-h-[220px] bg-bg-2">
           <div className="absolute inset-0">
             <HeroArt variant={heroStyle} />
           </div>
@@ -33,14 +27,11 @@ export default function OnboardingScreen({ onEnter, heroStyle }: OnboardingScree
 
         <div className="px-9 pt-9 pb-7 flex flex-col gap-5">
           <Eyebrow>// onboarding · step 1 / 3</Eyebrow>
-          <h1
-            className="display text-[36px] leading-[1.05] m-0"
-            style={{ letterSpacing: '-0.03em' }}
-          >
+          <h1 className="display text-[36px] leading-[1.05] m-0 tracking-[-0.03em]">
             Become a<br />
-            <span style={{ color: 'var(--accent)' }}>GrowQuest</span> insider.
+            <span className="text-accent">GrowQuest</span> insider.
           </h1>
-          <p className="text-[15px] leading-[1.6] m-0" style={{ color: 'var(--ink-dim)' }}>
+          <p className="text-[15px] leading-[1.6] m-0 text-ink-dim">
             Unlock exclusive perks, shape the roadmap, and earn XP toward rewards. Daily missions,
             limited drops, and a spin-to-win lootbox — yours when you join.
           </p>
@@ -51,15 +42,8 @@ export default function OnboardingScreen({ onEnter, heroStyle }: OnboardingScree
               { k: 'Tiers', v: '4 ranks' },
               { k: 'Drops', v: 'Weekly' },
             ].map((s) => (
-              <div
-                key={s.k}
-                className="px-3 py-[10px] rounded-lg"
-                style={{ background: 'var(--panel-2)', border: '1px solid var(--border)' }}
-              >
-                <div
-                  className="font-mono text-[10px] tracking-[0.1em] uppercase"
-                  style={{ color: 'var(--ink-dim)' }}
-                >
+              <div key={s.k} className="px-3 py-[10px] rounded-lg bg-panel-2 border border-border">
+                <div className="font-mono text-[10px] tracking-[0.1em] uppercase text-ink-dim">
                   {s.k}
                 </div>
                 <div className="font-semibold text-sm">{s.v}</div>
@@ -70,8 +54,7 @@ export default function OnboardingScreen({ onEnter, heroStyle }: OnboardingScree
           <div>
             <label
               htmlFor="onboarding-email"
-              className="block font-mono text-[10px] tracking-[0.12em] uppercase mb-[6px]"
-              style={{ color: 'var(--ink-dim)' }}
+              className="block font-mono text-[10px] tracking-[0.12em] uppercase mb-[6px] text-ink-dim"
             >
               work email
             </label>
@@ -83,10 +66,7 @@ export default function OnboardingScreen({ onEnter, heroStyle }: OnboardingScree
             />
           </div>
 
-          <label
-            className="flex gap-[10px] items-start text-xs"
-            style={{ color: 'var(--ink-dim)' }}
-          >
+          <label className="flex gap-[10px] items-start text-xs text-ink-dim">
             <input
               type="checkbox"
               checked={agree}
@@ -97,28 +77,14 @@ export default function OnboardingScreen({ onEnter, heroStyle }: OnboardingScree
               I agree to the{' '}
               <button
                 type="button"
-                style={{
-                  background: 'none',
-                  border: 'none',
-                  padding: 0,
-                  color: 'var(--accent)',
-                  cursor: 'pointer',
-                  font: 'inherit',
-                }}
+                className="bg-transparent border-0 p-0 text-accent cursor-pointer [font:inherit]"
               >
                 Terms
               </button>{' '}
               and acknowledge the{' '}
               <button
                 type="button"
-                style={{
-                  background: 'none',
-                  border: 'none',
-                  padding: 0,
-                  color: 'var(--accent)',
-                  cursor: 'pointer',
-                  font: 'inherit',
-                }}
+                className="bg-transparent border-0 p-0 text-accent cursor-pointer [font:inherit]"
               >
                 Privacy Policy
               </button>
@@ -139,10 +105,7 @@ export default function OnboardingScreen({ onEnter, heroStyle }: OnboardingScree
             </svg>
           </Button>
 
-          <div
-            className="flex justify-between text-[11px] font-mono"
-            style={{ color: 'var(--ink-faint)' }}
-          >
+          <div className="flex justify-between text-[11px] font-mono text-ink-faint">
             <span>// 2,481 insiders joined this week</span>
             <span>SSO · SAML ok</span>
           </div>

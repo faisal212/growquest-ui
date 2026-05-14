@@ -106,28 +106,11 @@ export function MissionModal({ m, onClose, onClaim }: MissionModalProps) {
       onClick={(e) => e.target === e.currentTarget && onClose()}
       onKeyDown={(e) => e.key === 'Escape' && onClose()}
     >
-      <div
-        ref={dialogRef}
-        className="modal"
-        role="dialog"
-        aria-modal="true"
-        style={{ maxWidth: 560 }}
-      >
-        <div
-          style={{
-            position: 'relative',
-            padding: '20px 24px',
-            borderBottom: '1px solid var(--border)',
-            display: 'flex',
-            alignItems: 'center',
-            gap: 12,
-          }}
-        >
-          <div style={{ flex: 1 }}>
-            <h2 className="display" style={{ margin: 0, fontSize: 20, letterSpacing: '-0.02em' }}>
-              {m.title}
-            </h2>
-            <div style={{ display: 'flex', gap: 8, marginTop: 6 }}>
+      <div ref={dialogRef} className="modal max-w-[560px]" role="dialog" aria-modal="true">
+        <div className="relative px-6 py-5 border-b border-border flex items-center gap-3">
+          <div className="flex-1">
+            <h2 className="display m-0 text-[20px] tracking-[-0.02em]">{m.title}</h2>
+            <div className="flex gap-2 mt-1.5">
               <XPPill amount={m.xp} />
               {m.limited && m.endsAt && (
                 <Tag tone="magenta">
@@ -139,8 +122,7 @@ export function MissionModal({ m, onClose, onClaim }: MissionModalProps) {
           <button
             onClick={onClose}
             aria-label="Close"
-            className="icon-box"
-            style={{ width: 28, height: 28, borderRadius: 6 }}
+            className="bg-panel-2 border border-border grid place-items-center w-7 h-7 rounded-md"
           >
             <svg width="12" height="12" viewBox="0 0 12 12">
               <path
@@ -153,9 +135,7 @@ export function MissionModal({ m, onClose, onClaim }: MissionModalProps) {
           </button>
         </div>
         {body ?? (
-          <div style={{ padding: 24, color: 'var(--ink-dim)', fontSize: 13, textAlign: 'center' }}>
-            Experience coming soon
-          </div>
+          <div className="p-6 text-ink-dim text-[13px] text-center">Experience coming soon</div>
         )}
       </div>
     </div>,

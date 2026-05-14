@@ -38,18 +38,7 @@ export function Chip({ children, tone = 'default', dot, className, style }: Chip
       className={['chip', className].filter(Boolean).join(' ')}
       style={{ ...toneStyle, ...style }}
     >
-      {dot && (
-        <span
-          style={{
-            width: 5,
-            height: 5,
-            borderRadius: '50%',
-            background: 'currentColor',
-            display: 'inline-block',
-            flexShrink: 0,
-          }}
-        />
-      )}
+      {dot && <span className="inline-block w-[5px] h-[5px] rounded-full bg-current shrink-0" />}
       {children}
     </span>
   )

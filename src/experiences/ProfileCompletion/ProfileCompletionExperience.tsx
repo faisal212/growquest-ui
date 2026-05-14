@@ -8,66 +8,35 @@ export function ProfileCompletionExperience({ onComplete }: { onComplete: () => 
   const filled = [name.length > 0, bio.length > 0].filter(Boolean).length
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 24 }}>
+    <div className="flex flex-col gap-4 p-6">
       <Field
         label="Display name"
         placeholder="Your name"
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-        <span
-          style={{
-            fontFamily: 'var(--font-mono)',
-            fontSize: 10,
-            letterSpacing: '0.12em',
-            textTransform: 'uppercase',
-            color: 'var(--ink-dim)',
-          }}
-        >
-          Bio
-        </span>
+      <div className="flex flex-col gap-1.5">
+        <span className="font-mono text-[10px] tracking-[0.12em] uppercase text-ink-dim">Bio</span>
         <Textarea
           placeholder="Tell us about yourself…"
           value={bio}
           onChange={(e) => setBio(e.target.value)}
         />
       </div>
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: 8,
-          fontSize: 12,
-          color: 'var(--ink-dim)',
-        }}
-      >
-        <div
-          style={{
-            flex: 1,
-            height: 4,
-            background: 'var(--panel-2)',
-            borderRadius: 2,
-            overflow: 'hidden',
-          }}
-        >
+      <div className="flex items-center gap-2 text-xs text-ink-dim">
+        <div className="flex-1 h-1 bg-panel-2 rounded-sm overflow-hidden">
           <div
-            style={{
-              height: '100%',
-              width: `${(filled / 2) * 100}%`,
-              background: filled === 2 ? 'var(--accent-lime)' : 'var(--accent)',
-              transition: 'width 0.3s ease',
-              borderRadius: 2,
-            }}
+            className={`h-full rounded-sm transition-[width] duration-300 ease-out ${filled === 2 ? 'bg-accent-lime' : 'bg-accent'}`}
+            style={{ width: `${(filled / 2) * 100}%` }}
           />
         </div>
-        <span style={{ whiteSpace: 'nowrap' }}>{filled}/2 fields</span>
+        <span className="whitespace-nowrap">{filled}/2 fields</span>
       </div>
       <Button
         variant="primary"
         disabled={name.length === 0}
         onClick={onComplete}
-        style={{ width: '100%' }}
+        className="w-full"
       >
         Save profile
       </Button>

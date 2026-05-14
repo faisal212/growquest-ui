@@ -22,8 +22,8 @@ export function BrandLockup({
   version?: string
 }) {
   return (
-    <div className="brand-lockup">
-      <span className="logo">
+    <div className="flex items-center gap-2.5 font-display font-semibold text-lg tracking-[-0.02em] max-[720px]:text-base max-[420px]:[&_span:last-of-type]:text-sm">
+      <span className="inline-grid place-items-center w-7 h-7 max-[720px]:w-6 max-[720px]:h-6">
         <Logo />
       </span>
       <span>{name}</span>

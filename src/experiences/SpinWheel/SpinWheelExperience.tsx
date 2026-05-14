@@ -32,29 +32,15 @@ export function SpinWheelExperience({ onComplete }: { onComplete: () => void }) 
   const angle = (2 * Math.PI) / segCount
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        gap: 20,
-        padding: 24,
-      }}
-    >
-      <div style={{ position: 'relative', width: size, height: size }}>
+    <div className="flex flex-col items-center gap-5 p-6">
+      <div className="relative w-[240px] h-[240px]">
         {/* Pointer */}
         <div
+          className="absolute -top-2.5 left-1/2 -translate-x-1/2 w-0 h-0 z-10"
           style={{
-            position: 'absolute',
-            top: -10,
-            left: '50%',
-            transform: 'translateX(-50%)',
-            width: 0,
-            height: 0,
             borderLeft: '8px solid transparent',
             borderRight: '8px solid transparent',
             borderTop: '18px solid var(--accent)',
-            zIndex: 10,
           }}
         />
         <svg
@@ -114,18 +100,18 @@ export function SpinWheelExperience({ onComplete }: { onComplete: () => void }) 
       </div>
 
       {result && (
-        <div style={{ textAlign: 'center' }}>
-          <div style={{ fontSize: 13, color: 'var(--ink-dim)' }}>You got</div>
-          <div style={{ fontSize: 22, fontWeight: 700, color: 'var(--accent)' }}>{result}</div>
+        <div className="text-center">
+          <div className="text-[13px] text-ink-dim">You got</div>
+          <div className="text-[22px] font-bold text-accent">{result}</div>
         </div>
       )}
 
       {!result ? (
-        <Button variant="primary" disabled={spinning} onClick={spin} style={{ width: '100%' }}>
+        <Button variant="primary" disabled={spinning} onClick={spin} className="w-full">
           {spinning ? 'Spinning…' : 'Spin the wheel'}
         </Button>
       ) : (
-        <Button variant="primary" onClick={onComplete} style={{ width: '100%' }}>
+        <Button variant="primary" onClick={onComplete} className="w-full">
           Claim reward
         </Button>
       )}

@@ -32,7 +32,7 @@ export const LeaderboardTable = memo(function LeaderboardTable({
 }: LeaderboardTableProps) {
   const labels = { ...DEFAULT_LABELS, ...columnLabels }
   return (
-    <div className="panel" style={{ overflow: 'hidden' }}>
+    <div className="panel overflow-hidden">
       <div className="lb-head lb-row">
         <span>{labels.rank}</span>
         <span>{labels.handle}</span>
@@ -47,17 +47,17 @@ export const LeaderboardTable = memo(function LeaderboardTable({
           style={{ background: p.me ? 'var(--accent-soft)' : 'transparent' }}
         >
           <span
-            className="mono"
-            style={{ fontWeight: 700, color: p.rank <= 3 ? 'var(--accent)' : 'var(--ink)' }}
+            className="mono font-bold"
+            style={{ color: p.rank <= 3 ? 'var(--accent)' : 'var(--ink)' }}
           >
             {String(p.rank).padStart(2, '0')}
           </span>
           <span className="lb-identity">
             <Avatar seed={p.seed} size={28} />
-            <span style={{ fontWeight: 600, fontSize: 14 }}>{p.handle}</span>
+            <span className="font-semibold text-[14px]">{p.handle}</span>
             {p.me && <Tag tone="accent">YOU</Tag>}
           </span>
-          <span className="mono lb-streak" style={{ fontSize: 13, color: 'var(--accent-amber)' }}>
+          <span className="mono lb-streak text-[13px] text-accent-amber">
             {p.streak}
             {streakEmoji}
           </span>

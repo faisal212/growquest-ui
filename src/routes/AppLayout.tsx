@@ -74,42 +74,23 @@ export function AppLayout({
             </button>
           ))}
         </nav>
-        <div
-          className="topbar-actions"
-          style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}
-        >
-          <div
-            className="persona-switch"
-            style={{
-              display: 'flex',
-              gap: 4,
-              padding: 4,
-              background: 'var(--panel-2)',
-              border: '1px solid var(--border)',
-              borderRadius: 8,
-            }}
-          >
+        <div className="topbar-actions flex items-center gap-2 flex-wrap">
+          <div className="persona-switch flex gap-1 p-1 bg-panel-2 border border-border rounded-lg">
             {PERSONAS.map((k) => (
               <button
                 key={k}
                 onClick={() => onSetPersonaKey(k)}
-                style={{
-                  padding: '5px 10px',
-                  fontSize: 11,
-                  fontFamily: 'var(--font-mono)',
-                  letterSpacing: '0.08em',
-                  textTransform: 'uppercase',
-                  borderRadius: 5,
-                  background: personaKey === k ? 'var(--panel)' : 'transparent',
-                  color: personaKey === k ? 'var(--ink)' : 'var(--ink-dim)',
-                  border: personaKey === k ? '1px solid var(--border)' : '1px solid transparent',
-                }}
+                className={`px-2.5 py-[5px] text-[11px] font-mono tracking-[0.08em] uppercase rounded-[5px] border ${
+                  personaKey === k
+                    ? 'bg-panel text-ink border-border'
+                    : 'bg-transparent text-ink-dim border-transparent'
+                }`}
               >
                 {k}
               </button>
             ))}
           </div>
-          <Chip tone="accent" className="xp-chip-mobile-hide" style={{ fontWeight: 700 }}>
+          <Chip tone="accent" className="xp-chip-mobile-hide font-bold">
             <svg width="10" height="10" viewBox="0 0 10 10">
               <polygon
                 points="5,0 6.3,3.7 10,3.7 7,6 8.2,10 5,7.6 1.8,10 3,6 0,3.7 3.7,3.7"
@@ -121,15 +102,7 @@ export function AppLayout({
           <button
             onClick={onToggleTweaks}
             title="Toggle tweaks"
-            style={{
-              width: 32,
-              height: 32,
-              borderRadius: 6,
-              background: 'var(--panel-2)',
-              border: '1px solid var(--border)',
-              display: 'grid',
-              placeItems: 'center',
-            }}
+            className="w-8 h-8 rounded-md bg-panel-2 border border-border grid place-items-center"
           >
             <svg
               width="14"

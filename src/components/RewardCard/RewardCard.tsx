@@ -19,15 +19,10 @@ export const RewardCard = memo(function RewardCard({
   const tone = r.tone === 'accent' ? 'cyan' : r.tone
 
   return (
-    <div className="panel" style={{ overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+    <div className="panel overflow-hidden flex flex-col">
       <div
-        style={{
-          aspectRatio: compact ? '2 / 1' : '4 / 3',
-          position: 'relative',
-          background: 'var(--panel-2)',
-          borderBottom: '1px solid var(--border)',
-          overflow: 'hidden',
-        }}
+        className="relative bg-panel-2 border-b border-border overflow-hidden"
+        style={{ aspectRatio: compact ? '2 / 1' : '4 / 3' }}
       >
         {r.imageUrl ? (
           <img
@@ -36,33 +31,24 @@ export const RewardCard = memo(function RewardCard({
             width={400}
             height={300}
             loading="lazy"
-            style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+            className="w-full h-full object-cover block"
           />
         ) : (
           <>
             <div
+              className="absolute inset-0"
               style={{
-                position: 'absolute',
-                inset: 0,
                 backgroundImage: `repeating-linear-gradient(135deg, color-mix(in oklch, var(--accent-${tone}) 20%, transparent) 0 8px, transparent 8px 18px)`,
               }}
             />
-            <div style={{ position: 'absolute', inset: 0, display: 'grid', placeItems: 'center' }}>
+            <div className="absolute inset-0 grid place-items-center">
               <div
+                className="rounded-xl text-[#05060A] grid place-items-center font-bold font-mono tracking-[0.1em] uppercase shadow-[0_10px_30px_-10px_rgba(0,0,0,0.3)]"
                 style={{
                   width: compact ? 52 : 68,
                   height: compact ? 52 : 68,
-                  borderRadius: 12,
                   background: `var(--accent-${tone})`,
-                  color: '#05060A',
-                  display: 'grid',
-                  placeItems: 'center',
-                  fontWeight: 700,
-                  fontFamily: 'var(--font-mono)',
                   fontSize: compact ? 9 : 11,
-                  letterSpacing: '0.1em',
-                  textTransform: 'uppercase',
-                  boxShadow: '0 10px 30px -10px rgba(0,0,0,0.3)',
                 }}
               >
                 {r.kind.slice(0, 4)}
@@ -71,47 +57,24 @@ export const RewardCard = memo(function RewardCard({
           </>
         )}
         {r.limited && (
-          <div style={{ position: 'absolute', top: 10, left: 10 }}>
+          <div className="absolute top-2.5 left-2.5">
             <Tag tone="magenta">LIMITED</Tag>
           </div>
         )}
-        <div style={{ position: 'absolute', top: 10, right: 10 }}>
+        <div className="absolute top-2.5 right-2.5">
           <Tag>{r.stock}</Tag>
         </div>
       </div>
-      <div
-        style={{
-          padding: compact ? 10 : 14,
-          display: 'flex',
-          flexDirection: 'column',
-          gap: 8,
-          flex: 1,
-        }}
-      >
+      <div className="flex flex-col gap-2 flex-1" style={{ padding: compact ? 10 : 14 }}>
         <div>
-          <div style={{ fontWeight: 600, fontSize: compact ? 13 : 14 }}>{r.title}</div>
-          <div
-            style={{
-              fontSize: 11,
-              color: 'var(--ink-dim)',
-              fontFamily: 'var(--font-mono)',
-              textTransform: 'uppercase',
-              letterSpacing: '0.1em',
-              marginTop: 2,
-            }}
-          >
+          <div className="font-semibold" style={{ fontSize: compact ? 13 : 14 }}>
+            {r.title}
+          </div>
+          <div className="text-[11px] text-ink-dim font-mono uppercase tracking-[0.1em] mt-0.5">
             {r.kind}
           </div>
         </div>
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            gap: 8,
-            marginTop: 'auto',
-          }}
-        >
+        <div className="flex items-center justify-between gap-2 mt-auto">
           <XPPill amount={r.cost.toLocaleString()} />
           <Button variant="primary" size="sm" disabled={!canAfford} onClick={() => onRedeem(r)}>
             {canAfford ? 'Redeem' : 'Locked'}

@@ -30,35 +30,11 @@ export function ReadArticleExperience({
   const progress = opened ? Math.round(((60 - secondsLeft) / 60) * 100) : 0
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 20, padding: 24 }}>
-      <div
-        style={{
-          padding: 16,
-          background: 'var(--panel-2)',
-          border: '1px solid var(--border)',
-          borderRadius: 10,
-          display: 'flex',
-          flexDirection: 'column',
-          gap: 8,
-        }}
-      >
-        <div
-          style={{
-            fontSize: 12,
-            color: 'var(--ink-dim)',
-            fontFamily: 'var(--font-mono)',
-            textTransform: 'uppercase',
-            letterSpacing: '0.06em',
-          }}
-        >
-          Article
-        </div>
-        <div style={{ fontWeight: 600, fontSize: 15 }}>How XP &amp; Levels work in GrowQuest</div>
-        {url && (
-          <div style={{ fontSize: 12, color: 'var(--ink-dim)' }}>
-            {url.replace(/^https?:\/\//, '')}
-          </div>
-        )}
+    <div className="flex flex-col gap-5 p-6">
+      <div className="p-4 bg-panel-2 border border-border rounded-[10px] flex flex-col gap-2">
+        <div className="text-xs text-ink-dim font-mono uppercase tracking-[0.06em]">Article</div>
+        <div className="font-semibold text-[15px]">How XP &amp; Levels work in GrowQuest</div>
+        {url && <div className="text-xs text-ink-dim">{url.replace(/^https?:\/\//, '')}</div>}
       </div>
 
       {!opened ? (
@@ -68,40 +44,26 @@ export function ReadArticleExperience({
             if (url) window.open(url, '_blank')
             setOpened(true)
           }}
-          style={{ width: '100%' }}
+          className="w-full"
         >
           Open article ↗
         </Button>
       ) : (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              fontSize: 12,
-              color: 'var(--ink-dim)',
-            }}
-          >
+        <div className="flex flex-col gap-2">
+          <div className="flex justify-between text-xs text-ink-dim">
             <span>{done ? 'Reading complete!' : `Reading… ${secondsLeft}s remaining`}</span>
             <span>{progress}%</span>
           </div>
-          <div
-            style={{ height: 4, background: 'var(--panel-2)', borderRadius: 2, overflow: 'hidden' }}
-          >
+          <div className="h-1 bg-panel-2 rounded-sm overflow-hidden">
             <div
-              style={{
-                height: '100%',
-                width: `${progress}%`,
-                background: 'var(--accent)',
-                transition: 'width 1s linear',
-                borderRadius: 2,
-              }}
+              className="h-full bg-accent rounded-sm transition-[width] duration-1000 ease-linear"
+              style={{ width: `${progress}%` }}
             />
           </div>
         </div>
       )}
 
-      <Button variant="primary" disabled={!done} onClick={onComplete} style={{ width: '100%' }}>
+      <Button variant="primary" disabled={!done} onClick={onComplete} className="w-full">
         Mark as read
       </Button>
     </div>

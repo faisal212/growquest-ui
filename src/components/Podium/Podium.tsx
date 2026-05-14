@@ -22,88 +22,34 @@ export function Podium({ entries, rankColors, platformHeights }: PodiumProps) {
   const display = [top3[1], top3[0], top3[2]].filter(Boolean)
 
   return (
-    <div
-      style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 14, marginBottom: 28 }}
-    >
+    <div className="grid grid-cols-3 gap-3.5 mb-7">
       {display.map((p) => {
         const color = colors[p.rank] ?? 'var(--accent)'
         const height = heights[p.rank] ?? 120
         return (
-          <div
-            key={p.rank}
-            style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10 }}
-          >
-            <div style={{ position: 'relative' }}>
+          <div key={p.rank} className="flex flex-col items-center gap-2.5">
+            <div className="relative">
               <Avatar seed={p.seed} size={56} />
               <div
-                style={{
-                  position: 'absolute',
-                  bottom: -6,
-                  right: -6,
-                  width: 22,
-                  height: 22,
-                  borderRadius: 5,
-                  background: color,
-                  color: '#05060A',
-                  display: 'grid',
-                  placeItems: 'center',
-                  fontFamily: 'var(--font-mono)',
-                  fontSize: 11,
-                  fontWeight: 700,
-                  border: '2px solid var(--bg)',
-                }}
+                className="absolute -bottom-1.5 -right-1.5 w-[22px] h-[22px] rounded-[5px] text-[#05060A] grid place-items-center font-mono text-[11px] font-bold border-2 border-bg"
+                style={{ background: color }}
               >
                 {p.rank}
               </div>
             </div>
-            <div
-              style={{
-                fontWeight: 700,
-                fontSize: 14,
-                maxWidth: '100%',
-                overflow: 'hidden',
-                textOverflow: 'ellipsis',
-                whiteSpace: 'nowrap',
-              }}
-            >
+            <div className="font-bold text-[14px] max-w-full overflow-hidden text-ellipsis whitespace-nowrap">
               {p.handle}
             </div>
-            <div className="mono" style={{ fontSize: 12, color: 'var(--ink-dim)' }}>
-              {p.xp.toLocaleString()} XP
-            </div>
+            <div className="mono text-[12px] text-ink-dim">{p.xp.toLocaleString()} XP</div>
             <div
+              className="w-full rounded-t-lg border border-border border-b-0 relative overflow-hidden"
               style={{
-                width: '100%',
                 height,
                 background: `linear-gradient(180deg, ${color} 0%, transparent 100%)`,
-                borderTopLeftRadius: 8,
-                borderTopRightRadius: 8,
-                border: '1px solid var(--border)',
-                borderBottom: 'none',
-                position: 'relative',
-                overflow: 'hidden',
               }}
             >
-              <div
-                style={{
-                  position: 'absolute',
-                  inset: 0,
-                  backgroundImage:
-                    'repeating-linear-gradient(0deg, transparent 0 8px, rgba(0,0,0,0.12) 8px 9px)',
-                }}
-              />
-              <div
-                style={{
-                  position: 'absolute',
-                  top: 10,
-                  left: 10,
-                  fontFamily: 'var(--font-mono)',
-                  fontSize: 28,
-                  fontWeight: 700,
-                  color: '#05060A',
-                  opacity: 0.8,
-                }}
-              >
+              <div className="absolute inset-0 bg-[repeating-linear-gradient(0deg,transparent_0_8px,rgba(0,0,0,0.12)_8px_9px)]" />
+              <div className="absolute top-2.5 left-2.5 font-mono text-[28px] font-bold text-[#05060A] opacity-80">
                 {String(p.rank).padStart(2, '0')}
               </div>
             </div>

@@ -13,7 +13,7 @@ export function XPBar({ value, max, style = 'segmented', segments = 10, label }:
     return (
       <div>
         {label && (
-          <div className="xpbar-label">
+          <div className="flex justify-between mb-1.5 font-mono text-[11px] text-ink-dim">
             <span>{label}</span>
             <span>
               {value}/{max}
@@ -32,7 +32,7 @@ export function XPBar({ value, max, style = 'segmented', segments = 10, label }:
     return (
       <div>
         {label && (
-          <div className="xpbar-label">
+          <div className="flex justify-between mb-1.5 font-mono text-[11px] text-ink-dim">
             <span>{label}</span>
             <span>
               {value}/{max}
@@ -52,7 +52,7 @@ export function XPBar({ value, max, style = 'segmented', segments = 10, label }:
     const r = 30,
       c = 2 * Math.PI * r
     return (
-      <div style={{ display: 'inline-flex', alignItems: 'center', gap: 12 }}>
+      <div className="inline-flex items-center gap-3">
         <svg width="80" height="80" viewBox="0 0 80 80">
           <circle cx="40" cy="40" r={r} fill="none" stroke="var(--panel-2)" strokeWidth="6" />
           <circle
@@ -85,18 +85,10 @@ export function XPBar({ value, max, style = 'segmented', segments = 10, label }:
         </svg>
         {label && (
           <div>
-            <div
-              style={{
-                fontFamily: 'var(--font-mono)',
-                fontSize: 10,
-                letterSpacing: '0.1em',
-                textTransform: 'uppercase',
-                color: 'var(--ink-dim)',
-              }}
-            >
+            <div className="font-mono text-[10px] tracking-[0.1em] uppercase text-ink-dim">
               {label}
             </div>
-            <div style={{ fontFamily: 'var(--font-mono)', fontSize: 14, fontWeight: 700 }}>
+            <div className="font-mono text-sm font-bold">
               {value}/{max}
             </div>
           </div>
@@ -109,44 +101,23 @@ export function XPBar({ value, max, style = 'segmented', segments = 10, label }:
   return (
     <div>
       {label && (
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            marginBottom: 6,
-            fontFamily: 'var(--font-mono)',
-            fontSize: 11,
-            color: 'var(--ink-dim)',
-          }}
-        >
+        <div className="flex justify-between mb-1.5 font-mono text-[11px] text-ink-dim">
           <span>{label}</span>
           <span>
             {value}/{max}
           </span>
         </div>
       )}
-      <div
-        style={{
-          position: 'relative',
-          height: 14,
-          border: '1px solid var(--border)',
-          borderRadius: 3,
-          background: 'var(--panel-2)',
-          overflow: 'hidden',
-        }}
-      >
+      <div className="relative h-3.5 border border-border rounded-[3px] bg-panel-2 overflow-hidden">
         <div
+          className="absolute inset-0.5 rounded-sm"
           style={{
-            position: 'absolute',
-            inset: 2,
             background: `linear-gradient(90deg, var(--accent) 0%, var(--accent) ${pct * 100}%, transparent ${pct * 100}%)`,
-            borderRadius: 2,
           }}
         />
         <div
+          className="absolute inset-0"
           style={{
-            position: 'absolute',
-            inset: 0,
             backgroundImage:
               'repeating-linear-gradient(90deg, transparent 0 9px, color-mix(in oklch, var(--bg) 60%, transparent) 9px 10px)',
           }}

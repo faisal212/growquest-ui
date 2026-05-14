@@ -57,26 +57,18 @@ export function SurveyExperience({
 
   if (variant === 'textarea') {
     return (
-      <div style={{ padding: 24, display: 'flex', flexDirection: 'column', gap: 16 }}>
+      <div className="p-6 flex flex-col gap-4">
         <Eyebrow>// survey · open question</Eyebrow>
-        <div style={{ fontSize: 17, fontWeight: 600, lineHeight: 1.4 }}>
+        <div className="text-[17px] font-semibold leading-snug">
           What's the single biggest pain point in your growth stack right now?
         </div>
         <Textarea
           value={text}
           onChange={(e) => setText(e.target.value)}
           placeholder={`Type your answer… (minimum ${textMinLength} characters)`}
-          style={{ minHeight: 180 }}
+          className="min-h-[180px]"
         />
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            fontFamily: 'var(--font-mono)',
-            fontSize: 11,
-            color: 'var(--ink-dim)',
-          }}
-        >
+        <div className="flex justify-between font-mono text-[11px] text-ink-dim">
           <span>{text.length} chars</span>
           <span>
             {text.length >= textMinLength
@@ -95,35 +87,22 @@ export function SurveyExperience({
     variant === 'text' ? SURVEY_TEXT : variant === 'textImage' ? SURVEY_TEXTIMG : SURVEY_IMGONLY
 
   return (
-    <div style={{ padding: 24, display: 'flex', flexDirection: 'column', gap: 16 }}>
+    <div className="p-6 flex flex-col gap-4">
       <Eyebrow>// survey · your take helps shape the roadmap</Eyebrow>
-      <div style={{ fontSize: 17, fontWeight: 600, lineHeight: 1.4 }}>{data.q}</div>
+      <div className="text-[17px] font-semibold leading-snug">{data.q}</div>
 
       {variant === 'text' && (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+        <div className="flex flex-col gap-2">
           {data.choices.map((c) => {
             const isPick = pick === c.id
             return (
               <ChoiceShell key={c.id} selected={isPick} onClick={() => setPick(c.id)} layout="row">
                 <span
-                  style={{
-                    width: 18,
-                    height: 18,
-                    borderRadius: 99,
-                    border: '2px solid var(--border)',
-                    borderColor: isPick ? 'var(--accent)' : 'var(--border)',
-                    display: 'grid',
-                    placeItems: 'center',
-                    flexShrink: 0,
-                  }}
+                  className={`w-[18px] h-[18px] rounded-full border-2 grid place-items-center shrink-0 ${isPick ? 'border-accent' : 'border-border'}`}
                 >
-                  {isPick && (
-                    <span
-                      style={{ width: 8, height: 8, borderRadius: 99, background: 'var(--accent)' }}
-                    />
-                  )}
+                  {isPick && <span className="w-2 h-2 rounded-full bg-accent" />}
                 </span>
-                <span style={{ flex: 1, fontSize: 14 }}>{c.label}</span>
+                <span className="flex-1 text-sm">{c.label}</span>
               </ChoiceShell>
             )
           })}
@@ -131,7 +110,7 @@ export function SurveyExperience({
       )}
 
       {variant === 'textImage' && (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 10 }}>
+        <div className="grid grid-cols-2 gap-2.5">
           {data.choices.map((c) => {
             const isPick = pick === c.id
             return (
@@ -141,13 +120,13 @@ export function SurveyExperience({
                 onClick={() => setPick(c.id)}
                 layout="column"
               >
-                <div style={{ aspectRatio: '16/10', borderRadius: 6, overflow: 'hidden' }}>
+                <div className="aspect-[16/10] rounded-md overflow-hidden">
                   <ShapeArt
                     shape={['hex', 'circle', 'diamond', 'square'][c.id.charCodeAt(0) - 97]}
                     tint={c.tint!}
                   />
                 </div>
-                <div style={{ textAlign: 'left', fontSize: 13 }}>{c.label}</div>
+                <div className="text-left text-[13px]">{c.label}</div>
               </ChoiceShell>
             )
           })}
@@ -155,7 +134,7 @@ export function SurveyExperience({
       )}
 
       {variant === 'imageOnly' && (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 10 }}>
+        <div className="grid grid-cols-2 gap-2.5">
           {data.choices.map((c) => {
             const isPick = pick === c.id
             return (
@@ -165,7 +144,7 @@ export function SurveyExperience({
                 onClick={() => setPick(c.id)}
                 layout="column"
               >
-                <div style={{ aspectRatio: '1/1' }}>
+                <div className="aspect-square">
                   <ShapeArt shape={c.shape!} tint={c.tint!} />
                 </div>
               </ChoiceShell>

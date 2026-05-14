@@ -16,26 +16,16 @@ export function PhotoProofExperience({ onComplete }: { onComplete: () => void })
 
   if (submitted) {
     return (
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          gap: 20,
-          padding: '32px 24px',
-        }}
-      >
-        <div style={{ fontSize: 48 }}>⏳</div>
-        <div style={{ textAlign: 'center' }}>
-          <div style={{ fontWeight: 600, fontSize: 15, marginBottom: 6 }}>
-            Photo submitted — pending review
-          </div>
-          <div style={{ fontSize: 13, color: 'var(--ink-dim)', lineHeight: 1.5 }}>
+      <div className="flex flex-col items-center gap-5 py-8 px-6">
+        <div className="text-[48px]">⏳</div>
+        <div className="text-center">
+          <div className="font-semibold text-[15px] mb-1.5">Photo submitted — pending review</div>
+          <div className="text-[13px] text-ink-dim leading-normal">
             Our team will review your photo and approve it within 24h. You'll be notified when XP is
             credited.
           </div>
         </div>
-        <Button variant="primary" onClick={onComplete} style={{ width: '100%' }}>
+        <Button variant="primary" onClick={onComplete} className="w-full">
           Got it
         </Button>
       </div>
@@ -43,46 +33,32 @@ export function PhotoProofExperience({ onComplete }: { onComplete: () => void })
   }
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 24 }}>
+    <div className="flex flex-col gap-4 p-6">
       <input
         ref={inputRef}
         type="file"
         accept="image/*"
         capture="environment"
-        style={{ display: 'none' }}
+        className="hidden"
         onChange={(e) => {
           if (e.target.files?.[0]) handleFile(e.target.files[0])
         }}
       />
 
       {preview ? (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+        <div className="flex flex-col gap-2.5">
           <img
             src={preview}
             alt="Proof"
-            style={{
-              width: '100%',
-              maxHeight: 220,
-              objectFit: 'cover',
-              borderRadius: 8,
-              border: '1px solid var(--border)',
-            }}
+            className="w-full max-h-[220px] object-cover rounded-lg border border-border"
           />
-          <div style={{ fontSize: 12, color: 'var(--ink-dim)' }}>{fileName}</div>
+          <div className="text-xs text-ink-dim">{fileName}</div>
           <button
             onClick={() => {
               setPreview(null)
               setFileName(null)
             }}
-            style={{
-              background: 'none',
-              border: 'none',
-              cursor: 'pointer',
-              fontSize: 12,
-              color: 'var(--ink-dim)',
-              textDecoration: 'underline',
-              textAlign: 'left',
-            }}
+            className="bg-transparent border-none cursor-pointer text-xs text-ink-dim underline text-left"
           >
             Change photo
           </button>
@@ -100,19 +76,11 @@ export function PhotoProofExperience({ onComplete }: { onComplete: () => void })
             e.preventDefault()
             if (e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0])
           }}
-          style={{
-            border: '2px dashed var(--border)',
-            borderRadius: 10,
-            padding: '36px 16px',
-            textAlign: 'center',
-            cursor: 'pointer',
-            color: 'var(--ink-dim)',
-            fontSize: 13,
-          }}
+          className="border-2 border-dashed border-border rounded-[10px] py-9 px-4 text-center cursor-pointer text-ink-dim text-[13px]"
         >
-          <div style={{ fontSize: 32, marginBottom: 8 }}>📸</div>
-          <div style={{ fontWeight: 500, marginBottom: 4 }}>Upload photo proof</div>
-          <div style={{ fontSize: 11 }}>Click to snap or choose a file · JPG, PNG</div>
+          <div className="text-[32px] mb-2">📸</div>
+          <div className="font-medium mb-1">Upload photo proof</div>
+          <div className="text-[11px]">Click to snap or choose a file · JPG, PNG</div>
         </div>
       )}
 
@@ -120,7 +88,7 @@ export function PhotoProofExperience({ onComplete }: { onComplete: () => void })
         variant="primary"
         disabled={!preview}
         onClick={() => setSubmitted(true)}
-        style={{ width: '100%' }}
+        className="w-full"
       >
         Submit for review
       </Button>

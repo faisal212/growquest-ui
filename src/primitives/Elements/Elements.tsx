@@ -2,17 +2,9 @@ import { useState, useEffect } from 'react'
 
 export function Eyebrow({ children, dot }: { children: React.ReactNode; dot?: boolean }) {
   return (
-    <div className="eyebrow">
+    <div className="inline-flex items-center gap-2 font-mono text-[11px] tracking-[0.16em] uppercase text-ink-dim">
       {dot !== false && (
-        <span
-          style={{
-            width: 6,
-            height: 6,
-            background: 'var(--accent)',
-            borderRadius: 99,
-            boxShadow: '0 0 8px var(--accent)',
-          }}
-        />
+        <span className="w-1.5 h-1.5 bg-accent rounded-full shadow-[0_0_8px_var(--accent)]" />
       )}
       {children}
     </div>
@@ -20,45 +12,23 @@ export function Eyebrow({ children, dot }: { children: React.ReactNode; dot?: bo
 }
 
 export function Tag({ children, tone = 'default' }: { children: React.ReactNode; tone?: string }) {
-  const styles: Record<string, React.CSSProperties> = {
-    default: {
-      color: 'var(--ink-dim)',
-      borderColor: 'var(--border)',
-      background: 'var(--panel-2)',
-    },
-    accent: {
-      color: 'var(--accent)',
-      borderColor: 'color-mix(in oklch, var(--accent) 40%, transparent)',
-      background: 'var(--accent-soft)',
-    },
-    lime: {
-      color: 'var(--accent-lime)',
-      borderColor: 'color-mix(in oklch, var(--accent-lime) 40%, transparent)',
-      background: 'color-mix(in oklch, var(--accent-lime) 14%, transparent)',
-    },
-    magenta: {
-      color: 'var(--accent-magenta)',
-      borderColor: 'color-mix(in oklch, var(--accent-magenta) 40%, transparent)',
-      background: 'color-mix(in oklch, var(--accent-magenta) 14%, transparent)',
-    },
-    amber: {
-      color: 'var(--accent-amber)',
-      borderColor: 'color-mix(in oklch, var(--accent-amber) 40%, transparent)',
-      background: 'color-mix(in oklch, var(--accent-amber) 14%, transparent)',
-    },
-    ghost: { color: 'var(--ink-dim)', borderColor: 'var(--border)', background: 'transparent' },
+  const toneClasses: Record<string, string> = {
+    default: 'text-ink-dim border-border bg-panel-2',
+    accent: 'text-accent border-[color-mix(in_oklch,var(--accent)_40%,transparent)] bg-accent-soft',
+    lime: 'text-accent-lime border-[color-mix(in_oklch,var(--accent-lime)_40%,transparent)] bg-[color-mix(in_oklch,var(--accent-lime)_14%,transparent)]',
+    magenta:
+      'text-accent-magenta border-[color-mix(in_oklch,var(--accent-magenta)_40%,transparent)] bg-[color-mix(in_oklch,var(--accent-magenta)_14%,transparent)]',
+    amber:
+      'text-accent-amber border-[color-mix(in_oklch,var(--accent-amber)_40%,transparent)] bg-[color-mix(in_oklch,var(--accent-amber)_14%,transparent)]',
+    ghost: 'text-ink-dim border-border bg-transparent',
   }
-  const s = styles[tone] ?? styles.default
-  return (
-    <span className="chip" style={s}>
-      {children}
-    </span>
-  )
+  const cls = toneClasses[tone] ?? toneClasses.default
+  return <span className={`chip ${cls}`}>{children}</span>
 }
 
 export function XPPill({ amount, icon = true }: { amount: number | string; icon?: boolean }) {
   return (
-    <span className="chip accent xp-pill">
+    <span className="chip accent gap-1.5 font-semibold">
       {icon && (
         <svg width="10" height="10" viewBox="0 0 10 10">
           <polygon
@@ -89,7 +59,7 @@ export function Countdown({ endsAt }: { endsAt: number }) {
     .toString()
     .padStart(2, '0')
   return (
-    <span className="mono" style={{ color: 'var(--accent-magenta)' }}>
+    <span className="mono text-accent-magenta">
       {h}:{m}:{s}
     </span>
   )
@@ -124,10 +94,14 @@ export function Sparkline({
 
 export function Divider({ label }: { label?: string }) {
   return (
-    <div className="divider">
-      <div className="divider-line" />
-      {label && <span className="eyebrow">{label}</span>}
-      <div className="divider-line" />
+    <div className="flex items-center gap-3 my-5">
+      <div className="flex-1 h-px bg-border" />
+      {label && (
+        <span className="inline-flex items-center gap-2 font-mono text-[11px] tracking-[0.16em] uppercase text-ink-dim">
+          {label}
+        </span>
+      )}
+      <div className="flex-1 h-px bg-border" />
     </div>
   )
 }

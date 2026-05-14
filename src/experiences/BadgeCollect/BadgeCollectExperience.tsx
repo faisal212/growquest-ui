@@ -23,82 +23,52 @@ export function BadgeCollectExperience({
   const done = earnedCount >= goal
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 24 }}>
+    <div className="flex flex-col gap-4 p-6">
       {/* Progress */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            fontSize: 12,
-            color: 'var(--ink-dim)',
-          }}
-        >
+      <div className="flex flex-col gap-1.5">
+        <div className="flex justify-between text-xs text-ink-dim">
           <span>Badges collected</span>
-          <span style={{ color: done ? 'var(--accent-lime)' : 'var(--ink)' }}>
+          <span className={done ? 'text-accent-lime' : 'text-ink'}>
             {earnedCount}/{goal}
           </span>
         </div>
-        <div
-          style={{ height: 6, background: 'var(--panel-2)', borderRadius: 3, overflow: 'hidden' }}
-        >
+        <div className="h-1.5 bg-panel-2 rounded-[3px] overflow-hidden">
           <div
+            className={`h-full rounded-[3px] transition-[width] duration-[400ms] ease-out ${done ? 'bg-accent-lime' : 'bg-accent'}`}
             style={{
-              height: '100%',
               width: `${Math.min(100, (earnedCount / goal) * 100)}%`,
-              background: done ? 'var(--accent-lime)' : 'var(--accent)',
-              transition: 'width 0.4s ease',
-              borderRadius: 3,
             }}
           />
         </div>
       </div>
 
       {/* Badge grid */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
+      <div className="grid grid-cols-2 gap-2">
         {badges.map((badge) => (
           <div
             key={badge.id}
-            style={{
-              padding: 12,
-              background: 'var(--panel-2)',
-              border: `1px ${badge.got ? 'solid' : 'dashed'} ${badge.got ? 'var(--accent)' : 'var(--border)'}`,
-              borderRadius: 8,
-              opacity: badge.got ? 1 : 0.45,
-              display: 'flex',
-              flexDirection: 'column',
-              gap: 4,
-            }}
+            className={`p-3 bg-panel-2 rounded-lg flex flex-col gap-1 border ${badge.got ? 'border-solid border-accent opacity-100' : 'border-dashed border-border opacity-45'}`}
           >
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <span style={{ fontSize: 18 }}>🏅</span>
+            <div className="flex justify-between items-center">
+              <span className="text-[18px]">🏅</span>
               {badge.got && (
-                <span
-                  style={{
-                    fontSize: 10,
-                    background: 'var(--accent)',
-                    color: '#05060A',
-                    padding: '1px 6px',
-                    borderRadius: 4,
-                    fontWeight: 700,
-                  }}
-                >
+                <span className="text-[10px] text-[#05060A] bg-accent py-px px-1.5 rounded-[4px] font-bold">
                   ✓
                 </span>
               )}
             </div>
-            <div style={{ fontSize: 12, fontWeight: 600 }}>{badge.name}</div>
+            <div className="text-xs font-semibold">{badge.name}</div>
           </div>
         ))}
       </div>
 
       {!done && (
-        <div style={{ fontSize: 12, color: 'var(--ink-dim)', textAlign: 'center' }}>
+        <div className="text-xs text-ink-dim text-center">
           Keep completing missions to earn more badges
         </div>
       )}
 
-      <Button variant="primary" disabled={!done} onClick={onComplete} style={{ width: '100%' }}>
+      <Button variant="primary" disabled={!done} onClick={onComplete} className="w-full">
         {done
           ? 'Claim XP'
           : `Earn ${goal - earnedCount} more badge${goal - earnedCount !== 1 ? 's' : ''}`}

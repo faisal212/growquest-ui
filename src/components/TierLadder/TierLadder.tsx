@@ -10,48 +10,36 @@ export function TierLadder({ tiers, currentXP }: TierLadderProps) {
   const currentTier = [...tiers].reverse().find((t) => currentXP >= t.min) ?? tiers[0]
 
   return (
-    <div className="panel" style={{ padding: 20 }}>
-      <div className="mono-label" style={{ marginBottom: 14 }}>
+    <div className="panel p-5">
+      <div className="font-mono text-[10px] tracking-[0.12em] uppercase text-ink-dim mb-3.5">
         // tier ladder
       </div>
-      <div
-        style={{ display: 'grid', gridTemplateColumns: `repeat(${tiers.length}, 1fr)`, gap: 10 }}
-      >
+      <div className="grid gap-2.5" style={{ gridTemplateColumns: `repeat(${tiers.length}, 1fr)` }}>
         {tiers.map((t, i) => {
           const isCurrent = currentTier.name === t.name
           const isPast = currentXP >= t.min
           return (
             <div
               key={t.name}
+              className="p-3.5 rounded-[10px] border"
               style={{
-                padding: 14,
-                borderRadius: 10,
-                border: isCurrent ? `1px solid ${t.color}` : '1px solid var(--border)',
+                borderColor: isCurrent ? t.color : 'var(--border)',
                 background: isCurrent
                   ? `color-mix(in oklch, ${t.color} 12%, transparent)`
                   : 'var(--panel-2)',
                 opacity: isPast || isCurrent ? 1 : 0.5,
               }}
             >
-              <div className="mono-label">tier {String(i + 1).padStart(2, '0')}</div>
+              <div className="font-mono text-[10px] tracking-[0.12em] uppercase text-ink-dim">
+                tier {String(i + 1).padStart(2, '0')}
+              </div>
               <div
-                style={{
-                  fontWeight: 700,
-                  fontSize: 16,
-                  marginTop: 4,
-                  color: isCurrent ? t.color : 'var(--ink)',
-                }}
+                className="font-bold text-[16px] mt-1"
+                style={{ color: isCurrent ? t.color : 'var(--ink)' }}
               >
                 {t.name}
               </div>
-              <div
-                style={{
-                  fontFamily: 'var(--font-mono)',
-                  fontSize: 11,
-                  color: 'var(--ink-dim)',
-                  marginTop: 2,
-                }}
-              >
+              <div className="font-mono text-[11px] text-ink-dim mt-0.5">
                 {t.min.toLocaleString()}+ XP
               </div>
             </div>

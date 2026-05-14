@@ -49,9 +49,7 @@ export function TweaksPanel({ tweaks, setTweaks, visible }: TweaksPanelProps) {
     <div className="tweaks">
       <header>
         <span className="title">⚙ Tweaks</span>
-        <span style={{ fontFamily: 'var(--font-mono)', fontSize: 10, color: 'var(--ink-faint)' }}>
-          live
-        </span>
+        <span className="font-mono text-[10px] text-ink-faint">live</span>
       </header>
       {sections.map((s) => (
         <div key={s.key} className="row">
@@ -65,15 +63,8 @@ export function TweaksPanel({ tweaks, setTweaks, visible }: TweaksPanelProps) {
               >
                 {s.key === 'accent' && (
                   <span
-                    style={{
-                      display: 'inline-block',
-                      width: 8,
-                      height: 8,
-                      borderRadius: 2,
-                      background: ACCENTS[opt],
-                      marginRight: 4,
-                      verticalAlign: 'middle',
-                    }}
+                    className="inline-block w-2 h-2 rounded-[2px] mr-1 align-middle"
+                    style={{ background: ACCENTS[opt] }}
                   />
                 )}
                 {opt}

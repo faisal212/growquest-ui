@@ -12,9 +12,11 @@ export function InviteExperience({ onComplete }: { onComplete: () => void }) {
     setEmail('')
   }
 
+  const valid = email.includes('@')
+
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 24 }}>
-      <div style={{ display: 'flex', gap: 8 }}>
+    <div className="flex flex-col gap-4 p-6">
+      <div className="flex gap-2">
         <Input
           type="email"
           placeholder="friend@example.com"
@@ -23,65 +25,31 @@ export function InviteExperience({ onComplete }: { onComplete: () => void }) {
           onKeyDown={(e) => {
             if (e.key === 'Enter') sendInvite()
           }}
-          style={{ flex: 1 }}
+          className="flex-1"
         />
         <button
           onClick={sendInvite}
-          disabled={!email.includes('@')}
-          style={{
-            padding: '0 16px',
-            borderRadius: 8,
-            border: '1px solid var(--border)',
-            background: email.includes('@') ? 'var(--accent)' : 'var(--panel-2)',
-            color: email.includes('@') ? '#05060A' : 'var(--ink-dim)',
-            fontSize: 12,
-            fontWeight: 700,
-            cursor: email.includes('@') ? 'pointer' : 'not-allowed',
-            whiteSpace: 'nowrap',
-            transition: 'all 0.15s',
-          }}
+          disabled={!valid}
+          className={`py-0 px-4 rounded-lg border border-border text-xs font-bold whitespace-nowrap transition-all duration-150 ${valid ? 'bg-accent cursor-pointer' : 'bg-panel-2 text-ink-dim cursor-not-allowed'}`}
+          style={valid ? { color: '#05060A' } : undefined}
         >
           Send
         </button>
       </div>
 
       {sent.length === 0 ? (
-        <div
-          style={{ fontSize: 12, color: 'var(--ink-dim)', textAlign: 'center', padding: '12px 0' }}
-        >
-          No invites sent yet
-        </div>
+        <div className="text-xs text-ink-dim text-center py-3 px-0">No invites sent yet</div>
       ) : (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+        <div className="flex flex-col gap-1.5">
           {sent.map((e, i) => (
             <div
               key={i}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: 8,
-                padding: '6px 10px',
-                background: 'var(--panel-2)',
-                borderRadius: 6,
-                fontSize: 12,
-              }}
+              className="flex items-center gap-2 py-1.5 px-2.5 bg-panel-2 rounded-md text-xs"
             >
-              <span
-                style={{
-                  width: 16,
-                  height: 16,
-                  borderRadius: '50%',
-                  background: 'var(--accent-lime, #84cc16)',
-                  display: 'grid',
-                  placeItems: 'center',
-                  fontSize: 9,
-                  fontWeight: 700,
-                  color: '#05060A',
-                }}
-              >
+              <span className="w-4 h-4 rounded-full bg-accent-lime text-[#05060A] grid place-items-center text-[9px] font-bold">
                 ✓
               </span>
-              <span style={{ color: 'var(--ink)', flex: 1 }}>{e}</span>
+              <span className="text-ink flex-1">{e}</span>
             </div>
           ))}
         </div>
@@ -91,7 +59,7 @@ export function InviteExperience({ onComplete }: { onComplete: () => void }) {
         variant="primary"
         disabled={sent.length === 0}
         onClick={onComplete}
-        style={{ width: '100%' }}
+        className="w-full"
       >
         {sent.length === 0
           ? 'Send at least 1 invite'

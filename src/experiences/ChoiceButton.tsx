@@ -39,21 +39,16 @@ export function ChoiceShell({
         ? 'var(--accent-soft)'
         : 'var(--panel-2)'
 
+  const layoutCls =
+    layout === 'row'
+      ? 'py-3.5 px-4 rounded-lg flex flex-row items-center gap-3'
+      : 'p-2.5 rounded-[10px] flex flex-col gap-2'
   return (
     <button
       disabled={disabled}
       onClick={onClick}
-      style={{
-        textAlign: 'left',
-        padding: layout === 'row' ? '14px 16px' : 10,
-        borderRadius: layout === 'row' ? 8 : 10,
-        border: `1px solid ${border}`,
-        background: bg,
-        display: 'flex',
-        flexDirection: layout === 'column' ? 'column' : 'row',
-        alignItems: layout === 'row' ? 'center' : undefined,
-        gap: layout === 'row' ? 12 : 8,
-      }}
+      className={`text-left border ${layoutCls}`}
+      style={{ borderColor: border, background: bg }}
     >
       {children}
     </button>

@@ -35,26 +35,12 @@ export function VideoExperience({ url, onComplete }: { url: string; onComplete: 
   }, [parsed.kind])
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 24 }}>
-      <div
-        style={{
-          position: 'relative',
-          paddingBottom: '56.25%',
-          background: 'var(--panel-2)',
-          borderRadius: 8,
-          overflow: 'hidden',
-        }}
-      >
+    <div className="flex flex-col gap-4 p-6">
+      <div className="relative pb-[56.25%] bg-panel-2 rounded-lg overflow-hidden">
         {parsed.kind === 'youtube' && (
           <iframe
             title="YouTube video player"
-            style={{
-              position: 'absolute',
-              inset: 0,
-              width: '100%',
-              height: '100%',
-              border: 'none',
-            }}
+            className="absolute inset-0 w-full h-full border-none"
             src={`https://www.youtube.com/embed/${parsed.id}?autoplay=1`}
             allow="autoplay; encrypted-media"
             allowFullScreen
@@ -63,13 +49,7 @@ export function VideoExperience({ url, onComplete }: { url: string; onComplete: 
         {parsed.kind === 'vimeo' && (
           <iframe
             title="Vimeo video player"
-            style={{
-              position: 'absolute',
-              inset: 0,
-              width: '100%',
-              height: '100%',
-              border: 'none',
-            }}
+            className="absolute inset-0 w-full h-full border-none"
             src={`https://player.vimeo.com/video/${parsed.id}?autoplay=1`}
             allow="autoplay; fullscreen"
             allowFullScreen
@@ -77,7 +57,7 @@ export function VideoExperience({ url, onComplete }: { url: string; onComplete: 
         )}
         {parsed.kind === 'native' && (
           <video
-            style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}
+            className="absolute inset-0 w-full h-full"
             src={url}
             controls
             onEnded={() => setReady(true)}
@@ -87,11 +67,9 @@ export function VideoExperience({ url, onComplete }: { url: string; onComplete: 
         )}
       </div>
       {parsed.kind !== 'native' && !ready && (
-        <div style={{ fontSize: 12, color: 'var(--ink-dim)', textAlign: 'center' }}>
-          Button available in {countdown}s
-        </div>
+        <div className="text-xs text-ink-dim text-center">Button available in {countdown}s</div>
       )}
-      <Button variant="primary" disabled={!ready} onClick={onComplete} style={{ width: '100%' }}>
+      <Button variant="primary" disabled={!ready} onClick={onComplete} className="w-full">
         I've watched it
       </Button>
     </div>

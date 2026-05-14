@@ -35,17 +35,12 @@ export function CelebrationScreen({
   }, [])
 
   return createPortal(
-    <div
-      className="fade-in fixed inset-0 z-[90] grid place-items-center overflow-hidden backdrop-blur"
-      style={{ background: 'color-mix(in oklch, var(--bg) 92%, transparent)' }}
-    >
+    <div className="animate-fade-in fixed inset-0 z-[90] grid place-items-center overflow-hidden backdrop-blur bg-[color-mix(in_oklch,var(--bg)_92%,transparent)]">
       {PARTICLES.map((p, i) => (
         <div
           key={i}
+          className="absolute w-2 h-2"
           style={{
-            position: 'absolute',
-            width: 8,
-            height: 8,
             borderRadius: i % 2 ? 0 : 2,
             background: COLORS[i % 4],
             transform:
@@ -58,23 +53,19 @@ export function CelebrationScreen({
         />
       ))}
 
-      <div
-        className="panel px-9 pt-9 pb-7 w-[min(520px,100%)] text-center relative z-[1]"
-        style={{ animation: 'fadeUp 400ms ease both' }}
-      >
+      <div className="panel px-9 pt-9 pb-7 w-[min(520px,100%)] text-center relative z-[1] animate-[fadeUp_400ms_ease_both]">
         <div className="w-[140px] h-[140px] mx-auto mb-5 relative">
           <div
-            className="absolute inset-0 rounded-full opacity-40"
+            className="absolute inset-0 rounded-full opacity-40 animate-[float_3s_ease-in-out_infinite]"
             style={{
               background: 'radial-gradient(circle, var(--accent) 0%, transparent 70%)',
-              animation: 'float 3s ease-in-out infinite',
             }}
           />
           <svg
             viewBox="0 0 140 140"
             width="140"
             height="140"
-            style={{ position: 'relative', animation: 'float 3s ease-in-out infinite' }}
+            className="relative animate-[float_3s_ease-in-out_infinite]"
           >
             <defs>
               <linearGradient id="cel-grad" x1="0" x2="1" y1="0" y2="1">
@@ -105,14 +96,10 @@ export function CelebrationScreen({
 
         <Eyebrow>// quest complete</Eyebrow>
         <h1 className="display text-[32px] mt-2 mb-[10px]">
-          <span style={{ color: 'var(--accent)' }}>Level up!</span>
+          <span className="text-accent">Level up!</span>
         </h1>
-        <p
-          className="text-sm leading-[1.6] mx-auto mb-5 max-w-[360px]"
-          style={{ color: 'var(--ink-dim)' }}
-        >
-          You earned{' '}
-          <strong style={{ color: 'var(--ink)' }}>{(reward?.xp ?? 500).toLocaleString()} XP</strong>
+        <p className="text-sm leading-[1.6] mx-auto mb-5 max-w-[360px] text-ink-dim">
+          You earned <strong className="text-ink">{(reward?.xp ?? 500).toLocaleString()} XP</strong>
           {reward?.title ? ` from "${reward.title}"` : ''}. Keep the streak going.
         </p>
 
@@ -122,7 +109,7 @@ export function CelebrationScreen({
           <Chip tone="magenta">NEW BADGE</Chip>
         </div>
 
-        <Button variant="primary" style={{ width: '100%' }} onClick={onContinue}>
+        <Button variant="primary" className="w-full" onClick={onContinue}>
           Continue the quest
         </Button>
       </div>
@@ -182,21 +169,7 @@ export function SpinModal({
         <h2 className="display mt-2 mb-5 text-[24px]">Take your spin</h2>
 
         <div className="relative w-[280px] h-[280px] mx-auto mb-5">
-          <div
-            style={{
-              position: 'absolute',
-              top: -4,
-              left: '50%',
-              transform: 'translateX(-50%)',
-              width: 0,
-              height: 0,
-              borderLeft: '10px solid transparent',
-              borderRight: '10px solid transparent',
-              borderTop: '18px solid var(--accent)',
-              zIndex: 2,
-              filter: 'drop-shadow(0 0 6px var(--accent))',
-            }}
-          />
+          <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-0 h-0 z-[2] border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-t-[18px] border-t-accent [filter:drop-shadow(0_0_6px_var(--accent))]" />
           <svg
             viewBox="-100 -100 200 200"
             width="280"
@@ -249,24 +222,22 @@ export function SpinModal({
 
         {result ? (
           <div className="mb-4">
-            <div className="eyebrow mb-[6px]">// you won</div>
-            <div className="text-[24px] font-bold" style={{ color: 'var(--accent)' }}>
-              {result.label}
+            <div className="inline-flex items-center gap-2 font-mono text-[11px] tracking-[0.16em] uppercase text-ink-dim mb-[6px]">
+              // you won
             </div>
+            <div className="text-[24px] font-bold text-accent">{result.label}</div>
           </div>
         ) : (
-          <div className="mb-4 text-[13px]" style={{ color: 'var(--ink-dim)' }}>
-            1 spin remaining · free
-          </div>
+          <div className="mb-4 text-[13px] text-ink-dim">1 spin remaining · free</div>
         )}
 
         <div className="flex gap-2">
-          <Button variant="ghost" style={{ flex: 1 }} onClick={onClose}>
+          <Button variant="ghost" className="flex-1" onClick={onClose}>
             Close
           </Button>
           <Button
             variant="primary"
-            style={{ flex: 2 }}
+            className="flex-[2]"
             disabled={spinning}
             onClick={() => {
               if (result) {
@@ -303,7 +274,7 @@ export function DailyModal({
       <div className="modal w-[min(480px,100%)] p-7" role="dialog" aria-modal="true">
         <Eyebrow>// daily drop</Eyebrow>
         <h2 className="display mt-2 mb-[6px] text-[24px]">Day {streak + 1} · keep it alive</h2>
-        <p className="text-[13px] mb-[18px]" style={{ color: 'var(--ink-dim)' }}>
+        <p className="text-[13px] mb-[18px] text-ink-dim">
           Check in every 24h. Milestones at day 7, 14 and 30 drop bonus rewards.
         </p>
 
@@ -324,12 +295,7 @@ export function DailyModal({
                       : 'transparent',
                 }}
               >
-                <div
-                  className="font-mono text-[9px] tracking-[0.1em]"
-                  style={{ color: 'var(--ink-dim)' }}
-                >
-                  D{i + 1}
-                </div>
+                <div className="font-mono text-[9px] tracking-[0.1em] text-ink-dim">D{i + 1}</div>
                 <div
                   className="font-bold text-[13px] mt-1"
                   style={{
@@ -349,7 +315,7 @@ export function DailyModal({
           </Button>
           <Button
             variant="primary"
-            style={{ flex: 1 }}
+            className="flex-1"
             onClick={() => {
               onClaim({ title: 'Daily drop', xp: 50 })
               onClose()

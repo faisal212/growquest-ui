@@ -176,7 +176,14 @@ export const Typography: Story = {
             </p>
           ),
         },
-        { label: 'eyebrow', el: <div className="eyebrow">// current season · week 04</div> },
+        {
+          label: 'eyebrow',
+          el: (
+            <div className="inline-flex items-center gap-2 font-mono text-[11px] tracking-[0.16em] uppercase text-ink-dim">
+              // current season · week 04
+            </div>
+          ),
+        },
         {
           label: 'mono',
           el: (
@@ -239,8 +246,8 @@ export const Animations: Story = {
       </div>
       <div style={{ display: 'flex', gap: 20, flexWrap: 'wrap', alignItems: 'flex-end' }}>
         {[
-          { name: 'fade-up', cls: 'fade-up' },
-          { name: 'fade-in', cls: 'fade-in' },
+          { name: 'animate-fade-up', cls: 'animate-fade-up' },
+          { name: 'animate-fade-in', cls: 'animate-fade-in' },
         ].map((a) => (
           <div key={a.name} style={{ textAlign: 'center' }}>
             <div

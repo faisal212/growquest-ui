@@ -10,34 +10,22 @@ interface BadgeGridProps {
 
 export const BadgeGrid = memo(function BadgeGrid({ badges, columns = 3 }: BadgeGridProps) {
   return (
-    <div className="panel" style={{ padding: 20 }}>
-      <div className="mono-label" style={{ marginBottom: 14 }}>
+    <div className="panel p-5">
+      <div className="font-mono text-[10px] tracking-[0.12em] uppercase text-ink-dim mb-3.5">
         // badges · {badges.filter((b) => b.got).length}/{badges.length}
       </div>
-      <div style={{ display: 'grid', gap: 10, gridTemplateColumns: `repeat(${columns}, 1fr)` }}>
+      <div className="grid gap-2.5" style={{ gridTemplateColumns: `repeat(${columns}, 1fr)` }}>
         {badges.map((b, i) => (
           <div
             key={b.id}
             title={b.desc}
-            style={{
-              padding: 14,
-              background: 'var(--panel-2)',
-              border: '1px solid var(--border)',
-              borderRadius: 10,
-              textAlign: 'center',
-              opacity: b.got ? 1 : 0.4,
-            }}
+            className="p-3.5 bg-panel-2 border border-border rounded-[10px] text-center"
+            style={{ opacity: b.got ? 1 : 0.4 }}
           >
             <div
+              className="w-11 h-11 mx-auto mb-2 rounded-[10px] grid place-items-center border border-border"
               style={{
-                width: 44,
-                height: 44,
-                margin: '0 auto 8px',
-                borderRadius: 10,
                 background: b.got ? `var(--accent-${ACCENT_COLORS[i % 5]})` : 'var(--panel)',
-                display: 'grid',
-                placeItems: 'center',
-                border: '1px solid var(--border)',
               }}
             >
               <svg width="22" height="22" viewBox="0 0 22 22">
@@ -47,17 +35,8 @@ export const BadgeGrid = memo(function BadgeGrid({ badges, columns = 3 }: BadgeG
                 />
               </svg>
             </div>
-            <div style={{ fontWeight: 600, fontSize: 12 }}>{b.name}</div>
-            <div
-              style={{
-                fontSize: 10,
-                color: 'var(--ink-faint)',
-                marginTop: 2,
-                fontFamily: 'var(--font-mono)',
-                textTransform: 'uppercase',
-                letterSpacing: '0.08em',
-              }}
-            >
+            <div className="font-semibold text-[12px]">{b.name}</div>
+            <div className="text-[10px] text-ink-faint mt-0.5 font-mono uppercase tracking-[0.08em]">
               {b.got ? 'unlocked' : 'locked'}
             </div>
           </div>

@@ -15,15 +15,17 @@ export default function RewardsScreen({ persona, onRedeem }: RewardsScreenProps)
   const filtered = REWARDS.filter((r) => kind === 'all' || r.kind === kind)
 
   return (
-    <div className="fade-up screen-root w-full max-w-[1280px] mx-auto px-6 pt-6 pb-10">
+    <div className="animate-fade-up w-full max-w-[1280px] mx-auto px-6 pt-6 pb-10 max-[720px]:px-3 max-[720px]:pt-4 max-[720px]:pb-8">
       <div className="flex justify-between items-end gap-[14px] mb-5 flex-wrap">
         <div>
           <Eyebrow>// rewards marketplace</Eyebrow>
           <h1 className="display mt-[6px] mb-0 text-[30px]">Spend your XP</h1>
         </div>
         <div className="panel px-[14px] py-[10px] flex items-center gap-[10px]">
-          <span className="eyebrow">balance</span>
-          <span className="mono text-lg font-bold" style={{ color: 'var(--accent)' }}>
+          <span className="inline-flex items-center gap-2 font-mono text-[11px] tracking-[0.16em] uppercase text-ink-dim">
+            balance
+          </span>
+          <span className="mono text-lg font-bold text-accent">
             {persona.xp.toLocaleString()} XP
           </span>
         </div>

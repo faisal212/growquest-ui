@@ -14,44 +14,31 @@ export function AvatarUploadExperience({ onComplete }: { onComplete: () => void 
   }
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 24 }}>
+    <div className="flex flex-col gap-4 p-6">
       <input
         ref={inputRef}
         type="file"
         accept="image/*"
-        style={{ display: 'none' }}
+        className="hidden"
         onChange={(e) => {
           if (e.target.files?.[0]) handleFile(e.target.files[0])
         }}
       />
 
       {preview ? (
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 12 }}>
+        <div className="flex flex-col items-center gap-3">
           <img
             src={preview}
             alt="Preview"
-            style={{
-              width: 88,
-              height: 88,
-              borderRadius: '50%',
-              objectFit: 'cover',
-              border: '2px solid var(--accent)',
-            }}
+            className="w-[88px] h-[88px] rounded-full object-cover border-2 border-accent"
           />
-          <span style={{ fontSize: 12, color: 'var(--ink-dim)' }}>{fileName}</span>
+          <span className="text-xs text-ink-dim">{fileName}</span>
           <button
             onClick={() => {
               setPreview(null)
               setFileName(null)
             }}
-            style={{
-              fontSize: 12,
-              color: 'var(--ink-dim)',
-              background: 'none',
-              border: 'none',
-              cursor: 'pointer',
-              textDecoration: 'underline',
-            }}
+            className="text-xs text-ink-dim bg-transparent border-none cursor-pointer underline"
           >
             Change photo
           </button>
@@ -69,24 +56,15 @@ export function AvatarUploadExperience({ onComplete }: { onComplete: () => void 
             e.preventDefault()
             if (e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0])
           }}
-          style={{
-            border: '2px dashed var(--border)',
-            borderRadius: 10,
-            padding: '32px 16px',
-            textAlign: 'center',
-            cursor: 'pointer',
-            color: 'var(--ink-dim)',
-            fontSize: 13,
-            transition: 'border-color 0.15s',
-          }}
+          className="border-2 border-dashed border-border rounded-[10px] py-8 px-4 text-center cursor-pointer text-ink-dim text-[13px] transition-colors duration-150"
         >
-          <div style={{ fontSize: 28, marginBottom: 8 }}>📷</div>
+          <div className="text-[28px] mb-2">📷</div>
           <div>Click or drag to upload a photo</div>
-          <div style={{ fontSize: 11, marginTop: 4 }}>PNG, JPG up to 5 MB</div>
+          <div className="text-[11px] mt-1">PNG, JPG up to 5 MB</div>
         </div>
       )}
 
-      <Button variant="primary" disabled={!preview} onClick={onComplete} style={{ width: '100%' }}>
+      <Button variant="primary" disabled={!preview} onClick={onComplete} className="w-full">
         Save photo
       </Button>
     </div>

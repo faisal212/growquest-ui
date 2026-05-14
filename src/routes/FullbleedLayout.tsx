@@ -8,24 +8,16 @@ interface FullbleedLayoutProps {
 export function FullbleedLayout({ onToggleTweaks }: FullbleedLayoutProps) {
   const navigate = useNavigate()
   return (
-    <div className="center-stage">
+    <div className="flex-1 grid place-items-center px-6 py-8 max-[720px]:px-3 max-[720px]:py-4">
       <Outlet />
-      <div style={{ position: 'fixed', top: 16, right: 16, display: 'flex', gap: 6 }}>
+      <div className="fixed top-4 right-4 flex gap-1.5">
         <Button variant="ghost" size="sm" onClick={() => navigate('/missions')}>
           Skip →
         </Button>
         <button
           onClick={onToggleTweaks}
           title="Toggle tweaks"
-          style={{
-            width: 32,
-            height: 32,
-            borderRadius: 6,
-            background: 'var(--panel)',
-            border: '1px solid var(--border)',
-            display: 'grid',
-            placeItems: 'center',
-          }}
+          className="w-8 h-8 rounded-md bg-panel border border-border grid place-items-center"
         >
           <svg
             width="14"

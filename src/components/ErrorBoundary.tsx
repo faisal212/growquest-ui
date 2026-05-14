@@ -22,16 +22,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
     if (this.state.hasError) {
       return (
         this.props.fallback ?? (
-          <div
-            style={{
-              padding: 24,
-              color: 'var(--ink-dim)',
-              fontFamily: 'var(--font-mono)',
-              fontSize: 13,
-            }}
-          >
-            Something went wrong.
-          </div>
+          <div className="p-6 text-ink-dim font-mono text-[13px]">Something went wrong.</div>
         )
       )
     }

@@ -75,8 +75,8 @@ export function TriviaExperience({
     const pct = Math.round((score / questions.length) * 100)
     const passed = score >= passScore
     return (
-      <div style={{ padding: 28, textAlign: 'center' }}>
-        <div style={{ width: 120, height: 120, margin: '0 auto 16px', position: 'relative' }}>
+      <div className="p-7 text-center">
+        <div className="w-[120px] h-[120px] mx-auto mb-4 relative">
           <svg viewBox="0 0 120 120">
             <circle cx="60" cy="60" r="50" fill="none" stroke="var(--panel-2)" strokeWidth="10" />
             <circle
@@ -104,21 +104,18 @@ export function TriviaExperience({
             </text>
           </svg>
         </div>
-        <div className="eyebrow" style={{ marginBottom: 6 }}>
+        <div className="inline-flex items-center gap-2 font-mono text-[11px] tracking-[0.16em] uppercase text-ink-dim mb-1.5">
           // trivia complete
         </div>
-        <h3
-          className="display"
-          style={{ margin: '0 0 8px', fontSize: 22, letterSpacing: '-0.02em' }}
-        >
+        <h3 className="display m-0 mb-2 text-[22px] tracking-[-0.02em]">
           {passed ? 'Nice run!' : 'Keep training.'}
         </h3>
-        <p style={{ color: 'var(--ink-dim)', fontSize: 13, marginBottom: 16 }}>
+        <p className="text-ink-dim text-[13px] mb-4">
           {passed
             ? 'You beat the bar — XP unlocked.'
             : `Needed ${passScore}/${questions.length} to pass. Try again tomorrow for another shot.`}
         </p>
-        <Button variant="primary" style={{ width: '100%' }} onClick={onComplete}>
+        <Button variant="primary" className="w-full" onClick={onComplete}>
           Continue
         </Button>
       </div>
@@ -126,44 +123,31 @@ export function TriviaExperience({
   }
 
   return (
-    <div style={{ padding: 24, display: 'flex', flexDirection: 'column', gap: 16 }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+    <div className="p-6 flex flex-col gap-4">
+      <div className="flex justify-between items-center">
         <Eyebrow>
           // trivia · q{idx + 1} / {questions.length}
         </Eyebrow>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+        <div className="flex items-center gap-1.5">
           <Chip tone="accent">SCORE {score}</Chip>
           <span
-            className="mono"
-            style={{
-              padding: '4px 8px',
-              border: `1px solid ${time < 5 ? 'var(--danger)' : 'var(--border)'}`,
-              borderRadius: 4,
-              fontSize: 12,
-              color: time < 5 ? 'var(--danger)' : 'var(--ink)',
-            }}
+            className={`mono py-1 px-2 border rounded-[4px] text-xs ${time < 5 ? 'border-danger text-danger' : 'border-border text-ink'}`}
           >
             ⏱ {String(time).padStart(2, '0')}s
           </span>
         </div>
       </div>
 
-      <div
-        style={{ height: 4, background: 'var(--panel-2)', borderRadius: 99, overflow: 'hidden' }}
-      >
+      <div className="h-1 bg-panel-2 rounded-full overflow-hidden">
         <div
-          style={{
-            height: '100%',
-            width: `${(time / timeLimit) * 100}%`,
-            background: time < 5 ? 'var(--danger)' : 'var(--accent)',
-            transition: 'width 1s linear',
-          }}
+          className={`h-full transition-[width] duration-1000 ease-linear ${time < 5 ? 'bg-danger' : 'bg-accent'}`}
+          style={{ width: `${(time / timeLimit) * 100}%` }}
         />
       </div>
 
-      <div style={{ fontSize: 18, fontWeight: 600, lineHeight: 1.4, padding: '10px 0' }}>{q.q}</div>
+      <div className="text-[18px] font-semibold leading-snug py-2.5 px-0">{q.q}</div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 8 }}>
+      <div className="grid grid-cols-2 gap-2">
         {q.choices.map((c, i) => {
           const isPick = pick === i
           const good = phase === 'reveal' && i === q.correct
@@ -173,36 +157,16 @@ export function TriviaExperience({
               key={i}
               disabled={phase !== 'answering'}
               onClick={() => lockIn(i)}
-              style={{
-                padding: '16px 14px',
-                borderRadius: 8,
-                border: `1px solid ${good ? 'var(--accent-lime)' : bad ? 'var(--danger)' : isPick ? 'var(--accent)' : 'var(--border)'}`,
-                background: good
-                  ? 'color-mix(in oklch, var(--accent-lime) 14%, transparent)'
+              className={`py-4 px-3.5 rounded-lg text-left flex items-center gap-2.5 text-sm border ${good ? 'border-accent-lime' : bad ? 'border-danger' : isPick ? 'border-accent' : 'border-border'} ${good || bad ? '' : 'bg-panel-2'}`}
+              style={
+                good
+                  ? { background: 'color-mix(in oklch, var(--accent-lime) 14%, transparent)' }
                   : bad
-                    ? 'color-mix(in oklch, var(--danger) 14%, transparent)'
-                    : 'var(--panel-2)',
-                textAlign: 'left',
-                display: 'flex',
-                alignItems: 'center',
-                gap: 10,
-                fontSize: 14,
-              }}
+                    ? { background: 'color-mix(in oklch, var(--danger) 14%, transparent)' }
+                    : undefined
+              }
             >
-              <span
-                className="mono"
-                style={{
-                  width: 22,
-                  height: 22,
-                  borderRadius: 4,
-                  border: '1px solid var(--border)',
-                  background: 'var(--panel)',
-                  display: 'grid',
-                  placeItems: 'center',
-                  fontSize: 11,
-                  fontWeight: 700,
-                }}
-              >
+              <span className="mono w-[22px] h-[22px] rounded-[4px] border border-border bg-panel grid place-items-center text-[11px] font-bold">
                 {String.fromCharCode(65 + i)}
               </span>
               <span>{c}</span>

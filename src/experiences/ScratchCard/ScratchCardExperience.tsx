@@ -36,55 +36,20 @@ export function ScratchCardExperience({
   const pct = Math.round((revealed.size / TILE_COUNT) * 100)
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        gap: 16,
-        padding: 24,
-      }}
-    >
-      <div style={{ position: 'relative', width: 280 }}>
+    <div className="flex flex-col items-center gap-4 p-6">
+      <div className="relative w-[280px]">
         {/* Reward underneath */}
-        <div
-          style={{
-            height: 140,
-            display: 'grid',
-            placeItems: 'center',
-            background: 'var(--panel-2)',
-            border: '1px solid var(--border)',
-            borderRadius: 10,
-          }}
-        >
-          <div style={{ textAlign: 'center' }}>
-            <div
-              style={{
-                fontSize: 11,
-                color: 'var(--ink-dim)',
-                marginBottom: 4,
-                fontFamily: 'var(--font-mono)',
-                textTransform: 'uppercase',
-                letterSpacing: '0.06em',
-              }}
-            >
+        <div className="h-[140px] grid place-items-center bg-panel-2 border border-border rounded-[10px]">
+          <div className="text-center">
+            <div className="text-[11px] text-ink-dim mb-1 font-mono uppercase tracking-[0.06em]">
               You won
             </div>
-            <div style={{ fontSize: 32, fontWeight: 800, color: 'var(--accent)' }}>{reward}</div>
+            <div className="text-[32px] font-extrabold text-accent">{reward}</div>
           </div>
         </div>
         {/* Scratch overlay */}
         <div
-          style={{
-            position: 'absolute',
-            inset: 0,
-            borderRadius: 10,
-            display: 'grid',
-            gridTemplateColumns: 'repeat(4, 1fr)',
-            gap: 2,
-            padding: 2,
-            pointerEvents: completed ? 'none' : 'auto',
-          }}
+          className={`absolute inset-0 rounded-[10px] grid grid-cols-4 gap-0.5 p-0.5 ${completed ? 'pointer-events-none' : 'pointer-events-auto'}`}
         >
           {Array.from({ length: TILE_COUNT }, (_, i) => (
             <div
@@ -99,40 +64,20 @@ export function ScratchCardExperience({
               onMouseEnter={(e) => {
                 if (e.buttons === 1) revealTile(i)
               }}
-              style={{
-                background: revealed.has(i) ? 'transparent' : 'var(--panel)',
-                border: revealed.has(i) ? 'none' : '1px solid var(--border)',
-                borderRadius: 6,
-                cursor: 'pointer',
-                transition: 'background 0.15s',
-                minHeight: 32,
-              }}
+              className={`rounded-md cursor-pointer transition-[background] duration-150 min-h-8 ${revealed.has(i) ? 'bg-transparent border-none' : 'bg-panel border border-border'}`}
             />
           ))}
         </div>
       </div>
 
-      <div
-        style={{
-          fontSize: 12,
-          color: completed ? 'var(--accent)' : 'var(--ink-dim)',
-          textAlign: 'center',
-        }}
-      >
+      <div className={`text-xs text-center ${completed ? 'text-accent' : 'text-ink-dim'}`}>
         {completed ? `🎉 You revealed: ${reward}` : `Scratch to reveal… ${pct}% uncovered`}
       </div>
 
       {!completed && (
         <button
           onClick={revealAll}
-          style={{
-            background: 'none',
-            border: 'none',
-            cursor: 'pointer',
-            fontSize: 11,
-            color: 'var(--ink-dim)',
-            textDecoration: 'underline',
-          }}
+          className="bg-transparent border-none cursor-pointer text-[11px] text-ink-dim underline"
         >
           Reveal all
         </button>

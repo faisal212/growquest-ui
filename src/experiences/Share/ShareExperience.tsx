@@ -35,63 +35,34 @@ export function ShareExperience({
   ]
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 24 }}>
+    <div className="flex flex-col gap-4 p-6">
       {/* Preview card */}
-      <div
-        style={{
-          padding: 14,
-          background: 'var(--panel-2)',
-          border: '1px solid var(--border)',
-          borderRadius: 10,
-        }}
-      >
-        <div style={{ fontWeight: 600, fontSize: 13, marginBottom: 4 }}>{shareText}</div>
-        <div style={{ fontSize: 11, color: 'var(--ink-dim)', fontFamily: 'var(--font-mono)' }}>
-          {shareUrl}
-        </div>
+      <div className="p-3.5 bg-panel-2 border border-border rounded-[10px]">
+        <div className="font-semibold text-[13px] mb-1">{shareText}</div>
+        <div className="text-[11px] text-ink-dim font-mono">{shareUrl}</div>
       </div>
 
-      <div style={{ fontSize: 12, color: 'var(--ink-dim)' }}>Share via</div>
+      <div className="text-xs text-ink-dim">Share via</div>
 
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+      <div className="flex flex-col gap-2">
         {platforms.map(({ id, label }) => (
           <button
             key={id}
             onClick={() => openShare(id)}
-            style={{
-              padding: '10px 14px',
-              borderRadius: 8,
-              border: '1px solid var(--border)',
-              background: 'var(--panel-2)',
-              color: 'var(--ink)',
-              fontSize: 13,
-              fontWeight: 500,
-              cursor: 'pointer',
-              textAlign: 'left',
-            }}
+            className="py-2.5 px-3.5 rounded-lg border border-border bg-panel-2 text-ink text-[13px] font-medium cursor-pointer text-left"
           >
             {label} ↗
           </button>
         ))}
         <button
           onClick={copyLink}
-          style={{
-            padding: '10px 14px',
-            borderRadius: 8,
-            border: '1px solid var(--border)',
-            background: 'var(--panel-2)',
-            color: 'var(--ink)',
-            fontSize: 13,
-            fontWeight: 500,
-            cursor: 'pointer',
-            textAlign: 'left',
-          }}
+          className="py-2.5 px-3.5 rounded-lg border border-border bg-panel-2 text-ink text-[13px] font-medium cursor-pointer text-left"
         >
           📋 Copy link
         </button>
       </div>
 
-      <Button variant="primary" disabled={!shared} onClick={onComplete} style={{ width: '100%' }}>
+      <Button variant="primary" disabled={!shared} onClick={onComplete} className="w-full">
         Done
       </Button>
     </div>

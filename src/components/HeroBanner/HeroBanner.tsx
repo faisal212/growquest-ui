@@ -22,10 +22,8 @@ export function HeroBanner({
       </div>
       <div className="hero-banner-content">
         <Eyebrow>{eyebrow}</Eyebrow>
-        <h2 className="display" style={{ margin: 0, fontSize: 26, letterSpacing: '-0.02em' }}>
-          {title}
-        </h2>
-        <div style={{ fontSize: 13, color: 'var(--ink-dim)', maxWidth: 420 }}>{subtitle}</div>
+        <h2 className="display m-0 text-[26px] tracking-[-0.02em]">{title}</h2>
+        <div className="text-[13px] text-ink-dim max-w-[420px]">{subtitle}</div>
       </div>
     </div>
   )
