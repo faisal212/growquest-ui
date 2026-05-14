@@ -4,7 +4,7 @@ import { XPPill, Tag, Countdown } from '../../atoms'
 import type { Mission } from '../../types'
 import { toneColor } from '../../utils/toneColor'
 
-export interface MissionTileProps {
+export interface MissionCardProps {
   /** The mission data to render. */
   m: Mission
   /** Visual density. `compact` reduces padding and hides description text. @default 'comfortable' */
@@ -15,12 +15,12 @@ export interface MissionTileProps {
   onOpen: (mission: Mission) => void
 }
 
-export const MissionTile = memo(function MissionTile({
+export const MissionCard = memo(function MissionCard({
   m,
   density = 'comfortable',
   layout = 'split',
   onOpen,
-}: MissionTileProps) {
+}: MissionCardProps) {
   const [done, total] = m.progress
   const pct = total > 0 ? done / total : 0
   const compact = density === 'compact'
@@ -30,11 +30,11 @@ export const MissionTile = memo(function MissionTile({
     return (
       <button
         onClick={() => onOpen(m)}
-        className={`mission-tile text-left flex flex-col gap-2.5 ${padCls} bg-[var(--mission-tile-bg)] border border-[color:var(--mission-tile-border)] rounded-xl transition-all duration-150`}
+        className={`mission-card text-left flex flex-col gap-2.5 ${padCls} bg-[var(--mission-card-bg)] border border-[color:var(--mission-card-border)] rounded-xl transition-all duration-150`}
       >
         <div className="flex justify-between items-center">
           <div
-            className="bg-[var(--mission-tile-icon-bg)] border border-[color:var(--mission-tile-icon-border)] grid place-items-center w-8 h-8 rounded-md"
+            className="bg-[var(--mission-card-icon-bg)] border border-[color:var(--mission-card-icon-border)] grid place-items-center w-8 h-8 rounded-md"
             style={{ color: toneColor(m.tone) }}
           >
             <MissionIcon type={m.type} size={18} />
@@ -53,19 +53,19 @@ export const MissionTile = memo(function MissionTile({
         </div>
         <div>
           <div
-            className={`font-semibold mb-1 text-[color:var(--mission-tile-title)] ${compact ? 'text-[13px]' : 'text-[15px]'}`}
+            className={`font-semibold mb-1 text-[color:var(--mission-card-title)] ${compact ? 'text-[13px]' : 'text-[15px]'}`}
           >
             {m.title}
           </div>
           {!compact && (
-            <div className="text-xs text-[color:var(--mission-tile-body)] leading-relaxed">
+            <div className="text-xs text-[color:var(--mission-card-body)] leading-relaxed">
               {m.desc}
             </div>
           )}
         </div>
         <div className="flex justify-between items-center gap-2.5 mt-auto">
           <XPPill amount={m.xp} />
-          <span className="font-mono text-[11px] text-[color:var(--mission-tile-body)]">
+          <span className="font-mono text-[11px] text-[color:var(--mission-card-body)]">
             {done}/{total}
           </span>
         </div>
@@ -80,25 +80,25 @@ export const MissionTile = memo(function MissionTile({
     return (
       <button
         onClick={() => onOpen(m)}
-        className={`mission-tile text-left flex items-center gap-3.5 ${padCls} bg-[var(--mission-tile-bg)] border border-[color:var(--mission-tile-border)] rounded-[10px] w-full`}
+        className={`mission-card text-left flex items-center gap-3.5 ${padCls} bg-[var(--mission-card-bg)] border border-[color:var(--mission-card-border)] rounded-[10px] w-full`}
       >
         <div
-          className="bg-[var(--mission-tile-icon-bg)] border border-[color:var(--mission-tile-icon-border)] grid place-items-center w-10 h-10 rounded-lg shrink-0"
+          className="bg-[var(--mission-card-icon-bg)] border border-[color:var(--mission-card-icon-border)] grid place-items-center w-10 h-10 rounded-lg shrink-0"
           style={{ color: toneColor(m.tone) }}
         >
           <MissionIcon type={m.type} size={20} />
         </div>
         <div className="flex-1 min-w-0">
-          <div className="font-semibold text-sm mb-0.5 text-[color:var(--mission-tile-title)]">
+          <div className="font-semibold text-sm mb-0.5 text-[color:var(--mission-card-title)]">
             {m.title}
           </div>
-          <div className="text-xs text-[color:var(--mission-tile-body)] overflow-hidden text-ellipsis whitespace-nowrap">
+          <div className="text-xs text-[color:var(--mission-card-body)] overflow-hidden text-ellipsis whitespace-nowrap">
             {m.desc}
           </div>
         </div>
         <div className="flex items-center gap-2.5 shrink-0">
           {m.limited && <Tag tone="magenta">LIMITED</Tag>}
-          <span className="font-mono text-[11px] text-[color:var(--mission-tile-body)]">
+          <span className="font-mono text-[11px] text-[color:var(--mission-card-body)]">
             {done}/{total}
           </span>
           <XPPill amount={m.xp} />
@@ -111,12 +111,12 @@ export const MissionTile = memo(function MissionTile({
   return (
     <button
       onClick={() => onOpen(m)}
-      className={`mission-tile text-left flex flex-col ${padCls} bg-[var(--mission-tile-bg)] border border-[color:var(--mission-tile-border)] rounded-xl relative overflow-hidden`}
+      className={`mission-card text-left flex flex-col ${padCls} bg-[var(--mission-card-bg)] border border-[color:var(--mission-card-border)] rounded-xl relative overflow-hidden`}
     >
       <div
         className="absolute top-0 right-0 w-20 h-20"
         style={{
-          opacity: 'var(--mission-tile-halo-opacity)',
+          opacity: 'var(--mission-card-halo-opacity)',
           background: `radial-gradient(circle at 100% 0, ${toneColor(m.tone)} 0%, transparent 70%)`,
         }}
       />
@@ -124,7 +124,7 @@ export const MissionTile = memo(function MissionTile({
         className={`flex justify-between items-start gap-2 relative ${compact ? 'mb-2.5' : 'mb-3.5'}`}
       >
         <div
-          className="bg-[var(--mission-tile-icon-bg)] border border-[color:var(--mission-tile-icon-border)] grid place-items-center w-[34px] h-[34px] rounded-[7px]"
+          className="bg-[var(--mission-card-icon-bg)] border border-[color:var(--mission-card-icon-border)] grid place-items-center w-[34px] h-[34px] rounded-[7px]"
           style={{ color: toneColor(m.tone) }}
         >
           <MissionIcon type={m.type} size={18} />
@@ -132,12 +132,12 @@ export const MissionTile = memo(function MissionTile({
         {m.limited && <Tag tone="magenta">⏱ LIMITED</Tag>}
       </div>
       <div
-        className={`font-semibold mb-1 text-[color:var(--mission-tile-title)] ${compact ? 'text-sm' : 'text-base'}`}
+        className={`font-semibold mb-1 text-[color:var(--mission-card-title)] ${compact ? 'text-sm' : 'text-base'}`}
       >
         {m.title}
       </div>
       {!compact && (
-        <div className="text-xs text-[color:var(--mission-tile-body)] leading-relaxed mb-3.5">
+        <div className="text-xs text-[color:var(--mission-card-body)] leading-relaxed mb-3.5">
           {m.desc}
         </div>
       )}
@@ -147,7 +147,7 @@ export const MissionTile = memo(function MissionTile({
           className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-xs font-bold tracking-[0.04em]"
           style={{
             background: toneColor(m.tone),
-            color: 'var(--mission-tile-cta-fg)',
+            color: 'var(--mission-card-cta-fg)',
           }}
         >
           GO

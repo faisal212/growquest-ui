@@ -2,7 +2,7 @@ import { Avatar } from '../../art'
 import { XPBar, Tag } from '../../atoms'
 import type { Persona, Tweaks } from '../../types'
 
-interface ProfileSnapshotProps {
+interface ProfileCardProps {
   persona: Persona
   xpStyle: string
   xpMax?: number
@@ -11,13 +11,13 @@ interface ProfileSnapshotProps {
 }
 
 /** Compact profile card showing avatar, handle, tier badge, XP bar, and key stats. Used in the missions sidebar and profile screen. */
-export function ProfileSnapshot({
+export function ProfileCard({
   persona,
   xpStyle,
   xpMax = 12000,
   label = 'Progress to Ascendant',
   walletAddress = '0xE63F6A · 356C10AC',
-}: ProfileSnapshotProps) {
+}: ProfileCardProps) {
   return (
     <div
       className="bg-[var(--profile-card-bg)] border border-[color:var(--profile-card-border)] rounded-[var(--radius-card,14px)] p-[18px] flex flex-col gap-3.5"
@@ -62,12 +62,6 @@ export function ProfileSnapshot({
 }
 
 // convenience re-export for callers that only need the xpStyle from tweaks
-export function ProfileSnapshotFromTweaks({
-  persona,
-  tweaks,
-}: {
-  persona: Persona
-  tweaks: Tweaks
-}) {
-  return <ProfileSnapshot persona={persona} xpStyle={tweaks.xpStyle} />
+export function ProfileCardFromTweaks({ persona, tweaks }: { persona: Persona; tweaks: Tweaks }) {
+  return <ProfileCard persona={persona} xpStyle={tweaks.xpStyle} />
 }

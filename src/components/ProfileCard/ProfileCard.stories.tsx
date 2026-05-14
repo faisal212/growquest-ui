@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { ProfileSnapshot } from './ProfileSnapshot'
+import { ProfileCard } from './ProfileCard'
 import type { Persona } from '../../types'
 
 const active: Persona = {
@@ -14,7 +14,7 @@ const active: Persona = {
 
 // Persona fields are flat args; render assembles them into the persona object the component expects.
 // satisfies Meta<any> is intentional — Storybook's type system can't express this flat-to-nested mapping.
-type ProfileSnapshotStoryArgs = Persona & {
+type ProfileCardStoryArgs = Persona & {
   xpStyle: 'plain' | 'segmented' | 'ring' | 'notched'
   xpMax: number
   label: string
@@ -22,8 +22,8 @@ type ProfileSnapshotStoryArgs = Persona & {
 }
 
 const meta = {
-  title: 'Components/ProfileSnapshot',
-  component: ProfileSnapshot,
+  title: 'Components/ProfileCard',
+  component: ProfileCard,
   args: {
     handle: active.handle,
     xp: active.xp,
@@ -66,8 +66,8 @@ const meta = {
     label: { control: 'text' },
     walletAddress: { control: 'text' },
   },
-  render: (args: ProfileSnapshotStoryArgs) => (
-    <ProfileSnapshot
+  render: (args: ProfileCardStoryArgs) => (
+    <ProfileCard
       persona={{
         handle: args.handle,
         xp: args.xp,
@@ -134,7 +134,7 @@ export const XPStyles: Story = {
           >
             {style}
           </div>
-          <ProfileSnapshot persona={active} xpStyle={style} />
+          <ProfileCard persona={active} xpStyle={style} />
         </div>
       ))}
     </div>

@@ -39,7 +39,7 @@ export const TENANTS: Record<string, BrandConfig> = {
       },
     },
     overrides: {
-      missionTile: {
+      missionCard: {
         surface: '#FFFFFF',
         border: '#FF8C00',
         ctaFg: '#FFFFFF',

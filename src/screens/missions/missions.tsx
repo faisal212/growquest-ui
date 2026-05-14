@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import { MISSIONS, REWARDS } from '../../data'
 import { Eyebrow, Button, Chip } from '../../atoms'
-import { MissionTile } from '../../components/MissionTile'
+import { MissionCard } from '../../components/MissionCard'
 import { MissionModal } from '../../components/MissionModal'
 import { RewardCard } from '../../components/RewardCard'
 import { FilterTabs } from '../../components/FilterTabs'
 import { HeroBanner } from '../../components/HeroBanner'
-import { ProfileSnapshotFromTweaks } from '../../components/ProfileSnapshot'
+import { ProfileCardFromTweaks } from '../../components/ProfileCard'
 import { useContent } from '../../config'
 import type { Mission, Persona, Tweaks, Reward } from '../../types'
 
@@ -65,7 +65,7 @@ export default function MissionsScreen({
       {/* Hero + profile snapshot */}
       <div className="grid gap-5 grid-cols-[minmax(0,2fr)_minmax(300px,1fr)] [&>*]:min-w-0 max-[720px]:grid-cols-1">
         <HeroBanner heroStyle={tweaks.heroStyle} />
-        <ProfileSnapshotFromTweaks persona={persona} tweaks={tweaks} />
+        <ProfileCardFromTweaks persona={persona} tweaks={tweaks} />
       </div>
 
       {/* Daily streak · Spin · Ready to collect */}
@@ -180,7 +180,7 @@ export default function MissionsScreen({
             {tileLayout === 'list' ? (
               <div className="flex flex-col gap-[10px]">
                 {filtered.map((m) => (
-                  <MissionTile
+                  <MissionCard
                     key={m.id}
                     m={m}
                     density={density}
@@ -197,7 +197,7 @@ export default function MissionsScreen({
                 }}
               >
                 {filtered.map((m) => (
-                  <MissionTile
+                  <MissionCard
                     key={m.id}
                     m={m}
                     density={density}

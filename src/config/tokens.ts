@@ -71,14 +71,14 @@ export function deriveTokens(cfg: BrandConfig): Record<string, string> {
   out['--tone-magenta'] = 'var(--accent-magenta)'
   out['--tone-amber'] = 'var(--accent-amber)'
 
-  out['--mission-tile-bg'] = 'var(--panel)'
-  out['--mission-tile-border'] = 'var(--border)'
-  out['--mission-tile-icon-bg'] = 'var(--panel-2)'
-  out['--mission-tile-icon-border'] = 'var(--border)'
-  out['--mission-tile-title'] = 'var(--ink)'
-  out['--mission-tile-body'] = 'var(--ink-dim)'
-  out['--mission-tile-cta-fg'] = '#05060A'
-  out['--mission-tile-halo-opacity'] = '0.25'
+  out['--mission-card-bg'] = 'var(--panel)'
+  out['--mission-card-border'] = 'var(--border)'
+  out['--mission-card-icon-bg'] = 'var(--panel-2)'
+  out['--mission-card-icon-border'] = 'var(--border)'
+  out['--mission-card-title'] = 'var(--ink)'
+  out['--mission-card-body'] = 'var(--ink-dim)'
+  out['--mission-card-cta-fg'] = '#05060A'
+  out['--mission-card-halo-opacity'] = '0.25'
 
   out['--mission-modal-backdrop'] = 'color-mix(in oklch, #000 60%, transparent)'
   out['--mission-modal-bg'] = 'var(--panel)'
@@ -115,18 +115,18 @@ export function deriveTokens(cfg: BrandConfig): Record<string, string> {
   // Per-component override slots. Each var only overwrites the default above
   // when explicitly supplied in cfg.overrides.*.
   const ov = cfg.overrides
-  if (ov?.missionTile) {
-    const r = ov.missionTile
-    if (r.surface) out['--mission-tile-bg'] = r.surface
-    if (r.border) out['--mission-tile-border'] = r.border
+  if (ov?.missionCard) {
+    const r = ov.missionCard
+    if (r.surface) out['--mission-card-bg'] = r.surface
+    if (r.border) out['--mission-card-border'] = r.border
     const innerBg = r.iconBoxBg ?? r.surface2
-    if (innerBg) out['--mission-tile-icon-bg'] = innerBg
-    if (r.iconBoxBorder) out['--mission-tile-icon-border'] = r.iconBoxBorder
-    if (r.title) out['--mission-tile-title'] = r.title
-    if (r.body) out['--mission-tile-body'] = r.body
-    if (r.ctaFg) out['--mission-tile-cta-fg'] = r.ctaFg
+    if (innerBg) out['--mission-card-icon-bg'] = innerBg
+    if (r.iconBoxBorder) out['--mission-card-icon-border'] = r.iconBoxBorder
+    if (r.title) out['--mission-card-title'] = r.title
+    if (r.body) out['--mission-card-body'] = r.body
+    if (r.ctaFg) out['--mission-card-cta-fg'] = r.ctaFg
     if (typeof r.haloOpacity === 'number')
-      out['--mission-tile-halo-opacity'] = String(r.haloOpacity)
+      out['--mission-card-halo-opacity'] = String(r.haloOpacity)
   }
 
   if (ov?.missionModal) {

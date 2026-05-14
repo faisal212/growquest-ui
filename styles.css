@@ -29,14 +29,14 @@
     --tone-magenta: var(--accent-magenta);
     --tone-amber: var(--accent-amber);
 
-    --mission-tile-bg: var(--panel);
-    --mission-tile-border: var(--border);
-    --mission-tile-icon-bg: var(--panel-2);
-    --mission-tile-icon-border: var(--border);
-    --mission-tile-title: var(--ink);
-    --mission-tile-body: var(--ink-dim);
-    --mission-tile-cta-fg: #05060A;
-    --mission-tile-halo-opacity: 0.25;
+    --mission-card-bg: var(--panel);
+    --mission-card-border: var(--border);
+    --mission-card-icon-bg: var(--panel-2);
+    --mission-card-icon-border: var(--border);
+    --mission-card-title: var(--ink);
+    --mission-card-body: var(--ink-dim);
+    --mission-card-cta-fg: #05060A;
+    --mission-card-halo-opacity: 0.25;
 
     --mission-modal-backdrop: color-mix(in oklch, #000 60%, transparent);
     --mission-modal-bg: var(--panel);

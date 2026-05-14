@@ -1,17 +1,17 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { fn, userEvent, within, expect } from 'storybook/test'
-import { MissionTile } from './MissionTile'
+import { MissionCard } from './MissionCard'
 import { MISSIONS } from '../../data'
 
 const meta = {
-  title: 'Components/MissionTile',
-  component: MissionTile,
+  title: 'Components/MissionCard',
+  component: MissionCard,
   args: { m: MISSIONS[0], layout: 'split', density: 'comfortable', onOpen: fn() },
   argTypes: {
     layout: { control: 'radio', options: ['split', 'stack', 'list'] },
     density: { control: 'radio', options: ['comfortable', 'compact'] },
   },
-} satisfies Meta<typeof MissionTile>
+} satisfies Meta<typeof MissionCard>
 export default meta
 type Story = StoryObj<typeof meta>
 
@@ -29,7 +29,7 @@ export const Playground: Story = {
     },
   } as any,
   render: (args) => (
-    <MissionTile m={args.m} layout={args.layout} density={args.density} onOpen={args.onOpen} />
+    <MissionCard m={args.m} layout={args.layout} density={args.density} onOpen={args.onOpen} />
   ),
 }
 
@@ -85,7 +85,7 @@ export const AllMissionTypes: Story = {
       }}
     >
       {MISSIONS.map((m) => (
-        <MissionTile key={m.id} m={m} layout="stack" onOpen={fn()} />
+        <MissionCard key={m.id} m={m} layout="stack" onOpen={fn()} />
       ))}
     </div>
   ),

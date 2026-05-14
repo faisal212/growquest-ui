@@ -105,7 +105,7 @@ export interface ComponentSurfaceRecipe {
   body?: string
 }
 
-export interface MissionTileRecipe extends ComponentSurfaceRecipe {
+export interface MissionCardRecipe extends ComponentSurfaceRecipe {
   /** Overrides surface2 for the icon container only. */
   iconBoxBg?: string
   iconBoxBorder?: string
@@ -166,8 +166,8 @@ export interface Overrides {
   radius?: RadiusSet
   /** Override font stacks. */
   fonts?: FontSet
-  /** Override mission-tile-specific surfaces, borders, icon box, CTA. */
-  missionTile?: MissionTileRecipe
+  /** Override mission-card-specific surfaces, borders, icon box, CTA. */
+  missionCard?: MissionCardRecipe
   /** Override mission-modal backdrop, surfaces, header, close button. */
   missionModal?: MissionModalRecipe
   /** Override reward-card surfaces and the image area. */

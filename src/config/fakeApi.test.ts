@@ -29,6 +29,6 @@ describe('fakeApi', () => {
 
   it('acme tenant has content + override slots populated', () => {
     expect(TENANTS.acme.content?.missions?.sectionTitle).toBe('Acme Quests')
-    expect(TENANTS.acme.overrides?.missionTile?.surface).toBe('#FFFFFF')
+    expect(TENANTS.acme.overrides?.missionCard?.surface).toBe('#FFFFFF')
   })
 })

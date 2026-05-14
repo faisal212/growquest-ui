@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest'
 import { render, screen, fireEvent } from '@testing-library/react'
-import { MissionTile } from './MissionTile'
+import { MissionCard } from './MissionCard'
 import type { Mission } from '../../types'
 
 const mission: Mission = {
@@ -13,41 +13,41 @@ const mission: Mission = {
   tone: 'accent',
 }
 
-describe('MissionTile', () => {
+describe('MissionCard', () => {
   it('renders the mission title', () => {
-    render(<MissionTile m={mission} onOpen={vi.fn()} />)
+    render(<MissionCard m={mission} onOpen={vi.fn()} />)
     expect(screen.getByText('Brand Knowledge Quiz')).toBeInTheDocument()
   })
 
   it('renders the mission description in comfortable density', () => {
-    render(<MissionTile m={mission} onOpen={vi.fn()} density="comfortable" />)
+    render(<MissionCard m={mission} onOpen={vi.fn()} density="comfortable" />)
     expect(screen.getByText('Test what you know about the brand')).toBeInTheDocument()
   })
 
   it('hides the description in compact density', () => {
-    render(<MissionTile m={mission} onOpen={vi.fn()} density="compact" />)
+    render(<MissionCard m={mission} onOpen={vi.fn()} density="compact" />)
     expect(screen.queryByText('Test what you know about the brand')).not.toBeInTheDocument()
   })
 
   it('calls onOpen with the mission when clicked', () => {
     const onOpen = vi.fn()
-    render(<MissionTile m={mission} onOpen={onOpen} />)
+    render(<MissionCard m={mission} onOpen={onOpen} />)
     fireEvent.click(screen.getByRole('button'))
     expect(onOpen).toHaveBeenCalledWith(mission)
   })
 
   it('renders in list layout', () => {
-    render(<MissionTile m={mission} onOpen={vi.fn()} layout="list" />)
+    render(<MissionCard m={mission} onOpen={vi.fn()} layout="list" />)
     expect(screen.getByText('Brand Knowledge Quiz')).toBeInTheDocument()
   })
 
   it('renders in stack layout', () => {
-    render(<MissionTile m={mission} onOpen={vi.fn()} layout="stack" />)
+    render(<MissionCard m={mission} onOpen={vi.fn()} layout="stack" />)
     expect(screen.getByText('Brand Knowledge Quiz')).toBeInTheDocument()
   })
 
   it('shows LIMITED tag for limited missions', () => {
-    render(<MissionTile m={{ ...mission, limited: true }} onOpen={vi.fn()} />)
+    render(<MissionCard m={{ ...mission, limited: true }} onOpen={vi.fn()} />)
     expect(screen.getByText(/LIMITED/)).toBeInTheDocument()
   })
 })

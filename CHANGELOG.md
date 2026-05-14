@@ -59,7 +59,7 @@ Initial public release of the growquest-ui component library.
 - `Tag`, `XPPill`, `Eyebrow`, `Countdown`, `Sparkline`, `Divider` — utility display elements
 
 **Components**
-- `MissionTile` — mission card with type icon, XP value, progress bar, and launch CTA
+- `MissionCard` — mission card with type icon, XP value, progress bar, and launch CTA
 - `MissionModal` — full-screen modal launcher for missions with `React.memo`
 - `RewardCard` — reward card with image, cost, stock indicator, and claim CTA; `width`/`height` set to eliminate CLS
 - `BadgeGrid` — achievement badge grid with earned/unearned state
@@ -67,10 +67,10 @@ Initial public release of the growquest-ui component library.
 - `Podium` — top-3 leaderboard podium display
 - `FilterTabs` — horizontal tab bar for content filtering
 - `HeroBanner` — full-width hero with persona stats and customisable art style
-- `ProfileSnapshot` — compact user stats header
+- `ProfileCard` — compact user stats header
 - `StatCard` — single-metric card with icon
 - `TierLadder` — XP tier progression ladder
-- `React.memo` applied to `RewardCard`, `MissionTile`, `LeaderboardTable`, `BadgeGrid` to reduce TBT in list-heavy pages
+- `React.memo` applied to `RewardCard`, `MissionCard`, `LeaderboardTable`, `BadgeGrid` to reduce TBT in list-heavy pages
 
 **Experiences** — tree-shakeable interactive mini-games
 - `QuizExperience` — multiple-choice quiz with scoring and feedback

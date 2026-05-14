@@ -9,9 +9,9 @@ describe('deriveTokens — per-component overrides', () => {
     // drops them from styles.css :root, so they must always land in the
     // server-rendered <style> block.
     const tokens = deriveTokens(BASE)
-    expect(tokens['--mission-tile-bg']).toBe('var(--panel)')
-    expect(tokens['--mission-tile-halo-opacity']).toBe('0.25')
-    expect(tokens['--mission-tile-cta-fg']).toBe('#05060A')
+    expect(tokens['--mission-card-bg']).toBe('var(--panel)')
+    expect(tokens['--mission-card-halo-opacity']).toBe('0.25')
+    expect(tokens['--mission-card-cta-fg']).toBe('#05060A')
     expect(tokens['--mission-modal-bg']).toBe('var(--panel)')
     expect(tokens['--reward-card-bg']).toBe('var(--panel)')
     expect(tokens['--profile-card-bg']).toBe('var(--panel)')
@@ -22,11 +22,11 @@ describe('deriveTokens — per-component overrides', () => {
     expect(tokens['--tone-amber']).toBe('var(--accent-amber)')
   })
 
-  it('emits MissionTile slots when missionTile override is supplied', () => {
+  it('emits MissionCard slots when missionCard override is supplied', () => {
     const tokens = deriveTokens({
       ...BASE,
       overrides: {
-        missionTile: {
+        missionCard: {
           surface: '#1A0E00',
           border: '#FF8C00',
           ctaFg: '#FFFFFF',
@@ -34,23 +34,23 @@ describe('deriveTokens — per-component overrides', () => {
         },
       },
     })
-    expect(tokens['--mission-tile-bg']).toBe('#1A0E00')
-    expect(tokens['--mission-tile-border']).toBe('#FF8C00')
-    expect(tokens['--mission-tile-cta-fg']).toBe('#FFFFFF')
-    expect(tokens['--mission-tile-halo-opacity']).toBe('0.5')
+    expect(tokens['--mission-card-bg']).toBe('#1A0E00')
+    expect(tokens['--mission-card-border']).toBe('#FF8C00')
+    expect(tokens['--mission-card-cta-fg']).toBe('#FFFFFF')
+    expect(tokens['--mission-card-halo-opacity']).toBe('0.5')
   })
 
   it('iconBoxBg shorthand falls back to surface2', () => {
     const fromExplicit = deriveTokens({
       ...BASE,
-      overrides: { missionTile: { iconBoxBg: '#111' } },
+      overrides: { missionCard: { iconBoxBg: '#111' } },
     })
     const fromSurface2 = deriveTokens({
       ...BASE,
-      overrides: { missionTile: { surface2: '#222' } },
+      overrides: { missionCard: { surface2: '#222' } },
     })
-    expect(fromExplicit['--mission-tile-icon-bg']).toBe('#111')
-    expect(fromSurface2['--mission-tile-icon-bg']).toBe('#222')
+    expect(fromExplicit['--mission-card-icon-bg']).toBe('#111')
+    expect(fromSurface2['--mission-card-icon-bg']).toBe('#222')
   })
 
   it('emits MissionModal slots independently', () => {

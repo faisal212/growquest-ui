@@ -26,7 +26,7 @@ import 'growquest-ui/styles.css'
 ## Quick start
 
 ```tsx
-import { MissionTile, RewardCard, XPBar } from 'growquest-ui'
+import { MissionCard, RewardCard, XPBar } from 'growquest-ui'
 import 'growquest-ui/styles'
 
 export default function App() {
@@ -34,7 +34,7 @@ export default function App() {
     <>
       <XPBar value={72} label="Level 4" />
 
-      <MissionTile
+      <MissionCard
         mission={{
           id: 'm1',
           type: 'quiz',
@@ -74,7 +74,7 @@ Import the stylesheet in your root layout:
 import 'growquest-ui/styles.css'
 ```
 
-Interactive components (`MissionModal`, `*Experience`, `Countdown`, `FilterTabs`, `MissionTile`, `RewardCard`) use React hooks and must run on the client. Wrap them in a `'use client'` boundary — this is the standard Next.js pattern for third-party UI libraries:
+Interactive components (`MissionModal`, `*Experience`, `Countdown`, `FilterTabs`, `MissionCard`, `RewardCard`) use React hooks and must run on the client. Wrap them in a `'use client'` boundary — this is the standard Next.js pattern for third-party UI libraries:
 
 ```tsx
 // components/MissionModalWrapper.tsx
@@ -84,7 +84,7 @@ export { MissionModal } from 'growquest-ui'
 
 Or just add `'use client'` to the file where you use them directly.
 
-Purely presentational components (`HeroBanner`, `Podium`, `ProfileSnapshot`, `StatCard`, `TierLadder`, `BadgeGrid`, `LeaderboardTable`, `Logo`, `BrandLockup`, `Chip`, `Tag`, `XPPill`, `Eyebrow`, `Divider`, `Sparkline`) work in Server Components with no extra setup.
+Purely presentational components (`HeroBanner`, `Podium`, `ProfileCard`, `StatCard`, `TierLadder`, `BadgeGrid`, `LeaderboardTable`, `Logo`, `BrandLockup`, `Chip`, `Tag`, `XPPill`, `Eyebrow`, `Divider`, `Sparkline`) work in Server Components with no extra setup.
 
 ---
 
@@ -118,9 +118,9 @@ Purely presentational components (`HeroBanner`, `Podium`, `ProfileSnapshot`, `St
 | `HeroBanner` | Full-width hero section with persona stats |
 | `LeaderboardTable` | Ranked user table with streak and tier columns |
 | `MissionModal` | Full-screen modal for launching a mission |
-| `MissionTile` | Card for a single mission with progress indicator |
+| `MissionCard` | Card for a single mission with progress indicator |
 | `Podium` | Top-3 leaderboard podium |
-| `ProfileSnapshot` | Compact user stats header |
+| `ProfileCard` | Compact user stats header |
 | `RewardCard` | Reward card with claim CTA and stock indicator |
 | `StatCard` | Single metric card with icon |
 | `TierLadder` | Visual XP tier progression ladder |
