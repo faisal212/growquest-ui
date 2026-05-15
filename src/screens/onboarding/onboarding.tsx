@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { HeroArt } from '../../art'
 import { Eyebrow, Button, Input, Chip } from '../../atoms'
-import { interpolate, useAsset, useContent } from '../../config'
+import { interpolate, useAsset, useContentSlice } from '../../config'
 import { HeroMedia } from '../../components/HeroMedia/HeroMedia'
 
 interface OnboardingScreenProps {
@@ -14,34 +14,19 @@ export default function OnboardingScreen({ onEnter, heroStyle }: OnboardingScree
   const [agree, setAgree] = useState(false)
   const valid = /^\S+@\S+\.\S+$/.test(email) && agree
 
-  const brandName = useContent<string>('brand.name')
-  const eyebrow = useContent<string>('onboarding.eyebrow')
-  const titleLead = useContent<string>('onboarding.titleLead')
-  const titleBrand = useContent<string>('onboarding.titleBrand')
-  const titleTrail = useContent<string>('onboarding.titleTrail')
-  const body = useContent<string>('onboarding.body')
-  const stats = useContent<{ key: string; value: string }[]>('onboarding.stats')
-  const emailLabel = useContent<string>('onboarding.emailLabel')
-  const emailPlaceholder = useContent<string>('onboarding.emailPlaceholder')
-  const consent = useContent<string>('onboarding.consent')
-  const consentTermsLabel = useContent<string>('onboarding.consentTermsLabel')
-  const consentPrivacyLabel = useContent<string>('onboarding.consentPrivacyLabel')
-  const cta = useContent<string>('onboarding.cta')
-  const microcopyLeft = useContent<string>('onboarding.microcopyLeft')
-  const microcopyRight = useContent<string>('onboarding.microcopyRight')
-  const chipPrimary = useContent<string>('onboarding.chipPrimary')
-  const chipSecondary = useContent<string>('onboarding.chipSecondary')
+  const t = useContentSlice('onboarding')
+  const brand = useContentSlice('brand')
   const onboardingHero = useAsset('onboardingHero')
 
-  const brandHighlight = titleBrand || brandName
-  const consentParts = interpolate(consent, {
+  const brandHighlight = t.titleBrand || brand.name
+  const consentParts = interpolate(t.consent, {
     terms: (
       <button
         type="button"
         className="bg-transparent border-0 p-0 cursor-pointer [font:inherit]"
         style={{ color: 'var(--onboarding-card-link)' }}
       >
-        {consentTermsLabel}
+        {t.consentTermsLabel}
       </button>
     ),
     privacy: (
@@ -50,7 +35,7 @@ export default function OnboardingScreen({ onEnter, heroStyle }: OnboardingScree
         className="bg-transparent border-0 p-0 cursor-pointer [font:inherit]"
         style={{ color: 'var(--onboarding-card-link)' }}
       >
-        {consentPrivacyLabel}
+        {t.consentPrivacyLabel}
       </button>
     ),
   })
@@ -72,13 +57,13 @@ export default function OnboardingScreen({ onEnter, heroStyle }: OnboardingScree
             <HeroMedia
               asset={onboardingHero}
               fallback={<HeroArt variant={heroStyle} />}
-              alt={`${titleLead} ${brandHighlight} ${titleTrail}`.trim()}
+              alt={`${t.titleLead} ${brandHighlight} ${t.titleTrail}`.trim()}
             />
           </div>
           {!onboardingHero && (
             <div className="absolute left-4 bottom-4 flex gap-[6px] flex-wrap">
-              <Chip tone="accent">{chipPrimary}</Chip>
-              <Chip>{chipSecondary}</Chip>
+              <Chip tone="accent">{t.chipPrimary}</Chip>
+              <Chip>{t.chipSecondary}</Chip>
             </div>
           )}
         </div>
@@ -90,24 +75,24 @@ export default function OnboardingScreen({ onEnter, heroStyle }: OnboardingScree
             color: 'var(--onboarding-card-title)',
           }}
         >
-          <Eyebrow>{eyebrow}</Eyebrow>
+          <Eyebrow>{t.eyebrow}</Eyebrow>
           <h1 className="display text-[36px] leading-[1.05] m-0 tracking-[-0.03em]">
-            {titleLead}
+            {t.titleLead}
             <br />
             <span style={{ color: 'var(--onboarding-card-brand-emphasis)' }}>
               {brandHighlight}
             </span>{' '}
-            {titleTrail}
+            {t.titleTrail}
           </h1>
           <p
             className="text-[15px] leading-[1.6] m-0"
             style={{ color: 'var(--onboarding-card-body)' }}
           >
-            {body}
+            {t.body}
           </p>
 
           <div className="grid grid-cols-3 gap-[10px]">
-            {stats.map((s) => (
+            {t.stats.map((s) => (
               <div
                 key={s.key}
                 className="px-3 py-[10px] rounded-lg"
@@ -133,11 +118,11 @@ export default function OnboardingScreen({ onEnter, heroStyle }: OnboardingScree
               className="block font-mono text-[10px] tracking-[0.12em] uppercase mb-[6px]"
               style={{ color: 'var(--onboarding-card-body)' }}
             >
-              {emailLabel}
+              {t.emailLabel}
             </label>
             <Input
               id="onboarding-email"
-              placeholder={emailPlaceholder}
+              placeholder={t.emailPlaceholder}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -157,7 +142,7 @@ export default function OnboardingScreen({ onEnter, heroStyle }: OnboardingScree
           </label>
 
           <Button variant="primary" disabled={!valid} onClick={() => onEnter(email)}>
-            {cta}
+            {t.cta}
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
               <path
                 d="M1 7h12M8 2l5 5-5 5"
@@ -173,8 +158,8 @@ export default function OnboardingScreen({ onEnter, heroStyle }: OnboardingScree
             className="flex justify-between text-[11px] font-mono"
             style={{ color: 'var(--ink-faint)' }}
           >
-            <span>{microcopyLeft}</span>
-            <span>{microcopyRight}</span>
+            <span>{t.microcopyLeft}</span>
+            <span>{t.microcopyRight}</span>
           </div>
         </div>
       </div>

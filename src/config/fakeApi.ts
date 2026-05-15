@@ -33,7 +33,7 @@ export const TENANTS: Record<string, BrandConfig> = {
     },
     overrides: {
       missionCard: {
-        surface: '#FFFFFF',
+        panel: '#FFFFFF',
         border: '#FF8C00',
         ctaFg: '#FFFFFF',
       },
@@ -127,14 +127,14 @@ export const TENANTS: Record<string, BrandConfig> = {
     },
     overrides: {
       onboardingCard: {
-        surface: '#1a0e00',
+        panel: '#1a0e00',
         heroBg: '#0a0500',
         statTileBg: '#2a1500',
         brandEmphasis: '#FF8C00',
         linkColor: '#FF8C00',
       },
       topNav: {
-        surface: 'rgba(20,10,0,0.85)',
+        panel: 'rgba(20,10,0,0.85)',
         border: '#FF8C00',
         linkColor: '#aa6600',
         linkColorActive: '#FF8C00',
@@ -146,14 +146,14 @@ export const TENANTS: Record<string, BrandConfig> = {
         brandColor: '#FF8C00',
       },
       heroBanner: {
-        surface: '#0a0500',
+        panel: '#0a0500',
         border: '#FF8C00',
         overlayGradient: 'linear-gradient(180deg, transparent 30%, rgba(20,10,0,0.95) 100%)',
         overlayMode: 'never',
       },
-      tierLadder: { currentMixPercent: 40, lockedOpacity: 0.2, surface: '#1a0e00' },
+      tierLadder: { currentMixPercent: 40, lockedOpacity: 0.2, panel: '#1a0e00' },
       badgeGrid: {
-        surface: '#1a0e00',
+        panel: '#1a0e00',
         border: '#FF8C00',
         unlockedTones: ['#FF8C00', '#FFD700', '#FF1493'],
         lockedFg: '#3a2500',

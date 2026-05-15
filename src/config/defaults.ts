@@ -1,26 +1,24 @@
-import type { BrandConfig, ContentMap, SurfacePalette, Mode } from './schema'
+import type { BrandConfig, ContentMap, PanelPalette, Mode } from './schema'
 
-/** Per-mode surface/ink palette. Matches the values currently in styles.css. */
-export const SURFACES: Record<Mode, SurfacePalette> = {
+/** Per-mode panel + ink palette. Matches the values currently in styles.css. */
+export const PALETTES: Record<Mode, PanelPalette> = {
   dark: {
-    surface: '#0E1018',
-    surface2: '#141722',
-    surface3: '#1A1E2C',
-    surfaceHover: '#1A1E2C',
-    onSurface: '#E8EBF2',
-    onSurfaceDim: '#8B93A7',
-    onSurfaceFaint: '#555C6E',
+    panel: '#0E1018',
+    panel2: '#141722',
+    panelHover: '#1A1E2C',
+    ink: '#E8EBF2',
+    inkDim: '#8B93A7',
+    inkFaint: '#555C6E',
     border: 'oklch(0.28 0.015 270)',
     borderStrong: 'oklch(0.38 0.02 270)',
   },
   light: {
-    surface: '#FFFFFF',
-    surface2: '#F9F8F4',
-    surface3: '#F0EFE9',
-    surfaceHover: '#F0EFE9',
-    onSurface: '#0A0B10',
-    onSurfaceDim: '#5A6275',
-    onSurfaceFaint: '#9099AA',
+    panel: '#FFFFFF',
+    panel2: '#F9F8F4',
+    panelHover: '#F0EFE9',
+    ink: '#0A0B10',
+    inkDim: '#5A6275',
+    inkFaint: '#9099AA',
     border: 'oklch(0.88 0.006 270)',
     borderStrong: 'oklch(0.78 0.01 270)',
   },

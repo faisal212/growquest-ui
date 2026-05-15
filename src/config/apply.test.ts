@@ -43,7 +43,7 @@ describe('applyBrand', () => {
       mode: 'dark',
       brand: { primary: '#FF8C00' },
       overrides: {
-        missionCard: { surface: '#1A0E00' },
+        missionCard: { panel: '#1A0E00' },
         leaderboardRow: { mineHighlight: '#FF8C0030' },
         tones: { accent: '#FF00FF' },
       },

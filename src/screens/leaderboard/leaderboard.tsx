@@ -2,22 +2,11 @@ import { LEADERBOARD } from '../../data'
 import { Eyebrow } from '../../atoms'
 import { Podium } from '../../components/Podium'
 import { LeaderboardTable } from '../../components/LeaderboardTable'
-import { useContent, useBrand } from '../../config'
+import { useContentSlice, useBrand } from '../../config'
 import type { Persona } from '../../types'
 
 export default function LeaderboardScreen({ persona: _persona }: { persona: Persona }) {
-  const eyebrow = useContent<string>('leaderboard.eyebrow')
-  const title = useContent<string>('leaderboard.title')
-  const subtitle = useContent<string>('leaderboard.subtitle')
-  const columnLabels = useContent<{
-    rank: string
-    insider: string
-    streak: string
-    tier: string
-    xp: string
-  }>('leaderboard.columns')
-  const streakEmoji = useContent<string>('leaderboard.streakEmoji')
-  const youTag = useContent<string>('leaderboard.youTag')
+  const t = useContentSlice('leaderboard')
 
   const brand = useBrand()
   const tierTones = brand.overrides?.leaderboardRow?.tierTones
@@ -38,23 +27,23 @@ export default function LeaderboardScreen({ persona: _persona }: { persona: Pers
   return (
     <div className="animate-fade-up w-full max-w-[1080px] mx-auto px-6 pt-6 pb-10 max-[720px]:px-3 max-[720px]:pt-4 max-[720px]:pb-8">
       <div className="mb-5">
-        <Eyebrow>{eyebrow}</Eyebrow>
-        <h1 className="display mt-[6px] mb-1 text-[30px]">{title}</h1>
-        <div className="text-sm text-ink-dim">{subtitle}</div>
+        <Eyebrow>{t.eyebrow}</Eyebrow>
+        <h1 className="display mt-[6px] mb-1 text-[30px]">{t.title}</h1>
+        <div className="text-sm text-ink-dim">{t.subtitle}</div>
       </div>
       <Podium entries={LEADERBOARD} rankColors={rankColors} platformHeights={platformHeights} />
       <LeaderboardTable
         entries={LEADERBOARD}
         columnLabels={{
-          rank: columnLabels.rank,
-          handle: columnLabels.insider,
-          streak: columnLabels.streak,
-          tier: columnLabels.tier,
-          xp: columnLabels.xp,
+          rank: t.columns.rank,
+          handle: t.columns.insider,
+          streak: t.columns.streak,
+          tier: t.columns.tier,
+          xp: t.columns.xp,
         }}
-        streakEmoji={streakEmoji}
+        streakEmoji={t.streakEmoji}
         tierToneMap={tierTones}
-        youTag={youTag}
+        youTag={t.youTag}
       />
     </div>
   )

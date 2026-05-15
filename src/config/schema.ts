@@ -143,15 +143,28 @@ export interface AssetMap {
   missionsHero?: AssetEntry
 }
 
-export interface SurfacePalette {
-  surface: string
-  surface2: string
-  surface3: string
-  surfaceHover: string
-  onSurface: string
-  onSurfaceDim: string
-  onSurfaceFaint: string
+/**
+ * Canonical panel + ink palette. Field names match the CSS custom properties
+ * emitted by tokens.ts (`panel` → `--panel`, `ink` → `--ink`, etc.) and the
+ * names every component already uses. One vocabulary across schema, CSS, and
+ * components — no translation layer.
+ */
+export interface PanelPalette {
+  /** Card / panel background. → --panel */
+  panel: string
+  /** Inner sub-panel inside a panel (icon container, stat tile). → --panel-2 */
+  panel2: string
+  /** Hover state for clickable panels. → --panel-hover */
+  panelHover: string
+  /** Primary text on a panel. → --ink */
+  ink: string
+  /** Secondary / dimmed text on a panel. → --ink-dim */
+  inkDim: string
+  /** Tertiary / faintest text on a panel. → --ink-faint */
+  inkFaint: string
+  /** Default border color. → --border */
   border: string
+  /** Emphasized border (used for hover + dividers). → --border-strong */
   borderStrong: string
 }
 
@@ -169,11 +182,11 @@ export interface FontSet {
 }
 
 /** Slots shared across most card-like components. Every field is optional. */
-export interface ComponentSurfaceRecipe {
+export interface ComponentPanelRecipe {
   /** Primary background. */
-  surface?: string
-  /** Inner sub-surface (icon container, image area, stat tile). */
-  surface2?: string
+  panel?: string
+  /** Inner sub-panel (icon container, image area, stat tile). */
+  panel2?: string
   /** Outer border. */
   border?: string
   /** Primary text color. */
@@ -182,8 +195,8 @@ export interface ComponentSurfaceRecipe {
   body?: string
 }
 
-export interface MissionCardRecipe extends ComponentSurfaceRecipe {
-  /** Overrides surface2 for the icon container only. */
+export interface MissionCardRecipe extends ComponentPanelRecipe {
+  /** Overrides panel2 for the icon container only. */
   iconBoxBg?: string
   iconBoxBorder?: string
   /** Foreground color of the tone-tinted "GO" CTA. Default `#05060A`. */
@@ -192,7 +205,7 @@ export interface MissionCardRecipe extends ComponentSurfaceRecipe {
   haloOpacity?: number
 }
 
-export interface MissionModalRecipe extends ComponentSurfaceRecipe {
+export interface MissionModalRecipe extends ComponentPanelRecipe {
   /** Dim overlay behind the modal. Default `color-mix(in oklch, #000 60%, transparent)`. */
   backdrop?: string
   /** Bottom border on the modal header. */
@@ -203,13 +216,13 @@ export interface MissionModalRecipe extends ComponentSurfaceRecipe {
   closeIcon?: string
 }
 
-export interface RewardCardRecipe extends ComponentSurfaceRecipe {
+export interface RewardCardRecipe extends ComponentPanelRecipe {
   /** Background behind the artwork (or the placeholder pattern when no image). */
   imageArea?: string
   imageAreaBorder?: string
 }
 
-export interface ProfileCardRecipe extends ComponentSurfaceRecipe {
+export interface ProfileCardRecipe extends ComponentPanelRecipe {
   /** Background for the inner stat tiles. */
   statBg?: string
   statBorder?: string
@@ -218,9 +231,9 @@ export interface ProfileCardRecipe extends ComponentSurfaceRecipe {
 }
 
 export interface LeaderboardRowRecipe {
-  rowSurface?: string
+  rowPanel?: string
   rowBorder?: string
-  headSurface?: string
+  headPanel?: string
   headText?: string
   /** Highlight color behind the current user's row. */
   mineHighlight?: string
@@ -230,10 +243,10 @@ export interface LeaderboardRowRecipe {
   tierTones?: Record<string, ToneName>
 }
 
-export interface OnboardingCardRecipe extends ComponentSurfaceRecipe {
+export interface OnboardingCardRecipe extends ComponentPanelRecipe {
   /** Left hero pane bg (currently `bg-bg-2`). */
   heroBg?: string
-  /** Right form pane bg (defaults to the wrapper surface). */
+  /** Right form pane bg (defaults to the wrapper panel). */
   formBg?: string
   /** Background for the 3 stat tiles. */
   statTileBg?: string
@@ -245,7 +258,7 @@ export interface OnboardingCardRecipe extends ComponentSurfaceRecipe {
 }
 
 export interface TopNavRecipe {
-  surface?: string
+  panel?: string
   border?: string
   linkColor?: string
   linkColorActive?: string
@@ -253,7 +266,7 @@ export interface TopNavRecipe {
 }
 
 export interface FooterRecipe {
-  surface?: string
+  panel?: string
   border?: string
   textColor?: string
   /** Color for the bolded wordmark inside "Powered by X". */
@@ -261,7 +274,7 @@ export interface FooterRecipe {
 }
 
 export interface HeroBannerRecipe {
-  surface?: string
+  panel?: string
   border?: string
   /** Overlay gradient applied above the art. */
   overlayGradient?: string
@@ -275,16 +288,16 @@ export interface HeroBannerRecipe {
 }
 
 export interface TierLadderRecipe {
-  /** Mix-percentage used for the current-tier surface tint, 0..100. Default 12. */
+  /** Mix-percentage used for the current-tier panel tint, 0..100. Default 12. */
   currentMixPercent?: number
   /** Opacity of past/locked tier cards, 0..1. Default 0.5. */
   lockedOpacity?: number
-  surface?: string
-  surfaceCurrent?: string
+  panel?: string
+  panelCurrent?: string
 }
 
 export interface BadgeGridRecipe {
-  surface?: string
+  panel?: string
   border?: string
   /**
    * Raw color string rotation for unlocked badges (CSS values; can be `var(--tone-*)`,
@@ -327,33 +340,33 @@ export interface ToneOverrides {
 }
 
 export interface Overrides {
-  /** Override the per-mode surface/ink palette. Rarely needed. */
-  surface?: Partial<SurfacePalette>
+  /** Override the per-mode panel + ink palette. Rarely needed — `mode` already selects a sensible default. */
+  palette?: Partial<PanelPalette>
   /** Override corner radii. */
   radius?: RadiusSet
   /** Override font stacks. */
   fonts?: FontSet
-  /** Override mission-card-specific surfaces, borders, icon box, CTA. */
+  /** Override mission-card-specific panels, borders, icon box, CTA. */
   missionCard?: MissionCardRecipe
-  /** Override mission-modal backdrop, surfaces, header, close button. */
+  /** Override mission-modal backdrop, panels, header, close button. */
   missionModal?: MissionModalRecipe
-  /** Override reward-card surfaces and the image area. */
+  /** Override reward-card panels and the image area. */
   rewardCard?: RewardCardRecipe
-  /** Override profile-snapshot card surfaces and stat tiles. */
+  /** Override profile-snapshot card panels and stat tiles. */
   profileCard?: ProfileCardRecipe
   /** Override leaderboard row + head + highlight colors + tier-tone map. */
   leaderboardRow?: LeaderboardRowRecipe
   /** Override the onboarding-card wrapper, hero pane, stat tiles, brand emphasis. */
   onboardingCard?: OnboardingCardRecipe
-  /** Override the top-nav surface, border, link colors. */
+  /** Override the top-nav panel, border, link colors. */
   topNav?: TopNavRecipe
-  /** Override the app-footer surface, border, text, brand color. */
+  /** Override the app-footer panel, border, text, brand color. */
   footer?: FooterRecipe
-  /** Override the hero-banner surface, border, overlay gradient. */
+  /** Override the hero-banner panel, border, overlay gradient. */
   heroBanner?: HeroBannerRecipe
-  /** Override the tier-ladder current-tier mix, locked opacity, surfaces. */
+  /** Override the tier-ladder current-tier mix, locked opacity, panels. */
   tierLadder?: TierLadderRecipe
-  /** Override the badge-grid surface, unlocked-tone rotation, locked fg. */
+  /** Override the badge-grid panel, unlocked-tone rotation, locked fg. */
   badgeGrid?: BadgeGridRecipe
   /** Override the leaderboard podium rank colors + platform heights. */
   podium?: PodiumRecipe

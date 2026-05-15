@@ -6,7 +6,7 @@ import type { BrandConfig } from '../config/schema'
 
 /**
  * Render a component inside <BrandProvider value={config}>. Use in tests that
- * exercise useContent / useAsset / useBrand. Passing `override` deep-merges
+ * exercise useContentSlice / useAsset / useBrand. Passing `override` deep-merges
  * onto DEFAULT_CONFIG so tests only specify the slice they care about.
  */
 export function renderWithBrand(

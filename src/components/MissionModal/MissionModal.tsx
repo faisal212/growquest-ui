@@ -137,7 +137,9 @@ export function MissionModal({ m, onClose, onClaim }: MissionModalProps) {
           </button>
         </div>
         {body ?? (
-          <div className="p-6 text-ink-dim text-[13px] text-center">Experience coming soon</div>
+          <div className="p-6 text-[13px] text-center text-[color:var(--mission-modal-body)]">
+            Experience coming soon
+          </div>
         )}
       </div>
     </div>,

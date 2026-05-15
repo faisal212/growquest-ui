@@ -7,7 +7,7 @@
 // (or a CMS UI exposing these knobs) can see the complete contract in one place.
 //
 // Defaults for every field live in:
-//   - `src/config/defaults.ts`       — mode, brand colors, surface palette, content
+//   - `src/config/defaults.ts`       — mode, brand colors, panel palette, content
 //   - `src/config/tokens.ts`         — per-component CSS-var defaults
 //   - `styles.css` @layer base block — Storybook safety net (mirrors tokens.ts)
 //
@@ -127,13 +127,13 @@
 
   // ─── Media assets ─────────────────────────────────────────────────────────
   // `onboardingHero` and `missionsHero` are consumed today: when set, they
-  // replace the procedural HeroArt SVG on their respective surfaces. On
+  // replace the procedural HeroArt SVG on their respective panels. On
   // onboarding the decorative chip row is also hidden when the asset is set.
   // `IMG` and `GIF` render via <img>; `JSON` (Lottie) is reserved but currently
   // falls back to HeroArt — add a LottiePlayer if a tenant needs animation.
   //
   // Defaults: `DEFAULT_CONFIG.assets` ships with edge-cached placehold.co
-  // URLs (colored to match the dark surface palette) for `onboardingHero`
+  // URLs (colored to match the dark panel palette) for `onboardingHero`
   // and `missionsHero`, so a zero-config install renders a branded image
   // instead of the procedural cube. Tenants override these freely. If a
   // tenant's URL fails to load at runtime, HeroMedia falls back to the
@@ -162,18 +162,18 @@
   // ─── Overrides: every field optional; supply only what differs ────────────
   "overrides": {
 
-    // Per-mode surface/ink palette. Rarely needed — `mode: "dark"` or "light"
-    // already selects a sensible palette (see defaults.ts:SURFACES).
-    "surface": {
-      "surface":        "#0E1018",                 // → --surface
-      "surface2":       "#141722",                 // → --surface-2
-      "surface3":       "#1A1E2C",                 // → --surface-3
-      "surfaceHover":   "#1A1E2C",                 // → --surface-hover
-      "onSurface":      "#E8EBF2",                 // → --on-surface (primary text)
-      "onSurfaceDim":   "#8B93A7",                 // → --on-surface-dim
-      "onSurfaceFaint": "#555C6E",                 // → --on-surface-faint
-      "border":         "oklch(0.28 0.015 270)",   // → --border-token
-      "borderStrong":   "oklch(0.38 0.02 270)"     // → --border-strong-token
+    // Per-mode panel + ink palette. Rarely needed — `mode: "dark"` or "light"
+    // already selects a sensible palette (see defaults.ts:PALETTES). Field
+    // names map 1:1 to the CSS custom properties components consume.
+    "palette": {
+      "panel":        "#0E1018",                   // → --panel       (card background)
+      "panel2":       "#141722",                   // → --panel-2     (inner sub-panel)
+      "panelHover":   "#1A1E2C",                   // → --panel-hover
+      "ink":          "#E8EBF2",                   // → --ink         (primary text)
+      "inkDim":       "#8B93A7",                   // → --ink-dim     (secondary text)
+      "inkFaint":     "#555C6E",                   // → --ink-faint   (tertiary text)
+      "border":       "oklch(0.28 0.015 270)",     // → --border
+      "borderStrong": "oklch(0.38 0.02 270)"       // → --border-strong
     },
 
     // Corner radii (defaults: 14px / 8px / 4px / 16px).
@@ -193,8 +193,8 @@
 
     // Mission card (the tappable item on /missions). Maps to --mission-card-*.
     "missionCard": {
-      "surface":       "#FFFFFF",                  // → --mission-card-bg
-      "surface2":      "#F9F8F4",                  // fallback for iconBoxBg if unset
+      "panel":         "#FFFFFF",                  // → --mission-card-bg
+      "panel2":        "#F9F8F4",                  // fallback for iconBoxBg if unset
       "border":        "#FF8C00",                  // → --mission-card-border
       "title":         "#0A0B10",                  // → --mission-card-title
       "body":          "#5A6275",                  // → --mission-card-body
@@ -206,7 +206,7 @@
 
     // Mission detail modal. Maps to --mission-modal-*.
     "missionModal": {
-      "surface":      "#FFFFFF",                   // → --mission-modal-bg
+      "panel":        "#FFFFFF",                   // → --mission-modal-bg
       "border":       "#FF8C00",
       "title":        "#0A0B10",
       "body":         "#5A6275",
@@ -219,8 +219,8 @@
 
     // Reward marketplace card. Maps to --reward-card-*.
     "rewardCard": {
-      "surface":         "#FFFFFF",
-      "surface2":        "#F9F8F4",                // fallback for imageArea if unset
+      "panel":           "#FFFFFF",
+      "panel2":          "#F9F8F4",                // fallback for imageArea if unset
       "border":          "#E8EBF2",
       "title":           "#0A0B10",
       "body":            "#5A6275",
@@ -230,8 +230,8 @@
 
     // Profile snapshot card (on /profile). Maps to --profile-card-*.
     "profileCard": {
-      "surface":     "#FFFFFF",
-      "surface2":    "#F9F8F4",                    // fallback for statBg
+      "panel":       "#FFFFFF",
+      "panel2":      "#F9F8F4",                    // fallback for statBg
       "border":      "#E8EBF2",
       "title":       "#0A0B10",
       "body":        "#5A6275",
@@ -243,9 +243,9 @@
     // Leaderboard table rows. Maps to --leaderboard-*. tierTones is consumed
     // by LeaderboardTable as a prop (not a CSS var) — maps tier display name → tone.
     "leaderboardRow": {
-      "rowSurface":    "transparent",              // → --leaderboard-row-bg
+      "rowPanel":      "transparent",              // → --leaderboard-row-bg
       "rowBorder":     "#E8EBF2",
-      "headSurface":   "transparent",
+      "headPanel":     "transparent",
       "headText":      "#5A6275",
       "mineHighlight": "#FF8C0030",                // bg behind current user's row
       "topRankColor":  "#FF8C00",                  // rank number color for top 3
@@ -257,7 +257,7 @@
 
     // Onboarding card (the wrapper card on /onboarding). Maps to --onboarding-card-*.
     "onboardingCard": {
-      "surface":        "#FFFFFF",                 // → --onboarding-card-bg
+      "panel":          "#FFFFFF",                 // → --onboarding-card-bg
       "border":         "#E8EBF2",
       "title":          "#0A0B10",
       "body":           "#5A6275",
@@ -271,7 +271,7 @@
 
     // Top navigation bar. Maps to --topnav-*.
     "topNav": {
-      "surface":         "color-mix(in oklch, #05060A 80%, transparent)",
+      "panel":           "color-mix(in oklch, #05060A 80%, transparent)",
       "border":          "#E8EBF2",
       "linkColor":       "#5A6275",                // inactive link
       "linkColorActive": "#FF8C00",                // active link text
@@ -280,7 +280,7 @@
 
     // App footer. Maps to --footer-*.
     "footer": {
-      "surface":    "transparent",
+      "panel":      "transparent",
       "border":     "#E8EBF2",
       "textColor":  "#9099AA",
       "brandColor": "#FF8C00"                      // color of bolded wordmark
@@ -288,7 +288,7 @@
 
     // Hero banner (top of /missions). Maps to --hero-banner-*.
     "heroBanner": {
-      "surface":         "#0B0D14",                // bg behind the art
+      "panel":           "#0B0D14",                // bg behind the art
       "border":          "#FF8C00",
       "overlayGradient": "linear-gradient(180deg, transparent 40%, #05060ACC 100%)",
       // 'always' (default) | 'eyebrow-only' | 'never'. Set 'never' when the
@@ -301,14 +301,14 @@
     "tierLadder": {
       "currentMixPercent": 12,                     // 0..100, default 12
       "lockedOpacity":     0.5,                    // 0..1, default 0.5
-      "surface":           "#F9F8F4",              // non-current tier bg
-      "surfaceCurrent":    ""                      // optional; overrides the auto-mix
+      "panel":             "#F9F8F4",              // non-current tier bg → --tier-ladder-panel
+      "panelCurrent":      ""                      // optional override; → --tier-ladder-panel-current
     },
 
     // Badge grid (right column on /profile). unlockedTones is consumed by
     // BadgeGrid as a prop; the rest map to --badge-grid-*.
     "badgeGrid": {
-      "surface":  "#F9F8F4",
+      "panel":    "#F9F8F4",
       "border":   "#E8EBF2",
       "unlockedTones": [
         "var(--accent-cyan)",

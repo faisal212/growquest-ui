@@ -129,7 +129,7 @@ export const Overview: Story = {
           { token: '--accent-lime / -magenta / -amber', usage: 'Secondary palette' },
           { token: '--ink / --ink-dim', usage: 'Text — primary / secondary' },
           { token: '--bg / --bg-2', usage: 'Page background levels' },
-          { token: '--panel / --panel-2', usage: 'Card surfaces' },
+          { token: '--panel / --panel-2', usage: 'Card panels' },
           { token: '--border', usage: 'Dividers and outlines' },
           { token: '--font-mono', usage: 'JetBrains Mono (data, labels, badges)' },
         ].map(({ token, usage }, i) => (

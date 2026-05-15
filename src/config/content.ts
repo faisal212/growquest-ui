@@ -1,24 +1,18 @@
 import { useBrandState } from './BrandProvider'
+import type { ContentMap } from './schema'
 
 /**
- * Read a content value by dotted path. Resolves from BrandProvider context.
- * Outside a provider, falls back to DEFAULT_CONTENT (BrandProvider's default).
+ * Read a typed slice of the content tree by namespace.
+ *
+ * Returns the whole namespace as a typed object, not a single field.
+ * The slice is reference-stable across renders until the BrandConfig
+ * changes (BrandProvider memoizes the resolved content), so it is safe
+ * to use as a dependency in `useMemo` / `React.memo`.
  *
  * @example
- *   const title = useContent<string>('missions.sectionTitle')
- *   const balance = useContent<string>('missions.rewardsBalance')
+ *   const t = useContentSlice('missions')
+ *   <h2>{t.sectionTitle}</h2>
  */
-export function useContent<T = string>(path: string): T {
-  const { content } = useBrandState()
-  return resolve<T>(content, path)
-}
-
-function resolve<T>(root: unknown, path: string): T {
-  const parts = path.split('.')
-  let cur: unknown = root
-  for (const part of parts) {
-    if (cur == null || typeof cur !== 'object') return '' as unknown as T
-    cur = (cur as Record<string, unknown>)[part]
-  }
-  return cur as T
+export function useContentSlice<K extends keyof ContentMap>(ns: K): ContentMap[K] {
+  return useBrandState().content[ns]
 }

@@ -27,7 +27,7 @@ describe('deriveTokens — per-component overrides', () => {
       ...BASE,
       overrides: {
         missionCard: {
-          surface: '#1A0E00',
+          panel: '#1A0E00',
           border: '#FF8C00',
           ctaFg: '#FFFFFF',
           haloOpacity: 0.5,
@@ -40,17 +40,17 @@ describe('deriveTokens — per-component overrides', () => {
     expect(tokens['--mission-card-halo-opacity']).toBe('0.5')
   })
 
-  it('iconBoxBg shorthand falls back to surface2', () => {
+  it('iconBoxBg shorthand falls back to panel2', () => {
     const fromExplicit = deriveTokens({
       ...BASE,
       overrides: { missionCard: { iconBoxBg: '#111' } },
     })
-    const fromSurface2 = deriveTokens({
+    const fromPanel2 = deriveTokens({
       ...BASE,
-      overrides: { missionCard: { surface2: '#222' } },
+      overrides: { missionCard: { panel2: '#222' } },
     })
     expect(fromExplicit['--mission-card-icon-bg']).toBe('#111')
-    expect(fromSurface2['--mission-card-icon-bg']).toBe('#222')
+    expect(fromPanel2['--mission-card-icon-bg']).toBe('#222')
   })
 
   it('emits MissionModal slots independently', () => {
@@ -59,7 +59,7 @@ describe('deriveTokens — per-component overrides', () => {
       overrides: {
         missionModal: {
           backdrop: 'rgba(50,0,0,0.7)',
-          surface: '#000',
+          panel: '#000',
           closeBg: '#FF8C00',
           closeIcon: '#FFFFFF',
         },
@@ -75,7 +75,7 @@ describe('deriveTokens — per-component overrides', () => {
     const tokens = deriveTokens({
       ...BASE,
       overrides: {
-        rewardCard: { surface: '#111', imageArea: '#222', title: '#FFF' },
+        rewardCard: { panel: '#111', imageArea: '#222', title: '#FFF' },
       },
     })
     expect(tokens['--reward-card-bg']).toBe('#111')
@@ -87,7 +87,7 @@ describe('deriveTokens — per-component overrides', () => {
     const tokens = deriveTokens({
       ...BASE,
       overrides: {
-        profileCard: { surface: '#111', statBg: '#222', walletColor: '#888' },
+        profileCard: { panel: '#111', statBg: '#222', walletColor: '#888' },
       },
     })
     expect(tokens['--profile-card-bg']).toBe('#111')
@@ -132,7 +132,7 @@ describe('deriveTokens — per-component overrides', () => {
       ...BASE,
       overrides: {
         onboardingCard: {
-          surface: '#FFFFFF',
+          panel: '#FFFFFF',
           heroBg: '#0B0D14',
           statTileBg: '#F9F8F4',
           brandEmphasis: '#FF8C00',
@@ -147,10 +147,10 @@ describe('deriveTokens — per-component overrides', () => {
     expect(tokens['--onboarding-card-link']).toBe('#FF8C00')
   })
 
-  it('onboardingCard.statTileBg falls back to surface2', () => {
+  it('onboardingCard.statTileBg falls back to panel2', () => {
     const tokens = deriveTokens({
       ...BASE,
-      overrides: { onboardingCard: { surface2: '#ABC' } },
+      overrides: { onboardingCard: { panel2: '#ABC' } },
     })
     expect(tokens['--onboarding-card-stat-bg']).toBe('#ABC')
   })
@@ -160,7 +160,7 @@ describe('deriveTokens — per-component overrides', () => {
       ...BASE,
       overrides: {
         topNav: {
-          surface: '#000',
+          panel: '#000',
           linkColor: '#888',
           linkColorActive: '#FF8C00',
           linkBgActive: '#FF8C0010',
@@ -177,7 +177,7 @@ describe('deriveTokens — per-component overrides', () => {
     const tokens = deriveTokens({
       ...BASE,
       overrides: {
-        footer: { surface: '#111', textColor: '#888', brandColor: '#FF8C00' },
+        footer: { panel: '#111', textColor: '#888', brandColor: '#FF8C00' },
       },
     })
     expect(tokens['--footer-bg']).toBe('#111')
@@ -190,7 +190,7 @@ describe('deriveTokens — per-component overrides', () => {
       ...BASE,
       overrides: {
         heroBanner: {
-          surface: '#0B0D14',
+          panel: '#0B0D14',
           border: '#FF8C00',
           overlayGradient: 'linear-gradient(180deg, transparent, #000)',
         },
@@ -205,12 +205,12 @@ describe('deriveTokens — per-component overrides', () => {
     const tokens = deriveTokens({
       ...BASE,
       overrides: {
-        tierLadder: { currentMixPercent: 150, lockedOpacity: -0.5, surface: '#ABC' },
+        tierLadder: { currentMixPercent: 150, lockedOpacity: -0.5, panel: '#ABC' },
       },
     })
     expect(tokens['--tier-ladder-current-mix']).toBe('100%')
     expect(tokens['--tier-ladder-locked-opacity']).toBe('0')
-    expect(tokens['--tier-ladder-surface']).toBe('#ABC')
+    expect(tokens['--tier-ladder-panel']).toBe('#ABC')
   })
 
   it('emits statCard trend colors when supplied', () => {
@@ -234,10 +234,10 @@ describe('deriveTokens — per-component overrides', () => {
     expect(tokens['--xp-chart-gradient-to']).toBe('#FF1493')
   })
 
-  it('emits badgeGrid surface + lockedFg when supplied', () => {
+  it('emits badgeGrid panel + lockedFg when supplied', () => {
     const tokens = deriveTokens({
       ...BASE,
-      overrides: { badgeGrid: { surface: '#111', border: '#222', lockedFg: '#555' } },
+      overrides: { badgeGrid: { panel: '#111', border: '#222', lockedFg: '#555' } },
     })
     expect(tokens['--badge-grid-bg']).toBe('#111')
     expect(tokens['--badge-grid-border']).toBe('#222')

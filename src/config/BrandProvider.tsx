@@ -51,7 +51,7 @@ export function BrandProvider({ value, children }: { value: BrandConfig; childre
   return <BrandContext.Provider value={state}>{children}</BrandContext.Provider>
 }
 
-/** Read the entire resolved brand state. Most callers want useContent / useAsset / useBrand instead. */
+/** Read the entire resolved brand state. Most callers want useContentSlice / useAsset / useBrand instead. */
 export function useBrandState(): BrandState {
   return useContext(BrandContext)
 }

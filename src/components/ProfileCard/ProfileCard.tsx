@@ -48,7 +48,7 @@ export function ProfileCard({
             key={s.k}
             className="p-2.5 bg-[var(--profile-card-stat-bg)] border border-[color:var(--profile-card-stat-border)] rounded-lg text-center"
           >
-            <div className="font-mono text-[9px] tracking-[0.12em] uppercase text-[color:var(--profile-card-wallet)]">
+            <div className="font-mono text-[9px] tracking-[0.12em] uppercase text-[color:var(--profile-card-body)]">
               {s.k}
             </div>
             <div className="font-bold text-[14px] mt-0.5 text-[color:var(--profile-card-title)]">

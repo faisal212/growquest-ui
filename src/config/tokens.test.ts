@@ -2,17 +2,17 @@ import { describe, it, expect } from 'vitest'
 import { deriveTokens } from './tokens'
 
 describe('deriveTokens', () => {
-  it('derives the full surface palette for dark mode', () => {
+  it('derives the full panel palette for dark mode', () => {
     const tokens = deriveTokens({ mode: 'dark', brand: { primary: '#FF8C00' } })
-    expect(tokens['--surface']).toBe('#0E1018')
-    expect(tokens['--on-surface']).toBe('#E8EBF2')
-    expect(tokens['--on-surface-dim']).toBe('#8B93A7')
+    expect(tokens['--panel']).toBe('#0E1018')
+    expect(tokens['--ink']).toBe('#E8EBF2')
+    expect(tokens['--ink-dim']).toBe('#8B93A7')
   })
 
-  it('derives the full surface palette for light mode', () => {
+  it('derives the full panel palette for light mode', () => {
     const tokens = deriveTokens({ mode: 'light', brand: { primary: '#FF8C00' } })
-    expect(tokens['--surface']).toBe('#FFFFFF')
-    expect(tokens['--on-surface']).toBe('#0A0B10')
+    expect(tokens['--panel']).toBe('#FFFFFF')
+    expect(tokens['--ink']).toBe('#0A0B10')
   })
 
   it('writes primary as the verbatim input, parsed to a valid color string', () => {
@@ -45,14 +45,14 @@ describe('deriveTokens', () => {
     expect(tokens['--radius-tag']).toBe('4px')
   })
 
-  it('falls back to default surface palette when overrides.surface is partial', () => {
+  it('falls back to default palette when overrides.palette is partial', () => {
     const tokens = deriveTokens({
       mode: 'light',
       brand: { primary: '#FF8C00' },
-      overrides: { surface: { surface: '#000000' } },
+      overrides: { palette: { panel: '#000000' } },
     })
-    expect(tokens['--surface']).toBe('#000000')
-    expect(tokens['--on-surface']).toBe('#0A0B10')
+    expect(tokens['--panel']).toBe('#000000')
+    expect(tokens['--ink']).toBe('#0A0B10')
   })
 
   it('skips secondary tokens when secondary not supplied', () => {

@@ -6,13 +6,13 @@ export {
   BrandProvider,
   useBrandState,
   useBrand,
-  useContent,
+  useContentSlice,
   useAsset,
   preloadAssets,
   deriveTokens,
   DEFAULT_CONFIG,
   DEFAULT_CONTENT,
-  SURFACES,
+  PALETTES,
 } from './config'
 export type {
   BrandConfig,
@@ -22,7 +22,7 @@ export type {
   AssetEntry,
   Mode,
   Overrides,
-  SurfacePalette,
+  PanelPalette,
   RadiusSet,
   FontSet,
 } from './config'

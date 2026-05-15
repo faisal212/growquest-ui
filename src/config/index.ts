@@ -1,10 +1,10 @@
 export { applyBrand, getCurrentBrand, subscribeBrand } from './apply'
 export { BrandProvider, useBrandState } from './BrandProvider'
-export { useContent } from './content'
+export { useContentSlice } from './content'
 export { interpolate } from './interpolate'
 export { useAsset, preloadAssets } from './assets'
 export { deriveTokens } from './tokens'
-export { DEFAULT_CONFIG, DEFAULT_CONTENT, SURFACES } from './defaults'
+export { DEFAULT_CONFIG, DEFAULT_CONTENT, PALETTES } from './defaults'
 export type {
   BrandConfig,
   BrandColors,
@@ -13,7 +13,7 @@ export type {
   AssetEntry,
   Mode,
   Overrides,
-  SurfacePalette,
+  PanelPalette,
   RadiusSet,
   FontSet,
 } from './schema'

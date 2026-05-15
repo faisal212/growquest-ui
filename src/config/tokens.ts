@@ -1,6 +1,6 @@
 import { parse, oklch, formatHex, formatCss, type Oklch } from 'culori'
-import type { BrandConfig, Mode, SurfacePalette } from './schema'
-import { SURFACES } from './defaults'
+import type { BrandConfig, Mode, PanelPalette } from './schema'
+import { PALETTES } from './defaults'
 
 /**
  * Derive ~50 CSS-var (name → value) pairs from a BrandConfig.
@@ -12,18 +12,19 @@ import { SURFACES } from './defaults'
 export function deriveTokens(cfg: BrandConfig): Record<string, string> {
   const out: Record<string, string> = {}
   const mode: Mode = cfg.mode
-  const surface = mergeSurface(SURFACES[mode], cfg.overrides?.surface)
+  const palette = mergePalette(PALETTES[mode], cfg.overrides?.palette)
 
-  // Surface / ink
-  out['--surface'] = surface.surface
-  out['--surface-2'] = surface.surface2
-  out['--surface-3'] = surface.surface3
-  out['--surface-hover'] = surface.surfaceHover
-  out['--on-surface'] = surface.onSurface
-  out['--on-surface-dim'] = surface.onSurfaceDim
-  out['--on-surface-faint'] = surface.onSurfaceFaint
-  out['--border-token'] = surface.border
-  out['--border-strong-token'] = surface.borderStrong
+  // Panel + ink palette. Component code (and Tailwind @theme) consumes these
+  // names directly — the override path is live because BrandStyles emits at a
+  // selector that wins over styles.css's html[data-theme] defaults.
+  out['--panel'] = palette.panel
+  out['--panel-2'] = palette.panel2
+  out['--panel-hover'] = palette.panelHover
+  out['--ink'] = palette.ink
+  out['--ink-dim'] = palette.inkDim
+  out['--ink-faint'] = palette.inkFaint
+  out['--border'] = palette.border
+  out['--border-strong'] = palette.borderStrong
 
   // Brand: primary
   const primary = parseSafe(cfg.brand.primary) ?? parseSafe('oklch(0.86 0.18 200)')!
@@ -100,7 +101,11 @@ export function deriveTokens(cfg: BrandConfig): Record<string, string> {
   out['--profile-card-bg'] = 'var(--panel)'
   out['--profile-card-border'] = 'var(--border)'
   out['--profile-card-title'] = 'var(--ink)'
-  out['--profile-card-body'] = 'var(--ink-dim)'
+  // Default mirrors --ink-faint (not --ink-dim) so the stat-tile labels keep
+  // their established visual weight when no override is supplied. Wallet line
+  // uses --profile-card-wallet (also defaults to --ink-faint); they're
+  // independently overridable but pixel-identical at default.
+  out['--profile-card-body'] = 'var(--ink-faint)'
   out['--profile-card-stat-bg'] = 'var(--panel-2)'
   out['--profile-card-stat-border'] = 'var(--border)'
   out['--profile-card-wallet'] = 'var(--ink-faint)'
@@ -146,8 +151,10 @@ export function deriveTokens(cfg: BrandConfig): Record<string, string> {
   // Tier 2 — tier ladder
   out['--tier-ladder-current-mix'] = '12%'
   out['--tier-ladder-locked-opacity'] = '0.5'
-  out['--tier-ladder-surface'] = 'var(--panel-2)'
-  out['--tier-ladder-surface-current'] = ''
+  out['--tier-ladder-panel'] = 'var(--panel-2)'
+  // --tier-ladder-panel-current is intentionally not emitted by default.
+  // When unset, TierLadder.tsx falls back to a color-mix derived from the tier color.
+  // Setting overrides.tierLadder.panelCurrent assigns a concrete value and wins via var() fallback chain.
 
   // Tier 2 — badge grid
   out['--badge-grid-bg'] = 'var(--panel-2)'
@@ -168,9 +175,9 @@ export function deriveTokens(cfg: BrandConfig): Record<string, string> {
   const ov = cfg.overrides
   if (ov?.missionCard) {
     const r = ov.missionCard
-    if (r.surface) out['--mission-card-bg'] = r.surface
+    if (r.panel) out['--mission-card-bg'] = r.panel
     if (r.border) out['--mission-card-border'] = r.border
-    const innerBg = r.iconBoxBg ?? r.surface2
+    const innerBg = r.iconBoxBg ?? r.panel2
     if (innerBg) out['--mission-card-icon-bg'] = innerBg
     if (r.iconBoxBorder) out['--mission-card-icon-border'] = r.iconBoxBorder
     if (r.title) out['--mission-card-title'] = r.title
@@ -183,7 +190,7 @@ export function deriveTokens(cfg: BrandConfig): Record<string, string> {
   if (ov?.missionModal) {
     const r = ov.missionModal
     if (r.backdrop) out['--mission-modal-backdrop'] = r.backdrop
-    if (r.surface) out['--mission-modal-bg'] = r.surface
+    if (r.panel) out['--mission-modal-bg'] = r.panel
     if (r.border) out['--mission-modal-border'] = r.border
     if (r.headerBorder) out['--mission-modal-header-border'] = r.headerBorder
     if (r.title) out['--mission-modal-title'] = r.title
@@ -195,9 +202,9 @@ export function deriveTokens(cfg: BrandConfig): Record<string, string> {
 
   if (ov?.rewardCard) {
     const r = ov.rewardCard
-    if (r.surface) out['--reward-card-bg'] = r.surface
+    if (r.panel) out['--reward-card-bg'] = r.panel
     if (r.border) out['--reward-card-border'] = r.border
-    const imgBg = r.imageArea ?? r.surface2
+    const imgBg = r.imageArea ?? r.panel2
     if (imgBg) out['--reward-card-image-bg'] = imgBg
     if (r.imageAreaBorder) out['--reward-card-image-border'] = r.imageAreaBorder
     if (r.title) out['--reward-card-title'] = r.title
@@ -206,11 +213,11 @@ export function deriveTokens(cfg: BrandConfig): Record<string, string> {
 
   if (ov?.profileCard) {
     const r = ov.profileCard
-    if (r.surface) out['--profile-card-bg'] = r.surface
+    if (r.panel) out['--profile-card-bg'] = r.panel
     if (r.border) out['--profile-card-border'] = r.border
     if (r.title) out['--profile-card-title'] = r.title
     if (r.body) out['--profile-card-body'] = r.body
-    const statBg = r.statBg ?? r.surface2
+    const statBg = r.statBg ?? r.panel2
     if (statBg) out['--profile-card-stat-bg'] = statBg
     if (r.statBorder) out['--profile-card-stat-border'] = r.statBorder
     if (r.walletColor) out['--profile-card-wallet'] = r.walletColor
@@ -218,9 +225,9 @@ export function deriveTokens(cfg: BrandConfig): Record<string, string> {
 
   if (ov?.leaderboardRow) {
     const r = ov.leaderboardRow
-    if (r.rowSurface) out['--leaderboard-row-bg'] = r.rowSurface
+    if (r.rowPanel) out['--leaderboard-row-bg'] = r.rowPanel
     if (r.rowBorder) out['--leaderboard-row-border'] = r.rowBorder
-    if (r.headSurface) out['--leaderboard-head-bg'] = r.headSurface
+    if (r.headPanel) out['--leaderboard-head-bg'] = r.headPanel
     if (r.headText) out['--leaderboard-head-text'] = r.headText
     if (r.mineHighlight) out['--leaderboard-mine-bg'] = r.mineHighlight
     if (r.topRankColor) out['--leaderboard-top-rank'] = r.topRankColor
@@ -235,13 +242,13 @@ export function deriveTokens(cfg: BrandConfig): Record<string, string> {
 
   if (ov?.onboardingCard) {
     const r = ov.onboardingCard
-    if (r.surface) out['--onboarding-card-bg'] = r.surface
+    if (r.panel) out['--onboarding-card-bg'] = r.panel
     if (r.border) out['--onboarding-card-border'] = r.border
     if (r.title) out['--onboarding-card-title'] = r.title
     if (r.body) out['--onboarding-card-body'] = r.body
     if (r.heroBg) out['--onboarding-card-hero-bg'] = r.heroBg
     if (r.formBg) out['--onboarding-card-form-bg'] = r.formBg
-    const statBg = r.statTileBg ?? r.surface2
+    const statBg = r.statTileBg ?? r.panel2
     if (statBg) out['--onboarding-card-stat-bg'] = statBg
     if (r.statTileBorder) out['--onboarding-card-stat-border'] = r.statTileBorder
     if (r.brandEmphasis) out['--onboarding-card-brand-emphasis'] = r.brandEmphasis
@@ -250,7 +257,7 @@ export function deriveTokens(cfg: BrandConfig): Record<string, string> {
 
   if (ov?.topNav) {
     const r = ov.topNav
-    if (r.surface) out['--topnav-bg'] = r.surface
+    if (r.panel) out['--topnav-bg'] = r.panel
     if (r.border) out['--topnav-border'] = r.border
     if (r.linkColor) out['--topnav-link'] = r.linkColor
     if (r.linkColorActive) out['--topnav-link-active'] = r.linkColorActive
@@ -259,7 +266,7 @@ export function deriveTokens(cfg: BrandConfig): Record<string, string> {
 
   if (ov?.footer) {
     const r = ov.footer
-    if (r.surface) out['--footer-bg'] = r.surface
+    if (r.panel) out['--footer-bg'] = r.panel
     if (r.border) out['--footer-border'] = r.border
     if (r.textColor) out['--footer-text'] = r.textColor
     if (r.brandColor) out['--footer-brand'] = r.brandColor
@@ -267,7 +274,7 @@ export function deriveTokens(cfg: BrandConfig): Record<string, string> {
 
   if (ov?.heroBanner) {
     const r = ov.heroBanner
-    if (r.surface) out['--hero-banner-bg'] = r.surface
+    if (r.panel) out['--hero-banner-bg'] = r.panel
     if (r.border) out['--hero-banner-border'] = r.border
     if (r.overlayGradient) out['--hero-banner-overlay'] = r.overlayGradient
   }
@@ -280,13 +287,13 @@ export function deriveTokens(cfg: BrandConfig): Record<string, string> {
     if (typeof r.lockedOpacity === 'number') {
       out['--tier-ladder-locked-opacity'] = String(clamp(r.lockedOpacity, 0, 1))
     }
-    if (r.surface) out['--tier-ladder-surface'] = r.surface
-    if (r.surfaceCurrent) out['--tier-ladder-surface-current'] = r.surfaceCurrent
+    if (r.panel) out['--tier-ladder-panel'] = r.panel
+    if (r.panelCurrent) out['--tier-ladder-panel-current'] = r.panelCurrent
   }
 
   if (ov?.badgeGrid) {
     const r = ov.badgeGrid
-    if (r.surface) out['--badge-grid-bg'] = r.surface
+    if (r.panel) out['--badge-grid-bg'] = r.panel
     if (r.border) out['--badge-grid-border'] = r.border
     if (r.lockedFg) out['--badge-grid-locked-fg'] = r.lockedFg
   }
@@ -307,10 +314,10 @@ export function deriveTokens(cfg: BrandConfig): Record<string, string> {
   return out
 }
 
-function mergeSurface(
-  base: SurfacePalette,
-  partial: Partial<SurfacePalette> | undefined
-): SurfacePalette {
+function mergePalette(
+  base: PanelPalette,
+  partial: Partial<PanelPalette> | undefined
+): PanelPalette {
   return partial ? { ...base, ...partial } : base
 }
 

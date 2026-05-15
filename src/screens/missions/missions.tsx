@@ -7,7 +7,7 @@ import { RewardCard } from '../../components/RewardCard'
 import { FilterTabs } from '../../components/FilterTabs'
 import { HeroBanner } from '../../components/HeroBanner'
 import { ProfileCardFromTweaks } from '../../components/ProfileCard'
-import { useContent } from '../../config'
+import { useContentSlice } from '../../config'
 import type { Mission, Persona, Tweaks, Reward } from '../../types'
 
 interface MissionsScreenProps {
@@ -29,16 +29,7 @@ export default function MissionsScreen({
   const tileLayout = tweaks.tileLayout
   const density = tweaks.tileDensity
 
-  const sectionEyebrow = useContent<string>('missions.sectionEyebrow')
-  const sectionTitle = useContent<string>('missions.sectionTitle')
-  const rewardsEyebrow = useContent<string>('missions.rewardsEyebrow')
-  const rewardsTitle = useContent<string>('missions.rewardsTitle')
-  const rewardsBalanceLabel = useContent<string>('missions.rewardsBalance')
-  const heroEyebrow = useContent<string>('missions.heroEyebrow')
-  const heroTitle = useContent<string>('missions.heroTitle')
-  const heroSubtitle = useContent<string>('missions.heroSubtitle')
-  const filterLabels = useContent<Record<string, string>>('missions.filterLabels')
-  const rewardKindLabels = useContent<Record<string, string>>('missions.rewardKindLabels')
+  const t = useContentSlice('missions')
 
   const filtered = MISSIONS.filter((m) => {
     if (filter === 'ready') return m.progress[0] >= m.progress[1]
@@ -53,9 +44,9 @@ export default function MissionsScreen({
       <div className="grid gap-5 grid-cols-[minmax(0,2fr)_minmax(300px,1fr)] [&>*]:min-w-0 max-[720px]:grid-cols-1">
         <HeroBanner
           heroStyle={tweaks.heroStyle}
-          eyebrow={heroEyebrow}
-          title={heroTitle}
-          subtitle={heroSubtitle}
+          eyebrow={t.heroEyebrow}
+          title={t.heroTitle}
+          subtitle={t.heroSubtitle}
         />
         <ProfileCardFromTweaks persona={persona} tweaks={tweaks} />
       </div>
@@ -84,14 +75,14 @@ export default function MissionsScreen({
           <div key="missions">
             <div className="flex justify-between items-center gap-[14px] mb-[14px] flex-wrap">
               <div>
-                <Eyebrow>{sectionEyebrow}</Eyebrow>
-                <h2 className="display mt-1 text-[22px]">{sectionTitle}</h2>
+                <Eyebrow>{t.sectionEyebrow}</Eyebrow>
+                <h2 className="display mt-1 text-[22px]">{t.sectionTitle}</h2>
               </div>
               <FilterTabs
                 options={['all', 'new', 'ongoing', 'ready']}
                 value={filter}
                 onChange={setFilter}
-                labels={filterLabels}
+                labels={t.filterLabels}
               />
             </div>
             {tileLayout === 'list' ? (
@@ -131,13 +122,13 @@ export default function MissionsScreen({
           <div key="rewards">
             <div className="flex justify-between items-center gap-[14px] mb-[14px] flex-wrap">
               <div>
-                <Eyebrow>{rewardsEyebrow}</Eyebrow>
-                <h2 className="display mt-1 text-[22px]">{rewardsTitle}</h2>
+                <Eyebrow>{t.rewardsEyebrow}</Eyebrow>
+                <h2 className="display mt-1 text-[22px]">{t.rewardsTitle}</h2>
               </div>
               <div className="flex gap-2 items-center flex-wrap">
                 <Chip className="!py-[6px] !px-[10px]">
                   <span className="inline-flex items-center gap-2 font-mono text-[11px] tracking-[0.16em] uppercase text-ink-dim mr-[6px]">
-                    {rewardsBalanceLabel}
+                    {t.rewardsBalance}
                   </span>
                   <span className="mono font-bold text-primary">
                     {persona.xp.toLocaleString()} XP
@@ -147,7 +138,7 @@ export default function MissionsScreen({
                   options={['all', 'merch', 'digital', 'access', 'experience']}
                   value={rewardKind}
                   onChange={setRewardKind}
-                  labels={rewardKindLabels}
+                  labels={t.rewardKindLabels}
                 />
               </div>
             </div>

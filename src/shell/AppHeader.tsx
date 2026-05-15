@@ -2,7 +2,7 @@
 
 import { useRouter, usePathname } from 'next/navigation'
 import { BrandLockup, Chip } from '../atoms'
-import { useContent } from '../config'
+import { useContentSlice } from '../config'
 import { useDemoShell } from './DemoShell'
 
 const NAV_IDS = ['missions', 'leaderboard', 'profile'] as const
@@ -15,17 +15,12 @@ export function AppHeader() {
   const pathname = usePathname()
   const screen = pathname.slice(1).split('/')[0]
 
-  const brandName = useContent<string>('brand.name')
-  const brandVersion = useContent<string>('brand.version')
-  const navLabels = {
-    missions: useContent<string>('nav.missions'),
-    leaderboard: useContent<string>('nav.leaderboard'),
-    profile: useContent<string>('nav.profile'),
-  }
+  const brand = useContentSlice('brand')
+  const navLabels = useContentSlice('nav')
 
   return (
     <div className="topbar">
-      <BrandLockup name={brandName} version={brandVersion} />
+      <BrandLockup name={brand.name} version={brand.version} />
       <nav className="nav">
         {NAV_IDS.map((id) => (
           <button

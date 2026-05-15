@@ -1,5 +1,5 @@
 import { memo } from 'react'
-import { useContent } from '../../config'
+import { useContentSlice } from '../../config'
 import type { Badge } from '../../types'
 
 const DEFAULT_UNLOCKED_TONES = [
@@ -22,16 +22,14 @@ export const BadgeGrid = memo(function BadgeGrid({
   columns = 3,
   unlockedTones,
 }: BadgeGridProps) {
-  const badgesEyebrow = useContent<string>('profile.badgesEyebrow')
-  const unlockedLabel = useContent<string>('profile.badgeUnlocked')
-  const lockedLabel = useContent<string>('profile.badgeLocked')
+  const t = useContentSlice('profile')
   const tones = unlockedTones && unlockedTones.length > 0 ? unlockedTones : DEFAULT_UNLOCKED_TONES
   const unlockedCount = badges.filter((b) => b.got).length
 
   return (
     <div className="panel p-5">
       <div className="font-mono text-[10px] tracking-[0.12em] uppercase text-ink-dim mb-3.5">
-        // {badgesEyebrow} · {unlockedCount}/{badges.length}
+        // {t.badgesEyebrow} · {unlockedCount}/{badges.length}
       </div>
       <div className="grid gap-2.5" style={{ gridTemplateColumns: `repeat(${columns}, 1fr)` }}>
         {badges.map((b, i) => (
@@ -60,7 +58,7 @@ export const BadgeGrid = memo(function BadgeGrid({
             </div>
             <div className="font-semibold text-[12px]">{b.name}</div>
             <div className="text-[10px] text-ink-faint mt-0.5 font-mono uppercase tracking-[0.08em]">
-              {b.got ? unlockedLabel : lockedLabel}
+              {b.got ? t.badgeUnlocked : t.badgeLocked}
             </div>
           </div>
         ))}

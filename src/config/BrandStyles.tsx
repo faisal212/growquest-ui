@@ -8,7 +8,12 @@ import { deriveTokens } from './tokens'
  */
 export function BrandStyles({ config }: { config: BrandConfig }) {
   const tokens = deriveTokens(config)
-  const body = `:root{${Object.entries(tokens)
+  // Emit at `html[data-theme]` (specificity 0,1,1) — equal specificity to the
+  // `html[data-theme="dark"|"light"]` blocks in styles.css. Source order is the
+  // tiebreaker; <style id="__brand"> renders in the body after styles.css loads
+  // in head, so tenant overrides win. Using plain `:root` (specificity 0,1,0)
+  // would lose to those static blocks and the override path would be dead.
+  const body = `html[data-theme]{${Object.entries(tokens)
     .map(([k, v]) => `${k}:${escapeCss(v)}`)
     .join(';')}}`
   return <style id="__brand" dangerouslySetInnerHTML={{ __html: body }} />
