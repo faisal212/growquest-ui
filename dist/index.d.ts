@@ -42,6 +42,8 @@ import { MissionModal } from './components/MissionModal'
 import { MissionType } from './types'
 import { Mode } from './config'
 import { Overrides } from './config'
+import { PALETTES } from './config'
+import { PanelPalette } from './config'
 import { Persona } from './types'
 import { PhoneVerificationExperience } from './experiences/PhoneVerification'
 import { PhotoProofExperience } from './experiences/PhotoProof'
@@ -63,8 +65,6 @@ import { Sparkline } from './primitives/Elements'
 import { SpinWheelExperience } from './experiences/SpinWheel'
 import { StatCard } from './components/StatCard'
 import { subscribeBrand } from './config'
-import { SurfacePalette } from './config'
-import { SURFACES } from './config'
 import { SurveyExperience } from './experiences/Survey'
 import { Tag } from './primitives/Elements'
 import { Textarea } from './primitives/Input'
@@ -76,7 +76,7 @@ import { TriviaExperience } from './experiences/Trivia'
 import { useAsset } from './config'
 import { useBrand } from './config'
 import { useBrandState } from './config'
-import { useContent } from './config'
+import { useContentSlice } from './config'
 import { VideoExperience } from './experiences/Video'
 import { XPBar } from './primitives/XPBar'
 import { XPBarProps } from './primitives/XPBar'
@@ -170,6 +170,10 @@ export { Mode }
 
 export { Overrides }
 
+export { PALETTES }
+
+export { PanelPalette }
+
 export { Persona }
 
 export { PhoneVerificationExperience }
@@ -212,10 +216,6 @@ export { StatCard }
 
 export { subscribeBrand }
 
-export { SurfacePalette }
-
-export { SURFACES }
-
 export { SurveyExperience }
 
 export { Tag }
@@ -238,7 +238,7 @@ export { useBrand }
 
 export { useBrandState }
 
-export { useContent }
+export { useContentSlice }
 
 export { VideoExperience }
 
