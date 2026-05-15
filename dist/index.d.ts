@@ -29,6 +29,7 @@ import { FontSet } from './config'
 import { getCurrentBrand } from './config'
 import { HangmanExperience } from './experiences/Hangman'
 import { HeroBanner } from './components/HeroBanner'
+import { HeroMedia } from './components/HeroMedia/HeroMedia'
 import { Input } from './primitives/Input'
 import { InputProps } from './primitives/Input'
 import { InviteExperience } from './experiences/Invite'
@@ -143,6 +144,8 @@ export { getCurrentBrand }
 export { HangmanExperience }
 
 export { HeroBanner }
+
+export { HeroMedia }
 
 export { Input }
 
