@@ -11,10 +11,16 @@ interface ColumnLabels {
   xp?: string
 }
 
+type ToneName = 'accent' | 'lime' | 'magenta' | 'amber'
+
 interface LeaderboardTableProps {
   entries: LeaderboardEntry[]
   streakEmoji?: string
   columnLabels?: ColumnLabels
+  /** Optional map: tier display name → tone. Falls back to "accent" for unmapped tiers. */
+  tierToneMap?: Record<string, ToneName>
+  /** Label for the "YOU" tag on the current user's row. */
+  youTag?: string
 }
 
 const DEFAULT_LABELS: Required<ColumnLabels> = {
@@ -25,12 +31,20 @@ const DEFAULT_LABELS: Required<ColumnLabels> = {
   xp: 'xp',
 }
 
+const DEFAULT_TIER_TONES: Record<string, ToneName> = {
+  Oracle: 'magenta',
+  Ascendant: 'lime',
+}
+
 export const LeaderboardTable = memo(function LeaderboardTable({
   entries,
   streakEmoji = '🔥',
   columnLabels,
+  tierToneMap,
+  youTag = 'YOU',
 }: LeaderboardTableProps) {
   const labels = { ...DEFAULT_LABELS, ...columnLabels }
+  const tones = tierToneMap ?? DEFAULT_TIER_TONES
   return (
     <div className="panel overflow-hidden">
       <div className="lb-head lb-row">
@@ -55,18 +69,14 @@ export const LeaderboardTable = memo(function LeaderboardTable({
           <span className="lb-identity">
             <Avatar seed={p.seed} size={28} />
             <span className="font-semibold text-[14px]">{p.handle}</span>
-            {p.me && <Tag tone="accent">YOU</Tag>}
+            {p.me && <Tag tone="accent">{youTag}</Tag>}
           </span>
           <span className="mono lb-streak text-[13px] text-accent-amber">
             {p.streak}
             {streakEmoji}
           </span>
           <span className="lb-tier">
-            <Tag
-              tone={p.tier === 'Oracle' ? 'magenta' : p.tier === 'Ascendant' ? 'lime' : 'accent'}
-            >
-              {p.tier}
-            </Tag>
+            <Tag tone={tones[p.tier] ?? 'accent'}>{p.tier}</Tag>
           </span>
           <span className="mono lb-xp">{p.xp.toLocaleString()}</span>
         </div>

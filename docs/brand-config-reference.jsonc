@@ -37,22 +37,137 @@
 
   // ─── Copy strings (sparse — falls back to defaults for unset keys) ────────
   "content": {
+    "brand": {
+      "name":    "GrowQuest",                      // wordmark rendered in header + footer
+      "version": "v1.4",                           // optional build tag beside wordmark
+      "tagline": "multi-tenant growth OS"          // footer tagline after wordmark
+    },
+    "nav": {
+      "missions":    "Missions",
+      "leaderboard": "Leaderboard",
+      "profile":     "Profile"
+    },
+    "footer": {
+      "terms":           "Terms of Service",
+      "privacy":         "Privacy Policy",
+      "changelog":       "Changelog",
+      "poweredByPrefix": "Powered by"
+    },
+    "onboarding": {
+      "eyebrow":               "// onboarding · step 1 / 3",
+      "titleLead":             "Become a",         // first half of h1
+      "titleBrand":            "",                 // leave blank to reuse brand.name
+      "titleTrail":            "insider.",         // second half of h1
+      "body":                  "Unlock exclusive perks, shape the roadmap, and earn XP toward rewards. Daily missions, limited drops, and a spin-to-win lootbox — yours when you join.",
+      "stats": [
+        { "key": "XP",    "value": "Daily" },
+        { "key": "Tiers", "value": "4 ranks" },
+        { "key": "Drops", "value": "Weekly" }
+      ],
+      "emailLabel":            "work email",
+      "emailPlaceholder":      "you@company.com",
+      "consent":               "I agree to the {terms} and acknowledge the {privacy}.",
+      "consentTermsLabel":     "Terms",
+      "consentPrivacyLabel":   "Privacy Policy",
+      "cta":                   "Enter the quest",
+      "microcopyLeft":         "// 2,481 insiders joined this week",
+      "microcopyRight":        "SSO · SAML ok",
+      "chipPrimary":           "QUEST · 01 OPEN",
+      "chipSecondary":         "FOUNDERS COHORT"
+    },
+    "leaderboard": {
+      "eyebrow":  "// season 04 leaderboard",
+      "title":    "The ascent",
+      "subtitle": "Season resets in 12 days · top 10 receive Oracle airdrop",
+      "columns": {
+        "rank":    "rank",
+        "insider": "insider",
+        "streak":  "streak",
+        "tier":    "tier",
+        "xp":      "xp"
+      },
+      "streakEmoji": "🔥",
+      "youTag":      "YOU"
+    },
+    "profile": {
+      "joinedTag":         "JOINED · {month} {year}",     // template w/ {month} {year}
+      "walletLine":        "{wallet} · {handle}",         // template w/ {wallet} {handle}
+      "activityEyebrow":   "// activity",
+      "xpChartEyebrow":    "// xp over 14 days",
+      "statLabels": {
+        "totalXP":  "Total XP",
+        "missions": "Missions",
+        "streak":   "Streak",
+        "rewards":  "Rewards"
+      },
+      "badgesEyebrow":     "badges",                      // appears after "// "
+      "badgeUnlocked":     "unlocked",
+      "badgeLocked":       "locked",
+      "tierLadderEyebrow": "// tier ladder",
+      "tierLabelPrefix":   "tier",                        // e.g. "tier 01", "tier 02"
+      "tierXPSuffix":      "+ XP"                         // e.g. "5,000+ XP"
+    },
     "missions": {
       "sectionEyebrow": "// missions",
       "sectionTitle":   "Daily quests",
       "rewardsEyebrow": "// rewards marketplace",
       "rewardsTitle":   "Spend your XP",
-      "rewardsBalance": "balance"
+      "rewardsBalance": "balance",
+      "heroEyebrow":    "// current season · week 04",
+      "heroTitle":      "Founders' Path",
+      "heroSubtitle":   "Complete 8 of 12 missions to unlock the Ascendant lootbox.",
+      "filterLabels": {
+        "all":     "all",
+        "new":     "new",
+        "ongoing": "ongoing",
+        "ready":   "ready"
+      },
+      "rewardKindLabels": {
+        "all":        "all",
+        "merch":      "merch",
+        "digital":    "digital",
+        "access":     "access",
+        "experience": "experience"
+      }
     }
   },
 
   // ─── Media assets ─────────────────────────────────────────────────────────
+  // `onboardingHero` and `missionsHero` are consumed today: when set, they
+  // replace the procedural HeroArt SVG on their respective surfaces. On
+  // onboarding the decorative chip row is also hidden when the asset is set.
+  // `IMG` and `GIF` render via <img>; `JSON` (Lottie) is reserved but currently
+  // falls back to HeroArt — add a LottiePlayer if a tenant needs animation.
+  //
+  // Defaults: `DEFAULT_CONFIG.assets` ships with edge-cached placehold.co
+  // URLs (colored to match the dark surface palette) for `onboardingHero`
+  // and `missionsHero`, so a zero-config install renders a branded image
+  // instead of the procedural cube. Tenants override these freely. If a
+  // tenant's URL fails to load at runtime, HeroMedia falls back to the
+  // procedural `<HeroArt />` automatically — no broken-image icon.
+  //
+  // Responsive variants: each AssetEntry accepts an optional `mobileSrc`.
+  // When set, HeroMedia emits `<picture><source media="(max-width: 720px)"
+  // srcset={mobileSrc}><img src={src}></picture>`. The browser fetches only
+  // the matching URL — desktop pulls `src`, mobile pulls `mobileSrc`.
+  // Selection is SSR-rendered; no client JS picks the variant. The 720px
+  // breakpoint matches the onboarding grid-collapse seam where the hero
+  // pane flips from portrait to landscape.
   "assets": {
-    "onboardingHero":   { "src": "/assets/onboarding-hero.gif", "type": "GIF" },
+    "onboardingHero": {
+      "src":       "/assets/onboarding-hero-desktop.png",
+      "type":      "IMG",
+      "mobileSrc": "/assets/onboarding-hero-mobile.png"
+    },
     "navBackground":    { "src": "/assets/nav-bg.json",         "type": "JSON" },
     "endGameImage":     { "src": "/assets/endgame.png",         "type": "IMG" },
     "nftMinting":       { "src": "/assets/nft-mint.json",       "type": "JSON" },
-    "onboardWelcoming": { "src": "/assets/welcome.gif",         "type": "GIF" }
+    "onboardWelcoming": { "src": "/assets/welcome.gif",         "type": "GIF" },
+    "missionsHero": {
+      "src":       "/assets/missions-hero-desktop.png",
+      "type":      "IMG",
+      "mobileSrc": "/assets/missions-hero-mobile.png"
+    }
   },
 
   // ─── Overrides: every field optional; supply only what differs ────────────
@@ -136,14 +251,107 @@
       "walletColor": "#9099AA"                     // color of mono wallet-address line
     },
 
-    // Leaderboard table rows. Maps to --leaderboard-*.
+    // Leaderboard table rows. Maps to --leaderboard-*. tierTones is consumed
+    // by LeaderboardTable as a prop (not a CSS var) — maps tier display name → tone.
     "leaderboardRow": {
       "rowSurface":    "transparent",              // → --leaderboard-row-bg
       "rowBorder":     "#E8EBF2",
       "headSurface":   "transparent",
       "headText":      "#5A6275",
       "mineHighlight": "#FF8C0030",                // bg behind current user's row
-      "topRankColor":  "#FF8C00"                   // rank number color for top 3
+      "topRankColor":  "#FF8C00",                  // rank number color for top 3
+      "tierTones": {
+        "Oracle":    "magenta",                    // 'accent' | 'lime' | 'magenta' | 'amber'
+        "Ascendant": "lime"
+      }
+    },
+
+    // Onboarding card (the wrapper card on /onboarding). Maps to --onboarding-card-*.
+    "onboardingCard": {
+      "surface":        "#FFFFFF",                 // → --onboarding-card-bg
+      "border":         "#E8EBF2",
+      "title":          "#0A0B10",
+      "body":           "#5A6275",
+      "heroBg":         "#0B0D14",                 // left hero pane bg
+      "formBg":         "transparent",             // right form pane bg
+      "statTileBg":     "#F9F8F4",                 // the 3 stat tiles
+      "statTileBorder": "#E8EBF2",
+      "brandEmphasis":  "#FF8C00",                 // h1 brand-name highlight
+      "linkColor":      "#FF8C00"                  // Terms / Privacy inline links
+    },
+
+    // Top navigation bar. Maps to --topnav-*.
+    "topNav": {
+      "surface":         "color-mix(in oklch, #05060A 80%, transparent)",
+      "border":          "#E8EBF2",
+      "linkColor":       "#5A6275",                // inactive link
+      "linkColorActive": "#FF8C00",                // active link text
+      "linkBgActive":    "#FF8C0010"               // active link bg
+    },
+
+    // App footer. Maps to --footer-*.
+    "footer": {
+      "surface":    "transparent",
+      "border":     "#E8EBF2",
+      "textColor":  "#9099AA",
+      "brandColor": "#FF8C00"                      // color of bolded wordmark
+    },
+
+    // Hero banner (top of /missions). Maps to --hero-banner-*.
+    "heroBanner": {
+      "surface":         "#0B0D14",                // bg behind the art
+      "border":          "#FF8C00",
+      "overlayGradient": "linear-gradient(180deg, transparent 40%, #05060ACC 100%)"
+    },
+
+    // Tier ladder (bottom of /profile). Maps to --tier-ladder-*.
+    "tierLadder": {
+      "currentMixPercent": 12,                     // 0..100, default 12
+      "lockedOpacity":     0.5,                    // 0..1, default 0.5
+      "surface":           "#F9F8F4",              // non-current tier bg
+      "surfaceCurrent":    ""                      // optional; overrides the auto-mix
+    },
+
+    // Badge grid (right column on /profile). unlockedTones is consumed by
+    // BadgeGrid as a prop; the rest map to --badge-grid-*.
+    "badgeGrid": {
+      "surface":  "#F9F8F4",
+      "border":   "#E8EBF2",
+      "unlockedTones": [
+        "var(--accent-cyan)",
+        "var(--accent-magenta)",
+        "var(--accent-lime)",
+        "var(--accent-amber)",
+        "var(--accent-violet)"
+      ],
+      "lockedFg": "#9099AA"
+    },
+
+    // Podium (top of /leaderboard). Consumed by Podium as props.
+    "podium": {
+      "rankColors": {
+        "1": "var(--accent-amber)",
+        "2": "var(--accent-cyan)",
+        "3": "var(--accent-magenta)"
+      },
+      "platformHeights": {
+        "1": 180,
+        "2": 150,
+        "3": 130
+      }
+    },
+
+    // Stat-card sparkline trend colors. Maps to --stat-card-trend-*.
+    "statCard": {
+      "trendDefault": "#FF8C00",                   // totalXP + missions
+      "trendStreak":  "var(--accent-amber)",
+      "trendRewards": "var(--accent-lime)"
+    },
+
+    // Activity bar chart (on /profile). Maps to --xp-chart-gradient-*.
+    "xpChart": {
+      "gradientFrom": "#FF8C00",
+      "gradientTo":   "#FF1493"
     },
 
     // Tone palette remap. Affects every component that calls toneColor().

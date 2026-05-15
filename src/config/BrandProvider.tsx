@@ -4,6 +4,8 @@ import { createContext, useContext, useEffect, useMemo, useState, type ReactNode
 import type { BrandConfig, ContentMap, AssetMap } from './schema'
 import { deepMerge } from './schema'
 import { DEFAULT_CONTENT, DEFAULT_CONFIG } from './defaults'
+
+const DEFAULT_ASSETS: AssetMap = DEFAULT_CONFIG.assets ?? {}
 import { subscribeBrand } from './apply'
 
 /**
@@ -42,7 +44,7 @@ export function BrandProvider({ value, children }: { value: BrandConfig; childre
     () => ({
       config: current,
       content: deepMerge(DEFAULT_CONTENT, current.content),
-      assets: current.assets ?? {},
+      assets: deepMerge(DEFAULT_ASSETS, current.assets),
     }),
     [current]
   )

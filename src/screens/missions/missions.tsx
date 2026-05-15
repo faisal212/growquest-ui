@@ -34,6 +34,11 @@ export default function MissionsScreen({
   const rewardsEyebrow = useContent<string>('missions.rewardsEyebrow')
   const rewardsTitle = useContent<string>('missions.rewardsTitle')
   const rewardsBalanceLabel = useContent<string>('missions.rewardsBalance')
+  const heroEyebrow = useContent<string>('missions.heroEyebrow')
+  const heroTitle = useContent<string>('missions.heroTitle')
+  const heroSubtitle = useContent<string>('missions.heroSubtitle')
+  const filterLabels = useContent<Record<string, string>>('missions.filterLabels')
+  const rewardKindLabels = useContent<Record<string, string>>('missions.rewardKindLabels')
 
   const filtered = MISSIONS.filter((m) => {
     if (filter === 'ready') return m.progress[0] >= m.progress[1]
@@ -46,7 +51,12 @@ export default function MissionsScreen({
     <div className="animate-fade-up w-full max-w-[1280px] mx-auto px-6 pt-6 pb-10 max-[720px]:px-3 max-[720px]:pt-4 max-[720px]:pb-8 grid gap-5 grid-cols-1">
       {/* Hero + profile snapshot */}
       <div className="grid gap-5 grid-cols-[minmax(0,2fr)_minmax(300px,1fr)] [&>*]:min-w-0 max-[720px]:grid-cols-1">
-        <HeroBanner heroStyle={tweaks.heroStyle} />
+        <HeroBanner
+          heroStyle={tweaks.heroStyle}
+          eyebrow={heroEyebrow}
+          title={heroTitle}
+          subtitle={heroSubtitle}
+        />
         <ProfileCardFromTweaks persona={persona} tweaks={tweaks} />
       </div>
 
@@ -81,6 +91,7 @@ export default function MissionsScreen({
                 options={['all', 'new', 'ongoing', 'ready']}
                 value={filter}
                 onChange={setFilter}
+                labels={filterLabels}
               />
             </div>
             {tileLayout === 'list' ? (
@@ -136,6 +147,7 @@ export default function MissionsScreen({
                   options={['all', 'merch', 'digital', 'access', 'experience']}
                   value={rewardKind}
                   onChange={setRewardKind}
+                  labels={rewardKindLabels}
                 />
               </div>
             </div>

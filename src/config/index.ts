@@ -1,6 +1,7 @@
 export { applyBrand, getCurrentBrand, subscribeBrand } from './apply'
 export { BrandProvider, useBrandState } from './BrandProvider'
 export { useContent } from './content'
+export { interpolate } from './interpolate'
 export { useAsset, preloadAssets } from './assets'
 export { deriveTokens } from './tokens'
 export { DEFAULT_CONFIG, DEFAULT_CONTENT, SURFACES } from './defaults'

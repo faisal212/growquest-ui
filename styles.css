@@ -69,6 +69,47 @@
     --leaderboard-head-text: var(--ink-dim);
     --leaderboard-mine-bg: var(--color-primary-soft);
     --leaderboard-top-rank: var(--color-primary);
+
+    --onboarding-card-bg: var(--panel);
+    --onboarding-card-border: var(--border);
+    --onboarding-card-title: var(--ink);
+    --onboarding-card-body: var(--ink-dim);
+    --onboarding-card-hero-bg: var(--bg-2);
+    --onboarding-card-form-bg: transparent;
+    --onboarding-card-stat-bg: var(--panel-2);
+    --onboarding-card-stat-border: var(--border);
+    --onboarding-card-brand-emphasis: var(--color-primary);
+    --onboarding-card-link: var(--color-primary);
+
+    --topnav-bg: color-mix(in oklch, var(--bg) 80%, transparent);
+    --topnav-border: var(--border);
+    --topnav-link: var(--ink-dim);
+    --topnav-link-active: var(--ink);
+    --topnav-link-bg-active: var(--panel);
+
+    --footer-bg: transparent;
+    --footer-border: var(--border);
+    --footer-text: var(--ink-faint);
+    --footer-brand: var(--ink);
+
+    --hero-banner-bg: var(--bg-2);
+    --hero-banner-border: var(--border);
+    --hero-banner-overlay: linear-gradient(180deg, transparent 40%, color-mix(in oklch, var(--bg) 90%, transparent) 100%);
+
+    --tier-ladder-current-mix: 12%;
+    --tier-ladder-locked-opacity: 0.5;
+    --tier-ladder-surface: var(--panel-2);
+
+    --badge-grid-bg: var(--panel-2);
+    --badge-grid-border: var(--border);
+    --badge-grid-locked-fg: var(--ink-faint);
+
+    --stat-card-trend-default: var(--color-primary);
+    --stat-card-trend-streak: var(--accent-amber);
+    --stat-card-trend-rewards: var(--accent-lime);
+
+    --xp-chart-gradient-from: var(--color-primary);
+    --xp-chart-gradient-to: var(--accent-magenta);
   }
 }
 
@@ -303,9 +344,9 @@ html[data-theme="light"] body::before {
   align-items: center;
   gap: 20px;
   padding: 14px 24px;
-  background: color-mix(in oklch, var(--bg) 80%, transparent);
+  background: var(--topnav-bg);
   backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid var(--topnav-border);
 }
 
 .topbar .nav {
@@ -316,12 +357,12 @@ html[data-theme="light"] body::before {
 .topbar .nav button {
   padding: 8px 14px;
   font-size: 13px;
-  color: var(--ink-dim);
+  color: var(--topnav-link);
   border-radius: 6px;
   font-weight: 400;
 }
-.topbar .nav button:hover { color: var(--ink); background: var(--panel-2); }
-.topbar .nav button.active { color: var(--ink); background: var(--panel); border: 1px solid var(--border); }
+.topbar .nav button:hover { color: var(--topnav-link-active); background: var(--panel-2); }
+.topbar .nav button.active { color: var(--topnav-link-active); background: var(--topnav-link-bg-active); border: 1px solid var(--border); }
 
 /* Footer */
 .app-footer {
@@ -330,12 +371,14 @@ html[data-theme="light"] body::before {
   display: flex;
   justify-content: space-between;
   gap: 24px;
-  color: var(--ink-faint);
+  color: var(--footer-text);
+  background: var(--footer-bg);
   font-size: 12px;
-  border-top: 1px solid var(--border);
+  border-top: 1px solid var(--footer-border);
 }
 .app-footer a { color: var(--ink-dim); text-decoration: none; }
 .app-footer a:hover { color: var(--ink); }
+.app-footer strong.brand { color: var(--footer-brand); }
 
 /* Modal */
 .modal-backdrop {
@@ -520,9 +563,9 @@ html[data-mobile-nav="bottom"] .bottom-nav { display: flex; }
   min-height: 240px;
   border-radius: 14px;
   overflow: hidden;
-  border: 1px solid var(--border);
+  border: 1px solid var(--hero-banner-border);
 }
-.hero-banner-bg { position: absolute; inset: 0; background: var(--bg-2); }
+.hero-banner-bg { position: absolute; inset: 0; background: var(--hero-banner-bg); }
 .hero-banner-content {
   position: relative;
   padding: 24px;
@@ -531,7 +574,7 @@ html[data-mobile-nav="bottom"] .bottom-nav { display: flex; }
   gap: 10px;
   height: 100%;
   justify-content: flex-end;
-  background: linear-gradient(180deg, transparent 40%, color-mix(in oklch, var(--bg) 90%, transparent) 100%);
+  background: var(--hero-banner-overlay);
 }
 
 /* LeaderboardTable */

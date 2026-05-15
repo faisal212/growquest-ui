@@ -27,12 +27,98 @@ export const SURFACES: Record<Mode, SurfacePalette> = {
 }
 
 export const DEFAULT_CONTENT: ContentMap = {
+  brand: {
+    name: 'GrowQuest',
+    version: 'v1.4',
+    tagline: 'multi-tenant growth OS',
+  },
+  nav: {
+    missions: 'Missions',
+    leaderboard: 'Leaderboard',
+    profile: 'Profile',
+  },
+  footer: {
+    terms: 'Terms of Service',
+    privacy: 'Privacy Policy',
+    changelog: 'Changelog',
+    poweredByPrefix: 'Powered by',
+  },
+  onboarding: {
+    eyebrow: '// onboarding · step 1 / 3',
+    titleLead: 'Become a',
+    titleBrand: '',
+    titleTrail: 'insider.',
+    body: 'Unlock exclusive perks, shape the roadmap, and earn XP toward rewards. Daily missions, limited drops, and a spin-to-win lootbox — yours when you join.',
+    stats: [
+      { key: 'XP', value: 'Daily' },
+      { key: 'Tiers', value: '4 ranks' },
+      { key: 'Drops', value: 'Weekly' },
+    ],
+    emailLabel: 'work email',
+    emailPlaceholder: 'you@company.com',
+    consent: 'I agree to the {terms} and acknowledge the {privacy}.',
+    consentTermsLabel: 'Terms',
+    consentPrivacyLabel: 'Privacy Policy',
+    cta: 'Enter the quest',
+    microcopyLeft: '// 2,481 insiders joined this week',
+    microcopyRight: 'SSO · SAML ok',
+    chipPrimary: 'QUEST · 01 OPEN',
+    chipSecondary: 'FOUNDERS COHORT',
+  },
+  leaderboard: {
+    eyebrow: '// season 04 leaderboard',
+    title: 'The ascent',
+    subtitle: 'Season resets in 12 days · top 10 receive Oracle airdrop',
+    columns: {
+      rank: 'rank',
+      insider: 'insider',
+      streak: 'streak',
+      tier: 'tier',
+      xp: 'xp',
+    },
+    streakEmoji: '🔥',
+    youTag: 'YOU',
+  },
+  profile: {
+    joinedTag: 'JOINED · {month} {year}',
+    walletLine: '{wallet} · {handle}',
+    activityEyebrow: '// activity',
+    xpChartEyebrow: '// xp over 14 days',
+    statLabels: {
+      totalXP: 'Total XP',
+      missions: 'Missions',
+      streak: 'Streak',
+      rewards: 'Rewards',
+    },
+    badgesEyebrow: 'badges',
+    badgeUnlocked: 'unlocked',
+    badgeLocked: 'locked',
+    tierLadderEyebrow: '// tier ladder',
+    tierLabelPrefix: 'tier',
+    tierXPSuffix: '+ XP',
+  },
   missions: {
     sectionEyebrow: '// missions',
     sectionTitle: 'Daily quests',
     rewardsEyebrow: '// rewards marketplace',
     rewardsTitle: 'Spend your XP',
     rewardsBalance: 'balance',
+    heroEyebrow: '// current season · week 04',
+    heroTitle: "Founders' Path",
+    heroSubtitle: 'Complete 8 of 12 missions to unlock the Ascendant lootbox.',
+    filterLabels: {
+      all: 'all',
+      new: 'new',
+      ongoing: 'ongoing',
+      ready: 'ready',
+    },
+    rewardKindLabels: {
+      all: 'all',
+      merch: 'merch',
+      digital: 'digital',
+      access: 'access',
+      experience: 'experience',
+    },
   },
 }
 
@@ -41,5 +127,25 @@ export const DEFAULT_CONFIG: BrandConfig = {
   brand: {
     primary: 'oklch(0.86 0.18 200)',
     secondary: 'oklch(0.72 0.25 340)',
+  },
+  // Default hero imagery. placehold.co serves edge-cached PNGs instantly —
+  // colors match the dark surface palette + cyan brand primary. Each surface
+  // ships a desktop + mobile variant matched to the actual pane aspect ratio:
+  // onboarding flips from portrait at >720px to landscape at ≤720px (grid
+  // collapse); missions stays landscape but narrows on mobile. Browsers fetch
+  // only the matching URL via <picture><source media>. Tenants override via
+  // `config.assets.{onboardingHero,missionsHero}`. If a URL fails to load,
+  // HeroMedia falls back to the procedural <HeroArt />.
+  assets: {
+    onboardingHero: {
+      src: 'https://placehold.co/720x800/0E1018/86C5FF/png?text=GrowQuest',
+      type: 'IMG',
+      mobileSrc: 'https://placehold.co/720x400/0E1018/86C5FF/png?text=GrowQuest',
+    },
+    missionsHero: {
+      src: 'https://placehold.co/1280x380/0E1018/86C5FF/png?text=GrowQuest+Missions',
+      type: 'IMG',
+      mobileSrc: 'https://placehold.co/720x360/0E1018/86C5FF/png?text=GrowQuest+Missions',
+    },
   },
 }

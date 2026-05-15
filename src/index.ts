@@ -44,6 +44,7 @@ export { Tag, XPPill, Eyebrow, Countdown, Sparkline, Divider } from './primitive
 export { BadgeGrid } from './components/BadgeGrid'
 export { FilterTabs } from './components/FilterTabs'
 export { HeroBanner } from './components/HeroBanner'
+export { HeroMedia } from './components/HeroMedia/HeroMedia'
 export { LeaderboardTable } from './components/LeaderboardTable'
 export { MissionModal } from './components/MissionModal'
 export { MissionCard } from './components/MissionCard'

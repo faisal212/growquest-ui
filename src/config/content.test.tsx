@@ -46,4 +46,51 @@ describe('useContent', () => {
     renderWithBrand(<Probe />)
     expect(screen.getByTestId('missing').textContent).toBe('')
   })
+
+  it('exposes defaults for every Tier 1 section', () => {
+    function Probe() {
+      return (
+        <>
+          <span data-testid="brand">{useContent<string>('brand.name')}</span>
+          <span data-testid="nav">{useContent<string>('nav.missions')}</span>
+          <span data-testid="footer">{useContent<string>('footer.terms')}</span>
+          <span data-testid="onboarding">{useContent<string>('onboarding.cta')}</span>
+          <span data-testid="leaderboard">{useContent<string>('leaderboard.title')}</span>
+          <span data-testid="profile">{useContent<string>('profile.activityEyebrow')}</span>
+          <span data-testid="missions-hero">{useContent<string>('missions.heroTitle')}</span>
+        </>
+      )
+    }
+    renderWithBrand(<Probe />)
+    expect(screen.getByTestId('brand').textContent).toBe('GrowQuest')
+    expect(screen.getByTestId('nav').textContent).toBe('Missions')
+    expect(screen.getByTestId('footer').textContent).toBe('Terms of Service')
+    expect(screen.getByTestId('onboarding').textContent).toBe('Enter the quest')
+    expect(screen.getByTestId('leaderboard').textContent).toBe('The ascent')
+    expect(screen.getByTestId('profile').textContent).toBe('// activity')
+    expect(screen.getByTestId('missions-hero').textContent).toBe("Founders' Path")
+  })
+
+  it('partial section overrides fall back to defaults for unset keys', () => {
+    function Probe() {
+      return (
+        <>
+          <span data-testid="overridden">{useContent<string>('profile.activityEyebrow')}</span>
+          <span data-testid="default">{useContent<string>('profile.xpChartEyebrow')}</span>
+        </>
+      )
+    }
+    render(
+      <BrandProvider
+        value={{
+          ...DEFAULT_CONFIG,
+          content: { profile: { activityEyebrow: '// vibes' } },
+        }}
+      >
+        <Probe />
+      </BrandProvider>
+    )
+    expect(screen.getByTestId('overridden').textContent).toBe('// vibes')
+    expect(screen.getByTestId('default').textContent).toBe('// xp over 14 days')
+  })
 })

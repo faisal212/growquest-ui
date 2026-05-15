@@ -1,3 +1,4 @@
+import { useContent } from '../../config'
 import type { Tier } from '../../types'
 
 interface TierLadderProps {
@@ -7,12 +8,15 @@ interface TierLadderProps {
 
 /** Horizontal progression ladder showing all tiers. Highlights the tier the user currently occupies based on currentXP. */
 export function TierLadder({ tiers, currentXP }: TierLadderProps) {
+  const eyebrow = useContent<string>('profile.tierLadderEyebrow')
+  const tierPrefix = useContent<string>('profile.tierLabelPrefix')
+  const xpSuffix = useContent<string>('profile.tierXPSuffix')
   const currentTier = [...tiers].reverse().find((t) => currentXP >= t.min) ?? tiers[0]
 
   return (
     <div className="panel p-5">
       <div className="font-mono text-[10px] tracking-[0.12em] uppercase text-ink-dim mb-3.5">
-        // tier ladder
+        {eyebrow}
       </div>
       <div className="grid gap-2.5" style={{ gridTemplateColumns: `repeat(${tiers.length}, 1fr)` }}>
         {tiers.map((t, i) => {
@@ -25,13 +29,13 @@ export function TierLadder({ tiers, currentXP }: TierLadderProps) {
               style={{
                 borderColor: isCurrent ? t.color : 'var(--border)',
                 background: isCurrent
-                  ? `color-mix(in oklch, ${t.color} 12%, transparent)`
-                  : 'var(--panel-2)',
-                opacity: isPast || isCurrent ? 1 : 0.5,
+                  ? `color-mix(in oklch, ${t.color} var(--tier-ladder-current-mix), transparent)`
+                  : 'var(--tier-ladder-surface)',
+                opacity: isPast || isCurrent ? 1 : 'var(--tier-ladder-locked-opacity)',
               }}
             >
               <div className="font-mono text-[10px] tracking-[0.12em] uppercase text-ink-dim">
-                tier {String(i + 1).padStart(2, '0')}
+                {tierPrefix} {String(i + 1).padStart(2, '0')}
               </div>
               <div
                 className="font-bold text-[16px] mt-1"
@@ -40,7 +44,8 @@ export function TierLadder({ tiers, currentXP }: TierLadderProps) {
                 {t.name}
               </div>
               <div className="font-mono text-[11px] text-ink-dim mt-0.5">
-                {t.min.toLocaleString()}+ XP
+                {t.min.toLocaleString()}
+                {xpSuffix}
               </div>
             </div>
           )
