@@ -134,7 +134,11 @@ export function HeroArt({ variant = 'isometric', accent }: { variant?: string; a
             width="28"
             height="24"
             fill={
-              cell.hue === 0 ? a : cell.hue === 1 ? 'var(--accent-magenta)' : 'var(--accent-lime)'
+              cell.hue === 0
+                ? a
+                : cell.hue === 1
+                  ? 'var(--color-secondary)'
+                  : 'var(--color-primary)'
             }
             opacity={0.6 + cell.hue * 0.15}
           />
@@ -165,7 +169,7 @@ export function HeroArt({ variant = 'isometric', accent }: { variant?: string; a
         </radialGradient>
         <linearGradient id="iso-top" x1="0" x2="1" y1="0" y2="1">
           <stop offset="0" stopColor={a} />
-          <stop offset="1" stopColor="var(--accent-magenta)" />
+          <stop offset="1" stopColor="var(--color-secondary)" />
         </linearGradient>
       </defs>
       <rect width="480" height="480" fill="url(#iso-grid)" transform="translate(0 60)" />
@@ -187,7 +191,7 @@ export function HeroArt({ variant = 'isometric', accent }: { variant?: string; a
         />
       </g>
       <g transform="translate(240 180)">
-        <polygon points="0,0 70,30 70,100 0,70" fill="var(--accent-magenta)" opacity="0.85" />
+        <polygon points="0,0 70,30 70,100 0,70" fill="var(--color-secondary)" opacity="0.85" />
         <polygon points="0,0 -70,30 -70,100 0,70" fill={a} opacity="0.9" />
         <polygon points="0,-40 70,-10 70,30 0,0 -70,30 -70,-10" fill="url(#iso-top)" />
         <text
@@ -213,13 +217,13 @@ export function HeroArt({ variant = 'isometric', accent }: { variant?: string; a
         transform="translate(380 120)"
         className="animate-[float_5s_ease-in-out_infinite] will-change-transform"
       >
-        <circle r="26" fill="var(--accent-magenta)" opacity="0.85" />
+        <circle r="26" fill="var(--color-secondary)" opacity="0.85" />
         <circle r="26" fill="none" stroke="#fff" strokeOpacity="0.45" strokeWidth="1" />
         <ellipse cx="0" cy="0" rx="26" ry="7" fill="none" stroke="#fff" strokeOpacity="0.3" />
       </g>
       <g transform="translate(110 360)">
-        <polygon points="0,0 22,9 22,30 0,21" fill="var(--accent-lime)" />
-        <polygon points="0,0 -22,9 -22,30 0,21" fill="var(--accent-lime)" opacity="0.7" />
+        <polygon points="0,0 22,9 22,30 0,21" fill="var(--color-primary)" />
+        <polygon points="0,0 -22,9 -22,30 0,21" fill="var(--color-primary)" opacity="0.7" />
         <polygon points="0,-12 22,-3 22,9 0,0 -22,9 -22,-3" fill="#fff" opacity="0.85" />
       </g>
       <g
@@ -261,11 +265,11 @@ export function HeroArt({ variant = 'isometric', accent }: { variant?: string; a
 
 export function Avatar({ seed = 1, size = 40 }: { seed?: number; size?: number }) {
   const colors = [
-    'var(--accent-cyan)',
-    'var(--accent-magenta)',
-    'var(--accent-lime)',
-    'var(--accent-amber)',
-    'var(--accent-violet)',
+    'var(--color-primary)',
+    'var(--color-secondary)',
+    'var(--color-primary)',
+    'var(--color-secondary)',
+    'color-mix(in oklch, var(--color-primary) 50%, var(--color-secondary))',
   ]
   const c1 = colors[seed % colors.length]
   const c2 = colors[(seed + 2) % colors.length]

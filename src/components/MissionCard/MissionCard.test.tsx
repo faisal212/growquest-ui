@@ -10,7 +10,7 @@ const mission: Mission = {
   desc: 'Test what you know about the brand',
   xp: 150,
   progress: [0, 1],
-  tone: 'accent',
+  tone: 'primary',
 }
 
 describe('MissionCard', () => {

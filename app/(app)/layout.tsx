@@ -1,6 +1,5 @@
 import type { ReactNode } from 'react'
 import { AppHeader } from '../../src/shell/AppHeader'
-import { BottomNav } from '../../src/shell/BottomNav'
 import { AppFooter } from '../../src/shell/AppFooter'
 
 export default function AppGroupLayout({ children }: { children: ReactNode }) {
@@ -8,7 +7,6 @@ export default function AppGroupLayout({ children }: { children: ReactNode }) {
     <>
       <AppHeader />
       <main className="flex-1">{children}</main>
-      <BottomNav />
       <AppFooter />
     </>
   )

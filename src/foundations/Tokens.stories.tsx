@@ -29,15 +29,12 @@ export const AccentPalette: Story = {
           marginBottom: 4,
         }}
       >
-        // accent palette
+        // brand palette
       </div>
       <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
         {[
-          { name: 'cyan', var: '--accent-cyan', oklch: '0.86 0.18 200' },
-          { name: 'lime', var: '--accent-lime', oklch: '0.89 0.22 130' },
-          { name: 'magenta', var: '--accent-magenta', oklch: '0.72 0.25 340' },
-          { name: 'amber', var: '--accent-amber', oklch: '0.83 0.18 75' },
-          { name: 'violet', var: '--accent-violet', oklch: '0.72 0.22 290' },
+          { name: 'primary', var: '--color-primary', oklch: 'set via brand.primary' },
+          { name: 'secondary', var: '--color-secondary', oklch: 'set via brand.secondary' },
         ].map((c) => (
           <div
             key={c.name}
@@ -296,7 +293,7 @@ export const Animations: Story = {
               style={{
                 fontFamily: 'var(--font-mono)',
                 fontSize: 20,
-                color: 'var(--accent-magenta)',
+                color: 'var(--color-secondary)',
               }}
             >
               ◈

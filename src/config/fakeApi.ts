@@ -41,9 +41,6 @@ export const TENANTS: Record<string, BrandConfig> = {
         closeBg: '#FF8C00',
         closeIcon: '#FFFFFF',
       },
-      tones: {
-        accent: '#FF8C00',
-      },
     },
   },
 
@@ -166,13 +163,12 @@ export const TENANTS: Record<string, BrandConfig> = {
       xpChart: { gradientFrom: '#FF8C00', gradientTo: '#FFD700' },
       leaderboardRow: {
         tierTones: {
-          Oracle: 'amber',
-          Ascendant: 'magenta',
-          Voyager: 'lime',
-          Scout: 'accent',
+          Oracle: 'secondary',
+          Ascendant: 'secondary',
+          Voyager: 'primary',
+          Scout: 'primary',
         },
       },
-      tones: { accent: '#FF8C00', lime: '#2DACA9', magenta: '#FF1493', amber: '#FFD700' },
     },
     assets: {
       onboardingHero: { src: '/test-assets/loud-onboarding-hero.png', type: 'IMG' },

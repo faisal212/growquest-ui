@@ -8,7 +8,7 @@ const reward: Reward = {
   title: 'Branded T-Shirt',
   cost: 500,
   stock: 'In stock',
-  tone: 'accent',
+  tone: 'primary',
   kind: 'merch',
 }
 

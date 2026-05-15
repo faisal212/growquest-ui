@@ -4,7 +4,7 @@ import { deriveTokens } from './tokens'
 const BASE = { mode: 'dark' as const, brand: { primary: '#FF8C00' } }
 
 describe('deriveTokens — per-component overrides', () => {
-  it('emits component-scoped + tone defaults unconditionally', () => {
+  it('emits component-scoped defaults unconditionally', () => {
     // BrandStyles is the single source of truth for these vars — Tailwind v4
     // drops them from styles.css :root, so they must always land in the
     // server-rendered <style> block.
@@ -16,10 +16,6 @@ describe('deriveTokens — per-component overrides', () => {
     expect(tokens['--reward-card-bg']).toBe('var(--panel)')
     expect(tokens['--profile-card-bg']).toBe('var(--panel)')
     expect(tokens['--leaderboard-mine-bg']).toBe('var(--color-primary-soft)')
-    expect(tokens['--tone-accent']).toBe('var(--accent-cyan)')
-    expect(tokens['--tone-lime']).toBe('var(--accent-lime)')
-    expect(tokens['--tone-magenta']).toBe('var(--accent-magenta)')
-    expect(tokens['--tone-amber']).toBe('var(--accent-amber)')
   })
 
   it('emits MissionCard slots when missionCard override is supplied', () => {
@@ -122,9 +118,9 @@ describe('deriveTokens — per-component overrides', () => {
     expect(tokens['--tier-ladder-locked-opacity']).toBe('0.5')
     expect(tokens['--badge-grid-bg']).toBe('var(--panel-2)')
     expect(tokens['--stat-card-trend-default']).toBe('var(--color-primary)')
-    expect(tokens['--stat-card-trend-streak']).toBe('var(--accent-amber)')
+    expect(tokens['--stat-card-trend-streak']).toBe('var(--color-secondary)')
     expect(tokens['--xp-chart-gradient-from']).toBe('var(--color-primary)')
-    expect(tokens['--xp-chart-gradient-to']).toBe('var(--accent-magenta)')
+    expect(tokens['--xp-chart-gradient-to']).toBe('var(--color-secondary)')
   })
 
   it('emits onboardingCard slots when supplied', () => {

@@ -6,6 +6,11 @@
 // `src/config/schema.ts` 1:1 so backend devs implementing the real brand API
 // (or a CMS UI exposing these knobs) can see the complete contract in one place.
 //
+// Color model: tenants drive the entire palette via `brand.primary` +
+// `brand.secondary`. Mission/reward `tone` values are `'primary' | 'secondary'`;
+// every accent paint resolves to `var(--color-primary)`, `var(--color-secondary)`,
+// or an OKLCH mix of the two. There is no separate accent or tone-overrides block.
+//
 // Defaults for every field live in:
 //   - `src/config/defaults.ts`       — mode, brand colors, panel palette, content
 //   - `src/config/tokens.ts`         — per-component CSS-var defaults
@@ -250,8 +255,8 @@
       "mineHighlight": "#FF8C0030",                // bg behind current user's row
       "topRankColor":  "#FF8C00",                  // rank number color for top 3
       "tierTones": {
-        "Oracle":    "magenta",                    // 'accent' | 'lime' | 'magenta' | 'amber'
-        "Ascendant": "lime"
+        "Oracle":    "secondary",                  // 'primary' | 'secondary'
+        "Ascendant": "primary"
       }
     },
 
@@ -311,11 +316,9 @@
       "panel":    "#F9F8F4",
       "border":   "#E8EBF2",
       "unlockedTones": [
-        "var(--accent-cyan)",
-        "var(--accent-magenta)",
-        "var(--accent-lime)",
-        "var(--accent-amber)",
-        "var(--accent-violet)"
+        "var(--color-primary)",
+        "var(--color-secondary)",
+        "color-mix(in oklch, var(--color-primary) 50%, var(--color-secondary))"
       ],
       "lockedFg": "#9099AA"
     },
@@ -323,9 +326,9 @@
     // Podium (top of /leaderboard). Consumed by Podium as props.
     "podium": {
       "rankColors": {
-        "1": "var(--accent-amber)",
-        "2": "var(--accent-cyan)",
-        "3": "var(--accent-magenta)"
+        "1": "color-mix(in oklch, var(--color-primary) 50%, var(--color-secondary))",
+        "2": "var(--color-primary)",
+        "3": "var(--color-secondary)"
       },
       "platformHeights": {
         "1": 180,
@@ -337,23 +340,14 @@
     // Stat-card sparkline trend colors. Maps to --stat-card-trend-*.
     "statCard": {
       "trendDefault": "#FF8C00",                   // totalXP + missions
-      "trendStreak":  "var(--accent-amber)",
-      "trendRewards": "var(--accent-lime)"
+      "trendStreak":  "var(--color-secondary)",
+      "trendRewards": "color-mix(in oklch, var(--color-primary) 50%, var(--color-secondary))"
     },
 
     // Activity bar chart (on /profile). Maps to --xp-chart-gradient-*.
     "xpChart": {
       "gradientFrom": "#FF8C00",
       "gradientTo":   "#FF1493"
-    },
-
-    // Tone palette remap. Affects every component that calls toneColor().
-    // Maps to --tone-accent / --tone-lime / --tone-magenta / --tone-amber.
-    "tones": {
-      "accent":  "#FF8C00",
-      "lime":    "#2DACA9",
-      "magenta": "#FF1493",
-      "amber":   "#FFA500"
     }
   }
 }

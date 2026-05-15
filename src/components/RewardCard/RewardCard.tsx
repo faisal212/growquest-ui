@@ -58,7 +58,7 @@ export const RewardCard = memo(function RewardCard({
         )}
         {r.limited && (
           <div className="absolute top-2.5 left-2.5">
-            <Tag tone="magenta">LIMITED</Tag>
+            <Tag tone="secondary">LIMITED</Tag>
           </div>
         )}
         <div className="absolute top-2.5 right-2.5">

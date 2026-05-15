@@ -11,7 +11,7 @@ export const MISSIONS: Mission[] = [
     desc: 'Confirm your address with a 6-digit code to claim XP.',
     xp: 80,
     progress: [0, 1],
-    tone: 'accent',
+    tone: 'primary',
   },
   {
     id: 'mav1',
@@ -20,7 +20,7 @@ export const MISSIONS: Mission[] = [
     desc: 'Add a face to your handle — drag in a photo to claim XP.',
     xp: 120,
     progress: [0, 1],
-    tone: 'magenta',
+    tone: 'secondary',
   },
 
   {
@@ -30,7 +30,7 @@ export const MISSIONS: Mission[] = [
     desc: 'Tap follow and never miss a drop.',
     xp: 150,
     progress: [0, 1],
-    tone: 'accent',
+    tone: 'primary',
     url: 'https://x.com',
   },
   {
@@ -40,7 +40,7 @@ export const MISSIONS: Mission[] = [
     desc: 'Upload a photo using #GrowQuestLive.',
     xp: 250,
     progress: [0, 1],
-    tone: 'magenta',
+    tone: 'secondary',
   },
   {
     id: 'm3',
@@ -49,7 +49,7 @@ export const MISSIONS: Mission[] = [
     desc: 'Refer friends and earn bonus XP on each signup.',
     xp: 450,
     progress: [1, 3],
-    tone: 'lime',
+    tone: 'primary',
   },
   {
     id: 'm4',
@@ -58,7 +58,7 @@ export const MISSIONS: Mission[] = [
     desc: '90 seconds on how GrowQuest works.',
     xp: 100,
     progress: [0, 1],
-    tone: 'accent',
+    tone: 'primary',
   },
   {
     id: 'mq1',
@@ -68,7 +68,7 @@ export const MISSIONS: Mission[] = [
     desc: '1 question, 4 text choices. Nail it for XP.',
     xp: 150,
     progress: [0, 1],
-    tone: 'amber',
+    tone: 'secondary',
   },
   {
     id: 'mq2',
@@ -78,7 +78,7 @@ export const MISSIONS: Mission[] = [
     desc: 'Pick the right layout from 4 visual options.',
     xp: 200,
     progress: [0, 1],
-    tone: 'accent',
+    tone: 'primary',
   },
   {
     id: 'mq3',
@@ -88,7 +88,7 @@ export const MISSIONS: Mission[] = [
     desc: 'Identify the correct mark. No words.',
     xp: 220,
     progress: [0, 1],
-    tone: 'magenta',
+    tone: 'secondary',
   },
   {
     id: 'ms1',
@@ -98,7 +98,7 @@ export const MISSIONS: Mission[] = [
     desc: 'One question, your voice shapes the roadmap.',
     xp: 120,
     progress: [0, 1],
-    tone: 'lime',
+    tone: 'primary',
   },
   {
     id: 'ms2',
@@ -108,7 +108,7 @@ export const MISSIONS: Mission[] = [
     desc: 'Text + image options. 15 seconds.',
     xp: 140,
     progress: [0, 1],
-    tone: 'amber',
+    tone: 'secondary',
   },
   {
     id: 'ms3',
@@ -118,7 +118,7 @@ export const MISSIONS: Mission[] = [
     desc: 'Pick the shape that speaks to you.',
     xp: 140,
     progress: [0, 1],
-    tone: 'accent',
+    tone: 'primary',
   },
   {
     id: 'ms4',
@@ -128,7 +128,7 @@ export const MISSIONS: Mission[] = [
     desc: 'Tell us your biggest growth pain. 20+ chars.',
     xp: 400,
     progress: [0, 1],
-    tone: 'magenta',
+    tone: 'secondary',
   },
   {
     id: 'mg1',
@@ -137,7 +137,7 @@ export const MISSIONS: Mission[] = [
     desc: '6 lives. Figure out the GrowQuest word.',
     xp: 300,
     progress: [0, 1],
-    tone: 'lime',
+    tone: 'primary',
   },
   {
     id: 'mg2',
@@ -146,7 +146,7 @@ export const MISSIONS: Mission[] = [
     desc: '3 questions · 15s each · score 2+ to pass.',
     xp: 350,
     progress: [0, 3],
-    tone: 'accent',
+    tone: 'primary',
   },
   {
     id: 'm6',
@@ -155,7 +155,7 @@ export const MISSIONS: Mission[] = [
     desc: 'Rate your experience on G2 or Capterra.',
     xp: 300,
     progress: [0, 1],
-    tone: 'magenta',
+    tone: 'secondary',
   },
   {
     id: 'm7',
@@ -164,7 +164,7 @@ export const MISSIONS: Mission[] = [
     desc: 'Live demo + lootbox drop — Thursday 4pm PT.',
     xp: 180,
     progress: [0, 1],
-    tone: 'lime',
+    tone: 'primary',
     limited: true,
     endsAt: LAUNCH_EVENT_ENDS,
   },
@@ -175,7 +175,7 @@ export const MISSIONS: Mission[] = [
     desc: "Unlock the founders' tier.",
     xp: 600,
     progress: [0, 1],
-    tone: 'accent',
+    tone: 'primary',
   },
 ]
 
@@ -196,7 +196,7 @@ export const REWARDS: Reward[] = [
     title: "Founders' hoodie",
     cost: 4500,
     stock: 'In stock',
-    tone: 'accent',
+    tone: 'primary',
     kind: 'merch',
     imageUrl: 'https://cdn.grow-quest.com/tshirt.jpeg',
   },
@@ -205,7 +205,7 @@ export const REWARDS: Reward[] = [
     title: '1-year Pro license',
     cost: 8000,
     stock: '12 left',
-    tone: 'magenta',
+    tone: 'secondary',
     kind: 'digital',
   },
   {
@@ -213,7 +213,7 @@ export const REWARDS: Reward[] = [
     title: 'Priority Slack channel',
     cost: 2400,
     stock: 'In stock',
-    tone: 'lime',
+    tone: 'primary',
     kind: 'access',
   },
   {
@@ -221,7 +221,7 @@ export const REWARDS: Reward[] = [
     title: 'Private beta keys (×3)',
     cost: 1800,
     stock: '28 left',
-    tone: 'amber',
+    tone: 'secondary',
     kind: 'digital',
   },
   {
@@ -229,7 +229,7 @@ export const REWARDS: Reward[] = [
     title: 'Co-brand Zoom background kit',
     cost: 500,
     stock: 'In stock',
-    tone: 'accent',
+    tone: 'primary',
     kind: 'digital',
   },
   {
@@ -237,7 +237,7 @@ export const REWARDS: Reward[] = [
     title: 'Dinner with the founders',
     cost: 12000,
     stock: 'Limited drop',
-    tone: 'magenta',
+    tone: 'secondary',
     kind: 'experience',
     limited: true,
     imageUrl: 'https://cdn.grow-quest.com/dinner.jpeg',
@@ -255,7 +255,11 @@ export const BADGES: Badge[] = [
 
 export const TIERS: Tier[] = [
   { name: 'Scout', min: 0, color: 'var(--ink-dim)' },
-  { name: 'Voyager', min: 5000, color: 'var(--accent-cyan)' },
-  { name: 'Ascendant', min: 12000, color: 'var(--accent-lime)' },
-  { name: 'Oracle', min: 25000, color: 'var(--accent-magenta)' },
+  { name: 'Voyager', min: 5000, color: 'var(--color-primary)' },
+  {
+    name: 'Ascendant',
+    min: 12000,
+    color: 'color-mix(in oklch, var(--color-primary) 50%, var(--color-secondary))',
+  },
+  { name: 'Oracle', min: 25000, color: 'var(--color-secondary)' },
 ]

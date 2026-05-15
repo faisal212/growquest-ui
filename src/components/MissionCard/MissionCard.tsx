@@ -40,7 +40,7 @@ export const MissionCard = memo(function MissionCard({
             <MissionIcon type={m.type} size={18} />
           </div>
           {m.limited && (
-            <Tag tone="magenta">
+            <Tag tone="secondary">
               LIMITED
               {m.endsAt ? (
                 <>
@@ -97,7 +97,7 @@ export const MissionCard = memo(function MissionCard({
           </div>
         </div>
         <div className="flex items-center gap-2.5 shrink-0">
-          {m.limited && <Tag tone="magenta">LIMITED</Tag>}
+          {m.limited && <Tag tone="secondary">LIMITED</Tag>}
           <span className="font-mono text-[11px] text-[color:var(--mission-card-body)]">
             {done}/{total}
           </span>
@@ -129,7 +129,7 @@ export const MissionCard = memo(function MissionCard({
         >
           <MissionIcon type={m.type} size={18} />
         </div>
-        {m.limited && <Tag tone="magenta">⏱ LIMITED</Tag>}
+        {m.limited && <Tag tone="secondary">⏱ LIMITED</Tag>}
       </div>
       <div
         className={`font-semibold mb-1 text-[color:var(--mission-card-title)] ${compact ? 'text-sm' : 'text-base'}`}

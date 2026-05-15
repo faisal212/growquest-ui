@@ -1,5 +1,5 @@
 export function ShapeArt({ shape, tint }: { shape: string; tint: string }) {
-  const color = `var(--accent-${tint})`
+  const color = `var(--color-${tint})`
   return (
     <svg viewBox="0 0 100 100" className="block w-full h-full">
       <rect width="100" height="100" fill="var(--panel)" />

@@ -13,7 +13,7 @@ const meta = {
     },
     tone: {
       control: 'select',
-      options: ['default', 'accent', 'lime', 'magenta', 'amber'],
+      options: ['default', 'primary', 'secondary'],
       description: 'Color tone — maps to the corresponding accent CSS variable.',
       table: { defaultValue: { summary: 'default' } },
     },
@@ -47,17 +47,15 @@ type Story = StoryObj<typeof meta>
 export const Playground: Story = { name: '· Playground' }
 
 export const Default: Story = { args: { children: 'FOUNDERS COHORT', tone: 'default' } }
-export const Accent: Story = { args: { children: 'QUEST · 01 OPEN', tone: 'accent' } }
-export const WithDot: Story = { args: { children: 'LIVE', tone: 'accent', dot: true } }
+export const Primary: Story = { args: { children: 'QUEST · 01 OPEN', tone: 'primary' } }
+export const WithDot: Story = { args: { children: 'LIVE', tone: 'primary', dot: true } }
 
 export const AllTones: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center' }}>
       <Chip>default</Chip>
-      <Chip tone="accent">accent</Chip>
-      <Chip tone="lime">lime</Chip>
-      <Chip tone="magenta">magenta</Chip>
-      <Chip tone="amber">amber</Chip>
+      <Chip tone="primary">primary</Chip>
+      <Chip tone="secondary">secondary</Chip>
     </div>
   ),
 }
@@ -66,11 +64,11 @@ export const InContext: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
       <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-        <Chip tone="accent">QUEST · 01 OPEN</Chip>
+        <Chip tone="primary">QUEST · 01 OPEN</Chip>
         <Chip>FOUNDERS COHORT</Chip>
       </div>
       <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', alignItems: 'center' }}>
-        <Chip tone="accent" style={{ fontWeight: 700 }}>
+        <Chip tone="primary" style={{ fontWeight: 700 }}>
           <svg width="10" height="10" viewBox="0 0 10 10">
             <polygon
               points="5,0 6.3,3.7 10,3.7 7,6 8.2,10 5,7.6 1.8,10 3,6 0,3.7 3.7,3.7"
@@ -82,9 +80,9 @@ export const InContext: Story = {
         <Chip>v1.4</Chip>
       </div>
       <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-        <Chip tone="lime">STREAK +1</Chip>
-        <Chip tone="magenta">NEW BADGE</Chip>
-        <Chip tone="accent">SCORE 2</Chip>
+        <Chip tone="primary">STREAK +1</Chip>
+        <Chip tone="secondary">NEW BADGE</Chip>
+        <Chip tone="primary">SCORE 2</Chip>
       </div>
       <div style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
         <span
@@ -99,7 +97,7 @@ export const InContext: Story = {
         >
           Chip vs XPPill:
         </span>
-        <Chip tone="accent">1,200 XP</Chip>
+        <Chip tone="primary">1,200 XP</Chip>
         <XPPill amount={1200} />
       </div>
     </div>

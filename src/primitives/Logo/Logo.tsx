@@ -4,7 +4,7 @@ export function Logo({ size = 28 }: { size?: number }) {
       <defs>
         <linearGradient id="lg" x1="0" y1="0" x2="1" y2="1">
           <stop offset="0" stopColor="var(--color-primary)" />
-          <stop offset="1" stopColor="var(--accent-magenta)" />
+          <stop offset="1" stopColor="var(--color-secondary)" />
         </linearGradient>
       </defs>
       <polygon points="16,2 28,9 28,23 16,30 4,23 4,9" fill="url(#lg)" />

@@ -3,11 +3,9 @@ import { useContentSlice } from '../../config'
 import type { Badge } from '../../types'
 
 const DEFAULT_UNLOCKED_TONES = [
-  'var(--accent-cyan)',
-  'var(--accent-magenta)',
-  'var(--accent-lime)',
-  'var(--accent-amber)',
-  'var(--accent-violet)',
+  'var(--color-primary)',
+  'var(--color-secondary)',
+  'color-mix(in oklch, var(--color-primary) 50%, var(--color-secondary))',
 ]
 
 interface BadgeGridProps {

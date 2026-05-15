@@ -14,13 +14,10 @@ export function Eyebrow({ children, dot }: { children: React.ReactNode; dot?: bo
 export function Tag({ children, tone = 'default' }: { children: React.ReactNode; tone?: string }) {
   const toneClasses: Record<string, string> = {
     default: 'text-ink-dim border-border bg-panel-2',
-    accent:
+    primary:
       'text-primary border-[color-mix(in_oklch,var(--color-primary)_40%,transparent)] bg-primary-soft',
-    lime: 'text-accent-lime border-[color-mix(in_oklch,var(--accent-lime)_40%,transparent)] bg-[color-mix(in_oklch,var(--accent-lime)_14%,transparent)]',
-    magenta:
-      'text-accent-magenta border-[color-mix(in_oklch,var(--accent-magenta)_40%,transparent)] bg-[color-mix(in_oklch,var(--accent-magenta)_14%,transparent)]',
-    amber:
-      'text-accent-amber border-[color-mix(in_oklch,var(--accent-amber)_40%,transparent)] bg-[color-mix(in_oklch,var(--accent-amber)_14%,transparent)]',
+    secondary:
+      'text-secondary border-[color-mix(in_oklch,var(--color-secondary)_40%,transparent)] bg-[color-mix(in_oklch,var(--color-secondary)_14%,transparent)]',
     ghost: 'text-ink-dim border-border bg-transparent',
   }
   const cls = toneClasses[tone] ?? toneClasses.default
@@ -60,7 +57,7 @@ export function Countdown({ endsAt }: { endsAt: number }) {
     .toString()
     .padStart(2, '0')
   return (
-    <span className="mono text-accent-magenta">
+    <span className="mono text-secondary">
       {h}:{m}:{s}
     </span>
   )

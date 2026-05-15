@@ -45,13 +45,11 @@ describe('applyBrand', () => {
       overrides: {
         missionCard: { panel: '#1A0E00' },
         leaderboardRow: { mineHighlight: '#FF8C0030' },
-        tones: { accent: '#FF00FF' },
       },
     })
     const style = document.documentElement.style
     expect(style.getPropertyValue('--mission-card-bg')).toBe('#1A0E00')
     expect(style.getPropertyValue('--leaderboard-mine-bg')).toBe('#FF8C0030')
-    expect(style.getPropertyValue('--tone-accent')).toBe('#FF00FF')
 
     applyBrand({ mode: 'dark', brand: { primary: '#FF8C00' } })
     // Without overrides, deriveTokens emits the unconditional fallbacks. The
@@ -59,6 +57,5 @@ describe('applyBrand', () => {
     // semantic-token values (BrandStyles is the single source of truth).
     expect(style.getPropertyValue('--mission-card-bg')).toBe('var(--panel)')
     expect(style.getPropertyValue('--leaderboard-mine-bg')).toBe('var(--color-primary-soft)')
-    expect(style.getPropertyValue('--tone-accent')).toBe('var(--accent-cyan)')
   })
 })

@@ -27,19 +27,19 @@ const SURVEY_TEXT: SurveyData = {
 const SURVEY_TEXTIMG: SurveyData = {
   q: 'Which hero style fits your brand?',
   choices: [
-    { id: 'a', label: 'Isometric world', tint: 'cyan' },
-    { id: 'b', label: 'Orbital / cosmic', tint: 'magenta' },
-    { id: 'c', label: 'Editorial poster', tint: 'lime' },
-    { id: 'd', label: 'Pixel / arcade', tint: 'amber' },
+    { id: 'a', label: 'Isometric world', tint: 'primary' },
+    { id: 'b', label: 'Orbital / cosmic', tint: 'secondary' },
+    { id: 'c', label: 'Editorial poster', tint: 'primary' },
+    { id: 'd', label: 'Pixel / arcade', tint: 'secondary' },
   ],
 }
 const SURVEY_IMGONLY: SurveyData = {
   q: 'Pick your favorite vibe:',
   choices: [
-    { id: 'a', shape: 'hex', tint: 'cyan' },
-    { id: 'b', shape: 'circle', tint: 'magenta' },
-    { id: 'c', shape: 'diamond', tint: 'lime' },
-    { id: 'd', shape: 'square', tint: 'amber' },
+    { id: 'a', shape: 'hex', tint: 'primary' },
+    { id: 'b', shape: 'circle', tint: 'secondary' },
+    { id: 'c', shape: 'diamond', tint: 'primary' },
+    { id: 'd', shape: 'square', tint: 'secondary' },
   ],
 }
 

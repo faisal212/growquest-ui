@@ -5,12 +5,6 @@
   --font-display: 'Space Grotesk', system-ui, sans-serif;
   --font-ui: 'Inter', system-ui, sans-serif;
   --font-mono: ui-monospace, 'Cascadia Code', 'Fira Mono', monospace;
-
-  --accent-cyan: oklch(0.86 0.18 200);
-  --accent-lime: oklch(0.89 0.22 130);
-  --accent-magenta: oklch(0.72 0.25 340);
-  --accent-amber: oklch(0.83 0.18 75);
-  --accent-violet: oklch(0.72 0.22 290);
 }
 
 /* Component-scoped + tone + halo fallbacks. Lives inside @layer base so
@@ -20,14 +14,8 @@
    for Storybook + any consumer that mounts components outside BrandProvider. */
 @layer base {
   :root {
-    --halo-amber: radial-gradient(circle, var(--accent-amber) 0%, transparent 70%);
-    --halo-magenta: radial-gradient(circle, var(--accent-magenta) 0%, transparent 70%);
     --halo-primary: radial-gradient(circle, var(--color-primary) 0%, transparent 70%);
-
-    --tone-accent: var(--accent-cyan);
-    --tone-lime: var(--accent-lime);
-    --tone-magenta: var(--accent-magenta);
-    --tone-amber: var(--accent-amber);
+    --halo-secondary: radial-gradient(circle, var(--color-secondary) 0%, transparent 70%);
 
     --mission-card-bg: var(--panel);
     --mission-card-border: var(--border);
@@ -105,11 +93,11 @@
     --badge-grid-locked-fg: var(--ink-faint);
 
     --stat-card-trend-default: var(--color-primary);
-    --stat-card-trend-streak: var(--accent-amber);
-    --stat-card-trend-rewards: var(--accent-lime);
+    --stat-card-trend-streak: var(--color-secondary);
+    --stat-card-trend-rewards: color-mix(in oklch, var(--color-primary) 50%, var(--color-secondary));
 
     --xp-chart-gradient-from: var(--color-primary);
-    --xp-chart-gradient-to: var(--accent-magenta);
+    --xp-chart-gradient-to: var(--color-secondary);
   }
 }
 
@@ -118,11 +106,6 @@
    New brand tokens (--color-primary*, --color-secondary*, --on-primary, halos)
    are written by applyBrand() at runtime in src/config/apply.ts. */
 @theme {
-  --color-accent-cyan: var(--accent-cyan);
-  --color-accent-lime: var(--accent-lime);
-  --color-accent-magenta: var(--accent-magenta);
-  --color-accent-amber: var(--accent-amber);
-  --color-accent-violet: var(--accent-violet);
   --color-bg: var(--bg);
   --color-bg-2: var(--bg-2);
   --color-panel: var(--panel);
@@ -135,16 +118,16 @@
   --color-border-strong: var(--border-strong);
   --color-danger: var(--danger);
 
-  /* Brand tokens (resolved at runtime by applyBrand). Direct values here so
+  /* Brand tokens (resolved at runtime by applyBrand). Literal defaults here so
      the canonical name owns the source; BrandStyles overrides at runtime. */
-  --color-primary: var(--accent-cyan);
-  --color-primary-hover: var(--accent-cyan);
-  --color-primary-soft: color-mix(in oklch, var(--accent-cyan) 18%, transparent);
-  --color-primary-faint: color-mix(in oklch, var(--accent-cyan) 8%, transparent);
+  --color-primary: oklch(0.86 0.18 200);
+  --color-primary-hover: oklch(0.86 0.18 200);
+  --color-primary-soft: color-mix(in oklch, oklch(0.86 0.18 200) 18%, transparent);
+  --color-primary-faint: color-mix(in oklch, oklch(0.86 0.18 200) 8%, transparent);
   --color-on-primary: #0A0B10;
-  --color-secondary: var(--accent-magenta);
-  --color-secondary-hover: var(--accent-magenta);
-  --color-secondary-soft: color-mix(in oklch, var(--accent-cyan) 8%, transparent);
+  --color-secondary: oklch(0.72 0.25 340);
+  --color-secondary-hover: oklch(0.72 0.25 340);
+  --color-secondary-soft: color-mix(in oklch, oklch(0.72 0.25 340) 18%, transparent);
   --color-on-secondary: #FFFFFF;
 
   --font-display: 'Space Grotesk', system-ui, sans-serif;
@@ -208,13 +191,13 @@ body::before {
   pointer-events: none;
   background-image:
     radial-gradient(1200px 600px at 80% -10%, var(--color-primary-faint), transparent 70%),
-    radial-gradient(900px 500px at -10% 110%, color-mix(in oklch, var(--accent-magenta) 6%, transparent), transparent 60%);
+    radial-gradient(900px 500px at -10% 110%, color-mix(in oklch, var(--color-secondary) 6%, transparent), transparent 60%);
 }
 
 html[data-theme="light"] body::before {
   background-image:
     radial-gradient(1200px 600px at 80% -10%, color-mix(in oklch, var(--color-primary) 10%, transparent), transparent 70%),
-    radial-gradient(900px 500px at -10% 110%, color-mix(in oklch, var(--accent-magenta) 5%, transparent), transparent 60%);
+    radial-gradient(900px 500px at -10% 110%, color-mix(in oklch, var(--color-secondary) 5%, transparent), transparent 60%);
 }
 
 @layer base {
@@ -406,7 +389,7 @@ html[data-theme="light"] body::before {
 .xpbar { position: relative; height: 8px; border-radius: 99px; overflow: hidden; background: var(--panel-2); border: 1px solid var(--border); }
 .xpbar .fill {
   height: 100%;
-  background: linear-gradient(90deg, var(--color-primary), color-mix(in oklch, var(--color-primary) 50%, var(--accent-magenta)));
+  background: linear-gradient(90deg, var(--color-primary), color-mix(in oklch, var(--color-primary) 50%, var(--color-secondary)));
   box-shadow: 0 0 12px color-mix(in oklch, var(--color-primary) 60%, transparent);
   transition: width 600ms cubic-bezier(.2,.7,.2,1);
 }
@@ -434,46 +417,6 @@ html[data-theme="light"] body::before {
   background-size: 32px 32px;
 }
 
-/* Tweaks panel */
-.tweaks {
-  position: fixed;
-  right: 16px;
-  bottom: 16px;
-  z-index: 100;
-  width: 280px;
-  background: var(--panel);
-  border: 1px solid var(--border-strong);
-  border-radius: 12px;
-  box-shadow: 0 20px 60px -20px rgba(0,0,0,0.5);
-  font-size: 12px;
-  overflow: hidden;
-  animation: fadeUp 220ms ease both;
-}
-.tweaks header {
-  padding: 10px 14px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid var(--border);
-  background: var(--panel-2);
-}
-.tweaks header .title { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; }
-.tweaks .row { padding: 10px 14px; border-bottom: 1px solid var(--border); }
-.tweaks .row:last-child { border-bottom: none; }
-.tweaks .row label { display: block; color: var(--ink-dim); font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 6px; }
-.tweaks .pill-row { display: flex; flex-wrap: wrap; gap: 4px; }
-.tweaks .pill {
-  padding: 5px 9px;
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  background: var(--panel-2);
-  color: var(--ink-dim);
-  font-size: 11px;
-  font-family: var(--font-mono);
-  cursor: pointer;
-}
-.tweaks .pill.on { background: var(--color-primary-soft); border-color: var(--color-primary); color: var(--color-primary); }
-
 /* Responsive helpers */
 @media (max-width: 1024px) {
   .topbar .nav { gap: 0; overflow-x: auto; }
@@ -496,7 +439,6 @@ html[data-theme="light"] body::before {
   .app-footer > div:first-child { flex-wrap: wrap; gap: 12px; }
   .modal-backdrop { padding: 12px; align-items: flex-end; }
   .modal { max-height: 94vh; border-radius: 14px; }
-  .tweaks { width: calc(100vw - 24px); max-width: 320px; max-height: 70vh; overflow-y: auto; right: 12px; bottom: 12px; }
 
   /* Hero banner mobile (.hero-banner is a structural component class) */
   .hero-banner { min-height: 180px !important; }
@@ -528,33 +470,6 @@ html[data-theme="light"] body::before {
   .lb-row { grid-template-columns: 40px 1fr 80px !important; padding: 10px 12px !important; }
   .lb-row .lb-tier, .lb-row .lb-streak { display: none !important; }
   .lb-head { display: none !important; }
-}
-
-/* Mobile-density tweak */
-html[data-mobile-density="compact"] .btn { padding: 9px 12px; font-size: 12px; }
-html[data-mobile-density="compact"] .panel { border-radius: 10px; }
-
-/* Bottom-nav tweak */
-html[data-mobile-nav="bottom"] .topbar .nav { display: none; }
-html[data-mobile-nav="bottom"] .bottom-nav { display: flex; }
-.bottom-nav { display: none; }
-@media (max-width: 720px) {
-  html[data-mobile-nav="bottom"] [data-app-root] { padding-bottom: 68px; }
-  html[data-mobile-nav="bottom"] .bottom-nav {
-    position: fixed; left: 0; right: 0; bottom: 0; z-index: 50;
-    display: flex; justify-content: space-around; align-items: center;
-    padding: 8px 10px; background: color-mix(in oklch, var(--bg) 88%, transparent);
-    backdrop-filter: blur(12px); border-top: 1px solid var(--border);
-  }
-  html[data-mobile-nav="bottom"] .bottom-nav button {
-    flex: 1; display: flex; flex-direction: column; align-items: center; gap: 2px;
-    padding: 6px 4px; font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.1em;
-    text-transform: uppercase; color: var(--ink-dim); border-radius: 6px;
-  }
-  html[data-mobile-nav="bottom"] .bottom-nav button.active { color: var(--color-primary); }
-  html[data-mobile-nav="bottom"] .bottom-nav button svg { width: 20px; height: 20px; }
-  html[data-mobile-hero="hide"] .hero-banner { display: none; }
-  html[data-mobile-hero="hide"] .onboarding-hero { display: none; }
 }
 
 /* HeroBanner structure */

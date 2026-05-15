@@ -25,7 +25,7 @@ describe('Chip', () => {
   })
 
   it('accepts all tone values without error', () => {
-    const tones = ['accent', 'lime', 'magenta', 'amber'] as const
+    const tones = ['primary', 'secondary'] as const
     tones.forEach((tone) => {
       const { unmount } = render(<Chip tone={tone}>{tone}</Chip>)
       expect(screen.getByText(tone)).toBeInTheDocument()

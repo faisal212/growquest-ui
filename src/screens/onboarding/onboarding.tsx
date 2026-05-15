@@ -62,7 +62,7 @@ export default function OnboardingScreen({ onEnter, heroStyle }: OnboardingScree
           </div>
           {!onboardingHero && (
             <div className="absolute left-4 bottom-4 flex gap-[6px] flex-wrap">
-              <Chip tone="accent">{t.chipPrimary}</Chip>
+              <Chip tone="primary">{t.chipPrimary}</Chip>
               <Chip>{t.chipSecondary}</Chip>
             </div>
           )}

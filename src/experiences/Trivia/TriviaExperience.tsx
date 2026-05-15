@@ -84,7 +84,7 @@ export function TriviaExperience({
               cy="60"
               r="50"
               fill="none"
-              stroke={passed ? 'var(--accent-lime)' : 'var(--danger)'}
+              stroke={passed ? 'var(--color-primary)' : 'var(--danger)'}
               strokeWidth="10"
               strokeDasharray={2 * Math.PI * 50}
               strokeDashoffset={2 * Math.PI * 50 * (1 - pct / 100)}
@@ -129,7 +129,7 @@ export function TriviaExperience({
           // trivia · q{idx + 1} / {questions.length}
         </Eyebrow>
         <div className="flex items-center gap-1.5">
-          <Chip tone="accent">SCORE {score}</Chip>
+          <Chip tone="primary">SCORE {score}</Chip>
           <span
             className={`mono py-1 px-2 border rounded-[4px] text-xs ${time < 5 ? 'border-danger text-danger' : 'border-border text-ink'}`}
           >
@@ -160,7 +160,7 @@ export function TriviaExperience({
               className={`py-4 px-3.5 rounded-lg text-left flex items-center gap-2.5 text-sm border ${good ? 'border-accent-lime' : bad ? 'border-danger' : isPick ? 'border-accent' : 'border-border'} ${good || bad ? '' : 'bg-panel-2'}`}
               style={
                 good
-                  ? { background: 'color-mix(in oklch, var(--accent-lime) 14%, transparent)' }
+                  ? { background: 'color-mix(in oklch, var(--color-primary) 14%, transparent)' }
                   : bad
                     ? { background: 'color-mix(in oklch, var(--danger) 14%, transparent)' }
                     : undefined

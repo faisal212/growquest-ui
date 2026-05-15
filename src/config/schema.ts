@@ -15,8 +15,8 @@ export interface BrandColors {
   secondary?: string
 }
 
-/** Tone palette names referenced by tier-tone mapping, badge rotation, etc. */
-export type ToneName = 'accent' | 'lime' | 'magenta' | 'amber'
+/** Brand color role used by tier-tone mapping, mission/reward tinting, etc. */
+export type ToneName = 'primary' | 'secondary'
 
 /** Copy strings, keyed by dotted path. Sparse — only override what differs from defaults. */
 export interface ContentMap {
@@ -327,16 +327,8 @@ export interface StatCardRecipe {
 export interface XpChartRecipe {
   /** Top of the activity bar gradient. Default `var(--color-primary)`. */
   gradientFrom?: string
-  /** Bottom of the activity bar gradient. Default `var(--accent-magenta)`. */
+  /** Bottom of the activity bar gradient. Default `var(--color-secondary)`. */
   gradientTo?: string
-}
-
-/** Override the tone-color palette. Affects every component that calls toneColor(). */
-export interface ToneOverrides {
-  accent?: string
-  lime?: string
-  magenta?: string
-  amber?: string
 }
 
 export interface Overrides {
@@ -374,8 +366,6 @@ export interface Overrides {
   statCard?: StatCardRecipe
   /** Override the profile activity-chart gradient. */
   xpChart?: XpChartRecipe
-  /** Remap the tone palette (accent/lime/magenta/amber → arbitrary colors). */
-  tones?: ToneOverrides
 }
 
 export interface BrandConfig {

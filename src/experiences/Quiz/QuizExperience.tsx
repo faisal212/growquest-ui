@@ -30,20 +30,20 @@ const QUIZ_BANK: Record<string, QuizData> = {
   textImage: {
     q: 'Pick the layout that maximizes click-through on a landing page.',
     choices: [
-      { id: 'a', label: 'Hero + single CTA above the fold', tint: 'cyan' },
-      { id: 'b', label: 'Carousel of 5 headlines', tint: 'magenta' },
-      { id: 'c', label: 'Testimonials first, CTA last', tint: 'lime' },
-      { id: 'd', label: 'Video autoplay + form', tint: 'amber' },
+      { id: 'a', label: 'Hero + single CTA above the fold', tint: 'primary' },
+      { id: 'b', label: 'Carousel of 5 headlines', tint: 'secondary' },
+      { id: 'c', label: 'Testimonials first, CTA last', tint: 'primary' },
+      { id: 'd', label: 'Video autoplay + form', tint: 'secondary' },
     ],
     correct: 'a',
   },
   imageOnly: {
     q: 'Which is the correct brand mark?',
     choices: [
-      { id: 'a', label: 'Hexagon', shape: 'hex', tint: 'cyan' },
-      { id: 'b', label: 'Circle', shape: 'circle', tint: 'magenta' },
-      { id: 'c', label: 'Diamond', shape: 'diamond', tint: 'lime' },
-      { id: 'd', label: 'Square', shape: 'square', tint: 'amber' },
+      { id: 'a', label: 'Hexagon', shape: 'hex', tint: 'primary' },
+      { id: 'b', label: 'Circle', shape: 'circle', tint: 'secondary' },
+      { id: 'c', label: 'Diamond', shape: 'diamond', tint: 'primary' },
+      { id: 'd', label: 'Square', shape: 'square', tint: 'secondary' },
     ],
     correct: 'a',
   },
@@ -104,7 +104,7 @@ export function QuizExperience({
                     height="16"
                     viewBox="0 0 16 16"
                     fill="none"
-                    stroke="var(--accent-lime)"
+                    stroke="var(--color-primary)"
                     strokeWidth="2.2"
                   >
                     <path d="M3 8.5l3.5 3.5L13 5" />
@@ -148,15 +148,15 @@ export function QuizExperience({
                   <div
                     className="absolute inset-0"
                     style={{
-                      backgroundImage: `repeating-linear-gradient(135deg, color-mix(in oklch, var(--accent-${c.tint}) 30%, transparent) 0 6px, transparent 6px 14px)`,
+                      backgroundImage: `repeating-linear-gradient(135deg, color-mix(in oklch, var(--color-${c.tint}) 30%, transparent) 0 6px, transparent 6px 14px)`,
                     }}
                   />
                   <div className="absolute inset-0 grid place-items-center">
                     <div
                       className="font-mono text-[10px] tracking-[0.12em] uppercase py-1 px-2 bg-panel border rounded-[4px]"
                       style={{
-                        color: `var(--accent-${c.tint})`,
-                        borderColor: `color-mix(in oklch, var(--accent-${c.tint}) 40%, transparent)`,
+                        color: `var(--color-${c.tint})`,
+                        borderColor: `color-mix(in oklch, var(--color-${c.tint}) 40%, transparent)`,
                       }}
                     >
                       OPT {c.id.toUpperCase()}
@@ -205,7 +205,7 @@ export function QuizExperience({
           className={`p-3 rounded-lg text-[13px] border ${correct ? 'border-accent-lime' : 'border-danger'}`}
           style={{
             background: correct
-              ? 'color-mix(in oklch, var(--accent-lime) 14%, transparent)'
+              ? 'color-mix(in oklch, var(--color-primary) 14%, transparent)'
               : 'color-mix(in oklch, var(--danger) 14%, transparent)',
           }}
         >

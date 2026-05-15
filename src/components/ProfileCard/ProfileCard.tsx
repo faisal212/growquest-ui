@@ -1,6 +1,6 @@
 import { Avatar } from '../../art'
 import { XPBar, Tag } from '../../atoms'
-import type { Persona, Tweaks } from '../../types'
+import type { Persona } from '../../types'
 
 interface ProfileCardProps {
   persona: Persona
@@ -30,7 +30,7 @@ export function ProfileCard({
             <span className="font-bold text-[color:var(--profile-card-title)]">
               @{persona.handle}
             </span>
-            <Tag tone="accent">{persona.tier}</Tag>
+            <Tag tone="primary">{persona.tier}</Tag>
           </div>
           <div className="font-mono text-[11px] text-[color:var(--profile-card-wallet)]">
             {walletAddress}
@@ -59,9 +59,4 @@ export function ProfileCard({
       </div>
     </div>
   )
-}
-
-// convenience re-export for callers that only need the xpStyle from tweaks
-export function ProfileCardFromTweaks({ persona, tweaks }: { persona: Persona; tweaks: Tweaks }) {
-  return <ProfileCard persona={persona} xpStyle={tweaks.xpStyle} />
 }

@@ -115,7 +115,7 @@ export function MissionModal({ m, onClose, onClaim }: MissionModalProps) {
             <div className="flex gap-2 mt-1.5">
               <XPPill amount={m.xp} />
               {m.limited && m.endsAt && (
-                <Tag tone="magenta">
+                <Tag tone="secondary">
                   Ends in <Countdown endsAt={m.endsAt} />
                 </Tag>
               )}

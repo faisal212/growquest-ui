@@ -54,13 +54,13 @@ export const AllStats: Story = {
         label="Streak"
         value="12d"
         trend={[3, 5, 7, 6, 9, 12]}
-        trendColor="var(--accent-amber)"
+        trendColor="var(--color-secondary)"
       />
       <StatCard
         label="Rewards"
         value={2}
         trend={[0, 0, 1, 1, 2, 2]}
-        trendColor="var(--accent-lime)"
+        trendColor="color-mix(in oklch, var(--color-primary) 50%, var(--color-secondary))"
       />
     </div>
   ),

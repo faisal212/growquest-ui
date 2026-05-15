@@ -5,10 +5,10 @@ import type { ClaimPayload } from '../../types'
 
 const PARTICLE_COUNT = 28
 const COLORS = [
-  'var(--accent-cyan)',
-  'var(--accent-magenta)',
-  'var(--accent-lime)',
-  'var(--accent-amber)',
+  'var(--color-primary)',
+  'var(--color-secondary)',
+  'var(--color-primary)',
+  'var(--color-secondary)',
 ]
 // Stable random values computed once at module load — not during render.
 const PARTICLES = Array.from({ length: PARTICLE_COUNT }, (_, i) => ({
@@ -70,7 +70,7 @@ export function CelebrationScreen({
             <defs>
               <linearGradient id="cel-grad" x1="0" x2="1" y1="0" y2="1">
                 <stop offset="0" stopColor="var(--color-primary)" />
-                <stop offset="1" stopColor="var(--accent-magenta)" />
+                <stop offset="1" stopColor="var(--color-secondary)" />
               </linearGradient>
             </defs>
             <polygon points="70,8 130,40 130,100 70,132 10,100 10,40" fill="url(#cel-grad)" />
@@ -105,8 +105,8 @@ export function CelebrationScreen({
 
         <div className="flex gap-2 justify-center mb-5 flex-wrap">
           <XPPill amount={`+${(reward?.xp ?? 500).toLocaleString()}`} />
-          <Chip tone="lime">STREAK +1</Chip>
-          <Chip tone="magenta">NEW BADGE</Chip>
+          <Chip tone="primary">STREAK +1</Chip>
+          <Chip tone="secondary">NEW BADGE</Chip>
         </div>
 
         <Button variant="primary" className="w-full" onClick={onContinue}>
@@ -134,14 +134,14 @@ export function SpinModal({
   const [spinning, setSpinning] = useState(false)
   const [result, setResult] = useState<Prize | null>(null)
   const prizes: Prize[] = [
-    { label: '+250 XP', tone: 'cyan', xp: 250 },
-    { label: '+50 XP', tone: 'amber', xp: 50 },
-    { label: 'MERCH', tone: 'magenta', xp: 0 },
-    { label: '+100 XP', tone: 'lime', xp: 100 },
-    { label: 'RARE', tone: 'magenta', xp: 0 },
-    { label: '+500 XP', tone: 'cyan', xp: 500 },
+    { label: '+250 XP', tone: 'primary', xp: 250 },
+    { label: '+50 XP', tone: 'secondary', xp: 50 },
+    { label: 'MERCH', tone: 'secondary', xp: 0 },
+    { label: '+100 XP', tone: 'primary', xp: 100 },
+    { label: 'RARE', tone: 'secondary', xp: 0 },
+    { label: '+500 XP', tone: 'primary', xp: 500 },
     { label: 'TRY AGAIN', tone: 'dim', xp: 0 },
-    { label: '+1000 XP', tone: 'lime', xp: 1000 },
+    { label: '+1000 XP', tone: 'primary', xp: 1000 },
   ]
   const [angle, setAngle] = useState(0)
 
@@ -189,7 +189,7 @@ export function SpinModal({
               const labelAngle = (a1 + a2) / 2
               const lx = Math.cos(labelAngle) * 60,
                 ly = Math.sin(labelAngle) * 60
-              const color = p.tone === 'dim' ? 'var(--panel-2)' : `var(--accent-${p.tone})`
+              const color = p.tone === 'dim' ? 'var(--panel-2)' : `var(--color-${p.tone})`
               return (
                 <g key={i}>
                   <path

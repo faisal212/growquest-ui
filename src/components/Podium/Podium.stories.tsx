@@ -20,9 +20,9 @@ const meta = {
   component: Podium,
   args: {
     entries: LEADERBOARD,
-    rank1Color: 'var(--accent-amber)',
-    rank2Color: 'var(--accent-cyan)',
-    rank3Color: 'var(--accent-magenta)',
+    rank1Color: 'var(--color-secondary)',
+    rank2Color: 'var(--color-primary)',
+    rank3Color: 'var(--color-secondary)',
     rank1Height: 180,
     rank2Height: 150,
     rank3Height: 130,

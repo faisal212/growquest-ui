@@ -1,25 +1,15 @@
-export type ChipTone = 'default' | 'accent' | 'lime' | 'magenta' | 'amber'
+export type ChipTone = 'default' | 'primary' | 'secondary'
 
 export const CHIP_TONES: Record<string, React.CSSProperties> = {
-  accent: {
+  primary: {
     color: 'var(--color-primary)',
     borderColor: 'color-mix(in oklch, var(--color-primary) 40%, transparent)',
     background: 'var(--color-primary-soft)',
   },
-  lime: {
-    color: 'var(--accent-lime)',
-    borderColor: 'color-mix(in oklch, var(--accent-lime) 40%, transparent)',
-    background: 'color-mix(in oklch, var(--accent-lime) 14%, transparent)',
-  },
-  magenta: {
-    color: 'var(--accent-magenta)',
-    borderColor: 'color-mix(in oklch, var(--accent-magenta) 40%, transparent)',
-    background: 'color-mix(in oklch, var(--accent-magenta) 14%, transparent)',
-  },
-  amber: {
-    color: 'var(--accent-amber)',
-    borderColor: 'color-mix(in oklch, var(--accent-amber) 40%, transparent)',
-    background: 'color-mix(in oklch, var(--accent-amber) 14%, transparent)',
+  secondary: {
+    color: 'var(--color-secondary)',
+    borderColor: 'color-mix(in oklch, var(--color-secondary) 40%, transparent)',
+    background: 'color-mix(in oklch, var(--color-secondary) 14%, transparent)',
   },
 }
 

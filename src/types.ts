@@ -33,8 +33,8 @@ export type MissionSubtype =
   | 'survey-imageOnly'
   | 'survey-textarea'
 
-/** Accent color token used for mission/reward tinting. 'accent' follows the user's active accent setting. */
-export type Tone = 'accent' | 'lime' | 'magenta' | 'amber'
+/** Brand color role used for mission/reward tinting. `'primary'` echoes `brand.primary`; `'secondary'` echoes `brand.secondary`. */
+export type Tone = 'primary' | 'secondary'
 
 export type RewardKind = 'merch' | 'digital' | 'access' | 'experience'
 
@@ -95,20 +95,6 @@ export interface Persona {
   streak: number
   tier: string
   ready: number
-}
-
-export interface Tweaks {
-  theme: 'dark' | 'light'
-  accent: 'cyan' | 'lime' | 'magenta' | 'amber' | 'violet'
-  tileLayout: 'split' | 'stack' | 'list'
-  xpStyle: 'notched' | 'ring' | 'segmented' | 'plain'
-  tileDensity: 'comfortable' | 'compact'
-  heroStyle: 'isometric' | 'orbital' | 'grid-poster' | 'pixel'
-  rewardsLayout: 'stacked' | 'side-by-side' | 'rewards-left'
-  rewardsRatio: 'balanced' | 'missions-heavy' | 'rewards-heavy'
-  mobileNav: 'top' | 'bottom'
-  mobileDensity: 'comfortable' | 'compact'
-  mobileHero: 'show' | 'hide'
 }
 
 export interface ClaimPayload {

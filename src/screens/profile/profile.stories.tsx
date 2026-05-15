@@ -1,10 +1,8 @@
 import type { Meta, StoryObj, ArgTypes } from '@storybook/react'
 import ProfileScreen from './profile'
-import type { Persona, Tweaks } from '../../types'
+import type { Persona } from '../../types'
 
-// Screen story args are flat (persona + tweaks fields spread); render assembles them into the nested props.
-// satisfies Meta<any> is intentional — Storybook's type system can't express this flat-to-nested mapping.
-type ProfileStoryArgs = Persona & Tweaks
+type ProfileStoryArgs = Persona
 
 const PERSONA_ARGS: Persona = {
   handle: 'alpha',
@@ -14,20 +12,6 @@ const PERSONA_ARGS: Persona = {
   streak: 12,
   tier: 'Voyager',
   ready: 2,
-}
-
-const TWEAKS_ARGS: Tweaks = {
-  theme: 'dark',
-  accent: 'amber',
-  tileLayout: 'stack',
-  xpStyle: 'notched',
-  tileDensity: 'comfortable',
-  heroStyle: 'grid-poster',
-  rewardsLayout: 'stacked',
-  rewardsRatio: 'balanced',
-  mobileNav: 'top',
-  mobileDensity: 'comfortable',
-  mobileHero: 'show',
 }
 
 const PERSONA_ARG_TYPES: ArgTypes = {
@@ -50,52 +34,6 @@ const PERSONA_ARG_TYPES: ArgTypes = {
   ready: { control: { type: 'range', min: 0, max: 10, step: 1 }, table: { category: 'Persona' } },
 }
 
-const TWEAKS_ARG_TYPES: ArgTypes = {
-  theme: { control: 'radio', options: ['dark', 'light'], table: { category: 'Tweaks' } },
-  accent: {
-    control: 'select',
-    options: ['amber', 'cyan', 'lime', 'magenta'],
-    table: { category: 'Tweaks' },
-  },
-  xpStyle: {
-    control: 'radio',
-    options: ['notched', 'ring', 'segmented', 'plain'],
-    table: { category: 'Tweaks' },
-  },
-  heroStyle: {
-    control: 'select',
-    options: ['grid-poster', 'isometric', 'orbital', 'pixel'],
-    table: { category: 'Tweaks' },
-  },
-  tileLayout: {
-    control: 'radio',
-    options: ['stack', 'split', 'list'],
-    table: { category: 'Tweaks' },
-  },
-  tileDensity: {
-    control: 'radio',
-    options: ['comfortable', 'compact'],
-    table: { category: 'Tweaks' },
-  },
-  rewardsLayout: {
-    control: 'radio',
-    options: ['stacked', 'side-by-side'],
-    table: { category: 'Tweaks' },
-  },
-  rewardsRatio: {
-    control: 'radio',
-    options: ['balanced', 'missions-heavy', 'rewards-heavy'],
-    table: { category: 'Tweaks' },
-  },
-  mobileNav: { control: 'radio', options: ['top', 'bottom'], table: { category: 'Tweaks' } },
-  mobileDensity: {
-    control: 'radio',
-    options: ['comfortable', 'compact'],
-    table: { category: 'Tweaks' },
-  },
-  mobileHero: { control: 'radio', options: ['show', 'hide'], table: { category: 'Tweaks' } },
-}
-
 function buildPersona(a: ProfileStoryArgs): Persona {
   return {
     handle: a.handle,
@@ -107,31 +45,14 @@ function buildPersona(a: ProfileStoryArgs): Persona {
     ready: a.ready,
   }
 }
-function buildTweaks(a: ProfileStoryArgs): Tweaks {
-  return {
-    theme: a.theme,
-    accent: a.accent,
-    tileLayout: a.tileLayout,
-    xpStyle: a.xpStyle,
-    tileDensity: a.tileDensity,
-    heroStyle: a.heroStyle,
-    rewardsLayout: a.rewardsLayout,
-    rewardsRatio: a.rewardsRatio,
-    mobileNav: a.mobileNav,
-    mobileDensity: a.mobileDensity,
-    mobileHero: a.mobileHero,
-  }
-}
 
 const meta = {
   title: 'Screens/Profile',
   component: ProfileScreen,
   parameters: { layout: 'fullscreen' },
-  args: { ...PERSONA_ARGS, ...TWEAKS_ARGS },
-  argTypes: { ...PERSONA_ARG_TYPES, ...TWEAKS_ARG_TYPES },
-  render: (args: ProfileStoryArgs) => (
-    <ProfileScreen persona={buildPersona(args)} tweaks={buildTweaks(args)} />
-  ),
+  args: { ...PERSONA_ARGS },
+  argTypes: { ...PERSONA_ARG_TYPES },
+  render: (args: ProfileStoryArgs) => <ProfileScreen persona={buildPersona(args)} />,
 } satisfies Meta<any>
 export default meta
 type Story = StoryObj<any>
@@ -159,16 +80,9 @@ export const PowerPersona: Story = {
     ready: 3,
   },
 }
-export const XPBarRing: Story = {
-  args: { theme: 'light', xpStyle: 'ring' },
-}
-export const XPBarSegmented: Story = {
-  args: { xpStyle: 'segmented' },
-}
 export const Mobile: Story = {
   name: '· Mobile',
   parameters: { viewport: { defaultViewport: 'mobile1' } },
-  args: { mobileNav: 'bottom', mobileDensity: 'comfortable' },
   decorators: [
     (Story) => (
       <div style={{ width: 375, maxWidth: '100%' }}>

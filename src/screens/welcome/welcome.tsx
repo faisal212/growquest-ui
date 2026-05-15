@@ -32,7 +32,7 @@ export default function WelcomeScreen({ onContinue, email }: WelcomeScreenProps)
               <defs>
                 <linearGradient id="wg-grad" x1="0" x2="1" y1="0" y2="1">
                   <stop offset="0" stopColor="var(--color-primary)" />
-                  <stop offset="1" stopColor="var(--accent-magenta)" />
+                  <stop offset="1" stopColor="var(--color-secondary)" />
                 </linearGradient>
                 <radialGradient id="wg-glow">
                   <stop offset="0" stopColor="var(--color-primary)" stopOpacity="0.5" />
@@ -44,9 +44,9 @@ export default function WelcomeScreen({ onContinue, email }: WelcomeScreenProps)
                 <polygon points="0,-60 18,-30 18,30 0,45 -18,30 -18,-30" fill="url(#wg-grad)" />
                 <polygon points="0,-60 18,-30 0,-20 -18,-30" fill="#fff" opacity="0.85" />
                 <circle cx="0" cy="-5" r="7" fill="var(--bg)" />
-                <polygon points="-18,30 -30,50 -6,40" fill="var(--accent-lime)" />
-                <polygon points="18,30 30,50 6,40" fill="var(--accent-lime)" />
-                <polygon points="-6,45 0,70 6,45" fill="var(--accent-amber)" />
+                <polygon points="-18,30 -30,50 -6,40" fill="var(--color-primary)" />
+                <polygon points="18,30 30,50 6,40" fill="var(--color-primary)" />
+                <polygon points="-6,45 0,70 6,45" fill="var(--color-secondary)" />
               </g>
               <text
                 x="20"

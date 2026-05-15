@@ -51,7 +51,7 @@ export const TagPlayground: Story = {
     text: { control: 'text', description: 'Tag label.' },
     tone: {
       control: 'select',
-      options: ['default', 'accent', 'lime', 'magenta', 'amber', 'ghost'],
+      options: ['default', 'primary', 'secondary', 'ghost'],
       description: 'Color tone.',
       table: { defaultValue: { summary: 'default' } },
     },
@@ -63,10 +63,8 @@ export const TagTones: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
       <Tag>default</Tag>
-      <Tag tone="accent">accent</Tag>
-      <Tag tone="lime">lime</Tag>
-      <Tag tone="magenta">magenta</Tag>
-      <Tag tone="amber">amber</Tag>
+      <Tag tone="primary">primary</Tag>
+      <Tag tone="secondary">secondary</Tag>
       <Tag tone="ghost">ghost</Tag>
     </div>
   ),
@@ -146,8 +144,13 @@ export const Sparklines: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
       <Sparkline values={[2, 4, 3, 6, 5, 8, 9, 12, 14]} />
-      <Sparkline values={[10, 8, 6, 7, 9, 11, 10, 12]} color="var(--accent-magenta)" />
-      <Sparkline values={[1, 1, 2, 3, 5, 8, 13]} color="var(--accent-lime)" w={120} h={40} />
+      <Sparkline values={[10, 8, 6, 7, 9, 11, 10, 12]} color="var(--color-secondary)" />
+      <Sparkline
+        values={[1, 1, 2, 3, 5, 8, 13]}
+        color="color-mix(in oklch, var(--color-primary) 50%, var(--color-secondary))"
+        w={120}
+        h={40}
+      />
     </div>
   ),
 }

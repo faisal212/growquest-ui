@@ -15,7 +15,7 @@ const socialMission: Mission = {
   desc: 'Follow on social media',
   xp: 100,
   progress: [0, 1],
-  tone: 'accent',
+  tone: 'primary',
 }
 
 describe('MissionModal', () => {

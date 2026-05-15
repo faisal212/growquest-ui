@@ -24,7 +24,7 @@ export function ChoiceShell({
   layout = 'row',
 }: ChoiceShellProps) {
   const border = correct
-    ? 'var(--accent-lime)'
+    ? 'var(--color-primary)'
     : wrong
       ? 'var(--danger)'
       : selected
@@ -32,7 +32,7 @@ export function ChoiceShell({
         : 'var(--border)'
 
   const bg = correct
-    ? 'color-mix(in oklch, var(--accent-lime) 14%, transparent)'
+    ? 'color-mix(in oklch, var(--color-primary) 14%, transparent)'
     : wrong
       ? 'color-mix(in oklch, var(--danger) 14%, transparent)'
       : selected

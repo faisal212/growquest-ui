@@ -2,8 +2,7 @@
 
 import { createContext, useContext, useState, useSyncExternalStore, type ReactNode } from 'react'
 import { lazy, Suspense } from 'react'
-import { TweaksPanel, useTweaks, useEditMode } from '../tweaks'
-import type { Persona, Tweaks, ClaimPayload, Reward, Mission } from '../types'
+import type { Persona, ClaimPayload, Reward, Mission } from '../types'
 import { ErrorBoundary } from '../components/ErrorBoundary'
 
 const CelebrationScreen = lazy(() =>
@@ -55,13 +54,10 @@ interface DemoShellState {
   persona: Persona
   personaKey: string
   setPersonaKey: (k: string) => void
-  tweaks: Tweaks
   email: string
   setEmail: (e: string) => void
   onClaim: (m: Mission | ClaimPayload) => void
   onRedeem: (r: Reward) => void
-  tweaksVisible: boolean
-  toggleTweaks: () => void
 }
 
 const DemoShellContext = createContext<DemoShellState | null>(null)
@@ -73,13 +69,11 @@ export function useDemoShell(): DemoShellState {
 }
 
 /**
- * Client-side state shell for the demo Next.js app. Owns persona / tweaks /
- * modal state and exposes it via DemoShellContext so screen pages (which are
- * server components) can render children that call useDemoShell().
+ * Client-side state shell for the demo Next.js app. Owns persona + modal state
+ * and exposes it via DemoShellContext so screen pages (which are server
+ * components) can render children that call useDemoShell().
  */
 export function DemoShell({ children }: { children: ReactNode }) {
-  const [tweaks, setTweaks] = useTweaks()
-  const [tweaksVisible, setTweaksVisible] = useEditMode()
   // SSR + first client render both read 'active'; useSyncExternalStore upgrades
   // to the localStorage value after hydration without an in-effect setState.
   const storedKey = useSyncExternalStore(
@@ -128,13 +122,10 @@ export function DemoShell({ children }: { children: ReactNode }) {
     persona,
     personaKey,
     setPersonaKey: handleSetPersonaKey,
-    tweaks,
     email,
     setEmail,
     onClaim: handleClaim,
     onRedeem: handleRedeem,
-    tweaksVisible,
-    toggleTweaks: () => setTweaksVisible((v) => !v),
   }
 
   return (
@@ -146,7 +137,6 @@ export function DemoShell({ children }: { children: ReactNode }) {
             <CelebrationScreen reward={celebration} onContinue={() => setCelebration(null)} />
           )}
         </Suspense>
-        <TweaksPanel tweaks={tweaks} setTweaks={setTweaks} visible={tweaksVisible} />
       </div>
     </DemoShellContext.Provider>
   )

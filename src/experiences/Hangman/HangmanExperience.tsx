@@ -89,7 +89,7 @@ export function HangmanExperience({
           className={`p-3 rounded-lg text-[13px] border ${solved ? 'border-accent-lime' : 'border-danger'}`}
           style={{
             background: solved
-              ? 'color-mix(in oklch, var(--accent-lime) 14%, transparent)'
+              ? 'color-mix(in oklch, var(--color-primary) 14%, transparent)'
               : 'color-mix(in oklch, var(--danger) 14%, transparent)',
           }}
         >

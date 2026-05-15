@@ -8,9 +8,9 @@ interface PodiumProps {
 }
 
 const DEFAULT_RANK_COLOR: Record<number, string> = {
-  1: 'var(--accent-amber)',
-  2: 'var(--accent-cyan)',
-  3: 'var(--accent-magenta)',
+  1: 'color-mix(in oklch, var(--color-primary) 50%, var(--color-secondary))',
+  2: 'var(--color-primary)',
+  3: 'var(--color-secondary)',
 }
 const DEFAULT_RANK_HEIGHT: Record<number, number> = { 1: 180, 2: 150, 3: 130 }
 

@@ -5,5 +5,5 @@ import { useDemoShell } from '../../../src/shell/DemoShell'
 
 export default function ProfilePage() {
   const shell = useDemoShell()
-  return <ProfileScreen persona={shell.persona} tweaks={shell.tweaks} />
+  return <ProfileScreen persona={shell.persona} />
 }

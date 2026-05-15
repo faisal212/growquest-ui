@@ -5,14 +5,13 @@ import { StatCard } from '../../components/StatCard'
 import { BadgeGrid } from '../../components/BadgeGrid'
 import { TierLadder } from '../../components/TierLadder'
 import { interpolate, useBrand, useContentSlice } from '../../config'
-import type { Persona, Tweaks } from '../../types'
+import type { Persona } from '../../types'
 
 interface ProfileScreenProps {
   persona: Persona
-  tweaks: Tweaks
 }
 
-export default function ProfileScreen({ persona, tweaks }: ProfileScreenProps) {
+export default function ProfileScreen({ persona }: ProfileScreenProps) {
   const xpMax = 12000
   const nextTier = TIERS.find((t) => persona.xp < t.min) ?? TIERS[TIERS.length - 1]
   const currentTier = [...TIERS].reverse().find((t) => persona.xp >= t.min) ?? TIERS[0]
@@ -35,21 +34,21 @@ export default function ProfileScreen({ persona, tweaks }: ProfileScreenProps) {
       <div className="panel p-6 grid gap-5 grid-cols-[auto_1fr] items-center max-[720px]:grid-cols-1 max-[720px]:text-center">
         <div className="relative">
           <Avatar seed={7} size={88} />
-          <div className="absolute -bottom-2 -right-2 px-2 py-1 rounded-[6px] text-[11px] font-bold font-mono bg-accent-magenta text-[#05060A] border-2 border-bg">
+          <div className="absolute -bottom-2 -right-2 px-2 py-1 rounded-[6px] text-[11px] font-bold font-mono bg-secondary text-[#05060A] border-2 border-bg">
             LV.{Math.floor(persona.xp / 1000)}
           </div>
         </div>
         <div className="flex flex-col gap-[10px]">
           <div className="flex items-center gap-[10px] flex-wrap">
             <h1 className="display m-0 text-[26px]">@{persona.handle}</h1>
-            <Tag tone="accent">{persona.tier}</Tag>
+            <Tag tone="primary">{persona.tier}</Tag>
             <Tag>{joinedParts}</Tag>
           </div>
           <div className="font-mono text-xs text-ink-dim">{walletParts}</div>
           <XPBar
             value={persona.xp}
             max={xpMax}
-            style={tweaks.xpStyle}
+            style="segmented"
             label={`${currentTier.name} → ${nextTier.name}`}
           />
         </div>

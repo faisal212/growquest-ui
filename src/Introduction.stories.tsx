@@ -26,7 +26,7 @@ export const Overview: Story = {
           <defs>
             <linearGradient id="lg-intro" x1="0" y1="0" x2="1" y2="1">
               <stop offset="0" stopColor="var(--color-primary)" />
-              <stop offset="1" stopColor="var(--accent-magenta)" />
+              <stop offset="1" stopColor="var(--color-secondary)" />
             </linearGradient>
           </defs>
           <polygon points="16,2 28,9 28,23 16,30 4,23 4,9" fill="url(#lg-intro)" />
@@ -126,7 +126,7 @@ export const Overview: Story = {
       >
         {[
           { token: '--color-primary', usage: 'Primary brand color (oklch)' },
-          { token: '--accent-lime / -magenta / -amber', usage: 'Secondary palette' },
+          { token: '--color-secondary', usage: 'Secondary brand color (oklch)' },
           { token: '--ink / --ink-dim', usage: 'Text — primary / secondary' },
           { token: '--bg / --bg-2', usage: 'Page background levels' },
           { token: '--panel / --panel-2', usage: 'Card panels' },

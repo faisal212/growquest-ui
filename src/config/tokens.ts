@@ -46,10 +46,10 @@ export function deriveTokens(cfg: BrandConfig): Record<string, string> {
   }
 
   // Halo gradient recipes (precomputed, written as full gradient values so
-  // components can use bg-[var(--halo-amber)] without runtime color-mix).
-  out['--halo-amber'] = `radial-gradient(circle, var(--accent-amber) 0%, transparent 70%)`
-  out['--halo-magenta'] = `radial-gradient(circle, var(--accent-magenta) 0%, transparent 70%)`
+  // components can use bg-[var(--halo-primary)] / bg-[var(--halo-secondary)]
+  // without runtime color-mix).
   out['--halo-primary'] = `radial-gradient(circle, ${out['--color-primary']} 0%, transparent 70%)`
+  out['--halo-secondary'] = `radial-gradient(circle, var(--color-secondary) 0%, transparent 70%)`
 
   // Radii (overridable)
   out['--radius-card'] = cfg.overrides?.radius?.card ?? '14px'
@@ -62,16 +62,11 @@ export function deriveTokens(cfg: BrandConfig): Record<string, string> {
   if (cfg.overrides?.fonts?.ui) out['--font-ui'] = cfg.overrides.fonts.ui
   if (cfg.overrides?.fonts?.mono) out['--font-mono'] = cfg.overrides.fonts.mono
 
-  // Component-scoped + tone fallbacks. These MUST be emitted unconditionally
-  // because Tailwind v4's PostCSS preprocessing drops :root declarations in
-  // styles.css after the first block. Owning the fallback values here makes
-  // BrandStyles the single source of truth and survives any CSS-pipeline
-  // pruning. cfg.overrides.* blocks below overwrite these when supplied.
-  out['--tone-accent'] = 'var(--accent-cyan)'
-  out['--tone-lime'] = 'var(--accent-lime)'
-  out['--tone-magenta'] = 'var(--accent-magenta)'
-  out['--tone-amber'] = 'var(--accent-amber)'
-
+  // Component-scoped fallbacks. These MUST be emitted unconditionally because
+  // Tailwind v4's PostCSS preprocessing drops :root declarations in styles.css
+  // after the first block. Owning the fallback values here makes BrandStyles
+  // the single source of truth and survives any CSS-pipeline pruning.
+  // cfg.overrides.* blocks below overwrite these when supplied.
   out['--mission-card-bg'] = 'var(--panel)'
   out['--mission-card-border'] = 'var(--border)'
   out['--mission-card-icon-bg'] = 'var(--panel-2)'
@@ -163,12 +158,13 @@ export function deriveTokens(cfg: BrandConfig): Record<string, string> {
 
   // Tier 2 — stat card trend colors
   out['--stat-card-trend-default'] = 'var(--color-primary)'
-  out['--stat-card-trend-streak'] = 'var(--accent-amber)'
-  out['--stat-card-trend-rewards'] = 'var(--accent-lime)'
+  out['--stat-card-trend-streak'] = 'var(--color-secondary)'
+  out['--stat-card-trend-rewards'] =
+    'color-mix(in oklch, var(--color-primary) 50%, var(--color-secondary))'
 
   // Tier 2 — xp chart (profile activity)
   out['--xp-chart-gradient-from'] = 'var(--color-primary)'
-  out['--xp-chart-gradient-to'] = 'var(--accent-magenta)'
+  out['--xp-chart-gradient-to'] = 'var(--color-secondary)'
 
   // Per-component override slots. Each var only overwrites the default above
   // when explicitly supplied in cfg.overrides.*.
@@ -231,13 +227,6 @@ export function deriveTokens(cfg: BrandConfig): Record<string, string> {
     if (r.headText) out['--leaderboard-head-text'] = r.headText
     if (r.mineHighlight) out['--leaderboard-mine-bg'] = r.mineHighlight
     if (r.topRankColor) out['--leaderboard-top-rank'] = r.topRankColor
-  }
-
-  if (ov?.tones) {
-    if (ov.tones.accent) out['--tone-accent'] = ov.tones.accent
-    if (ov.tones.lime) out['--tone-lime'] = ov.tones.lime
-    if (ov.tones.magenta) out['--tone-magenta'] = ov.tones.magenta
-    if (ov.tones.amber) out['--tone-amber'] = ov.tones.amber
   }
 
   if (ov?.onboardingCard) {

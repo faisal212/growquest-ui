@@ -29,9 +29,8 @@ describe('deriveTokens', () => {
 
   it('emits halo gradient tokens', () => {
     const tokens = deriveTokens({ mode: 'dark', brand: { primary: '#FF8C00' } })
-    expect(tokens['--halo-amber']).toContain('radial-gradient')
-    expect(tokens['--halo-magenta']).toContain('radial-gradient')
     expect(tokens['--halo-primary']).toContain('radial-gradient')
+    expect(tokens['--halo-secondary']).toContain('radial-gradient')
   })
 
   it('honors radius overrides', () => {

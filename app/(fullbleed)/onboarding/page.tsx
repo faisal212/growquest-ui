@@ -9,7 +9,7 @@ export default function OnboardingPage() {
   const router = useRouter()
   return (
     <OnboardingScreen
-      heroStyle={shell.tweaks.heroStyle}
+      heroStyle="isometric"
       onEnter={(email) => {
         shell.setEmail(email)
         router.push('/welcome')
