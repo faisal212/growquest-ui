@@ -17,7 +17,11 @@ export async function fetchBrand(tenantId: string): Promise<BrandConfig> {
 
   try {
     const res = await fetch(url, {
-      next: { revalidate: 86400, tags: [`brand:${tenantId}`] },
+      // In dev, skip the 24h Next data cache so edits to fakeApi.ts show up on
+      // the next request without needing a server restart or admin invalidate.
+      ...(process.env.NODE_ENV === 'development'
+        ? { cache: 'no-store' as const }
+        : { next: { revalidate: 86400, tags: [`brand:${tenantId}`] } }),
       headers: { Accept: 'application/json' },
     })
     if (!res.ok) {

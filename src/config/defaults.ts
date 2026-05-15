@@ -120,11 +120,16 @@ export const DEFAULT_CONTENT: ContentMap = {
   },
 }
 
+// Fail-safe + test fallback. The running app fetches its config via
+// fetchBrand() → /api/brand/[tenantId] → TENANTS in src/config/fakeApi.ts.
+// To change the colors users see on /missions /leaderboard /profile,
+// edit fakeApi.ts:TENANTS.default — not this constant. Keep both in sync
+// so Storybook + SSR fallback match the running app.
 export const DEFAULT_CONFIG: BrandConfig = {
   mode: 'dark',
   brand: {
-    primary: 'oklch(0.86 0.18 200)',
-    secondary: 'oklch(0.72 0.25 340)',
+    primary: 'oklch(0.7029 0.1979 43.36)',
+    secondary: 'oklch(0.1595 0.0021 286.16))',
   },
   // Default hero imagery. Both onboardingHero and missionsHero ship real
   // branded artwork from the GrowQuest CDN. Dimensions match the actual pane
