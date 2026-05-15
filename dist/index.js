@@ -1,12 +1,12 @@
-import pn, { useState as j, useEffect as G, useMemo as hn, useContext as mn, createContext as bn, memo as Ue, useRef as Xt, useSyncExternalStore as gn } from "react";
+import pn, { useState as j, useEffect as G, useMemo as hn, useContext as mn, createContext as bn, memo as Ue, useRef as Ht, useSyncExternalStore as gn } from "react";
 import { createPortal as vn } from "react-dom";
-function Fe(e, t) {
+function Le(e, t) {
   if (!t) return e;
   if (typeof e != "object" || e === null) return t ?? e;
   const r = Array.isArray(e) ? [...e] : { ...e };
   for (const i of Object.keys(t)) {
     const a = e[i], o = t[i];
-    o !== void 0 && (a && typeof a == "object" && !Array.isArray(a) && o && typeof o == "object" && !Array.isArray(o) ? r[i] = Fe(a, o) : r[i] = o);
+    o !== void 0 && (a && typeof a == "object" && !Array.isArray(a) && o && typeof o == "object" && !Array.isArray(o) ? r[i] = Le(a, o) : r[i] = o);
   }
   return r;
 }
@@ -133,24 +133,25 @@ const yn = {
     primary: "oklch(0.86 0.18 200)",
     secondary: "oklch(0.72 0.25 340)"
   },
-  // Default hero imagery. placehold.co serves edge-cached PNGs instantly —
-  // colors match the dark surface palette + cyan brand primary. Each surface
-  // ships a desktop + mobile variant matched to the actual pane aspect ratio:
-  // onboarding flips from portrait at >720px to landscape at ≤720px (grid
-  // collapse); missions stays landscape but narrows on mobile. Browsers fetch
-  // only the matching URL via <picture><source media>. Tenants override via
-  // `config.assets.{onboardingHero,missionsHero}`. If a URL fails to load,
-  // HeroMedia falls back to the procedural <HeroArt />.
+  // Default hero imagery. Both onboardingHero and missionsHero ship real
+  // branded artwork from the GrowQuest CDN. Dimensions match the actual pane
+  // aspect ratios: onboarding flips from portrait at >720px to landscape at
+  // ≤720px (grid collapse); missions stays landscape but narrows on mobile.
+  // Browsers fetch only the matching URL via <picture><source media>. Tenants
+  // override via `config.assets.{onboardingHero,missionsHero}`. If a URL fails
+  // to load, HeroMedia falls back to the procedural <HeroArt />. Whether the
+  // visible title/subtitle overlay renders on top is controlled by
+  // `overrides.heroBanner.overlayMode` ('always' | 'eyebrow-only' | 'never').
   assets: {
     onboardingHero: {
-      src: "https://placehold.co/720x800/0E1018/86C5FF/png?text=GrowQuest",
+      src: "https://cdn.grow-quest.com/uploads/testing/achievement-illustration%20(1)%20(1).png",
       type: "IMG",
-      mobileSrc: "https://placehold.co/720x400/0E1018/86C5FF/png?text=GrowQuest"
+      mobileSrc: "https://cdn.grow-quest.com/uploads/testing/achievement-banner%20(1)%20(1).png"
     },
     missionsHero: {
-      src: "https://placehold.co/1280x380/0E1018/86C5FF/png?text=GrowQuest+Missions",
+      src: "https://cdn.grow-quest.com/uploads/testing/missions-header.png",
       type: "IMG",
-      mobileSrc: "https://placehold.co/720x360/0E1018/86C5FF/png?text=GrowQuest+Missions"
+      mobileSrc: "https://cdn.grow-quest.com/uploads/testing/missions-header-720x360.png"
     }
   }
 }, Tr = (e, t) => {
@@ -340,10 +341,10 @@ const yn = {
 }, kn = (e) => Tr(jn[e.toLowerCase()], 6), wn = /^#?([0-9a-f]{8}|[0-9a-f]{6}|[0-9a-f]{4}|[0-9a-f]{3})$/i, Nn = (e) => {
   let t;
   return (t = e.match(wn)) ? Tr(parseInt(t[1], 16), t[1].length) : void 0;
-}, Y = "([+-]?\\d*\\.?\\d+(?:[eE][+-]?\\d+)?)", Me = `${Y}%`, qt = `(?:${Y}%|${Y})`, Mn = `(?:${Y}(deg|grad|rad|turn)|${Y})`, fe = "\\s*,\\s*", Cn = new RegExp(
-  `^rgba?\\(\\s*${Y}${fe}${Y}${fe}${Y}\\s*(?:,\\s*${qt}\\s*)?\\)$`
+}, Y = "([+-]?\\d*\\.?\\d+(?:[eE][+-]?\\d+)?)", Me = `${Y}%`, Xt = `(?:${Y}%|${Y})`, Mn = `(?:${Y}(deg|grad|rad|turn)|${Y})`, fe = "\\s*,\\s*", Cn = new RegExp(
+  `^rgba?\\(\\s*${Y}${fe}${Y}${fe}${Y}\\s*(?:,\\s*${Xt}\\s*)?\\)$`
 ), _n = new RegExp(
-  `^rgba?\\(\\s*${Me}${fe}${Me}${fe}${Me}\\s*(?:,\\s*${qt}\\s*)?\\)$`
+  `^rgba?\\(\\s*${Me}${fe}${Me}${fe}${Me}\\s*(?:,\\s*${Xt}\\s*)?\\)$`
 ), Sn = (e) => {
   let t = { mode: "rgb" }, r;
   if (r = e.match(Cn))
@@ -361,26 +362,26 @@ const yn = {
   ) : (
     // otherwise check to see if we have a dedicated
     // converter for the target mode
-    L[t.mode][e] ? (
+    F[t.mode][e] ? (
       // and return its result...
-      L[t.mode][e](t)
+      F[t.mode][e](t)
     ) : (
       // ...otherwise pass through RGB as an intermediary step.
       // if the target mode is RGB...
       e === "rgb" ? (
         // just return the RGB
-        L[t.mode].rgb(t)
+        F[t.mode].rgb(t)
       ) : (
         // otherwise convert color.mode -> RGB -> target_mode
-        L.rgb[e](L[t.mode].rgb(t))
+        F.rgb[e](F[t.mode].rgb(t))
       )
     )
   )
-) : void 0, L = {}, Pr = {}, Le = [], zr = {}, Tn = (e) => e, N = (e) => (L[e.mode] = {
-  ...L[e.mode],
+) : void 0, F = {}, Pr = {}, Fe = [], zr = {}, Tn = (e) => e, N = (e) => (F[e.mode] = {
+  ...F[e.mode],
   ...e.toMode
 }, Object.keys(e.fromMode || {}).forEach((t) => {
-  L[t] || (L[t] = {}), L[t][e.mode] = e.fromMode[t];
+  F[t] || (F[t] = {}), F[t][e.mode] = e.fromMode[t];
 }), e.ranges || (e.ranges = {}), e.difference || (e.difference = {}), e.channels.forEach((t) => {
   if (e.ranges[t] === void 0 && (e.ranges[t] = [0, 1]), !e.interpolate[t])
     throw new Error(`Missing interpolator for: ${t}`);
@@ -394,7 +395,7 @@ const yn = {
     if (!t)
       throw new Error("'mode' required when 'parser' is a string");
     zr[e] = t;
-  } else typeof e == "function" && Le.indexOf(e) < 0 && Le.push(e);
+  } else typeof e == "function" && Fe.indexOf(e) < 0 && Fe.push(e);
 }, zt = /[^\x00-\x7F]|[a-zA-Z_]/, En = /[^\x00-\x7F]|[-\w]/, p = {
   Function: "function",
   Ident: "ident",
@@ -578,9 +579,9 @@ const Or = (e) => {
   if (typeof e != "string")
     return;
   const t = Rn(e), r = t ? On(t, !0) : void 0;
-  let i, a = 0, o = Le.length;
+  let i, a = 0, o = Fe.length;
   for (; a < o; )
-    if ((i = Le[a++](e, r)) !== void 0)
+    if ((i = Fe[a++](e, r)) !== void 0)
       return i;
   return t ? An(t) : void 0;
 };
@@ -597,7 +598,7 @@ function In(e, t) {
       )
     )), r;
 }
-const Fn = (e) => e === "transparent" ? { mode: "rgb", r: 0, g: 0, b: 0, alpha: 0 } : void 0, Ln = (e, t, r) => e + r * (t - e), Bn = (e) => {
+const Ln = (e) => e === "transparent" ? { mode: "rgb", r: 0, g: 0, b: 0, alpha: 0 } : void 0, Fn = (e, t, r) => e + r * (t - e), Bn = (e) => {
   let t = [];
   for (let r = 0; r < e.length - 1; r++) {
     let i = e[r], a = e[r + 1];
@@ -610,7 +611,7 @@ const Fn = (e) => e === "transparent" ? { mode: "rgb", r: 0, g: 0, b: 0, alpha: 
     let a = i * r.length, o = i >= 1 ? r.length - 1 : Math.max(Math.floor(a), 0), s = r[o];
     return s === void 0 ? void 0 : e(s[0], s[1], a - o);
   };
-}, h = Dn(Ln), A = (e) => {
+}, h = Dn(Fn), A = (e) => {
   let t = !1, r = e.map((i) => i !== void 0 ? (t = !0, i) : 1);
   return t ? r : e;
 }, xe = {
@@ -621,7 +622,7 @@ const Fn = (e) => e === "transparent" ? { mode: "rgb", r: 0, g: 0, b: 0, alpha: 
     Nn,
     Sn,
     kn,
-    Fn,
+    Ln,
     "srgb"
   ],
   serialize: "srgb",
@@ -695,7 +696,7 @@ const Fn = (e) => e === "transparent" ? { mode: "rgb", r: 0, g: 0, b: 0, alpha: 
     b: e * 0.0556300796969936 - t * 0.2039769588889765 + 1.0569715142428784 * r
   });
   return i !== void 0 && (a.alpha = i), a;
-}, Hn = {
+}, qn = {
   ...xe,
   mode: "a98",
   parse: ["a98-rgb"],
@@ -708,12 +709,12 @@ const Fn = (e) => e === "transparent" ? { mode: "rgb", r: 0, g: 0, b: 0, alpha: 
     rgb: (e) => te(er(e)),
     xyz65: er
   }
-}, F = (e) => (e = e % 360) < 0 ? e + 360 : e, Xn = (e, t) => e.map((r, i, a) => {
+}, L = (e) => (e = e % 360) < 0 ? e + 360 : e, Hn = (e, t) => e.map((r, i, a) => {
   if (r === void 0)
     return r;
-  let o = F(r);
-  return i === 0 || e[i - 1] === void 0 ? o : t(o - F(a[i - 1]));
-}).reduce((r, i) => !r.length || i === void 0 || r[r.length - 1] === void 0 ? (r.push(i), r) : (r.push(i + r[r.length - 1]), r), []), q = (e) => Xn(e, (t) => Math.abs(t) <= 180 ? t : t - 360 * Math.sign(t)), O = [-0.14861, 1.78277, -0.29227, -0.90649, 1.97294, 0], qn = Math.PI / 180, Wn = 180 / Math.PI;
+  let o = L(r);
+  return i === 0 || e[i - 1] === void 0 ? o : t(o - L(a[i - 1]));
+}).reduce((r, i) => !r.length || i === void 0 || r[r.length - 1] === void 0 ? (r.push(i), r) : (r.push(i + r[r.length - 1]), r), []), X = (e) => Hn(e, (t) => Math.abs(t) <= 180 ? t : t - 360 * Math.sign(t)), O = [-0.14861, 1.78277, -0.29227, -0.90649, 1.97294, 0], Xn = Math.PI / 180, Wn = 180 / Math.PI;
 let rr = O[3] * O[4], nr = O[1] * O[4], ar = O[1] * O[2] - O[0] * O[3];
 const Un = ({ r: e, g: t, b: r, alpha: i }) => {
   e === void 0 && (e = 0), t === void 0 && (t = 0), r === void 0 && (r = 0);
@@ -725,23 +726,23 @@ const Un = ({ r: e, g: t, b: r, alpha: i }) => {
   return l.s && (l.h = Math.atan2(s, o) * Wn - 120), i !== void 0 && (l.alpha = i), l;
 }, Yn = ({ h: e, s: t, l: r, alpha: i }) => {
   let a = { mode: "rgb" };
-  e = (e === void 0 ? 0 : e + 120) * qn, r === void 0 && (r = 0);
+  e = (e === void 0 ? 0 : e + 120) * Xn, r === void 0 && (r = 0);
   let o = t === void 0 ? 0 : t * r * (1 - r), s = Math.cos(e), l = Math.sin(e);
   return a.r = r + o * (O[0] * s + O[1] * l), a.g = r + o * (O[2] * s + O[3] * l), a.b = r + o * (O[4] * s + O[5] * l), i !== void 0 && (a.alpha = i), a;
 }, Ye = (e, t) => {
   if (e.h === void 0 || t.h === void 0 || !e.s || !t.s)
     return 0;
-  let r = F(e.h), i = F(t.h), a = Math.sin((i - r + 360) / 2 * Math.PI / 180);
+  let r = L(e.h), i = L(t.h), a = Math.sin((i - r + 360) / 2 * Math.PI / 180);
   return 2 * Math.sqrt(e.s * t.s) * a;
 }, Gn = (e, t) => {
   if (e.h === void 0 || t.h === void 0)
     return 0;
-  let r = F(e.h), i = F(t.h);
+  let r = L(e.h), i = L(t.h);
   return Math.abs(i - r) > 180 ? r - (i - 360 * Math.sign(i - r)) : i - r;
 }, Ge = (e, t) => {
   if (e.h === void 0 || t.h === void 0 || !e.c || !t.c)
     return 0;
-  let r = F(e.h), i = F(t.h), a = Math.sin((i - r + 360) / 2 * Math.PI / 180);
+  let r = L(e.h), i = L(t.h), a = Math.sin((i - r + 360) / 2 * Math.PI / 180);
   return 2 * Math.sqrt(e.c * t.c) * a;
 }, W = (e) => {
   let t = e.reduce(
@@ -774,7 +775,7 @@ const Un = ({ r: e, g: t, b: r, alpha: i }) => {
   interpolate: {
     h: {
       use: h,
-      fixup: q
+      fixup: X
     },
     s: h,
     l: h,
@@ -792,7 +793,7 @@ const Un = ({ r: e, g: t, b: r, alpha: i }) => {
 }, J = ({ l: e, a: t, b: r, alpha: i }, a = "lch") => {
   t === void 0 && (t = 0), r === void 0 && (r = 0);
   let o = Math.sqrt(t * t + r * r), s = { mode: a, l: e, c: o };
-  return o && (s.h = F(Math.atan2(r, t) * 180 / Math.PI)), i !== void 0 && (s.alpha = i), s;
+  return o && (s.h = L(Math.atan2(r, t) * 180 / Math.PI)), i !== void 0 && (s.alpha = i), s;
 }, V = ({ l: e, c: t, h: r, alpha: i }, a = "lab") => {
   r === void 0 && (r = 0);
   let o = {
@@ -802,7 +803,7 @@ const Un = ({ r: e, g: t, b: r, alpha: i }) => {
     b: t ? t * Math.sin(r / 180 * Math.PI) : 0
   };
   return i !== void 0 && (o.alpha = i), o;
-}, Ir = Math.pow(29, 3) / Math.pow(3, 3), Fr = Math.pow(6, 3) / Math.pow(29, 3), R = {
+}, Ir = Math.pow(29, 3) / Math.pow(3, 3), Lr = Math.pow(6, 3) / Math.pow(29, 3), R = {
   X: 0.3457 / 0.3585,
   Y: 1,
   Z: (1 - 0.3457 - 0.3585) / 0.3585
@@ -811,8 +812,8 @@ const Un = ({ r: e, g: t, b: r, alpha: i }) => {
   Y: 1,
   Z: (1 - 0.3127 - 0.329) / 0.329
 };
-let dt = (e) => Math.pow(e, 3) > Fr ? Math.pow(e, 3) : (116 * e - 16) / Ir;
-const Lr = ({ l: e, a: t, b: r, alpha: i }) => {
+let dt = (e) => Math.pow(e, 3) > Lr ? Math.pow(e, 3) : (116 * e - 16) / Ir;
+const Fr = ({ l: e, a: t, b: r, alpha: i }) => {
   e === void 0 && (e = 0), t === void 0 && (t = 0), r === void 0 && (r = 0);
   let a = (e + 16) / 116, o = t / 500 + a, s = a - r / 200, l = {
     mode: "xyz65",
@@ -821,7 +822,7 @@ const Lr = ({ l: e, a: t, b: r, alpha: i }) => {
     z: dt(s) * le.Z
   };
   return i !== void 0 && (l.alpha = i), l;
-}, Je = (e) => te(Lr(e)), ct = (e) => e > Fr ? Math.cbrt(e) : (Ir * e + 16) / 116, Br = ({ x: e, y: t, z: r, alpha: i }) => {
+}, Je = (e) => te(Fr(e)), ct = (e) => e > Lr ? Math.cbrt(e) : (Ir * e + 16) / 116, Br = ({ x: e, y: t, z: r, alpha: i }) => {
   e === void 0 && (e = 0), t === void 0 && (t = 0), r === void 0 && (r = 0);
   let a = ct(e / le.X), o = ct(t / le.Y), s = ct(r / le.Z), l = {
     mode: "lab65",
@@ -833,21 +834,21 @@ const Lr = ({ l: e, a: t, b: r, alpha: i }) => {
 }, Ve = (e) => {
   let t = Br(ee(e));
   return e.r === e.b && e.b === e.g && (t.a = t.b = 0), t;
-}, De = 1, Dr = 1, Se = 26 / 180 * Math.PI, He = Math.cos(Se), Xe = Math.sin(Se), Hr = 100 / Math.log(139 / 100), At = ({ l: e, c: t, h: r, alpha: i }) => {
+}, De = 1, Dr = 1, Se = 26 / 180 * Math.PI, qe = Math.cos(Se), He = Math.sin(Se), qr = 100 / Math.log(139 / 100), At = ({ l: e, c: t, h: r, alpha: i }) => {
   e === void 0 && (e = 0), t === void 0 && (t = 0), r === void 0 && (r = 0);
   let a = {
     mode: "lab65",
-    l: (Math.exp(e * De / Hr) - 1) / 39e-4
+    l: (Math.exp(e * De / qr) - 1) / 39e-4
   }, o = (Math.exp(0.0435 * t * Dr * De) - 1) / 0.075, s = o * Math.cos(r / 180 * Math.PI - Se), l = o * Math.sin(r / 180 * Math.PI - Se);
-  return a.a = s * He - l / 0.83 * Xe, a.b = s * Xe + l / 0.83 * He, i !== void 0 && (a.alpha = i), a;
+  return a.a = s * qe - l / 0.83 * He, a.b = s * He + l / 0.83 * qe, i !== void 0 && (a.alpha = i), a;
 }, Ot = ({ l: e, a: t, b: r, alpha: i }) => {
   e === void 0 && (e = 0), t === void 0 && (t = 0), r === void 0 && (r = 0);
-  let a = t * He + r * Xe, o = 0.83 * (r * He - t * Xe), s = Math.sqrt(a * a + o * o), l = {
+  let a = t * qe + r * He, o = 0.83 * (r * qe - t * He), s = Math.sqrt(a * a + o * o), l = {
     mode: "dlch",
-    l: Hr / De * Math.log(1 + 39e-4 * e),
+    l: qr / De * Math.log(1 + 39e-4 * e),
     c: Math.log(1 + 0.075 * s) / (0.0435 * Dr * De)
   };
-  return l.c && (l.h = F((Math.atan2(o, a) + Se) / Math.PI * 180)), i !== void 0 && (l.alpha = i), l;
+  return l.c && (l.h = L((Math.atan2(o, a) + Se) / Math.PI * 180)), i !== void 0 && (l.alpha = i), l;
 }, ir = (e) => At(J(e, "dlch")), or = (e) => V(Ot(e), "dlab"), Vn = {
   mode: "dlab",
   parse: ["--din99o-lab"],
@@ -900,7 +901,7 @@ const Lr = ({ l: e, a: t, b: r, alpha: i }) => {
     c: h,
     h: {
       use: h,
-      fixup: q
+      fixup: X
     },
     alpha: {
       use: h,
@@ -915,7 +916,7 @@ const Lr = ({ l: e, a: t, b: r, alpha: i }) => {
   }
 };
 function Zn({ h: e, s: t, i: r, alpha: i }) {
-  e = F(e !== void 0 ? e : 0), t === void 0 && (t = 0), r === void 0 && (r = 0);
+  e = L(e !== void 0 ? e : 0), t === void 0 && (t = 0), r === void 0 && (r = 0);
   let a = Math.abs(e / 60 % 2 - 1), o;
   switch (Math.floor(e / 60)) {
     case 0:
@@ -990,7 +991,7 @@ const ea = {
   },
   gamut: "rgb",
   interpolate: {
-    h: { use: h, fixup: q },
+    h: { use: h, fixup: X },
     s: h,
     i: h,
     alpha: { use: h, fixup: A }
@@ -1003,7 +1004,7 @@ const ea = {
   }
 };
 function ta({ h: e, s: t, l: r, alpha: i }) {
-  e = F(e !== void 0 ? e : 0), t === void 0 && (t = 0), r === void 0 && (r = 0);
+  e = L(e !== void 0 ? e : 0), t === void 0 && (t = 0), r === void 0 && (r = 0);
   let a = r + t * (r < 0.5 ? r : 1 - r), o = a - (a - r) * 2 * Math.abs(e / 60 % 2 - 1), s;
   switch (Math.floor(e / 60)) {
     case 0:
@@ -1050,7 +1051,7 @@ const na = (e, t) => {
       return e * 360;
   }
 }, aa = new RegExp(
-  `^hsla?\\(\\s*${Mn}${fe}${Me}${fe}${Me}\\s*(?:,\\s*${qt}\\s*)?\\)$`
+  `^hsla?\\(\\s*${Mn}${fe}${Me}${fe}${Me}\\s*(?:,\\s*${Xt}\\s*)?\\)$`
 ), ia = (e) => {
   let t = e.match(aa);
   if (!t) return;
@@ -1084,7 +1085,7 @@ function oa(e, t) {
     )
   )), r;
 }
-const Xr = {
+const Hr = {
   mode: "hsl",
   toMode: {
     rgb: ta
@@ -1100,7 +1101,7 @@ const Xr = {
   parse: [oa, ia],
   serialize: (e) => `hsl(${e.h !== void 0 ? e.h : "none"} ${e.s !== void 0 ? e.s * 100 + "%" : "none"} ${e.l !== void 0 ? e.l * 100 + "%" : "none"}${e.alpha < 1 ? ` / ${e.alpha}` : ""})`,
   interpolate: {
-    h: { use: h, fixup: q },
+    h: { use: h, fixup: X },
     s: h,
     l: h,
     alpha: { use: h, fixup: A }
@@ -1112,8 +1113,8 @@ const Xr = {
     h: W
   }
 };
-function qr({ h: e, s: t, v: r, alpha: i }) {
-  e = F(e !== void 0 ? e : 0), t === void 0 && (t = 0), r === void 0 && (r = 0);
+function Xr({ h: e, s: t, v: r, alpha: i }) {
+  e = L(e !== void 0 ? e : 0), t === void 0 && (t = 0), r === void 0 && (r = 0);
   let a = Math.abs(e / 60 % 2 - 1), o;
   switch (Math.floor(e / 60)) {
     case 0:
@@ -1151,7 +1152,7 @@ function Wr({ r: e, g: t, b: r, alpha: i }) {
 const Ur = {
   mode: "hsv",
   toMode: {
-    rgb: qr
+    rgb: Xr
   },
   parse: ["--hsv"],
   serialize: "--hsv",
@@ -1164,7 +1165,7 @@ const Ur = {
   },
   gamut: "rgb",
   interpolate: {
-    h: { use: h, fixup: q },
+    h: { use: h, fixup: X },
     s: h,
     v: h,
     alpha: { use: h, fixup: A }
@@ -1181,7 +1182,7 @@ function sa({ h: e, w: t, b: r, alpha: i }) {
     let a = t + r;
     t /= a, r /= a;
   }
-  return qr({
+  return Xr({
     h: e,
     s: r === 1 ? 1 : 1 - t / (1 - r),
     v: 1 - r,
@@ -1241,7 +1242,7 @@ const ca = {
   parse: [da],
   serialize: (e) => `hwb(${e.h !== void 0 ? e.h : "none"} ${e.w !== void 0 ? e.w * 100 + "%" : "none"} ${e.b !== void 0 ? e.b * 100 + "%" : "none"}${e.alpha < 1 ? ` / ${e.alpha}` : ""})`,
   interpolate: {
-    h: { use: h, fixup: q },
+    h: { use: h, fixup: X },
     w: h,
     b: h,
     alpha: { use: h, fixup: A }
@@ -1381,7 +1382,7 @@ const xt = (e) => Math.max(e / Yr, 0), sr = ({ i: e, t, p: r, alpha: i }) => {
     j: e,
     c: a
   };
-  return a && (o.h = F(Math.atan2(r, t) * 180 / Math.PI)), i !== void 0 && (o.alpha = i), o;
+  return a && (o.h = L(Math.atan2(r, t) * 180 / Math.PI)), i !== void 0 && (o.alpha = i), o;
 }, fr = ({ j: e, c: t, h: r, alpha: i }) => {
   r === void 0 && (r = 0);
   let a = {
@@ -1410,7 +1411,7 @@ const xt = (e) => Math.max(e / Yr, 0), sr = ({ i: e, t, p: r, alpha: i }) => {
     h: [0, 360]
   },
   interpolate: {
-    h: { use: h, fixup: q },
+    h: { use: h, fixup: X },
     c: h,
     j: h,
     alpha: { use: h, fixup: A }
@@ -1504,7 +1505,7 @@ const Gt = {
   parse: ["--lab-d65"],
   serialize: "--lab-d65",
   toMode: {
-    xyz65: Lr,
+    xyz65: Fr,
     rgb: Je
   },
   fromMode: {
@@ -1561,7 +1562,7 @@ const Jt = {
   parse: [va],
   serialize: (e) => `lch(${e.l !== void 0 ? e.l : "none"} ${e.c !== void 0 ? e.c : "none"} ${e.h !== void 0 ? e.h : "none"}${e.alpha < 1 ? ` / ${e.alpha}` : ""})`,
   interpolate: {
-    h: { use: h, fixup: q },
+    h: { use: h, fixup: X },
     c: h,
     l: h,
     alpha: { use: h, fixup: A }
@@ -1597,7 +1598,7 @@ const Jt = {
     l: e,
     c: a
   };
-  return a && (o.h = F(Math.atan2(r, t) * 180 / Math.PI)), i !== void 0 && (o.alpha = i), o;
+  return a && (o.h = L(Math.atan2(r, t) * 180 / Math.PI)), i !== void 0 && (o.alpha = i), o;
 }, rn = ({ l: e, c: t, h: r, alpha: i }) => {
   r === void 0 && (r = 0);
   let a = {
@@ -1618,13 +1619,13 @@ const Jt = {
     v: s
   };
   return i !== void 0 && (l.alpha = i), l;
-}, Na = (e, t, r) => 4 * e / (e + 15 * t + 3 * r), Ma = (e, t, r) => 9 * t / (e + 15 * t + 3 * r), Ca = Na(R.X, R.Y, R.Z), _a = Ma(R.X, R.Y, R.Z), Ft = ({ l: e, u: t, v: r, alpha: i }) => {
+}, Na = (e, t, r) => 4 * e / (e + 15 * t + 3 * r), Ma = (e, t, r) => 9 * t / (e + 15 * t + 3 * r), Ca = Na(R.X, R.Y, R.Z), _a = Ma(R.X, R.Y, R.Z), Lt = ({ l: e, u: t, v: r, alpha: i }) => {
   if (e === void 0 && (e = 0), e === 0)
     return { mode: "xyz50", x: 0, y: 0, z: 0 };
   t === void 0 && (t = 0), r === void 0 && (r = 0);
   let a = t / (13 * e) + Ca, o = r / (13 * e) + _a, s = R.Y * (e <= 8 ? e / tt : Math.pow((e + 16) / 116, 3)), l = s * (9 * a) / (4 * o), d = s * (12 - 3 * a - 20 * o) / (4 * o), c = { mode: "xyz50", x: l, y: s, z: d };
   return i !== void 0 && (c.alpha = i), c;
-}, Sa = (e) => tn(It(Ee(e))), Ta = (e) => $e(Ft(rn(e))), $a = {
+}, Sa = (e) => tn(It(Ee(e))), Ta = (e) => $e(Lt(rn(e))), $a = {
   mode: "lchuv",
   toMode: {
     luv: rn,
@@ -1643,7 +1644,7 @@ const Jt = {
     h: [0, 360]
   },
   interpolate: {
-    h: { use: h, fixup: q },
+    h: { use: h, fixup: X },
     c: h,
     l: h,
     alpha: { use: h, fixup: A }
@@ -1668,8 +1669,8 @@ const Jt = {
 }, Pa = {
   mode: "luv",
   toMode: {
-    xyz50: Ft,
-    rgb: (e) => $e(Ft(e))
+    xyz50: Lt,
+    rgb: (e) => $e(Lt(e))
   },
   fromMode: {
     xyz50: It,
@@ -1717,11 +1718,11 @@ const Jt = {
   };
   return i !== void 0 && (l.alpha = i), l;
 }, nt = (e) => he(Pe(e));
-function Lt(e) {
+function Ft(e) {
   const i = 1.170873786407767;
   return 0.5 * (i * e - 0.206 + Math.sqrt((i * e - 0.206) * (i * e - 0.206) + 4 * 0.03 * i * e));
 }
-function qe(e) {
+function Xe(e) {
   return (e * e + 0.206 * e) / (1.170873786407767 * (e + 0.03));
 }
 function za(e, t) {
@@ -1729,8 +1730,8 @@ function za(e, t) {
   -1.88170328 * e - 0.80936493 * t > 1 ? (r = 1.19086277, i = 1.76576728, a = 0.59662641, o = 0.75515197, s = 0.56771245, l = 4.0767416621, d = -3.3077115913, c = 0.2309699292) : 1.81444104 * e - 1.19445276 * t > 1 ? (r = 0.73956515, i = -0.45954404, a = 0.08285427, o = 0.1254107, s = 0.14503204, l = -1.2684380046, d = 2.6097574011, c = -0.3413193965) : (r = 1.35733652, i = -915799e-8, a = -1.1513021, o = -0.50559606, s = 692167e-8, l = -0.0041960863, d = -0.7034186147, c = 1.707614701);
   let u = r + i * e + a * t + o * e * e + s * e * t, m = 0.3963377774 * e + 0.2158037573 * t, b = -0.1055613458 * e - 0.0638541728 * t, v = -0.0894841775 * e - 1.291485548 * t;
   {
-    let k = 1 + u * m, C = 1 + u * b, M = 1 + u * v, E = k * k * k, w = C * C * C, _ = M * M * M, I = 3 * m * k * k, f = 3 * b * C * C, S = 3 * v * M * M, Q = 6 * m * m * k, Z = 6 * b * b * C, B = 6 * v * v * M, U = l * E + d * w + c * _, D = l * I + d * f + c * S, H = l * Q + d * Z + c * B;
-    u = u - U * D / (D * D - 0.5 * U * H);
+    let k = 1 + u * m, C = 1 + u * b, M = 1 + u * v, E = k * k * k, w = C * C * C, _ = M * M * M, I = 3 * m * k * k, f = 3 * b * C * C, S = 3 * v * M * M, Q = 6 * m * m * k, Z = 6 * b * b * C, B = 6 * v * v * M, U = l * E + d * w + c * _, D = l * I + d * f + c * S, q = l * Q + d * Z + c * B;
+    u = u - U * D / (D * D - 0.5 * U * q);
   }
   return u;
 }
@@ -1748,7 +1749,7 @@ function Ra(e, t, r, i, a, o = null) {
     {
       let l = r - a, d = i, c = 0.3963377774 * e + 0.2158037573 * t, u = -0.1055613458 * e - 0.0638541728 * t, m = -0.0894841775 * e - 1.291485548 * t, b = l + d * c, v = l + d * u, k = l + d * m;
       {
-        let C = a * (1 - s) + s * r, M = s * i, E = C + M * c, w = C + M * u, _ = C + M * m, I = E * E * E, f = w * w * w, S = _ * _ * _, Q = 3 * b * E * E, Z = 3 * v * w * w, B = 3 * k * _ * _, U = 6 * b * b * E, D = 6 * v * v * w, H = 6 * k * k * _, me = 4.0767416621 * I - 3.3077115913 * f + 0.2309699292 * S - 1, be = 4.0767416621 * Q - 3.3077115913 * Z + 0.2309699292 * B, ge = 4.0767416621 * U - 3.3077115913 * D + 0.2309699292 * H, ve = be / (be * be - 0.5 * me * ge), re = -me * ve, ye = -1.2684380046 * I + 2.6097574011 * f - 0.3413193965 * S - 1, ne = -1.2684380046 * Q + 2.6097574011 * Z - 0.3413193965 * B, ze = -1.2684380046 * U + 2.6097574011 * D - 0.3413193965 * H, x = ne / (ne * ne - 0.5 * ye * ze), y = -ye * x, $ = -0.0041960863 * I - 0.7034186147 * f + 1.707614701 * S - 1, P = -0.0041960863 * Q - 0.7034186147 * Z + 1.707614701 * B, ae = -0.0041960863 * U - 0.7034186147 * D + 1.707614701 * H, ie = P / (P * P - 0.5 * $ * ae), z = -$ * ie;
+        let C = a * (1 - s) + s * r, M = s * i, E = C + M * c, w = C + M * u, _ = C + M * m, I = E * E * E, f = w * w * w, S = _ * _ * _, Q = 3 * b * E * E, Z = 3 * v * w * w, B = 3 * k * _ * _, U = 6 * b * b * E, D = 6 * v * v * w, q = 6 * k * k * _, me = 4.0767416621 * I - 3.3077115913 * f + 0.2309699292 * S - 1, be = 4.0767416621 * Q - 3.3077115913 * Z + 0.2309699292 * B, ge = 4.0767416621 * U - 3.3077115913 * D + 0.2309699292 * q, ve = be / (be * be - 0.5 * me * ge), re = -me * ve, ye = -1.2684380046 * I + 2.6097574011 * f - 0.3413193965 * S - 1, ne = -1.2684380046 * Q + 2.6097574011 * Z - 0.3413193965 * B, ze = -1.2684380046 * U + 2.6097574011 * D - 0.3413193965 * q, x = ne / (ne * ne - 0.5 * ye * ze), y = -ye * x, $ = -0.0041960863 * I - 0.7034186147 * f + 1.707614701 * S - 1, P = -0.0041960863 * Q - 0.7034186147 * Z + 1.707614701 * B, ae = -0.0041960863 * U - 0.7034186147 * D + 1.707614701 * q, ie = P / (P * P - 0.5 * $ * ae), z = -$ * ie;
         re = ve >= 0 ? re : 1e6, y = x >= 0 ? y : 1e6, z = ie >= 0 ? z : 1e6, s += Math.min(re, Math.min(y, z));
       }
     }
@@ -1769,7 +1770,7 @@ function sn(e, t, r) {
   return c = e * 0.4, u = (1 - e) * 0.8, [Math.sqrt(1 / (1 / (c * c) + 1 / (u * u))), m, a];
 }
 function ur(e) {
-  const t = e.l !== void 0 ? e.l : 0, r = e.a !== void 0 ? e.a : 0, i = e.b !== void 0 ? e.b : 0, a = { mode: "okhsl", l: Lt(t) };
+  const t = e.l !== void 0 ? e.l : 0, r = e.a !== void 0 ? e.a : 0, i = e.b !== void 0 ? e.b : 0, a = { mode: "okhsl", l: Ft(t) };
   e.alpha !== void 0 && (a.alpha = e.alpha);
   let o = Math.sqrt(r * r + i * i);
   if (!o)
@@ -1782,11 +1783,11 @@ function ur(e) {
     let u = l, m = 0.2 * l * l * 1.25 * 1.25 / s, b = 1 - m / (d - l);
     c = 0.8 + 0.2 * ((o - u) / (m + b * (o - u)));
   }
-  return c && (a.s = c, a.h = F(Math.atan2(i, r) * 180 / Math.PI)), a;
+  return c && (a.s = c, a.h = L(Math.atan2(i, r) * 180 / Math.PI)), a;
 }
 function xr(e) {
   let t = e.h !== void 0 ? e.h : 0, r = e.s !== void 0 ? e.s : 0, i = e.l !== void 0 ? e.l : 0;
-  const a = { mode: "oklab", l: qe(i) };
+  const a = { mode: "oklab", l: Xe(i) };
   if (e.alpha !== void 0 && (a.alpha = e.alpha), !r || i === 1)
     return a.a = a.b = 0, a;
   let o = Math.cos(t / 180 * Math.PI), s = Math.sin(t / 180 * Math.PI), [l, d, c] = sn(a.l, o, s), u, m, b, v;
@@ -1795,7 +1796,7 @@ function xr(e) {
   return a.a = k * o, a.b = k * s, a;
 }
 const Aa = {
-  ...Xr,
+  ...Hr,
   mode: "okhsl",
   channels: ["h", "s", "l", "alpha"],
   parse: ["--okhsl"],
@@ -1810,27 +1811,27 @@ const Aa = {
   }
 };
 function pr(e) {
-  let t = e.l !== void 0 ? e.l : 0, r = e.a !== void 0 ? e.a : 0, i = e.b !== void 0 ? e.b : 0, a = Math.sqrt(r * r + i * i), o = a ? r / a : 1, s = a ? i / a : 1, [l, d] = Qt(o, s), c = 0.5, u = 1 - c / l, m = d / (a + t * d), b = m * t, v = m * a, k = qe(b), C = v * k / b, M = Pe({ l: k, a: o * C, b: s * C }), E = Math.cbrt(
+  let t = e.l !== void 0 ? e.l : 0, r = e.a !== void 0 ? e.a : 0, i = e.b !== void 0 ? e.b : 0, a = Math.sqrt(r * r + i * i), o = a ? r / a : 1, s = a ? i / a : 1, [l, d] = Qt(o, s), c = 0.5, u = 1 - c / l, m = d / (a + t * d), b = m * t, v = m * a, k = Xe(b), C = v * k / b, M = Pe({ l: k, a: o * C, b: s * C }), E = Math.cbrt(
     1 / Math.max(M.r, M.g, M.b, 0)
   );
-  t = t / E, a = a / E * Lt(t) / t, t = Lt(t);
+  t = t / E, a = a / E * Ft(t) / t, t = Ft(t);
   const w = {
     mode: "okhsv",
     s: a ? (c + d) * v / (d * c + d * u * v) : 0,
     v: t ? t / b : 0
   };
-  return w.s && (w.h = F(Math.atan2(i, r) * 180 / Math.PI)), e.alpha !== void 0 && (w.alpha = e.alpha), w;
+  return w.s && (w.h = L(Math.atan2(i, r) * 180 / Math.PI)), e.alpha !== void 0 && (w.alpha = e.alpha), w;
 }
 function hr(e) {
   const t = { mode: "oklab" };
   e.alpha !== void 0 && (t.alpha = e.alpha);
-  const r = e.h !== void 0 ? e.h : 0, i = e.s !== void 0 ? e.s : 0, a = e.v !== void 0 ? e.v : 0, o = Math.cos(r / 180 * Math.PI), s = Math.sin(r / 180 * Math.PI), [l, d] = Qt(o, s), c = 0.5, u = 1 - c / l, m = 1 - i * c / (c + d - d * u * i), b = i * d * c / (c + d - d * u * i), v = qe(m), k = b * v / m, C = Pe({
+  const r = e.h !== void 0 ? e.h : 0, i = e.s !== void 0 ? e.s : 0, a = e.v !== void 0 ? e.v : 0, o = Math.cos(r / 180 * Math.PI), s = Math.sin(r / 180 * Math.PI), [l, d] = Qt(o, s), c = 0.5, u = 1 - c / l, m = 1 - i * c / (c + d - d * u * i), b = i * d * c / (c + d - d * u * i), v = Xe(m), k = b * v / m, C = Pe({
     l: v,
     a: o * k,
     b: s * k
   }), M = Math.cbrt(
     1 / Math.max(C.r, C.g, C.b, 0)
-  ), E = qe(a * m), w = b * E / m;
+  ), E = Xe(a * m), w = b * E / m;
   return t.l = E * M, t.a = w * o * M, t.b = w * s * M, t;
 }
 const Oa = {
@@ -1864,7 +1865,7 @@ function Ia(e, t) {
       )
     )), r;
 }
-const Fa = {
+const La = {
   ...Gt,
   mode: "oklab",
   toMode: {
@@ -1883,7 +1884,7 @@ const Fa = {
   parse: [Ia],
   serialize: (e) => `oklab(${e.l !== void 0 ? e.l : "none"} ${e.a !== void 0 ? e.a : "none"} ${e.b !== void 0 ? e.b : "none"}${e.alpha < 1 ? ` / ${e.alpha}` : ""})`
 };
-function La(e, t) {
+function Fa(e, t) {
   if (!t || t[0] !== "oklch")
     return;
   const r = { mode: "oklch" }, [, i, a, o, s] = t;
@@ -1922,7 +1923,7 @@ const Ba = {
     rgb: (e) => J(rt(e), "oklch"),
     oklab: (e) => J(e, "oklch")
   },
-  parse: [La],
+  parse: [Fa],
   serialize: (e) => `oklch(${e.l !== void 0 ? e.l : "none"} ${e.c !== void 0 ? e.c : "none"} ${e.h !== void 0 ? e.h : "none"}${e.alpha < 1 ? ` / ${e.alpha}` : ""})`,
   ranges: {
     l: [0, 1],
@@ -1988,7 +1989,7 @@ const Ba = {
     z: 0 * t + 0 * r + 0.8251046025104602 * i
   };
   return e.alpha !== void 0 && (a.alpha = e.alpha), a;
-}, Ha = {
+}, qa = {
   ...xe,
   mode: "prophoto",
   parse: ["prophoto-rgb"],
@@ -2001,9 +2002,9 @@ const Ba = {
     xyz50: vr,
     rgb: (e) => $e(vr(e))
   }
-}, yr = 1.09929682680944, Xa = 0.018053968510807, wt = (e) => {
+}, yr = 1.09929682680944, Ha = 0.018053968510807, wt = (e) => {
   const t = Math.abs(e);
-  return t > Xa ? (Math.sign(e) || 1) * (yr * Math.pow(t, 0.45) - (yr - 1)) : 4.5 * e;
+  return t > Ha ? (Math.sign(e) || 1) * (yr * Math.pow(t, 0.45) - (yr - 1)) : 4.5 * e;
 }, jr = ({ x: e, y: t, z: r, alpha: i }) => {
   e === void 0 && (e = 0), t === void 0 && (t = 0), r === void 0 && (r = 0);
   let a = {
@@ -2019,9 +2020,9 @@ const Ba = {
     )
   };
   return i !== void 0 && (a.alpha = i), a;
-}, kr = 1.09929682680944, qa = 0.018053968510807, Nt = (e = 0) => {
+}, kr = 1.09929682680944, Xa = 0.018053968510807, Nt = (e = 0) => {
   let t = Math.abs(e);
-  return t < qa * 4.5 ? e / 4.5 : (Math.sign(e) || 1) * Math.pow((t + kr - 1) / kr, 1 / 0.45);
+  return t < Xa * 4.5 ? e / 4.5 : (Math.sign(e) || 1) * Math.pow((t + kr - 1) / kr, 1 / 0.45);
 }, wr = (e) => {
   let t = Nt(e.r), r = Nt(e.g), i = Nt(e.b), a = {
     mode: "xyz65",
@@ -2210,12 +2211,12 @@ const Ba = {
   if (typeof r.serialize == "function")
     return r.serialize(t);
 }, ii = (e) => ai(ni(e));
-N(Hn);
+N(qn);
 N(Jn);
 N(Vn);
 N(Qn);
 N(ea);
-N(Xr);
+N(Hr);
 N(Ur);
 N(ca);
 N(fa);
@@ -2230,10 +2231,10 @@ N(Ea);
 N(Pa);
 N(Aa);
 N(Oa);
-N(Fa);
+N(La);
 const oi = N(Ba);
 N(Da);
-N(Ha);
+N(qa);
 N(Wa);
 N(xe);
 N(Ga);
@@ -2341,14 +2342,13 @@ function di(e) {
     Bt.delete(e);
   };
 }
-function oo(e) {
+function so(e) {
   const t = {
     mode: e.mode ?? se.mode,
     brand: e.brand ?? se.brand,
-    logos: e.logos,
     content: e.content,
     assets: e.assets,
-    overrides: Fe(se.overrides ?? {}, e.overrides)
+    overrides: Le(se.overrides ?? {}, e.overrides)
   };
   if (dn = t, typeof document < "u") {
     const r = document.documentElement;
@@ -2362,7 +2362,7 @@ function oo(e) {
   }
   for (const r of Bt) r(t);
 }
-function so() {
+function lo() {
   return dn;
 }
 var Dt = { exports: {} }, ke = {};
@@ -2485,7 +2485,7 @@ function fi() {
       }
     }
     function a() {
-      var x = H.A;
+      var x = q.A;
       return x === null ? null : x.getOwner();
     }
     function o() {
@@ -2603,7 +2603,7 @@ React keys must be passed directly to JSX without using spread:
     function b(x) {
       return typeof x == "object" && x !== null && x.$$typeof === k;
     }
-    var v = pn, k = Symbol.for("react.transitional.element"), C = Symbol.for("react.portal"), M = Symbol.for("react.fragment"), E = Symbol.for("react.strict_mode"), w = Symbol.for("react.profiler"), _ = Symbol.for("react.consumer"), I = Symbol.for("react.context"), f = Symbol.for("react.forward_ref"), S = Symbol.for("react.suspense"), Q = Symbol.for("react.suspense_list"), Z = Symbol.for("react.memo"), B = Symbol.for("react.lazy"), U = Symbol.for("react.activity"), D = Symbol.for("react.client.reference"), H = v.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, me = Object.prototype.hasOwnProperty, be = Array.isArray, ge = console.createTask ? console.createTask : function() {
+    var v = pn, k = Symbol.for("react.transitional.element"), C = Symbol.for("react.portal"), M = Symbol.for("react.fragment"), E = Symbol.for("react.strict_mode"), w = Symbol.for("react.profiler"), _ = Symbol.for("react.consumer"), I = Symbol.for("react.context"), f = Symbol.for("react.forward_ref"), S = Symbol.for("react.suspense"), Q = Symbol.for("react.suspense_list"), Z = Symbol.for("react.memo"), B = Symbol.for("react.lazy"), U = Symbol.for("react.activity"), D = Symbol.for("react.client.reference"), q = v.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, me = Object.prototype.hasOwnProperty, be = Array.isArray, ge = console.createTask ? console.createTask : function() {
       return null;
     };
     v = {
@@ -2616,7 +2616,7 @@ React keys must be passed directly to JSX without using spread:
       o
     )(), ne = ge(i(o)), ze = {};
     we.Fragment = M, we.jsx = function(x, y, $) {
-      var P = 1e4 > H.recentlyCreatedOwnerStacks++;
+      var P = 1e4 > q.recentlyCreatedOwnerStacks++;
       return u(
         x,
         y,
@@ -2626,7 +2626,7 @@ React keys must be passed directly to JSX without using spread:
         P ? ge(i(x)) : ne
       );
     }, we.jsxs = function(x, y, $) {
-      var P = 1e4 > H.recentlyCreatedOwnerStacks++;
+      var P = 1e4 > q.recentlyCreatedOwnerStacks++;
       return u(
         x,
         y,
@@ -2645,14 +2645,14 @@ const ui = se.assets ?? {}, xi = {
   content: Sr,
   assets: {}
 }, cn = bn(xi);
-function lo({ value: e, children: t }) {
+function co({ value: e, children: t }) {
   const [r, i] = j(null);
   G(() => di(i), []);
   const a = r ?? e, o = hn(
     () => ({
       config: a,
-      content: Fe(Sr, a.content),
-      assets: Fe(ui, a.assets)
+      content: Le(Sr, a.content),
+      assets: Le(ui, a.assets)
     }),
     [a]
   );
@@ -2679,7 +2679,7 @@ function hi(e) {
   const { assets: t } = Zt();
   return t[e];
 }
-function co(e) {
+function fo(e) {
   if (!(typeof document > "u"))
     for (const t of e) {
       if (!(t != null && t.src) || _r.has(t.src)) continue;
@@ -2687,7 +2687,7 @@ function co(e) {
       r.rel = "preload", r.href = t.src, r.as = t.type === "JSON" ? "fetch" : "image", t.type === "JSON" && (r.crossOrigin = "anonymous"), document.head.appendChild(r), _r.add(t.src);
     }
 }
-function fo() {
+function mi() {
   return Zt().config;
 }
 function T({
@@ -2713,7 +2713,7 @@ function T({
     a ?? r
   ] });
 }
-const mi = {
+const bi = {
   accent: {
     color: "var(--color-primary)",
     borderColor: "color-mix(in oklch, var(--color-primary) 40%, transparent)",
@@ -2735,8 +2735,8 @@ const mi = {
     background: "color-mix(in oklch, var(--accent-amber) 14%, transparent)"
   }
 };
-function bi({ children: e, tone: t = "default", dot: r, className: i, style: a }) {
-  const o = t !== "default" ? mi[t] : {};
+function gi({ children: e, tone: t = "default", dot: r, className: i, style: a }) {
+  const o = t !== "default" ? bi[t] : {};
   return /* @__PURE__ */ n.jsxs(
     "span",
     {
@@ -2762,7 +2762,7 @@ function fn({ className: e, style: t, ...r }) {
     }
   );
 }
-function gi({
+function vi({
   label: e,
   labelInside: t,
   adornmentLeft: r,
@@ -2818,7 +2818,7 @@ function gi({
     )
   ] });
 }
-function vi({ value: e, max: t, style: r = "segmented", segments: i = 10, label: a }) {
+function yi({ value: e, max: t, style: r = "segmented", segments: i = 10, label: a }) {
   const o = Math.max(0, Math.min(1, e / t));
   if (r === "plain")
     return /* @__PURE__ */ n.jsxs("div", { children: [
@@ -2928,7 +2928,7 @@ function vi({ value: e, max: t, style: r = "segmented", segments: i = 10, label:
     ] })
   ] });
 }
-function yi({ size: e = 28 }) {
+function ji({ size: e = 28 }) {
   return /* @__PURE__ */ n.jsxs("svg", { width: e, height: e, viewBox: "0 0 32 32", children: [
     /* @__PURE__ */ n.jsx("defs", { children: /* @__PURE__ */ n.jsxs("linearGradient", { id: "lg", x1: "0", y1: "0", x2: "1", y2: "1", children: [
       /* @__PURE__ */ n.jsx("stop", { offset: "0", stopColor: "var(--color-primary)" }),
@@ -2944,7 +2944,7 @@ function uo({
   version: t = "v1.4"
 }) {
   return /* @__PURE__ */ n.jsxs("div", { className: "flex items-center gap-2.5 font-display font-semibold text-lg tracking-[-0.02em] max-[720px]:text-base max-[420px]:[&_span:last-of-type]:text-sm", children: [
-    /* @__PURE__ */ n.jsx("span", { className: "inline-grid place-items-center w-7 h-7 max-[720px]:w-6 max-[720px]:h-6", children: /* @__PURE__ */ n.jsx(yi, {}) }),
+    /* @__PURE__ */ n.jsx("span", { className: "inline-grid place-items-center w-7 h-7 max-[720px]:w-6 max-[720px]:h-6", children: /* @__PURE__ */ n.jsx(ji, {}) }),
     /* @__PURE__ */ n.jsx("span", { children: e }),
     /* @__PURE__ */ n.jsx("span", { className: "chip brand-version", children: t })
   ] });
@@ -2955,7 +2955,7 @@ function ue({ children: e, dot: t }) {
     e
   ] });
 }
-function X({ children: e, tone: t = "default" }) {
+function H({ children: e, tone: t = "default" }) {
   const r = {
     default: "text-ink-dim border-border bg-panel-2",
     accent: "text-primary border-[color-mix(in_oklch,var(--color-primary)_40%,transparent)] bg-primary-soft",
@@ -2994,7 +2994,7 @@ function un({ endsAt: e }) {
     s
   ] });
 }
-function ji({
+function ki({
   values: e,
   color: t = "var(--color-primary)",
   w: r = 80,
@@ -3013,7 +3013,7 @@ function xo({ label: e }) {
     /* @__PURE__ */ n.jsx("div", { className: "flex-1 h-px bg-border" })
   ] });
 }
-const ki = [
+const wi = [
   "var(--accent-cyan)",
   "var(--accent-magenta)",
   "var(--accent-lime)",
@@ -3024,7 +3024,7 @@ const ki = [
   columns: r = 3,
   unlockedTones: i
 }) {
-  const a = de("profile.badgesEyebrow"), o = de("profile.badgeUnlocked"), s = de("profile.badgeLocked"), l = i && i.length > 0 ? i : ki, d = t.filter((c) => c.got).length;
+  const a = de("profile.badgesEyebrow"), o = de("profile.badgeUnlocked"), s = de("profile.badgeLocked"), l = i && i.length > 0 ? i : wi, d = t.filter((c) => c.got).length;
   return /* @__PURE__ */ n.jsxs("div", { className: "panel p-5", children: [
     /* @__PURE__ */ n.jsxs("div", { className: "font-mono text-[10px] tracking-[0.12em] uppercase text-ink-dim mb-3.5", children: [
       "// ",
@@ -3090,7 +3090,7 @@ function ho({ options: e, value: t, onChange: r, labels: i }) {
     a
   )) });
 }
-function wi({ variant: e = "isometric", accent: t }) {
+function Ni({ variant: e = "isometric", accent: t }) {
   const r = t || "var(--color-primary)";
   if (e === "grid-poster")
     return /* @__PURE__ */ n.jsxs("svg", { viewBox: "0 0 480 480", className: "block w-full h-full", children: [
@@ -3470,7 +3470,7 @@ function Et({ type: e, size: t = 22 }) {
     /* @__PURE__ */ n.jsx("circle", { cx: "18.5", cy: "5.5", r: "2.5", fill: "currentColor", stroke: "none" })
   ] }) : /* @__PURE__ */ n.jsx("svg", { ...i, children: /* @__PURE__ */ n.jsx("circle", { cx: "12", cy: "12", r: "8" }) });
 }
-function Ni({ asset: e, fallback: t, alt: r = "", className: i }) {
+function Mi({ asset: e, fallback: t, alt: r = "", className: i }) {
   const [a, o] = j(!1);
   if (!(e && (e.type === "IMG" || e.type === "GIF") && !a)) return /* @__PURE__ */ n.jsx(n.Fragment, { children: t });
   const l = /* @__PURE__ */ n.jsx(
@@ -3495,30 +3495,25 @@ function mo({
   subtitle: r = "Complete 8 of 12 missions to unlock the Ascendant lootbox.",
   eyebrow: i = "// current season · week 04"
 }) {
-  const a = hi("missionsHero");
+  var c, u;
+  const a = hi("missionsHero"), o = ((u = (c = mi().overrides) == null ? void 0 : c.heroBanner) == null ? void 0 : u.overlayMode) ?? "always", s = o !== "never", l = o === "always", d = o === "always";
   return /* @__PURE__ */ n.jsxs("div", { className: "hero-banner", children: [
-    /* @__PURE__ */ n.jsx("div", { className: "hero-banner-bg", children: /* @__PURE__ */ n.jsx(
-      Ni,
-      {
-        asset: a,
-        fallback: /* @__PURE__ */ n.jsx(wi, { variant: e }),
-        alt: t
-      }
-    ) }),
-    /* @__PURE__ */ n.jsxs("div", { className: "hero-banner-content", children: [
+    /* @__PURE__ */ n.jsx("div", { className: "hero-banner-bg", children: /* @__PURE__ */ n.jsx(Mi, { asset: a, fallback: /* @__PURE__ */ n.jsx(Ni, { variant: e }), alt: t }) }),
+    s && /* @__PURE__ */ n.jsxs("div", { className: "hero-banner-content", children: [
       /* @__PURE__ */ n.jsx(ue, { children: i }),
-      /* @__PURE__ */ n.jsx("h2", { className: "display m-0 text-[26px] tracking-[-0.02em]", children: t }),
-      /* @__PURE__ */ n.jsx("div", { className: "text-[13px] text-ink-dim max-w-[420px]", children: r })
-    ] })
+      l && /* @__PURE__ */ n.jsx("h2", { className: "display m-0 text-[26px] tracking-[-0.02em]", children: t }),
+      d && /* @__PURE__ */ n.jsx("div", { className: "text-[13px] text-ink-dim max-w-[420px]", children: r })
+    ] }),
+    !l && /* @__PURE__ */ n.jsx("h2", { className: "sr-only", children: t })
   ] });
 }
-const Mi = {
+const Ci = {
   rank: "rank",
   handle: "insider",
   streak: "streak",
   tier: "tier",
   xp: "xp"
-}, Ci = {
+}, _i = {
   Oracle: "magenta",
   Ascendant: "lime"
 }, bo = Ue(function({
@@ -3528,7 +3523,7 @@ const Mi = {
   tierToneMap: a,
   youTag: o = "YOU"
 }) {
-  const s = { ...Mi, ...i }, l = a ?? Ci;
+  const s = { ...Ci, ...i }, l = a ?? _i;
   return /* @__PURE__ */ n.jsxs("div", { className: "panel overflow-hidden", children: [
     /* @__PURE__ */ n.jsxs("div", { className: "lb-head lb-row", children: [
       /* @__PURE__ */ n.jsx("span", { children: s.rank }),
@@ -3554,13 +3549,13 @@ const Mi = {
           /* @__PURE__ */ n.jsxs("span", { className: "lb-identity", children: [
             /* @__PURE__ */ n.jsx(Kt, { seed: d.seed, size: 28 }),
             /* @__PURE__ */ n.jsx("span", { className: "font-semibold text-[14px]", children: d.handle }),
-            d.me && /* @__PURE__ */ n.jsx(X, { tone: "accent", children: o })
+            d.me && /* @__PURE__ */ n.jsx(H, { tone: "accent", children: o })
           ] }),
           /* @__PURE__ */ n.jsxs("span", { className: "mono lb-streak text-[13px] text-accent-amber", children: [
             d.streak,
             r
           ] }),
-          /* @__PURE__ */ n.jsx("span", { className: "lb-tier", children: /* @__PURE__ */ n.jsx(X, { tone: l[d.tier] ?? "accent", children: d.tier }) }),
+          /* @__PURE__ */ n.jsx("span", { className: "lb-tier", children: /* @__PURE__ */ n.jsx(H, { tone: l[d.tier] ?? "accent", children: d.tier }) }),
           /* @__PURE__ */ n.jsx("span", { className: "mono lb-xp", children: d.xp.toLocaleString() })
         ]
       },
@@ -3568,7 +3563,7 @@ const Mi = {
     ))
   ] });
 });
-function Ht({ shape: e, tint: t }) {
+function qt({ shape: e, tint: t }) {
   const r = `var(--accent-${t})`;
   return /* @__PURE__ */ n.jsxs("svg", { viewBox: "0 0 100 100", className: "block w-full h-full", children: [
     /* @__PURE__ */ n.jsx("rect", { width: "100", height: "100", fill: "var(--panel)" }),
@@ -3632,7 +3627,7 @@ const Pt = {
     correct: "a"
   }
 };
-function _i({
+function Si({
   variant: e,
   onComplete: t
 }) {
@@ -3744,7 +3739,7 @@ function _i({
           disabled: o,
           onClick: () => a(d.id),
           layout: "column",
-          children: /* @__PURE__ */ n.jsx("div", { className: "aspect-square", children: /* @__PURE__ */ n.jsx(Ht, { shape: d.shape, tint: d.tint }) })
+          children: /* @__PURE__ */ n.jsx("div", { className: "aspect-square", children: /* @__PURE__ */ n.jsx(qt, { shape: d.shape, tint: d.tint }) })
         },
         d.id
       );
@@ -3775,7 +3770,7 @@ function _i({
     ) })
   ] });
 }
-const Si = {
+const Ti = {
   q: "Which GrowQuest feature would you use most?",
   choices: [
     { id: "a", label: "Daily missions" },
@@ -3783,7 +3778,7 @@ const Si = {
     { id: "c", label: "Referral boosts" },
     { id: "d", label: "Leaderboard competition" }
   ]
-}, Ti = {
+}, $i = {
   q: "Which hero style fits your brand?",
   choices: [
     { id: "a", label: "Isometric world", tint: "cyan" },
@@ -3791,7 +3786,7 @@ const Si = {
     { id: "c", label: "Editorial poster", tint: "lime" },
     { id: "d", label: "Pixel / arcade", tint: "amber" }
   ]
-}, $i = {
+}, Ei = {
   q: "Pick your favorite vibe:",
   choices: [
     { id: "a", shape: "hex", tint: "cyan" },
@@ -3800,7 +3795,7 @@ const Si = {
     { id: "d", shape: "square", tint: "amber" }
   ]
 };
-function Ei({
+function Pi({
   variant: e,
   onComplete: t,
   textMinLength: r = 20
@@ -3828,7 +3823,7 @@ function Ei({
       ] }),
       /* @__PURE__ */ n.jsx(T, { variant: "primary", disabled: o.length < r, onClick: t, children: "Submit feedback" })
     ] });
-  const l = e === "text" ? Si : e === "textImage" ? Ti : $i;
+  const l = e === "text" ? Ti : e === "textImage" ? $i : Ei;
   return /* @__PURE__ */ n.jsxs("div", { className: "p-6 flex flex-col gap-4", children: [
     /* @__PURE__ */ n.jsx(ue, { children: "// survey · your take helps shape the roadmap" }),
     /* @__PURE__ */ n.jsx("div", { className: "text-[17px] font-semibold leading-snug", children: l.q }),
@@ -3855,7 +3850,7 @@ function Ei({
           layout: "column",
           children: [
             /* @__PURE__ */ n.jsx("div", { className: "aspect-[16/10] rounded-md overflow-hidden", children: /* @__PURE__ */ n.jsx(
-              Ht,
+              qt,
               {
                 shape: ["hex", "circle", "diamond", "square"][d.id.charCodeAt(0) - 97],
                 tint: d.tint
@@ -3875,7 +3870,7 @@ function Ei({
           selected: c,
           onClick: () => a(d.id),
           layout: "column",
-          children: /* @__PURE__ */ n.jsx("div", { className: "aspect-square", children: /* @__PURE__ */ n.jsx(Ht, { shape: d.shape, tint: d.tint }) })
+          children: /* @__PURE__ */ n.jsx("div", { className: "aspect-square", children: /* @__PURE__ */ n.jsx(qt, { shape: d.shape, tint: d.tint }) })
         },
         d.id
       );
@@ -3883,7 +3878,7 @@ function Ei({
     /* @__PURE__ */ n.jsx(T, { variant: "primary", disabled: !i, onClick: t, children: "Submit" })
   ] });
 }
-function Pi({
+function zi({
   onComplete: e,
   word: t = "GROWQUEST",
   maxWrong: r = 6,
@@ -3961,7 +3956,7 @@ function Pi({
     /* @__PURE__ */ n.jsx(T, { variant: "primary", disabled: !l && !d, onClick: e, children: "Continue" })
   ] });
 }
-const zi = [
+const Ri = [
   { q: "How many tiers are in GrowQuest?", choices: ["2", "3", "4", "5"], correct: 2 },
   {
     q: "What currency powers redemptions?",
@@ -3970,9 +3965,9 @@ const zi = [
   },
   { q: "Streak bonus milestone lands at day…", choices: ["3", "5", "7", "10"], correct: 2 }
 ];
-function Ri({
+function Ai({
   onComplete: e,
-  questions: t = zi,
+  questions: t = Ri,
   timeLimit: r = 15,
   passScore: i = 2
 }) {
@@ -4048,7 +4043,7 @@ function Ri({
         t.length
       ] }),
       /* @__PURE__ */ n.jsxs("div", { className: "flex items-center gap-1.5", children: [
-        /* @__PURE__ */ n.jsxs(bi, { tone: "accent", children: [
+        /* @__PURE__ */ n.jsxs(gi, { tone: "accent", children: [
           "SCORE ",
           d
         ] }),
@@ -4093,14 +4088,14 @@ function Ri({
     b === "reveal" && /* @__PURE__ */ n.jsx(T, { variant: "primary", onClick: E, children: a === t.length - 1 ? "See results" : "Next question" })
   ] });
 }
-function Ai(e) {
+function Oi(e) {
   const t = e.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([A-Za-z0-9_-]{11})/);
   if (t) return { kind: "youtube", id: t[1] };
   const r = e.match(/vimeo\.com\/(\d+)/);
   return r ? { kind: "vimeo", id: r[1] } : { kind: "native" };
 }
-function Oi({ url: e, onComplete: t }) {
-  const [r, i] = j(!1), [a, o] = j(10), s = Ai(e);
+function Ii({ url: e, onComplete: t }) {
+  const [r, i] = j(!1), [a, o] = j(10), s = Oi(e);
   return G(() => {
     if (s.kind === "native") return;
     const l = setInterval(() => {
@@ -4148,7 +4143,7 @@ function Oi({ url: e, onComplete: t }) {
     /* @__PURE__ */ n.jsx(T, { variant: "primary", disabled: !r, onClick: t, className: "w-full", children: "I've watched it" })
   ] });
 }
-function Ii({
+function Li({
   url: e,
   onComplete: t
 }) {
@@ -4200,7 +4195,7 @@ function Fi({ onComplete: e }) {
   const [t, r] = j(""), [i, a] = j(""), o = [t.length > 0, i.length > 0].filter(Boolean).length;
   return /* @__PURE__ */ n.jsxs("div", { className: "flex flex-col gap-4 p-6", children: [
     /* @__PURE__ */ n.jsx(
-      gi,
+      vi,
       {
         label: "Display name",
         placeholder: "Your name",
@@ -4244,8 +4239,8 @@ function Fi({ onComplete: e }) {
     )
   ] });
 }
-function Li({ onComplete: e }) {
-  const [t, r] = j(null), [i, a] = j(null), o = Xt(null);
+function Bi({ onComplete: e }) {
+  const [t, r] = j(null), [i, a] = j(null), o = Ht(null);
   function s(l) {
     a(l.name);
     const d = new FileReader();
@@ -4316,7 +4311,7 @@ function Li({ onComplete: e }) {
     /* @__PURE__ */ n.jsx(T, { variant: "primary", disabled: !t, onClick: e, className: "w-full", children: "Save photo" })
   ] });
 }
-function Bi({
+function Di({
   email: e,
   onComplete: t
 }) {
@@ -4357,7 +4352,7 @@ function Bi({
     )
   ] });
 }
-const Di = [
+const qi = [
   { code: "+1", flag: "🇺🇸", name: "US" },
   { code: "+44", flag: "🇬🇧", name: "UK" },
   { code: "+92", flag: "🇵🇰", name: "PK" },
@@ -4411,7 +4406,7 @@ function Hi({ onComplete: e }) {
           className: "input w-full",
           value: i,
           onChange: (c) => a(c.target.value),
-          children: Di.map(({ code: c, flag: u, name: m }) => /* @__PURE__ */ n.jsxs("option", { value: c, children: [
+          children: qi.map(({ code: c, flag: u, name: m }) => /* @__PURE__ */ n.jsxs("option", { value: c, children: [
             u,
             " ",
             m,
@@ -4451,7 +4446,7 @@ function Xi(e) {
   const t = (e % 360 + 360) % 360, r = Math.floor((360 - t) / (360 / _e.length)) % _e.length;
   return _e[r];
 }
-function qi({ onComplete: e }) {
+function Wi({ onComplete: e }) {
   const [t, r] = j(!1), [i, a] = j(0), [o, s] = j(null);
   function l() {
     if (t) return;
@@ -4539,7 +4534,7 @@ function qi({ onComplete: e }) {
   ] });
 }
 const Ie = 16;
-function Wi({
+function Ui({
   reward: e = "200 XP",
   onComplete: t
 }) {
@@ -4596,14 +4591,14 @@ function Wi({
     )
   ] });
 }
-const Ui = [
+const Yi = [
   { id: "b1", name: "First Quest", got: !0, desc: "Completed your first mission." },
   { id: "b2", name: "Streak ×7", got: !0, desc: "7-day streak maintained." },
   { id: "b3", name: "Evangelist", got: !1, desc: "Refer 10 teammates." },
   { id: "b4", name: "Lorekeeper", got: !1, desc: "Complete all weekly quizzes." }
 ];
-function Yi({
-  badges: e = Ui,
+function Gi({
+  badges: e = Yi,
   goal: t = 3,
   earned: r,
   onComplete: i
@@ -4647,7 +4642,7 @@ function Yi({
     /* @__PURE__ */ n.jsx(T, { variant: "primary", disabled: !o, onClick: i, className: "w-full", children: o ? "Claim XP" : `Earn ${t - a} more badge${t - a !== 1 ? "s" : ""}` })
   ] });
 }
-function Gi({
+function Ji({
   referralLink: e = "https://app.growquest.io/ref/demo-abc123",
   onComplete: t
 }) {
@@ -4701,7 +4696,7 @@ function Gi({
     /* @__PURE__ */ n.jsx(T, { variant: "primary", disabled: !s, onClick: t, className: "w-full", children: "Done" })
   ] });
 }
-function Ji({
+function Vi({
   shareText: e = "Check out GrowQuest — earn XP for real actions!",
   shareUrl: t = "https://growquest.io",
   onComplete: r
@@ -4754,7 +4749,7 @@ function Ji({
     /* @__PURE__ */ n.jsx(T, { variant: "primary", disabled: !i, onClick: r, className: "w-full", children: "Done" })
   ] });
 }
-function Vi({ onComplete: e }) {
+function Qi({ onComplete: e }) {
   const [t, r] = j(""), [i, a] = j([]);
   function o() {
     t.includes("@") && (a((l) => [...l, t]), r(""));
@@ -4809,8 +4804,8 @@ function Vi({ onComplete: e }) {
     )
   ] });
 }
-function Qi({ onComplete: e }) {
-  const [t, r] = j(null), [i, a] = j(null), [o, s] = j(!1), l = Xt(null);
+function Zi({ onComplete: e }) {
+  const [t, r] = j(null), [i, a] = j(null), [o, s] = j(!1), l = Ht(null);
   function d(c) {
     a(c.name);
     const u = new FileReader();
@@ -4898,7 +4893,7 @@ function Qi({ onComplete: e }) {
     )
   ] });
 }
-function Zi({ platform: e }) {
+function Ki({ platform: e }) {
   const t = e;
   return t === "Instagram" ? /* @__PURE__ */ n.jsxs("svg", { width: "32", height: "32", viewBox: "0 0 24 24", fill: "none", children: [
     /* @__PURE__ */ n.jsx("rect", { x: "2", y: "2", width: "20", height: "20", rx: "5", stroke: "currentColor", strokeWidth: "1.6" }),
@@ -4945,7 +4940,7 @@ function Zi({ platform: e }) {
     }
   );
 }
-function Ki({
+function eo({
   platform: e = "Instagram",
   handle: t = "@growquest",
   url: r = "https://instagram.com/growquest",
@@ -4953,7 +4948,7 @@ function Ki({
 }) {
   const [a, o] = j(!1);
   return /* @__PURE__ */ n.jsxs("div", { className: "flex flex-col items-center gap-6 py-8 px-6", children: [
-    /* @__PURE__ */ n.jsx("div", { className: "w-[72px] h-[72px] rounded-[18px] bg-panel-2 border border-border grid place-items-center text-primary", children: /* @__PURE__ */ n.jsx(Zi, { platform: e }) }),
+    /* @__PURE__ */ n.jsx("div", { className: "w-[72px] h-[72px] rounded-[18px] bg-panel-2 border border-border grid place-items-center text-primary", children: /* @__PURE__ */ n.jsx(Ki, { platform: e }) }),
     /* @__PURE__ */ n.jsxs("div", { className: "text-center", children: [
       /* @__PURE__ */ n.jsx("div", { className: "font-bold text-[22px] tracking-[-0.02em] mb-1", children: t }),
       /* @__PURE__ */ n.jsxs("div", { className: "text-[13px] text-ink-dim", children: [
@@ -4991,11 +4986,11 @@ function Ki({
     ] })
   ] });
 }
-const eo = 'a,button:not([disabled]),input:not([disabled]),textarea:not([disabled]),select:not([disabled]),[tabindex]:not([tabindex="-1"])';
-function to(e, t) {
+const to = 'a,button:not([disabled]),input:not([disabled]),textarea:not([disabled]),select:not([disabled]),[tabindex]:not([tabindex="-1"])';
+function ro(e, t) {
   G(() => {
     if (!t || !e.current) return;
-    const r = e.current, i = Array.from(r.querySelectorAll(eo)), a = i[0], o = i[i.length - 1];
+    const r = e.current, i = Array.from(r.querySelectorAll(to)), a = i[0], o = i[i.length - 1];
     a == null || a.focus();
     const s = (l) => {
       l.key === "Tab" && (l.shiftKey ? document.activeElement === a && (l.preventDefault(), o == null || o.focus()) : document.activeElement === o && (l.preventDefault(), a == null || a.focus()));
@@ -5009,19 +5004,19 @@ function go({ m: e, onClose: t, onClaim: r }) {
     },
     () => !0,
     () => !1
-  ), a = Xt(null);
-  if (to(a, e !== null), !e || !i) return null;
+  ), a = Ht(null);
+  if (ro(a, e !== null), !e || !i) return null;
   const o = () => {
     r(e), t();
   };
   let s = null;
   if (e.type === "quiz") {
     const l = e.subtype === "quiz-textImage" ? "textImage" : e.subtype === "quiz-imageOnly" ? "imageOnly" : "text";
-    s = /* @__PURE__ */ n.jsx(_i, { variant: l, onComplete: o });
+    s = /* @__PURE__ */ n.jsx(Si, { variant: l, onComplete: o });
   } else if (e.type === "survey") {
     const l = e.subtype === "survey-textImage" ? "textImage" : e.subtype === "survey-imageOnly" ? "imageOnly" : e.subtype === "survey-textarea" ? "textarea" : "text";
-    s = /* @__PURE__ */ n.jsx(Ei, { variant: l, onComplete: o });
-  } else e.type === "hangman" ? s = /* @__PURE__ */ n.jsx(Pi, { onComplete: o }) : e.type === "trivia" ? s = /* @__PURE__ */ n.jsx(Ri, { onComplete: o }) : e.type === "video" ? s = /* @__PURE__ */ n.jsx(Oi, { url: e.url ?? "", onComplete: o }) : e.type === "read_article" ? s = /* @__PURE__ */ n.jsx(Ii, { url: e.url, onComplete: o }) : e.type === "profile" ? s = /* @__PURE__ */ n.jsx(Fi, { onComplete: o }) : e.type === "avatar" ? s = /* @__PURE__ */ n.jsx(Li, { onComplete: o }) : e.type === "verify_email" ? s = /* @__PURE__ */ n.jsx(Bi, { onComplete: o }) : e.type === "verify_phone" ? s = /* @__PURE__ */ n.jsx(Hi, { onComplete: o }) : e.type === "spin_wheel" ? s = /* @__PURE__ */ n.jsx(qi, { onComplete: o }) : e.type === "scratch_card" ? s = /* @__PURE__ */ n.jsx(Wi, { onComplete: o }) : e.type === "badge_collect" ? s = /* @__PURE__ */ n.jsx(Yi, { onComplete: o }) : e.type === "refer" ? s = /* @__PURE__ */ n.jsx(Gi, { onComplete: o }) : e.type === "share" ? s = /* @__PURE__ */ n.jsx(Ji, { shareUrl: e.url, onComplete: o }) : e.type === "invite" ? s = /* @__PURE__ */ n.jsx(Vi, { onComplete: o }) : e.type === "photo_proof" ? s = /* @__PURE__ */ n.jsx(Qi, { onComplete: o }) : (e.type === "follow_social" || e.type === "social") && (s = /* @__PURE__ */ n.jsx(Ki, { url: e.url, onComplete: o }));
+    s = /* @__PURE__ */ n.jsx(Pi, { variant: l, onComplete: o });
+  } else e.type === "hangman" ? s = /* @__PURE__ */ n.jsx(zi, { onComplete: o }) : e.type === "trivia" ? s = /* @__PURE__ */ n.jsx(Ai, { onComplete: o }) : e.type === "video" ? s = /* @__PURE__ */ n.jsx(Ii, { url: e.url ?? "", onComplete: o }) : e.type === "read_article" ? s = /* @__PURE__ */ n.jsx(Li, { url: e.url, onComplete: o }) : e.type === "profile" ? s = /* @__PURE__ */ n.jsx(Fi, { onComplete: o }) : e.type === "avatar" ? s = /* @__PURE__ */ n.jsx(Bi, { onComplete: o }) : e.type === "verify_email" ? s = /* @__PURE__ */ n.jsx(Di, { onComplete: o }) : e.type === "verify_phone" ? s = /* @__PURE__ */ n.jsx(Hi, { onComplete: o }) : e.type === "spin_wheel" ? s = /* @__PURE__ */ n.jsx(Wi, { onComplete: o }) : e.type === "scratch_card" ? s = /* @__PURE__ */ n.jsx(Ui, { onComplete: o }) : e.type === "badge_collect" ? s = /* @__PURE__ */ n.jsx(Gi, { onComplete: o }) : e.type === "refer" ? s = /* @__PURE__ */ n.jsx(Ji, { onComplete: o }) : e.type === "share" ? s = /* @__PURE__ */ n.jsx(Vi, { shareUrl: e.url, onComplete: o }) : e.type === "invite" ? s = /* @__PURE__ */ n.jsx(Qi, { onComplete: o }) : e.type === "photo_proof" ? s = /* @__PURE__ */ n.jsx(Zi, { onComplete: o }) : (e.type === "follow_social" || e.type === "social") && (s = /* @__PURE__ */ n.jsx(eo, { url: e.url, onComplete: o }));
   return vn(
     /* @__PURE__ */ n.jsx(
       "div",
@@ -5036,7 +5031,7 @@ function go({ m: e, onClose: t, onClaim: r }) {
               /* @__PURE__ */ n.jsx("h2", { className: "display m-0 text-[20px] tracking-[-0.02em] text-[color:var(--mission-modal-title)]", children: e.title }),
               /* @__PURE__ */ n.jsxs("div", { className: "flex gap-2 mt-1.5", children: [
                 /* @__PURE__ */ n.jsx(Ce, { amount: e.xp }),
-                e.limited && e.endsAt && /* @__PURE__ */ n.jsxs(X, { tone: "magenta", children: [
+                e.limited && e.endsAt && /* @__PURE__ */ n.jsxs(H, { tone: "magenta", children: [
                   "Ends in ",
                   /* @__PURE__ */ n.jsx(un, { endsAt: e.endsAt })
                 ] })
@@ -5092,7 +5087,7 @@ const vo = Ue(function({
               children: /* @__PURE__ */ n.jsx(Et, { type: t.type, size: 18 })
             }
           ),
-          t.limited && /* @__PURE__ */ n.jsxs(X, { tone: "magenta", children: [
+          t.limited && /* @__PURE__ */ n.jsxs(H, { tone: "magenta", children: [
             "LIMITED",
             t.endsAt ? /* @__PURE__ */ n.jsxs(n.Fragment, { children: [
               " ",
@@ -5141,7 +5136,7 @@ const vo = Ue(function({
           /* @__PURE__ */ n.jsx("div", { className: "text-xs text-[color:var(--mission-card-body)] overflow-hidden text-ellipsis whitespace-nowrap", children: t.desc })
         ] }),
         /* @__PURE__ */ n.jsxs("div", { className: "flex items-center gap-2.5 shrink-0", children: [
-          t.limited && /* @__PURE__ */ n.jsx(X, { tone: "magenta", children: "LIMITED" }),
+          t.limited && /* @__PURE__ */ n.jsx(H, { tone: "magenta", children: "LIMITED" }),
           /* @__PURE__ */ n.jsxs("span", { className: "font-mono text-[11px] text-[color:var(--mission-card-body)]", children: [
             o,
             "/",
@@ -5180,7 +5175,7 @@ const vo = Ue(function({
                   children: /* @__PURE__ */ n.jsx(Et, { type: t.type, size: 18 })
                 }
               ),
-              t.limited && /* @__PURE__ */ n.jsx(X, { tone: "magenta", children: "⏱ LIMITED" })
+              t.limited && /* @__PURE__ */ n.jsx(H, { tone: "magenta", children: "⏱ LIMITED" })
             ]
           }
         ),
@@ -5222,13 +5217,13 @@ const vo = Ue(function({
       ]
     }
   );
-}), ro = {
+}), no = {
   1: "var(--accent-amber)",
   2: "var(--accent-cyan)",
   3: "var(--accent-magenta)"
-}, no = { 1: 180, 2: 150, 3: 130 };
+}, ao = { 1: 180, 2: 150, 3: 130 };
 function yo({ entries: e, rankColors: t, platformHeights: r }) {
-  const i = t ?? ro, a = r ?? no, o = e.slice(0, 3), s = [o[1], o[0], o[2]].filter(Boolean);
+  const i = t ?? no, a = r ?? ao, o = e.slice(0, 3), s = [o[1], o[0], o[2]].filter(Boolean);
   return /* @__PURE__ */ n.jsx("div", { className: "grid grid-cols-3 gap-3.5 mb-7", children: s.map((l) => {
     const d = i[l.rank] ?? "var(--color-primary)", c = a[l.rank] ?? 120;
     return /* @__PURE__ */ n.jsxs("div", { className: "flex flex-col items-center gap-2.5", children: [
@@ -5286,12 +5281,12 @@ function jo({
                 "@",
                 e.handle
               ] }),
-              /* @__PURE__ */ n.jsx(X, { tone: "accent", children: e.tier })
+              /* @__PURE__ */ n.jsx(H, { tone: "accent", children: e.tier })
             ] }),
             /* @__PURE__ */ n.jsx("div", { className: "font-mono text-[11px] text-[color:var(--profile-card-wallet)]", children: a })
           ] })
         ] }),
-        /* @__PURE__ */ n.jsx(vi, { value: e.xp, max: r, style: t, label: i }),
+        /* @__PURE__ */ n.jsx(yi, { value: e.xp, max: r, style: t, label: i }),
         /* @__PURE__ */ n.jsx("div", { className: "grid grid-cols-3 gap-2", children: [
           { k: "Missions", v: `${e.missionsDone}/12` },
           { k: "XP", v: e.xp.toLocaleString() },
@@ -5359,8 +5354,8 @@ const ko = Ue(function({
               }
             ) })
           ] }),
-          t.limited && /* @__PURE__ */ n.jsx("div", { className: "absolute top-2.5 left-2.5", children: /* @__PURE__ */ n.jsx(X, { tone: "magenta", children: "LIMITED" }) }),
-          /* @__PURE__ */ n.jsx("div", { className: "absolute top-2.5 right-2.5", children: /* @__PURE__ */ n.jsx(X, { children: t.stock }) })
+          t.limited && /* @__PURE__ */ n.jsx("div", { className: "absolute top-2.5 left-2.5", children: /* @__PURE__ */ n.jsx(H, { tone: "magenta", children: "LIMITED" }) }),
+          /* @__PURE__ */ n.jsx("div", { className: "absolute top-2.5 right-2.5", children: /* @__PURE__ */ n.jsx(H, { children: t.stock }) })
         ]
       }
     ),
@@ -5388,7 +5383,7 @@ function wo({ label: e, value: t, trend: r, trendColor: i }) {
     /* @__PURE__ */ n.jsx("div", { className: "font-mono text-[10px] tracking-[0.12em] uppercase text-ink-dim mb-1.5", children: e }),
     /* @__PURE__ */ n.jsxs("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "flex-end" }, children: [
       /* @__PURE__ */ n.jsx("span", { style: { fontWeight: 700, fontSize: 22 }, children: t }),
-      /* @__PURE__ */ n.jsx(ji, { values: r, color: i })
+      /* @__PURE__ */ n.jsx(ki, { values: r, color: i })
     ] })
   ] });
 }
@@ -5433,61 +5428,61 @@ function No({ tiers: e, currentXP: t }) {
   ] });
 }
 export {
-  Li as AvatarUploadExperience,
-  Yi as BadgeCollectExperience,
+  Bi as AvatarUploadExperience,
+  Gi as BadgeCollectExperience,
   po as BadgeGrid,
   uo as BrandLockup,
-  lo as BrandProvider,
+  co as BrandProvider,
   T as Button,
-  bi as Chip,
+  gi as Chip,
   un as Countdown,
   se as DEFAULT_CONFIG,
   Sr as DEFAULT_CONTENT,
   xo as Divider,
-  Bi as EmailVerificationExperience,
+  Di as EmailVerificationExperience,
   ue as Eyebrow,
-  gi as Field,
+  vi as Field,
   ho as FilterTabs,
-  Ki as FollowSocialExperience,
-  Pi as HangmanExperience,
+  eo as FollowSocialExperience,
+  zi as HangmanExperience,
   mo as HeroBanner,
-  Ni as HeroMedia,
+  Mi as HeroMedia,
   Te as Input,
-  Vi as InviteExperience,
+  Qi as InviteExperience,
   bo as LeaderboardTable,
-  yi as Logo,
+  ji as Logo,
   vo as MissionCard,
   go as MissionModal,
   Hi as PhoneVerificationExperience,
-  Qi as PhotoProofExperience,
+  Zi as PhotoProofExperience,
   yo as Podium,
   jo as ProfileCard,
   Fi as ProfileCompletionExperience,
-  _i as QuizExperience,
-  Ii as ReadArticleExperience,
-  Gi as ReferralExperience,
+  Si as QuizExperience,
+  Li as ReadArticleExperience,
+  Ji as ReferralExperience,
   ko as RewardCard,
   yn as SURFACES,
-  Wi as ScratchCardExperience,
-  Ji as ShareExperience,
-  ji as Sparkline,
-  qi as SpinWheelExperience,
+  Ui as ScratchCardExperience,
+  Vi as ShareExperience,
+  ki as Sparkline,
+  Wi as SpinWheelExperience,
   wo as StatCard,
-  Ei as SurveyExperience,
-  X as Tag,
+  Pi as SurveyExperience,
+  H as Tag,
   fn as Textarea,
   No as TierLadder,
-  Ri as TriviaExperience,
-  Oi as VideoExperience,
-  vi as XPBar,
+  Ai as TriviaExperience,
+  Ii as VideoExperience,
+  yi as XPBar,
   Ce as XPPill,
-  oo as applyBrand,
+  so as applyBrand,
   si as deriveTokens,
-  so as getCurrentBrand,
-  co as preloadAssets,
+  lo as getCurrentBrand,
+  fo as preloadAssets,
   di as subscribeBrand,
   hi as useAsset,
-  fo as useBrand,
+  mi as useBrand,
   Zt as useBrandState,
   de as useContent
 };

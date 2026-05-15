@@ -36,7 +36,6 @@ import { InviteExperience } from './experiences/Invite'
 import { LeaderboardEntry } from './types'
 import { LeaderboardTable } from './components/LeaderboardTable'
 import { Logo } from './primitives/Logo'
-import { LogoSet } from './config'
 import { Mission } from './types'
 import { MissionCard } from './components/MissionCard'
 import { MissionModal } from './components/MissionModal'
@@ -158,8 +157,6 @@ export { LeaderboardEntry }
 export { LeaderboardTable }
 
 export { Logo }
-
-export { LogoSet }
 
 export { Mission }
 
