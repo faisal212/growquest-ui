@@ -128,24 +128,25 @@ export const DEFAULT_CONFIG: BrandConfig = {
     primary: 'oklch(0.86 0.18 200)',
     secondary: 'oklch(0.72 0.25 340)',
   },
-  // Default hero imagery. placehold.co serves edge-cached PNGs instantly —
-  // colors match the dark surface palette + cyan brand primary. Each surface
-  // ships a desktop + mobile variant matched to the actual pane aspect ratio:
-  // onboarding flips from portrait at >720px to landscape at ≤720px (grid
-  // collapse); missions stays landscape but narrows on mobile. Browsers fetch
-  // only the matching URL via <picture><source media>. Tenants override via
-  // `config.assets.{onboardingHero,missionsHero}`. If a URL fails to load,
-  // HeroMedia falls back to the procedural <HeroArt />.
+  // Default hero imagery. Both onboardingHero and missionsHero ship real
+  // branded artwork from the GrowQuest CDN. Dimensions match the actual pane
+  // aspect ratios: onboarding flips from portrait at >720px to landscape at
+  // ≤720px (grid collapse); missions stays landscape but narrows on mobile.
+  // Browsers fetch only the matching URL via <picture><source media>. Tenants
+  // override via `config.assets.{onboardingHero,missionsHero}`. If a URL fails
+  // to load, HeroMedia falls back to the procedural <HeroArt />. Whether the
+  // visible title/subtitle overlay renders on top is controlled by
+  // `overrides.heroBanner.overlayMode` ('always' | 'eyebrow-only' | 'never').
   assets: {
     onboardingHero: {
-      src: 'https://placehold.co/720x800/0E1018/86C5FF/png?text=GrowQuest',
+      src: 'https://cdn.grow-quest.com/uploads/testing/achievement-illustration%20(1)%20(1).png',
       type: 'IMG',
-      mobileSrc: 'https://placehold.co/720x400/0E1018/86C5FF/png?text=GrowQuest',
+      mobileSrc: 'https://cdn.grow-quest.com/uploads/testing/achievement-banner%20(1)%20(1).png',
     },
     missionsHero: {
-      src: 'https://placehold.co/1280x380/0E1018/86C5FF/png?text=GrowQuest+Missions',
+      src: 'https://cdn.grow-quest.com/uploads/testing/missions-header.png',
       type: 'IMG',
-      mobileSrc: 'https://placehold.co/720x360/0E1018/86C5FF/png?text=GrowQuest+Missions',
+      mobileSrc: 'https://cdn.grow-quest.com/uploads/testing/missions-header-720x360.png',
     },
   },
 }

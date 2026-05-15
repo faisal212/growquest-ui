@@ -16,7 +16,6 @@ describe('validateBrandConfig', () => {
       tenantId: 'acme',
       mode: 'light',
       brand: { primary: '#FF8C00', secondary: '#2DACA9' },
-      logos: { nav: '/logos/acme.svg' },
       content: { missions: { sectionTitle: 'Acme Quests' } },
       overrides: { tones: { accent: '#FF8C00' } },
     }
@@ -25,7 +24,6 @@ describe('validateBrandConfig', () => {
     expect(result.brand.primary).toBe('#FF8C00')
     expect(result.brand.secondary).toBe('#2DACA9')
     expect(result.tenantId).toBe('acme')
-    expect(result.logos).toEqual(input.logos)
     expect(result.content).toEqual(input.content)
     expect(result.overrides).toEqual(input.overrides)
   })

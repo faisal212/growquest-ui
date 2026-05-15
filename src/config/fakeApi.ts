@@ -24,9 +24,6 @@ export const TENANTS: Record<string, BrandConfig> = {
       primary: '#FF8C00',
       secondary: '#2DACA9',
     },
-    logos: {
-      nav: '/logos/acme.svg',
-    },
     content: {
       missions: {
         sectionTitle: 'Acme Quests',
@@ -152,6 +149,7 @@ export const TENANTS: Record<string, BrandConfig> = {
         surface: '#0a0500',
         border: '#FF8C00',
         overlayGradient: 'linear-gradient(180deg, transparent 30%, rgba(20,10,0,0.95) 100%)',
+        overlayMode: 'never',
       },
       tierLadder: { currentMixPercent: 40, lockedOpacity: 0.2, surface: '#1a0e00' },
       badgeGrid: {

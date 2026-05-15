@@ -28,13 +28,6 @@
     "secondary": "#2DACA9"                         // optional; same derivation rules.
   },
 
-  // ─── Logos (all optional) ─────────────────────────────────────────────────
-  "logos": {
-    "onboarding": "/logos/onboarding.svg",         // Onboarding hero (mobile + desktop)
-    "nav":        "/logos/nav.svg",                // Top-nav logo
-    "endGame":    "/logos/endgame.svg"             // Celebration / completion screen
-  },
-
   // ─── Copy strings (sparse — falls back to defaults for unset keys) ────────
   "content": {
     "brand": {
@@ -159,10 +152,6 @@
       "type":      "IMG",
       "mobileSrc": "/assets/onboarding-hero-mobile.png"
     },
-    "navBackground":    { "src": "/assets/nav-bg.json",         "type": "JSON" },
-    "endGameImage":     { "src": "/assets/endgame.png",         "type": "IMG" },
-    "nftMinting":       { "src": "/assets/nft-mint.json",       "type": "JSON" },
-    "onboardWelcoming": { "src": "/assets/welcome.gif",         "type": "GIF" },
     "missionsHero": {
       "src":       "/assets/missions-hero-desktop.png",
       "type":      "IMG",
@@ -301,7 +290,11 @@
     "heroBanner": {
       "surface":         "#0B0D14",                // bg behind the art
       "border":          "#FF8C00",
-      "overlayGradient": "linear-gradient(180deg, transparent 40%, #05060ACC 100%)"
+      "overlayGradient": "linear-gradient(180deg, transparent 40%, #05060ACC 100%)",
+      // 'always' (default) | 'eyebrow-only' | 'never'. Set 'never' when the
+      // tenant supplies a designed banner with text/CTA baked into the artwork
+      // — hides the visible h2/subtitle overlay. h2 stays in DOM as sr-only.
+      "overlayMode":     "always"
     },
 
     // Tier ladder (bottom of /profile). Maps to --tier-ladder-*.

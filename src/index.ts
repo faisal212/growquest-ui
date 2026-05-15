@@ -23,7 +23,6 @@ export type {
   Mode,
   Overrides,
   SurfacePalette,
-  LogoSet,
   RadiusSet,
   FontSet,
 } from './config'

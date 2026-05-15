@@ -40,13 +40,20 @@ describe('Loud-tenant flow — Tier 1 + Tier 2 visual smoke', () => {
     expect(screen.queryByText('LAUNCH COHORT')).not.toBeInTheDocument()
   })
 
-  it('renders the tenant-supplied missionsHero image while keeping the text overlay', () => {
-    renderWithBrand(<HeroBanner heroStyle="iso-cube" title="Loud Path" />, LOUD)
+  it('renders the tenant-supplied missionsHero image and hides the visible overlay (overlayMode: never)', () => {
+    const { container } = renderWithBrand(
+      <HeroBanner heroStyle="iso-cube" title="Loud Path" />,
+      LOUD
+    )
 
     const img = screen.getByRole('img', { name: 'Loud Path' })
     expect(img).toHaveAttribute('src', '/test-assets/loud-missions-hero.png')
-    // Text overlay still rendered on top.
-    expect(screen.getByText('Loud Path')).toBeInTheDocument()
+    // The loud tenant sets overlayMode: 'never' — no visible content container or eyebrow.
+    expect(container.querySelector('.hero-banner-content')).toBeNull()
+    // The h2 stays in DOM as sr-only so the heading semantic is preserved.
+    const title = screen.getByText('Loud Path')
+    expect(title.tagName).toBe('H2')
+    expect(title).toHaveClass('sr-only')
   })
 
   it('renders leaderboard copy + column labels from the loud tenant', () => {

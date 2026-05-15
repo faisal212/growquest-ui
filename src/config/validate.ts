@@ -30,7 +30,6 @@ export function validateBrandConfig(input: unknown): BrandConfig {
     brand,
   }
 
-  if (isObject(input.logos)) out.logos = input.logos as BrandConfig['logos']
   if (isObject(input.content)) out.content = input.content as BrandConfig['content']
   if (isObject(input.assets)) out.assets = input.assets as BrandConfig['assets']
   if (isObject(input.overrides)) out.overrides = input.overrides as BrandConfig['overrides']

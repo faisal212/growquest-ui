@@ -15,15 +15,6 @@ export interface BrandColors {
   secondary?: string
 }
 
-export interface LogoSet {
-  /** Onboarding hero logo (mobile + desktop share unless asset overrides). */
-  onboarding?: string
-  /** Top-nav logo. */
-  nav?: string
-  /** End-game / celebration logo. */
-  endGame?: string
-}
-
 /** Tone palette names referenced by tier-tone mapping, badge rotation, etc. */
 export type ToneName = 'accent' | 'lime' | 'magenta' | 'amber'
 
@@ -148,10 +139,6 @@ export interface AssetEntry {
 export interface AssetMap {
   /** Onboarding left-pane image. When set, replaces the procedural HeroArt SVG and hides the decorative chip row. */
   onboardingHero?: AssetEntry
-  navBackground?: AssetEntry
-  endGameImage?: AssetEntry
-  nftMinting?: AssetEntry
-  onboardWelcoming?: AssetEntry
   /** Missions hero banner image. When set, replaces the procedural HeroArt SVG behind the text overlay. */
   missionsHero?: AssetEntry
 }
@@ -278,6 +265,13 @@ export interface HeroBannerRecipe {
   border?: string
   /** Overlay gradient applied above the art. */
   overlayGradient?: string
+  /**
+   * Controls whether the hero overlay (eyebrow + title + subtitle) renders on top of the image.
+   * - `'always'` (default): render eyebrow, title, subtitle, and the dark-fade gradient. Best for abstract / decorative artwork.
+   * - `'eyebrow-only'`: render the eyebrow + gradient; suppress title and subtitle. Good for designed banners where the title is baked into the artwork but you still want a dynamic eyebrow (e.g. "// week 04").
+   * - `'never'`: suppress the visible overlay and the dark-fade gradient. The image fills the banner edge to edge. The title is kept in the DOM as `sr-only` so screen readers still receive a heading.
+   */
+  overlayMode?: 'always' | 'eyebrow-only' | 'never'
 }
 
 export interface TierLadderRecipe {
@@ -378,7 +372,6 @@ export interface BrandConfig {
   tenantId?: string
   mode: Mode
   brand: BrandColors
-  logos?: LogoSet
   /** Sparse content overrides. Falls back to defaults for any unset key. */
   content?: DeepPartial<ContentMap>
   assets?: AssetMap

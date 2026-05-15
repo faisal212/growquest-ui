@@ -33,7 +33,6 @@ export function applyBrand(input: Partial<BrandConfig>): void {
   const cfg: BrandConfig = {
     mode: input.mode ?? DEFAULT_CONFIG.mode,
     brand: input.brand ?? DEFAULT_CONFIG.brand,
-    logos: input.logos,
     content: input.content,
     assets: input.assets,
     overrides: deepMerge(DEFAULT_CONFIG.overrides ?? {}, input.overrides),
