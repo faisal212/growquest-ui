@@ -66,3 +66,6 @@ coverage/
 /*.png
 /*.jpg
 /*.jpeg
+
+# Superpowers brainstorm scratch (visual-companion mockups, session-local)
+.superpowers/
