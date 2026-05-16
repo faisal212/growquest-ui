@@ -27,6 +27,19 @@ export type {
   FontSet,
 } from './config'
 
+// Design configurator (preview editor). PreviewMount is the lightweight CSR
+// entry point; it lazy-loads the heavy editor only when an admin opens it, so
+// nothing here lands on the end-user bundle. Consumers wire their real auth via
+// setAdminSessionAdapter.
+export { PreviewMount } from './preview/PreviewMount'
+export type { PreviewMountProps } from './preview/PreviewMount'
+export {
+  setAdminSessionAdapter,
+  getAdminSessionAdapter,
+  resetAdminSessionAdapter,
+} from './config/admin/adapter'
+export type { AdminSession, AdminSessionAdapter } from './config/admin/adapter'
+
 // Primitives
 export { Button } from './primitives/Button'
 export type { ButtonProps } from './primitives/Button'

@@ -4,6 +4,7 @@ import { fetchBrand } from '../src/config/fetchBrand'
 import { BrandProvider } from '../src/config/BrandProvider'
 import { BrandStyles } from '../src/config/BrandStyles'
 import { DemoShell } from '../src/shell/DemoShell'
+import { PreviewMount } from '../src/preview/PreviewMount'
 import '../styles.css'
 
 export const metadata = {
@@ -24,6 +25,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
       <body>
         <BrandProvider value={config}>
           <DemoShell>{children}</DemoShell>
+          <PreviewMount tenantId={tenantId} />
         </BrandProvider>
       </body>
     </html>

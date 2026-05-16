@@ -79,6 +79,7 @@
     "vitest": "^4.1.5"
   },
   "dependencies": {
+    "@tanstack/react-pacer": "^0.22.1",
     "culori": "^4.0.2",
     "next": "^16.2.6"
   }
