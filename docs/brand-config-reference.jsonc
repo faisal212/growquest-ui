@@ -57,6 +57,8 @@
       "titleBrand":            "",                 // leave blank to reuse brand.name
       "titleTrail":            "insider.",         // second half of h1
       "body":                  "Unlock exclusive perks, shape the roadmap, and earn XP toward rewards. Daily missions, limited drops, and a spin-to-win lootbox — yours when you join.",
+      // Arrays are replaced wholesale (not element-merged): to override, supply
+      // ALL tiles you want rendered, not just the one you change.
       "stats": [
         { "key": "XP",    "value": "Daily" },
         { "key": "Tiers", "value": "4 ranks" },
@@ -171,6 +173,7 @@
     // already selects a sensible palette (see defaults.ts:PALETTES). Field
     // names map 1:1 to the CSS custom properties components consume.
     "palette": {
+      "bg":           "#05060A",                   // → --bg          (page canvas; --bg-2 auto-derived from this)
       "panel":        "#0E1018",                   // → --panel       (card background)
       "panel2":       "#141722",                   // → --panel-2     (inner sub-panel)
       "panelHover":   "#1A1E2C",                   // → --panel-hover

@@ -49,7 +49,11 @@ export interface ContentMap {
     /** Second half of the h1 ("insider."). */
     titleTrail: string
     body: string
-    /** Three stat tiles below the body. */
+    /**
+     * Three stat tiles below the body. NOTE: arrays are replaced wholesale by
+     * deepMerge (not element-merged) — a tenant override must supply ALL tiles
+     * it wants rendered, not just the one it changes.
+     */
     stats: { key: string; value: string }[]
     emailLabel: string
     emailPlaceholder: string
@@ -150,6 +154,16 @@ export interface AssetMap {
  * components — no translation layer.
  */
 export interface PanelPalette {
+  /** Page canvas background (behind everything). → --bg */
+  bg: string
+  /**
+   * Raised page tone behind hero art (onboarding hero pane, missions hero
+   * banner). → --bg-2. Required in the internal palette (PALETTES always
+   * supplies it); tenants never set it — `overrides.palette` is
+   * `Partial<PanelPalette>`, and when a tenant overrides `bg` this is
+   * auto-derived from it via a mode-aware lightness shift in tokens.ts.
+   */
+  bg2: string
   /** Card / panel background. → --panel */
   panel: string
   /** Inner sub-panel inside a panel (icon container, stat tile). → --panel-2 */
@@ -244,7 +258,7 @@ export interface LeaderboardRowRecipe {
 }
 
 export interface OnboardingCardRecipe extends ComponentPanelRecipe {
-  /** Left hero pane bg (currently `bg-bg-2`). */
+  /** Left hero pane bg (defaults to `var(--bg-2)`). */
   heroBg?: string
   /** Right form pane bg (defaults to the wrapper panel). */
   formBg?: string

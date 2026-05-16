@@ -9,6 +9,13 @@ import { PALETTES } from './defaults'
  * happens here (in JS, not via runtime color-mix), so the values written to
  * :root are concrete and the browser doesn't recompute them every paint.
  */
+// oklch-lightness deltas applied to a tenant-overridden `bg` to derive `--bg-2`.
+// Tuned from the stock pairs so the relationship matches the built-in themes:
+//   dark  #05060A (L 0.123) → #0B0D14 (L 0.160)  ≈ +0.0375
+//   light #F4F3EE (L 0.964) → #EDECE6 (L 0.942)  ≈ -0.0213
+const BG2_SHIFT_DARK = 0.0375
+const BG2_SHIFT_LIGHT = -0.0213
+
 export function deriveTokens(cfg: BrandConfig): Record<string, string> {
   const out: Record<string, string> = {}
   const mode: Mode = cfg.mode
@@ -26,7 +33,23 @@ export function deriveTokens(cfg: BrandConfig): Record<string, string> {
   out['--border'] = palette.border
   out['--border-strong'] = palette.borderStrong
 
+  // Page background. When the tenant sets `bg`, derive the raised `--bg-2`
+  // tone the same way the stock themes relate their pair (dark nudges
+  // lighter, light nudges darker). Otherwise emit the literal default so the
+  // built-in look is byte-identical.
+  out['--bg'] = palette.bg
+  if (cfg.overrides?.palette?.bg && !cfg.overrides?.palette?.bg2) {
+    const base = parseSafe(palette.bg)
+    const delta = mode === 'dark' ? BG2_SHIFT_DARK : BG2_SHIFT_LIGHT
+    out['--bg-2'] = base ? formatCss(shift(base, delta))! : palette.bg2
+  } else {
+    out['--bg-2'] = palette.bg2
+  }
+
   // Brand: primary
+  // The fallback is a statically-valid OKLCH literal, so parseSafe never
+  // returns undefined for it — the `!` is safe. If you change this string,
+  // keep it a valid color or this asserts on a real failure.
   const primary = parseSafe(cfg.brand.primary) ?? parseSafe('oklch(0.86 0.18 200)')!
   out['--color-primary'] = formatCss(primary) ?? cfg.brand.primary
   out['--color-primary-hover'] = formatCss(shift(primary, mode === 'dark' ? +0.04 : -0.06))!
@@ -49,7 +72,12 @@ export function deriveTokens(cfg: BrandConfig): Record<string, string> {
   // components can use bg-[var(--halo-primary)] / bg-[var(--halo-secondary)]
   // without runtime color-mix).
   out['--halo-primary'] = `radial-gradient(circle, ${out['--color-primary']} 0%, transparent 70%)`
-  out['--halo-secondary'] = `radial-gradient(circle, var(--color-secondary) 0%, transparent 70%)`
+  // Bake the resolved secondary color in (like --halo-primary) when a secondary
+  // exists; fall back to the var() form only when it doesn't, so the gradient
+  // degrades predictably instead of rendering an unresolved var.
+  out['--halo-secondary'] = out['--color-secondary']
+    ? `radial-gradient(circle, ${out['--color-secondary']} 0%, transparent 70%)`
+    : `radial-gradient(circle, var(--color-secondary) 0%, transparent 70%)`
 
   // Radii (overridable)
   out['--radius-card'] = cfg.overrides?.radius?.card ?? '14px'
@@ -335,5 +363,10 @@ function withAlpha(color: Oklch, alpha: number): string {
 }
 
 function clamp(n: number, lo: number, hi: number): number {
+  // A non-finite n (NaN) would propagate through Math.max/min and emit a
+  // corrupt token like "NaN%". Real config can't carry NaN (the call sites
+  // also gate on `typeof === 'number'`), but make the invariant explicit and
+  // fail safe to the lower bound.
+  if (!Number.isFinite(n)) return lo
   return Math.max(lo, Math.min(hi, n))
 }

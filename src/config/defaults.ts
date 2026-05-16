@@ -3,6 +3,8 @@ import type { BrandConfig, ContentMap, PanelPalette, Mode } from './schema'
 /** Per-mode panel + ink palette. Matches the values currently in styles.css. */
 export const PALETTES: Record<Mode, PanelPalette> = {
   dark: {
+    bg: '#05060A',
+    bg2: '#0B0D14',
     panel: '#0E1018',
     panel2: '#141722',
     panelHover: '#1A1E2C',
@@ -13,6 +15,8 @@ export const PALETTES: Record<Mode, PanelPalette> = {
     borderStrong: 'oklch(0.38 0.02 270)',
   },
   light: {
+    bg: '#F4F3EE',
+    bg2: '#EDECE6',
     panel: '#FFFFFF',
     panel2: '#F9F8F4',
     panelHover: '#F0EFE9',
@@ -128,8 +132,8 @@ export const DEFAULT_CONTENT: ContentMap = {
 export const DEFAULT_CONFIG: BrandConfig = {
   mode: 'dark',
   brand: {
-    primary: 'oklch(0.7029 0.1979 43.36)',
-    secondary: 'oklch(0.1595 0.0021 286.16))',
+    primary: 'oklch(0.86 0.18 200)',
+    secondary: 'oklch(0.72 0.25 340)',
   },
   // Default hero imagery. Both onboardingHero and missionsHero ship real
   // branded artwork from the GrowQuest CDN. Dimensions match the actual pane
