@@ -30,6 +30,12 @@ export function validateBrandConfig(input: unknown): BrandConfig {
     brand,
   }
 
+  // Trust boundary: content/assets/overrides are accepted structurally
+  // (object-shaped) but NOT field-validated — this is deliberate so new nested
+  // keys can land without a schema bump. Consequence: string values here are
+  // trusted-unverified. The safety net for the CSS-emitting path is
+  // BrandStyles.escapeCss(), which strips rule/tag-breakout characters from
+  // every value before it reaches the server <style> block.
   if (isObject(input.content)) out.content = input.content as BrandConfig['content']
   if (isObject(input.assets)) out.assets = input.assets as BrandConfig['assets']
   if (isObject(input.overrides)) out.overrides = input.overrides as BrandConfig['overrides']

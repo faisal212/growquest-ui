@@ -46,7 +46,9 @@
     --profile-card-bg: var(--panel);
     --profile-card-border: var(--border);
     --profile-card-title: var(--ink);
-    --profile-card-body: var(--ink-dim);
+    /* Mirrors tokens.ts: profile body uses --ink-faint (not --ink-dim) so the
+       static/Storybook path matches the runtime BrandStyles emission. */
+    --profile-card-body: var(--ink-faint);
     --profile-card-stat-bg: var(--panel-2);
     --profile-card-stat-border: var(--border);
     --profile-card-wallet: var(--ink-faint);

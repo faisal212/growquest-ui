@@ -10,6 +10,11 @@ import { DEFAULT_CONFIG } from './defaults'
  * Works from both Next.js Server Components (during SSR) and Client Components
  * (for runtime revalidation). Server-side caching: 24h freshness, busted on
  * demand via POST /api/brand/[tenantId]/invalidate from the admin panel.
+ *
+ * NOTE: the prod cache uses the Next.js-only `{ next: { revalidate, tags } }`
+ * fetch extension. This function is Next.js-only; a non-Next consumer importing
+ * it directly gets no server caching (the option is silently ignored). It is
+ * deliberately not re-exported from `index.ts` for that reason.
  */
 export async function fetchBrand(tenantId: string): Promise<BrandConfig> {
   const base = getBaseUrl()

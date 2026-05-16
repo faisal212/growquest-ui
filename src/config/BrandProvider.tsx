@@ -4,9 +4,9 @@ import { createContext, useContext, useEffect, useMemo, useState, type ReactNode
 import type { BrandConfig, ContentMap, AssetMap } from './schema'
 import { deepMerge } from './schema'
 import { DEFAULT_CONTENT, DEFAULT_CONFIG } from './defaults'
+import { subscribeBrand } from './apply'
 
 const DEFAULT_ASSETS: AssetMap = DEFAULT_CONFIG.assets ?? {}
-import { subscribeBrand } from './apply'
 
 /**
  * Resolved brand state — what the provider actually exposes to consumers.
