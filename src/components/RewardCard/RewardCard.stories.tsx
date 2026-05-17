@@ -21,7 +21,10 @@ const meta = {
   component: RewardCard,
   args: { r: REWARDS[0], xp: richXP, onRedeem: fn(), compact: false },
   argTypes: {
-    compact: { control: 'boolean', description: 'Compact aspect ratio (2:1 instead of 4:3).' },
+    compact: {
+      control: 'boolean',
+      description: 'Narrow rewards-rail portrait tile (full-width CTA, clamped title).',
+    },
     r: { control: 'object' },
     xp: {
       control: { type: 'range', min: 0, max: 30000, step: 500 },
@@ -135,6 +138,26 @@ export const WithCustomImageUrl: Story = {
       </div>
     ),
   ],
+}
+export const RailTile: Story = {
+  name: 'Rewards rail (2-up, compact)',
+  render: () => (
+    <div style={{ width: 360 }}>
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
+          gap: 14,
+          gridAutoRows: '1fr',
+          alignItems: 'stretch',
+        }}
+      >
+        {REWARDS.slice(0, 6).map((r) => (
+          <RewardCard key={r.id} r={r} persona={{ xp: richXP }} onRedeem={fn()} compact />
+        ))}
+      </div>
+    </div>
+  ),
 }
 export const ImageGrid: Story = {
   name: 'Image vs stripe — side by side',

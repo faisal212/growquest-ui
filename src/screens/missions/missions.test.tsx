@@ -1,4 +1,5 @@
 import { describe, it, expect, vi } from 'vitest'
+import { screen, fireEvent } from '@testing-library/react'
 import { renderWithBrand } from '../../test/renderWithBrand'
 import { DEFAULT_CONFIG } from '../../config/defaults'
 import MissionsScreen from './missions'
@@ -56,7 +57,39 @@ describe('MissionsScreen — desktop two-column layout', () => {
   it('still renders both the missions and rewards sections', () => {
     const { container } = renderMissions()
     expect(container.querySelectorAll('.mission-card').length).toBeGreaterThan(0)
-    // Rewards marketplace renders RewardCard "Redeem"/"Locked" CTAs.
-    expect(container.textContent ?? '').toMatch(/Redeem|Locked/)
+    // Rewards marketplace renders display-only RewardCard tiles.
+    expect(container.querySelector('[class*="reward-card-bg"]')).not.toBeNull()
+  })
+
+  it('rewards rail grid is 2-up at every width (mobile included)', () => {
+    const { container } = renderMissions()
+    const grid = container.querySelector('[class*="reward-card-bg"]')!.parentElement!
+    expect(grid.className).toContain('grid-cols-2')
+    expect(grid.className).not.toContain('auto-fill')
+  })
+})
+
+describe('MissionsScreen — rewards Unlocked/Locked filter', () => {
+  // persona.xp = 9840. "Founders' hoodie" costs 4500 (unlocked);
+  // "Dinner with the founders" costs 12000 (locked).
+  it('offers exactly All / Unlocked / Locked', () => {
+    renderMissions()
+    expect(screen.getByRole('button', { name: 'unlocked' })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'locked' })).toBeInTheDocument()
+    expect(screen.queryByRole('button', { name: 'merch' })).not.toBeInTheDocument()
+  })
+
+  it('Unlocked shows affordable rewards and hides unaffordable ones', () => {
+    renderMissions()
+    fireEvent.click(screen.getByRole('button', { name: 'unlocked' }))
+    expect(screen.getByText("Founders' hoodie")).toBeInTheDocument()
+    expect(screen.queryByText('Dinner with the founders')).not.toBeInTheDocument()
+  })
+
+  it('Locked shows unaffordable rewards and hides affordable ones', () => {
+    renderMissions()
+    fireEvent.click(screen.getByRole('button', { name: 'locked' }))
+    expect(screen.getByText('Dinner with the founders')).toBeInTheDocument()
+    expect(screen.queryByText("Founders' hoodie")).not.toBeInTheDocument()
   })
 })

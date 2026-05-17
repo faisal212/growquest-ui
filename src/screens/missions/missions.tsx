@@ -19,7 +19,7 @@ interface MissionsScreenProps {
 export default function MissionsScreen({ persona, onClaim, onRedeem }: MissionsScreenProps) {
   const [active, setActive] = useState<Mission | null>(null)
   const [filter, setFilter] = useState('all')
-  const [rewardKind, setRewardKind] = useState('all')
+  const [rewardFilter, setRewardFilter] = useState('all')
 
   const t = useContentSlice('missions')
 
@@ -76,13 +76,13 @@ export default function MissionsScreen({ persona, onClaim, onRedeem }: MissionsS
 
         {/* Rewards — flows with the page (missions is the pinned pane) */}
         <div className="min-w-0">
-          <div className="flex justify-between items-center gap-[14px] mb-[14px] flex-wrap">
-            <div>
-              <Eyebrow>{t.rewardsEyebrow}</Eyebrow>
-              <h2 className="display mt-1 text-[22px]">{t.rewardsTitle}</h2>
-            </div>
-            <div className="flex gap-2 items-center flex-wrap">
-              <Chip className="!py-[6px] !px-[10px]">
+          <div className="mb-[14px] flex flex-col gap-3">
+            <div className="flex justify-between items-start gap-[14px]">
+              <div>
+                <Eyebrow>{t.rewardsEyebrow}</Eyebrow>
+                <h2 className="display mt-1 text-[22px]">{t.rewardsTitle}</h2>
+              </div>
+              <Chip className="!py-[6px] !px-[10px] shrink-0">
                 <span className="inline-flex items-center gap-2 font-mono text-[11px] tracking-[0.16em] uppercase text-ink-dim mr-[6px]">
                   {t.rewardsBalance}
                 </span>
@@ -90,16 +90,24 @@ export default function MissionsScreen({ persona, onClaim, onRedeem }: MissionsS
                   {persona.xp.toLocaleString()} XP
                 </span>
               </Chip>
-              <FilterTabs
-                options={['all', 'merch', 'digital', 'access', 'experience']}
-                value={rewardKind}
-                onChange={setRewardKind}
-                labels={t.rewardKindLabels}
-              />
+            </div>
+            {/* Single-row, horizontally-scrollable filter strip. */}
+            <div className="-mx-1 overflow-x-auto px-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+              <div className="w-max">
+                <FilterTabs
+                  options={['all', 'unlocked', 'locked']}
+                  value={rewardFilter}
+                  onChange={setRewardFilter}
+                />
+              </div>
             </div>
           </div>
-          <div className="grid gap-[14px] grid-cols-[repeat(auto-fill,minmax(240px,1fr))] lg:grid-cols-2">
-            {REWARDS.filter((r) => rewardKind === 'all' || r.kind === rewardKind).map((r) => (
+          <div className="grid gap-[14px] grid-cols-2 auto-rows-fr">
+            {REWARDS.filter((r) => {
+              if (rewardFilter === 'all') return true
+              const unlocked = persona.xp >= r.cost
+              return rewardFilter === 'unlocked' ? unlocked : !unlocked
+            }).map((r) => (
               <RewardCard key={r.id} r={r} persona={persona} onRedeem={onRedeem} compact />
             ))}
           </div>

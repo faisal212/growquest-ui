@@ -44,13 +44,7 @@ function MissionFiltersDemo() {
 }
 function RewardFiltersDemo() {
   const [v, setV] = useState('all')
-  return (
-    <FilterTabs
-      options={['all', 'merch', 'digital', 'access', 'experience']}
-      value={v}
-      onChange={setV}
-    />
-  )
+  return <FilterTabs options={['all', 'unlocked', 'locked']} value={v} onChange={setV} />
 }
 
 export const MissionFilters: Story = { render: () => <MissionFiltersDemo /> }
