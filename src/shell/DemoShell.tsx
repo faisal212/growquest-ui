@@ -1,6 +1,6 @@
 'use client'
 
-import { createContext, useContext, useState, useSyncExternalStore, type ReactNode } from 'react'
+import { createContext, useContext, useState, type ReactNode } from 'react'
 import { lazy, Suspense } from 'react'
 import type { Persona, ClaimPayload, Reward, Mission } from '../types'
 import { ErrorBoundary } from '../components/ErrorBoundary'
@@ -9,51 +9,18 @@ const CelebrationScreen = lazy(() =>
   import('../screens/celebration').then((m) => ({ default: m.CelebrationScreen }))
 )
 
-function subscribePersonaStorage(cb: () => void): () => void {
-  if (typeof window === 'undefined') return () => {}
-  window.addEventListener('storage', cb)
-  return () => window.removeEventListener('storage', cb)
-}
-
-function getPersonaFromStorage(): string {
-  if (typeof window === 'undefined') return 'active'
-  return window.localStorage.getItem('gq.persona') || 'active'
-}
-
-const PERSONAS: Record<string, Persona> = {
-  new: {
-    handle: 'you',
-    xp: 0,
-    missionsDone: 0,
-    rewardsClaimed: 0,
-    streak: 0,
-    tier: 'Scout',
-    ready: 0,
-  },
-  active: {
-    handle: 'alpha',
-    xp: 9840,
-    missionsDone: 7,
-    rewardsClaimed: 2,
-    streak: 12,
-    tier: 'Voyager',
-    ready: 2,
-  },
-  power: {
-    handle: 'northstar',
-    xp: 18420,
-    missionsDone: 11,
-    rewardsClaimed: 6,
-    streak: 47,
-    tier: 'Ascendant',
-    ready: 3,
-  },
+const ACTIVE_PERSONA: Persona = {
+  handle: 'alpha',
+  xp: 9840,
+  missionsDone: 7,
+  rewardsClaimed: 2,
+  streak: 12,
+  tier: 'Voyager',
+  ready: 2,
 }
 
 interface DemoShellState {
   persona: Persona
-  personaKey: string
-  setPersonaKey: (k: string) => void
   email: string
   setEmail: (e: string) => void
   onClaim: (m: Mission | ClaimPayload) => void
@@ -71,31 +38,14 @@ export function useDemoShell(): DemoShellState {
 /**
  * Client-side state shell for the demo Next.js app. Owns persona + modal state
  * and exposes it via DemoShellContext so screen pages (which are server
- * components) can render children that call useDemoShell().
+ * components) can render children that call useDemoShell(). The persona is
+ * always the "active" demo user; claim/redeem mutate a local copy.
  */
 export function DemoShell({ children }: { children: ReactNode }) {
-  // SSR + first client render both read 'active'; useSyncExternalStore upgrades
-  // to the localStorage value after hydration without an in-effect setState.
-  const storedKey = useSyncExternalStore(
-    subscribePersonaStorage,
-    getPersonaFromStorage,
-    () => 'active'
-  )
-  const [overrideKey, setOverrideKey] = useState<string | null>(null)
-  const personaKey = overrideKey ?? storedKey
   const [overridePersona, setOverridePersona] = useState<Persona | null>(null)
-  const persona = overridePersona ?? { ...(PERSONAS[personaKey] ?? PERSONAS.active) }
+  const persona = overridePersona ?? { ...ACTIVE_PERSONA }
   const [celebration, setCelebration] = useState<ClaimPayload | null>(null)
   const [email, setEmail] = useState('')
-
-  function handleSetPersonaKey(key: string) {
-    if (typeof window !== 'undefined') {
-      window.localStorage.setItem('gq.persona', key)
-      window.dispatchEvent(new StorageEvent('storage', { key: 'gq.persona', newValue: key }))
-    }
-    setOverrideKey(key)
-    setOverridePersona({ ...(PERSONAS[key] ?? PERSONAS.active) })
-  }
 
   function handleClaim(reward: Mission | ClaimPayload) {
     setCelebration(reward as ClaimPayload)
@@ -120,8 +70,6 @@ export function DemoShell({ children }: { children: ReactNode }) {
 
   const value: DemoShellState = {
     persona,
-    personaKey,
-    setPersonaKey: handleSetPersonaKey,
     email,
     setEmail,
     onClaim: handleClaim,

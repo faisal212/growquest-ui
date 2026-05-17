@@ -43,53 +43,66 @@ export default function MissionsScreen({ persona, onClaim, onRedeem }: MissionsS
         <ProfileCard persona={persona} xpStyle="segmented" />
       </div>
 
-      {/* Missions */}
-      <div>
-        <div className="flex justify-between items-center gap-[14px] mb-[14px] flex-wrap">
-          <div>
-            <Eyebrow>{t.sectionEyebrow}</Eyebrow>
-            <h2 className="display mt-1 text-[22px]">{t.sectionTitle}</h2>
-          </div>
-          <FilterTabs
-            options={['all', 'new', 'ongoing', 'ready']}
-            value={filter}
-            onChange={setFilter}
-            labels={t.filterLabels}
-          />
-        </div>
-        <div className="grid gap-[14px] grid-cols-[repeat(auto-fill,minmax(280px,1fr))]">
-          {filtered.map((m) => (
-            <MissionCard key={m.id} m={m} density="comfortable" layout="split" onOpen={setActive} />
-          ))}
-        </div>
-      </div>
-
-      {/* Rewards */}
-      <div>
-        <div className="flex justify-between items-center gap-[14px] mb-[14px] flex-wrap">
-          <div>
-            <Eyebrow>{t.rewardsEyebrow}</Eyebrow>
-            <h2 className="display mt-1 text-[22px]">{t.rewardsTitle}</h2>
-          </div>
-          <div className="flex gap-2 items-center flex-wrap">
-            <Chip className="!py-[6px] !px-[10px]">
-              <span className="inline-flex items-center gap-2 font-mono text-[11px] tracking-[0.16em] uppercase text-ink-dim mr-[6px]">
-                {t.rewardsBalance}
-              </span>
-              <span className="mono font-bold text-primary">{persona.xp.toLocaleString()} XP</span>
-            </Chip>
+      {/* Missions (left, 3-up) + Rewards marketplace (right, 2-up) at
+          desktop; both flow with the page. Stacks to a single column
+          below 1024px. */}
+      <div className="grid gap-5 grid-cols-1 lg:grid-cols-[minmax(0,2.2fr)_minmax(300px,1fr)] lg:items-start">
+        {/* Missions */}
+        <div className="min-w-0">
+          <div className="flex justify-between items-center gap-[14px] mb-[14px] flex-wrap">
+            <div>
+              <Eyebrow>{t.sectionEyebrow}</Eyebrow>
+              <h2 className="display mt-1 text-[22px]">{t.sectionTitle}</h2>
+            </div>
             <FilterTabs
-              options={['all', 'merch', 'digital', 'access', 'experience']}
-              value={rewardKind}
-              onChange={setRewardKind}
-              labels={t.rewardKindLabels}
+              options={['all', 'new', 'ongoing', 'ready']}
+              value={filter}
+              onChange={setFilter}
+              labels={t.filterLabels}
             />
           </div>
+          <div className="grid gap-[14px] grid-cols-[repeat(auto-fill,minmax(240px,1fr))] lg:grid-cols-3">
+            {filtered.map((m) => (
+              <MissionCard
+                key={m.id}
+                m={m}
+                density="comfortable"
+                layout="split"
+                onOpen={setActive}
+              />
+            ))}
+          </div>
         </div>
-        <div className="grid gap-[14px] grid-cols-[repeat(auto-fill,minmax(240px,1fr))]">
-          {REWARDS.filter((r) => rewardKind === 'all' || r.kind === rewardKind).map((r) => (
-            <RewardCard key={r.id} r={r} persona={persona} onRedeem={onRedeem} compact={false} />
-          ))}
+
+        {/* Rewards — flows with the page (missions is the pinned pane) */}
+        <div className="min-w-0">
+          <div className="flex justify-between items-center gap-[14px] mb-[14px] flex-wrap">
+            <div>
+              <Eyebrow>{t.rewardsEyebrow}</Eyebrow>
+              <h2 className="display mt-1 text-[22px]">{t.rewardsTitle}</h2>
+            </div>
+            <div className="flex gap-2 items-center flex-wrap">
+              <Chip className="!py-[6px] !px-[10px]">
+                <span className="inline-flex items-center gap-2 font-mono text-[11px] tracking-[0.16em] uppercase text-ink-dim mr-[6px]">
+                  {t.rewardsBalance}
+                </span>
+                <span className="mono font-bold text-primary">
+                  {persona.xp.toLocaleString()} XP
+                </span>
+              </Chip>
+              <FilterTabs
+                options={['all', 'merch', 'digital', 'access', 'experience']}
+                value={rewardKind}
+                onChange={setRewardKind}
+                labels={t.rewardKindLabels}
+              />
+            </div>
+          </div>
+          <div className="grid gap-[14px] grid-cols-[repeat(auto-fill,minmax(240px,1fr))] lg:grid-cols-2">
+            {REWARDS.filter((r) => rewardKind === 'all' || r.kind === rewardKind).map((r) => (
+              <RewardCard key={r.id} r={r} persona={persona} onRedeem={onRedeem} compact />
+            ))}
+          </div>
         </div>
       </div>
 

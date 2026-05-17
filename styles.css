@@ -447,8 +447,6 @@ html[data-theme="light"] body::before {
   .topbar .topbar-actions { margin-left: auto; gap: 6px; }
   .topbar .nav { order: 10; width: 100%; margin-left: 0; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
   .topbar .nav::-webkit-scrollbar { display: none; }
-  .topbar .persona-switch { padding: 2px !important; }
-  .topbar .persona-switch button { padding: 4px 6px !important; font-size: 10px !important; }
   .topbar .xp-chip-mobile-hide { display: none !important; }
   .topbar .topbar-actions { flex-wrap: wrap !important; }
 
@@ -475,7 +473,6 @@ html[data-theme="light"] body::before {
 
 /* ───── Small phones (≤420px) ───── */
 @media (max-width: 420px) {
-  .topbar .persona-switch { display: none !important; }
   .topbar { padding: 10px 12px; }
   .topbar .nav { width: 100%; }
   .topbar .topbar-actions { margin-left: auto; }
