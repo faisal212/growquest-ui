@@ -57,10 +57,7 @@ export default function MissionsScreen({ persona, onClaim, onRedeem }: MissionsS
             labels={t.filterLabels}
           />
         </div>
-        <div
-          className="grid gap-[14px]"
-          style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))' }}
-        >
+        <div className="grid gap-[14px] grid-cols-[repeat(auto-fill,minmax(280px,1fr))]">
           {filtered.map((m) => (
             <MissionCard key={m.id} m={m} density="comfortable" layout="split" onOpen={setActive} />
           ))}
@@ -89,10 +86,7 @@ export default function MissionsScreen({ persona, onClaim, onRedeem }: MissionsS
             />
           </div>
         </div>
-        <div
-          className="grid gap-[14px]"
-          style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))' }}
-        >
+        <div className="grid gap-[14px] grid-cols-[repeat(auto-fill,minmax(240px,1fr))]">
           {REWARDS.filter((r) => rewardKind === 'all' || r.kind === rewardKind).map((r) => (
             <RewardCard key={r.id} r={r} persona={persona} onRedeem={onRedeem} compact={false} />
           ))}

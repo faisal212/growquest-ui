@@ -19,10 +19,7 @@ export function ProfileCard({
   walletAddress = '0xE63F6A · 356C10AC',
 }: ProfileCardProps) {
   return (
-    <div
-      className="bg-[var(--profile-card-bg)] border border-[color:var(--profile-card-border)] rounded-[var(--r-panel)] p-[18px] flex flex-col gap-3.5"
-      style={{ containerType: 'inline-size' }}
-    >
+    <div className="bg-[var(--profile-card-bg)] border border-[color:var(--profile-card-border)] rounded-[var(--r-panel)] p-[18px] flex flex-col gap-3.5 [container-type:inline-size]">
       <div className="flex items-center gap-3">
         <Avatar seed={7} size={44} />
         <div className="flex-1 min-w-0">

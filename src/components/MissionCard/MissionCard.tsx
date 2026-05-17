@@ -69,7 +69,7 @@ export const MissionCard = memo(function MissionCard({
             {done}/{total}
           </span>
         </div>
-        <div className="xpbar" style={{ height: 4 }}>
+        <div className="xpbar h-1">
           <div className="fill" style={{ width: `${pct * 100}%` }} />
         </div>
       </button>

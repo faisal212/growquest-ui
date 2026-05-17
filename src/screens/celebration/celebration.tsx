@@ -55,12 +55,7 @@ export function CelebrationScreen({
 
       <div className="panel px-9 pt-9 pb-7 w-[min(520px,100%)] text-center relative z-[1] animate-[fadeUp_400ms_ease_both]">
         <div className="w-[140px] h-[140px] mx-auto mb-5 relative">
-          <div
-            className="absolute inset-0 rounded-full opacity-40 animate-[float_3s_ease-in-out_infinite]"
-            style={{
-              background: 'radial-gradient(circle, var(--color-primary) 0%, transparent 70%)',
-            }}
-          />
+          <div className="absolute inset-0 rounded-full opacity-40 animate-[float_3s_ease-in-out_infinite] bg-[var(--halo-primary)]" />
           <svg
             viewBox="0 0 140 140"
             width="140"

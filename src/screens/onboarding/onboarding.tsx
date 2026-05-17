@@ -23,8 +23,7 @@ export default function OnboardingScreen({ onEnter, heroStyle }: OnboardingScree
     terms: (
       <button
         type="button"
-        className="bg-transparent border-0 p-0 cursor-pointer [font:inherit]"
-        style={{ color: 'var(--onboarding-card-link)' }}
+        className="bg-transparent border-0 p-0 cursor-pointer [font:inherit] text-[color:var(--onboarding-card-link)]"
       >
         {t.consentTermsLabel}
       </button>
@@ -32,8 +31,7 @@ export default function OnboardingScreen({ onEnter, heroStyle }: OnboardingScree
     privacy: (
       <button
         type="button"
-        className="bg-transparent border-0 p-0 cursor-pointer [font:inherit]"
-        style={{ color: 'var(--onboarding-card-link)' }}
+        className="bg-transparent border-0 p-0 cursor-pointer [font:inherit] text-[color:var(--onboarding-card-link)]"
       >
         {t.consentPrivacyLabel}
       </button>
@@ -42,17 +40,8 @@ export default function OnboardingScreen({ onEnter, heroStyle }: OnboardingScree
 
   return (
     <div className="animate-fade-up w-[min(1040px,100%)] mx-auto">
-      <div
-        className="grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] gap-0 rounded-[var(--r-panel)] overflow-hidden max-[720px]:grid-cols-1"
-        style={{
-          background: 'var(--onboarding-card-bg)',
-          border: '1px solid var(--onboarding-card-border)',
-        }}
-      >
-        <div
-          className="onboarding-hero relative min-h-[440px] max-[720px]:min-h-[220px]"
-          style={{ background: 'var(--onboarding-card-hero-bg)' }}
-        >
+      <div className="grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] gap-0 rounded-[var(--r-panel)] overflow-hidden bg-[var(--onboarding-card-bg)] border border-[color:var(--onboarding-card-border)] max-[720px]:grid-cols-1">
+        <div className="onboarding-hero relative min-h-[440px] bg-[var(--onboarding-card-hero-bg)] max-[720px]:min-h-[220px]">
           <div className="absolute inset-0">
             <HeroMedia
               asset={onboardingHero}
@@ -68,26 +57,17 @@ export default function OnboardingScreen({ onEnter, heroStyle }: OnboardingScree
           )}
         </div>
 
-        <div
-          className="px-9 pt-9 pb-7 flex flex-col gap-5"
-          style={{
-            background: 'var(--onboarding-card-form-bg)',
-            color: 'var(--onboarding-card-title)',
-          }}
-        >
+        <div className="px-9 pt-9 pb-7 flex flex-col gap-5 bg-[var(--onboarding-card-form-bg)] text-[color:var(--onboarding-card-title)]">
           <Eyebrow>{t.eyebrow}</Eyebrow>
           <h1 className="display text-[36px] leading-[1.05] m-0 tracking-[-0.03em]">
             {t.titleLead}
             <br />
-            <span style={{ color: 'var(--onboarding-card-brand-emphasis)' }}>
+            <span className="text-[color:var(--onboarding-card-brand-emphasis)]">
               {brandHighlight}
             </span>{' '}
             {t.titleTrail}
           </h1>
-          <p
-            className="text-[15px] leading-[1.6] m-0"
-            style={{ color: 'var(--onboarding-card-body)' }}
-          >
+          <p className="text-[15px] leading-[1.6] m-0 text-[color:var(--onboarding-card-body)]">
             {t.body}
           </p>
 
@@ -95,16 +75,9 @@ export default function OnboardingScreen({ onEnter, heroStyle }: OnboardingScree
             {t.stats.map((s, i) => (
               <div
                 key={i}
-                className="px-3 py-[10px] rounded-[var(--r-inset)]"
-                style={{
-                  background: 'var(--onboarding-card-stat-bg)',
-                  border: '1px solid var(--onboarding-card-stat-border)',
-                }}
+                className="px-3 py-[10px] rounded-[var(--r-inset)] bg-[var(--onboarding-card-stat-bg)] border border-[color:var(--onboarding-card-stat-border)]"
               >
-                <div
-                  className="font-mono text-[10px] tracking-[0.1em] uppercase"
-                  style={{ color: 'var(--onboarding-card-body)' }}
-                >
+                <div className="font-mono text-[10px] tracking-[0.1em] uppercase text-[color:var(--onboarding-card-body)]">
                   {s.key}
                 </div>
                 <div className="font-semibold text-sm">{s.value}</div>
@@ -115,8 +88,7 @@ export default function OnboardingScreen({ onEnter, heroStyle }: OnboardingScree
           <div>
             <label
               htmlFor="onboarding-email"
-              className="block font-mono text-[10px] tracking-[0.12em] uppercase mb-[6px]"
-              style={{ color: 'var(--onboarding-card-body)' }}
+              className="block font-mono text-[10px] tracking-[0.12em] uppercase mb-[6px] text-[color:var(--onboarding-card-body)]"
             >
               {t.emailLabel}
             </label>
@@ -128,10 +100,7 @@ export default function OnboardingScreen({ onEnter, heroStyle }: OnboardingScree
             />
           </div>
 
-          <label
-            className="flex gap-[10px] items-start text-xs"
-            style={{ color: 'var(--onboarding-card-body)' }}
-          >
+          <label className="flex gap-[10px] items-start text-xs text-[color:var(--onboarding-card-body)]">
             <input
               type="checkbox"
               checked={agree}
@@ -154,10 +123,7 @@ export default function OnboardingScreen({ onEnter, heroStyle }: OnboardingScree
             </svg>
           </Button>
 
-          <div
-            className="flex justify-between text-[11px] font-mono"
-            style={{ color: 'var(--ink-faint)' }}
-          >
+          <div className="flex justify-between text-[11px] font-mono text-ink-faint">
             <span>{t.microcopyLeft}</span>
             <span>{t.microcopyRight}</span>
           </div>

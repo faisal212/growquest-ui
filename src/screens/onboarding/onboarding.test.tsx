@@ -62,3 +62,29 @@ describe('OnboardingScreen — stat tiles', () => {
     expect(screen.getByText('4 ranks')).toBeInTheDocument()
   })
 })
+
+describe('OnboardingScreen — design-config wiring (characterization)', () => {
+  // Locked across the inline-style → Tailwind-class refactor: the recipe
+  // tokens must remain present in the markup (style attr today, className
+  // after). Green before AND after — proves the refactor preserves wiring.
+  it('wires every onboardingCard recipe surface to its CSS var', () => {
+    const { container } = renderWithBrand(
+      <OnboardingScreen onEnter={() => {}} heroStyle="" />,
+      DEFAULT_CONFIG
+    )
+    const html = container.innerHTML
+    for (const token of [
+      'var(--onboarding-card-bg)',
+      'var(--onboarding-card-border)',
+      'var(--onboarding-card-hero-bg)',
+      'var(--onboarding-card-title)',
+      'var(--onboarding-card-body)',
+      'var(--onboarding-card-brand-emphasis)',
+      'var(--onboarding-card-stat-bg)',
+      'var(--onboarding-card-stat-border)',
+      'var(--onboarding-card-link)',
+    ]) {
+      expect(html).toContain(token)
+    }
+  })
+})
