@@ -12,7 +12,7 @@ export function TierLadder({ tiers, currentXP }: TierLadderProps) {
   const currentTier = [...tiers].reverse().find((t) => currentXP >= t.min) ?? tiers[0]
 
   return (
-    <div className="panel p-5">
+    <div className="p-5 rounded-[var(--r-panel)] [container-type:inline-size] bg-[var(--profile-card-bg)] border border-[color:var(--profile-card-border)]">
       <div className="font-mono text-[10px] tracking-[0.12em] uppercase text-ink-dim mb-3.5">
         {profile.tierLadderEyebrow}
       </div>

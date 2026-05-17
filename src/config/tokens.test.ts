@@ -141,4 +141,71 @@ describe('deriveTokens', () => {
     expect(tokens['--bg']).toBe('#fbeaff')
     expect(lightnessOf(tokens['--bg-2'])).toBeLessThan(lightnessOf('#fbeaff'))
   })
+
+  it('emits contrast-aware podium defaults and applies podium overrides', () => {
+    const def = deriveTokens({ mode: 'dark', brand: { primary: '#FF8C00' } })
+    expect(def['--podium-rank-fg']).toBe('var(--on-primary)')
+    expect(def['--podium-platform-pattern']).toBe('rgba(0,0,0,0.12)')
+
+    const ov = deriveTokens({
+      mode: 'dark',
+      brand: { primary: '#FF8C00' },
+      overrides: {
+        podium: { rankFg: '#ffffff', platformPattern: 'rgba(255,255,255,0.2)' },
+      },
+    })
+    expect(ov['--podium-rank-fg']).toBe('#ffffff')
+    expect(ov['--podium-platform-pattern']).toBe('rgba(255,255,255,0.2)')
+  })
+
+  it('emits leaderboard-header defaults and applies leaderboardHeader overrides', () => {
+    const def = deriveTokens({ mode: 'dark', brand: { primary: '#FF8C00' } })
+    expect(def['--leaderboard-eyebrow']).toBe('var(--ink-dim)')
+    expect(def['--leaderboard-eyebrow-dot']).toBe('var(--color-primary)')
+    expect(def['--leaderboard-title']).toBe('var(--ink)')
+    expect(def['--leaderboard-subtitle']).toBe('var(--ink-dim)')
+
+    const ov = deriveTokens({
+      mode: 'dark',
+      brand: { primary: '#FF8C00' },
+      overrides: {
+        leaderboardHeader: {
+          eyebrow: '#111',
+          eyebrowDot: '#222',
+          title: '#333',
+          subtitle: '#444',
+        },
+      },
+    })
+    expect(ov['--leaderboard-eyebrow']).toBe('#111')
+    expect(ov['--leaderboard-eyebrow-dot']).toBe('#222')
+    expect(ov['--leaderboard-title']).toBe('#333')
+    expect(ov['--leaderboard-subtitle']).toBe('#444')
+  })
+
+  it('emits podium text defaults and applies podium handle/xp overrides', () => {
+    const def = deriveTokens({ mode: 'dark', brand: { primary: '#FF8C00' } })
+    expect(def['--podium-handle']).toBe('var(--ink)')
+    expect(def['--podium-xp']).toBe('var(--ink-dim)')
+
+    const ov = deriveTokens({
+      mode: 'dark',
+      brand: { primary: '#FF8C00' },
+      overrides: { podium: { handle: '#abc', xp: '#def' } },
+    })
+    expect(ov['--podium-handle']).toBe('#abc')
+    expect(ov['--podium-xp']).toBe('#def')
+  })
+
+  it('emits the badge-grid unlocked-fg default and applies its override', () => {
+    const def = deriveTokens({ mode: 'dark', brand: { primary: '#FF8C00' } })
+    expect(def['--badge-grid-unlocked-fg']).toBe('#05060A')
+
+    const ov = deriveTokens({
+      mode: 'dark',
+      brand: { primary: '#FF8C00' },
+      overrides: { badgeGrid: { unlockedFg: '#00ff00' } },
+    })
+    expect(ov['--badge-grid-unlocked-fg']).toBe('#00ff00')
+  })
 })

@@ -184,6 +184,11 @@ const RECIPES: RecipeSpec[] = [
     ]),
   },
   {
+    recipe: 'leaderboardHeader',
+    group: 'leaderboard',
+    fields: C(['eyebrow', 'eyebrowDot', 'title', 'subtitle']),
+  },
+  {
     recipe: 'leaderboardRow',
     group: 'leaderboard',
     fields: [
@@ -201,6 +206,7 @@ const RECIPES: RecipeSpec[] = [
       { slot: 'platformHeights.1', kind: 'number', min: 0, max: 400 },
       { slot: 'platformHeights.2', kind: 'number', min: 0, max: 400 },
       { slot: 'platformHeights.3', kind: 'number', min: 0, max: 400 },
+      ...C(['rankFg', 'platformPattern', 'handle', 'xp']),
     ],
   },
   {
@@ -229,7 +235,10 @@ const RECIPES: RecipeSpec[] = [
   {
     recipe: 'badgeGrid',
     group: 'profile',
-    fields: [...C(['panel', 'border', 'lockedFg']), { slot: 'unlockedTones', kind: 'list' }],
+    fields: [
+      ...C(['panel', 'border', 'lockedFg', 'unlockedFg']),
+      { slot: 'unlockedTones', kind: 'list' },
+    ],
   },
   {
     recipe: 'statCard',

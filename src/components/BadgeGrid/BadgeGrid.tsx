@@ -25,7 +25,7 @@ export const BadgeGrid = memo(function BadgeGrid({
   const unlockedCount = badges.filter((b) => b.got).length
 
   return (
-    <div className="panel p-5">
+    <div className="p-5 rounded-[var(--r-panel)] [container-type:inline-size] bg-[var(--profile-card-bg)] border border-[color:var(--profile-card-border)]">
       <div className="font-mono text-[10px] tracking-[0.12em] uppercase text-ink-dim mb-3.5">
         // {t.badgesEyebrow} · {unlockedCount}/{badges.length}
       </div>
@@ -50,7 +50,7 @@ export const BadgeGrid = memo(function BadgeGrid({
               <svg width="22" height="22" viewBox="0 0 22 22">
                 <polygon
                   points="11,2 20,7 20,15 11,20 2,15 2,7"
-                  fill={b.got ? '#05060A' : 'var(--badge-grid-locked-fg)'}
+                  fill={b.got ? 'var(--badge-grid-unlocked-fg)' : 'var(--badge-grid-locked-fg)'}
                 />
               </svg>
             </div>

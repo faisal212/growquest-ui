@@ -37,4 +37,13 @@ describe('BadgeGrid', () => {
     render(<BadgeGrid badges={[]} />)
     expect(screen.getByText(/0\/0/)).toBeInTheDocument()
   })
+
+  it('fills the unlocked badge icon from a themeable token, not a hardcoded near-black', () => {
+    const { container } = render(<BadgeGrid badges={badges} />)
+    const fills = Array.from(container.querySelectorAll('polygon')).map((p) =>
+      p.getAttribute('fill')
+    )
+    expect(fills).toContain('var(--badge-grid-unlocked-fg)')
+    expect(fills).not.toContain('#05060A')
+  })
 })

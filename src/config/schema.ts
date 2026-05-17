@@ -325,6 +325,8 @@ export interface BadgeGridRecipe {
   unlockedTones?: string[]
   /** SVG icon fill for locked badges. */
   lockedFg?: string
+  /** SVG icon fill for unlocked badges. Default `#05060A`. */
+  unlockedFg?: string
 }
 
 export interface PodiumRecipe {
@@ -332,6 +334,30 @@ export interface PodiumRecipe {
   rankColors?: { '1'?: string; '2'?: string; '3'?: string }
   /** Override rank platform heights in px (rank 1..3). */
   platformHeights?: { '1'?: number; '2'?: number; '3'?: number }
+  /**
+   * Foreground color of the rank badge + platform numeral. Defaults to the
+   * contrast-aware `var(--on-primary)` (auto black/white by the brand color's
+   * lightness) so it stays readable instead of a fixed near-black.
+   */
+  rankFg?: string
+  /** Diagonal stripe pattern color on the platform blocks. Default `rgba(0,0,0,0.12)`. */
+  platformPattern?: string
+  /** `@handle` text color under each avatar. Default `var(--ink)`. */
+  handle?: string
+  /** XP line text color under each avatar. Default `var(--ink-dim)`. */
+  xp?: string
+}
+
+/** Leaderboard hero-band text (eyebrow, title, subtitle). Maps to --leaderboard-*. */
+export interface LeaderboardHeaderRecipe {
+  /** Eyebrow label color. Default `var(--ink-dim)`. */
+  eyebrow?: string
+  /** Eyebrow leading-dot color. Default `var(--color-primary)`. */
+  eyebrowDot?: string
+  /** Title ("The ascent") color. Default `var(--ink)`. */
+  title?: string
+  /** Subtitle color. Default `var(--ink-dim)`. */
+  subtitle?: string
 }
 
 export interface StatCardRecipe {
@@ -367,6 +393,8 @@ export interface Overrides {
   profileCard?: ProfileCardRecipe
   /** Override leaderboard row + head + highlight colors + tier-tone map. */
   leaderboardRow?: LeaderboardRowRecipe
+  /** Override the leaderboard hero-band text (eyebrow, title, subtitle). */
+  leaderboardHeader?: LeaderboardHeaderRecipe
   /** Override the onboarding-card wrapper, hero pane, stat tiles, brand emphasis. */
   onboardingCard?: OnboardingCardRecipe
   /** Override the top-nav panel, border, link colors. */

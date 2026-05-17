@@ -31,16 +31,18 @@ export function Podium({ entries, rankColors, platformHeights }: PodiumProps) {
             <div className="relative">
               <Avatar seed={p.seed} size={56} />
               <div
-                className="absolute -bottom-1.5 -right-1.5 w-[22px] h-[22px] rounded-[var(--r-tag-lg)] text-[#05060A] grid place-items-center font-mono text-[11px] font-bold border-2 border-bg"
+                className="absolute -bottom-1.5 -right-1.5 w-[22px] h-[22px] rounded-[var(--r-tag-lg)] grid place-items-center font-mono text-[11px] font-bold border-2 border-bg text-[color:var(--podium-rank-fg)]"
                 style={{ background: color }}
               >
                 {p.rank}
               </div>
             </div>
-            <div className="font-bold text-[14px] max-w-full overflow-hidden text-ellipsis whitespace-nowrap">
+            <div className="font-bold text-[14px] max-w-full overflow-hidden text-ellipsis whitespace-nowrap text-[color:var(--podium-handle)]">
               {p.handle}
             </div>
-            <div className="mono text-[12px] text-ink-dim">{p.xp.toLocaleString()} XP</div>
+            <div className="mono text-[12px] text-[color:var(--podium-xp)]">
+              {p.xp.toLocaleString()} XP
+            </div>
             <div
               className="w-full rounded-t-lg border border-border border-b-0 relative overflow-hidden"
               style={{
@@ -48,8 +50,8 @@ export function Podium({ entries, rankColors, platformHeights }: PodiumProps) {
                 background: `linear-gradient(180deg, ${color} 0%, transparent 100%)`,
               }}
             >
-              <div className="absolute inset-0 bg-[repeating-linear-gradient(0deg,transparent_0_8px,rgba(0,0,0,0.12)_8px_9px)]" />
-              <div className="absolute top-2.5 left-2.5 font-mono text-[28px] font-bold text-[#05060A] opacity-80">
+              <div className="absolute inset-0 bg-[repeating-linear-gradient(0deg,transparent_0_8px,var(--podium-platform-pattern)_8px_9px)]" />
+              <div className="absolute top-2.5 left-2.5 font-mono text-[28px] font-bold opacity-80 text-[color:var(--podium-rank-fg)]">
                 {String(p.rank).padStart(2, '0')}
               </div>
             </div>

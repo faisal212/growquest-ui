@@ -205,6 +205,24 @@ export function deriveTokens(cfg: BrandConfig): Record<string, string> {
   out['--badge-grid-bg'] = 'var(--panel-2)'
   out['--badge-grid-border'] = 'var(--border)'
   out['--badge-grid-locked-fg'] = 'var(--ink-faint)'
+  // Unlocked badge icon. Near-black default preserves the historical look; an
+  // override (or a future contrast token) keeps it legible on dark tenants.
+  out['--badge-grid-unlocked-fg'] = '#05060A'
+
+  // Tier 2 — leaderboard podium. Rank badge/numeral foreground is
+  // contrast-aware (reuse --on-primary, auto black/white by the brand color's
+  // lightness) instead of a fixed near-black that's unreadable on dark colors.
+  out['--podium-rank-fg'] = 'var(--on-primary)'
+  out['--podium-platform-pattern'] = 'rgba(0,0,0,0.12)'
+  out['--podium-handle'] = 'var(--ink)'
+  out['--podium-xp'] = 'var(--ink-dim)'
+
+  // Tier 2 — leaderboard hero-band text. Defaults mirror the prior global
+  // values so the band is byte-identical until a tenant overrides it.
+  out['--leaderboard-eyebrow'] = 'var(--ink-dim)'
+  out['--leaderboard-eyebrow-dot'] = 'var(--color-primary)'
+  out['--leaderboard-title'] = 'var(--ink)'
+  out['--leaderboard-subtitle'] = 'var(--ink-dim)'
 
   // Tier 2 — stat card trend colors
   out['--stat-card-trend-default'] = 'var(--color-primary)'
@@ -339,6 +357,23 @@ export function deriveTokens(cfg: BrandConfig): Record<string, string> {
     if (r.panel) out['--badge-grid-bg'] = r.panel
     if (r.border) out['--badge-grid-border'] = r.border
     if (r.lockedFg) out['--badge-grid-locked-fg'] = r.lockedFg
+    if (r.unlockedFg) out['--badge-grid-unlocked-fg'] = r.unlockedFg
+  }
+
+  if (ov?.podium) {
+    const r = ov.podium
+    if (r.rankFg) out['--podium-rank-fg'] = r.rankFg
+    if (r.platformPattern) out['--podium-platform-pattern'] = r.platformPattern
+    if (r.handle) out['--podium-handle'] = r.handle
+    if (r.xp) out['--podium-xp'] = r.xp
+  }
+
+  if (ov?.leaderboardHeader) {
+    const r = ov.leaderboardHeader
+    if (r.eyebrow) out['--leaderboard-eyebrow'] = r.eyebrow
+    if (r.eyebrowDot) out['--leaderboard-eyebrow-dot'] = r.eyebrowDot
+    if (r.title) out['--leaderboard-title'] = r.title
+    if (r.subtitle) out['--leaderboard-subtitle'] = r.subtitle
   }
 
   if (ov?.statCard) {

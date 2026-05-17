@@ -31,23 +31,24 @@ export default function ProfileScreen({ persona }: ProfileScreenProps) {
   return (
     <div className="animate-fade-up w-full max-w-[1180px] mx-auto px-6 pt-6 pb-10 max-[720px]:px-3 max-[720px]:pt-4 max-[720px]:pb-8 grid gap-5">
       {/* Identity card */}
-      <div className="panel p-6 grid gap-5 grid-cols-[auto_1fr] items-center max-[720px]:grid-cols-1 max-[720px]:text-center">
+      <div className="p-6 grid gap-5 grid-cols-[auto_1fr] items-center rounded-[var(--r-panel)] [container-type:inline-size] bg-[var(--profile-card-bg)] border border-[color:var(--profile-card-border)] max-[720px]:grid-cols-1 max-[720px]:text-center">
         <div className="relative">
           <Avatar seed={7} size={88} />
-          <div
-            className="absolute -bottom-2 -right-2 px-2 py-1 rounded-[var(--r-tag-lg)] text-[11px] font-bold font-mono bg-secondary border-2 border-bg"
-            style={{ color: 'var(--on-secondary, var(--on-primary))' }}
-          >
+          <div className="absolute -bottom-2 -right-2 px-2 py-1 rounded-[var(--r-tag-lg)] text-[11px] font-bold font-mono bg-secondary border-2 border-bg text-[color:var(--on-secondary,var(--on-primary))]">
             LV.{Math.floor(persona.xp / 1000)}
           </div>
         </div>
         <div className="flex flex-col gap-[10px]">
           <div className="flex items-center gap-[10px] flex-wrap">
-            <h1 className="display m-0 text-[26px]">@{persona.handle}</h1>
+            <h1 className="display m-0 text-[26px] text-[color:var(--profile-card-title)]">
+              @{persona.handle}
+            </h1>
             <Tag tone="primary">{persona.tier}</Tag>
             <Tag>{joinedParts}</Tag>
           </div>
-          <div className="font-mono text-xs text-ink-dim">{walletParts}</div>
+          <div className="font-mono text-xs text-[color:var(--profile-card-wallet)]">
+            {walletParts}
+          </div>
           <XPBar
             value={persona.xp}
             max={xpMax}
@@ -59,7 +60,7 @@ export default function ProfileScreen({ persona }: ProfileScreenProps) {
 
       <div className="grid gap-5 grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] max-[720px]:grid-cols-1">
         {/* Stats + activity chart */}
-        <div className="panel p-5 flex flex-col gap-[18px]">
+        <div className="p-5 flex flex-col gap-[18px] rounded-[var(--r-panel)] [container-type:inline-size] bg-[var(--profile-card-bg)] border border-[color:var(--profile-card-border)]">
           <Eyebrow>{t.activityEyebrow}</Eyebrow>
           <div className="grid gap-[10px] grid-cols-[repeat(auto-fit,minmax(130px,1fr))]">
             <StatCard
@@ -89,7 +90,7 @@ export default function ProfileScreen({ persona }: ProfileScreenProps) {
           </div>
           <div>
             <Eyebrow>{t.xpChartEyebrow}</Eyebrow>
-            <div className="mt-3 flex items-end gap-[3px] h-[100px] p-[10px] rounded-[var(--r-inset)] bg-panel-2 border border-border">
+            <div className="mt-3 flex items-end gap-[3px] h-[100px] p-[10px] rounded-[var(--r-inset)] bg-[var(--profile-card-stat-bg)] border border-[color:var(--profile-card-stat-border)]">
               {activity.map((v, i) => (
                 <div
                   key={i}

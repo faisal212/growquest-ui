@@ -337,10 +337,12 @@
         "var(--color-secondary)",
         "color-mix(in oklch, var(--color-primary) 50%, var(--color-secondary))"
       ],
-      "lockedFg": "#9099AA"
+      "lockedFg": "#9099AA",
+      "unlockedFg": "#05060A"                        // → --badge-grid-unlocked-fg (unlocked badge icon)
     },
 
-    // Podium (top of /leaderboard). Consumed by Podium as props.
+    // Podium (top of /leaderboard). rankColors/platformHeights are consumed by
+    // Podium as props; rankFg/platformPattern map to --podium-*.
     "podium": {
       "rankColors": {
         "1": "color-mix(in oklch, var(--color-primary) 50%, var(--color-secondary))",
@@ -351,7 +353,20 @@
         "1": 180,
         "2": 150,
         "3": 130
-      }
+      },
+      "rankFg": "var(--on-primary)",                 // → --podium-rank-fg (rank badge + numeral, contrast-aware default)
+      "platformPattern": "rgba(0,0,0,0.12)",         // → --podium-platform-pattern (platform stripe)
+      "handle": "var(--ink)",                        // → --podium-handle (@handle under each avatar)
+      "xp": "var(--ink-dim)"                         // → --podium-xp (XP line under each avatar)
+    },
+
+    // Leaderboard hero-band text (eyebrow / title / subtitle on /leaderboard).
+    // Defaults mirror the prior global look. Maps to --leaderboard-*.
+    "leaderboardHeader": {
+      "eyebrow": "var(--ink-dim)",                   // → --leaderboard-eyebrow
+      "eyebrowDot": "var(--color-primary)",          // → --leaderboard-eyebrow-dot
+      "title": "var(--ink)",                         // → --leaderboard-title ("The ascent")
+      "subtitle": "var(--ink-dim)"                   // → --leaderboard-subtitle
     },
 
     // Stat-card sparkline trend colors. Maps to --stat-card-trend-*.

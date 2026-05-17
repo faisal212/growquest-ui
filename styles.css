@@ -94,6 +94,17 @@
     --badge-grid-bg: var(--panel-2);
     --badge-grid-border: var(--border);
     --badge-grid-locked-fg: var(--ink-faint);
+    --badge-grid-unlocked-fg: #05060A;
+
+    --podium-rank-fg: var(--on-primary, #05060A);
+    --podium-platform-pattern: rgba(0,0,0,0.12);
+    --podium-handle: var(--ink);
+    --podium-xp: var(--ink-dim);
+
+    --leaderboard-eyebrow: var(--ink-dim);
+    --leaderboard-eyebrow-dot: var(--color-primary);
+    --leaderboard-title: var(--ink);
+    --leaderboard-subtitle: var(--ink-dim);
 
     --stat-card-trend-default: var(--color-primary);
     --stat-card-trend-streak: var(--color-secondary);
