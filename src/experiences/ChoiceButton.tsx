@@ -41,8 +41,8 @@ export function ChoiceShell({
 
   const layoutCls =
     layout === 'row'
-      ? 'py-3.5 px-4 rounded-lg flex flex-row items-center gap-3'
-      : 'p-2.5 rounded-[10px] flex flex-col gap-2'
+      ? 'py-3.5 px-4 rounded-[var(--r-btn)] flex flex-row items-center gap-3'
+      : 'p-2.5 rounded-[var(--r-inset)] flex flex-col gap-2'
   return (
     <button
       disabled={disabled}

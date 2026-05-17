@@ -19,7 +19,7 @@ export const RewardCard = memo(function RewardCard({
   const toneVar = `var(--tone-${r.tone})`
 
   return (
-    <div className="bg-[var(--reward-card-bg)] border border-[color:var(--reward-card-border)] rounded-[var(--radius-card,14px)] overflow-hidden flex flex-col">
+    <div className="bg-[var(--reward-card-bg)] border border-[color:var(--reward-card-border)] rounded-[var(--r-panel)] overflow-hidden flex flex-col">
       <div
         className="relative bg-[var(--reward-card-image-bg)] border-b border-[color:var(--reward-card-image-border)] overflow-hidden"
         style={{ aspectRatio: compact ? '2 / 1' : '4 / 3' }}

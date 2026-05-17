@@ -14,6 +14,7 @@ import { formatHex, parse } from 'culori'
 import type { FieldDef } from '../registry'
 import { normalizeToOklch, toCssColor } from './color'
 import { removeItem, moveItem } from './listOps'
+import { AssetControl } from './AssetControl'
 
 export interface FieldProps {
   def: FieldDef
@@ -185,6 +186,46 @@ export function Field({ def, value, modified, onChange, onReset }: FieldProps) {
         />
       )
       break
+    case 'lengthPx': {
+      // Free-text radius entry let users type unit-less values ("20") that
+      // are invalid CSS and silently dropped. A px slider can only ever emit
+      // a valid `Npx` string. Seed from def.default when nothing is set yet
+      // so the handle starts at the same radius the UI is actually showing.
+      const parsed = parseInt(String(value ?? ''), 10)
+      const n = Number.isFinite(parsed) ? parsed : (def.default ?? 0)
+      const emit = (raw: string) => {
+        const v = parseInt(raw, 10)
+        onChange(`${Number.isFinite(v) ? v : (def.default ?? 0)}px`)
+      }
+      control = (
+        <span className="gqdc-f-range">
+          <input
+            id={id}
+            aria-label={def.label}
+            type="range"
+            min={def.min ?? 0}
+            max={def.max ?? 32}
+            step={def.step ?? 1}
+            value={n}
+            onChange={(e) => emit(e.target.value)}
+          />
+          <input
+            aria-label={`${def.label} value`}
+            type="number"
+            className="gqdc-f-input gqdc-f-num"
+            min={def.min ?? 0}
+            max={def.max ?? 32}
+            step={def.step ?? 1}
+            value={n}
+            onChange={(e) => emit(e.target.value)}
+          />
+          <span className="gqdc-f-unit" aria-hidden>
+            px
+          </span>
+        </span>
+      )
+      break
+    }
     case 'textarea':
       control = (
         <textarea
@@ -199,30 +240,9 @@ export function Field({ def, value, modified, onChange, onReset }: FieldProps) {
     case 'list':
       control = <ListControl value={value} onChange={onChange} />
       break
-    case 'asset': {
-      const a = (value ?? {}) as { src?: string; mobileSrc?: string; type?: string }
-      const patch = (p: object) => onChange({ ...a, ...p })
-      control = (
-        <span className="gqdc-f-asset">
-          <input
-            id={id}
-            aria-label={`${def.label} src`}
-            className="gqdc-f-input"
-            placeholder="src URL"
-            value={a.src ?? ''}
-            onChange={(e) => patch({ src: e.target.value })}
-          />
-          <input
-            aria-label={`${def.label} mobile src`}
-            className="gqdc-f-input"
-            placeholder="mobile src (optional)"
-            value={a.mobileSrc ?? ''}
-            onChange={(e) => patch({ mobileSrc: e.target.value })}
-          />
-        </span>
-      )
+    case 'asset':
+      control = <AssetControl id={id} def={def} value={value} onChange={onChange} />
       break
-    }
     case 'toneMap': {
       const map = (value ?? {}) as Record<string, string>
       control = (

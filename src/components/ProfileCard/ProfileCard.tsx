@@ -20,7 +20,7 @@ export function ProfileCard({
 }: ProfileCardProps) {
   return (
     <div
-      className="bg-[var(--profile-card-bg)] border border-[color:var(--profile-card-border)] rounded-[var(--radius-card,14px)] p-[18px] flex flex-col gap-3.5"
+      className="bg-[var(--profile-card-bg)] border border-[color:var(--profile-card-border)] rounded-[var(--r-panel)] p-[18px] flex flex-col gap-3.5"
       style={{ containerType: 'inline-size' }}
     >
       <div className="flex items-center gap-3">

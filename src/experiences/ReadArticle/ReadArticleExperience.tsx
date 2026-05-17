@@ -31,7 +31,7 @@ export function ReadArticleExperience({
 
   return (
     <div className="flex flex-col gap-5 p-6">
-      <div className="p-4 bg-panel-2 border border-border rounded-[10px] flex flex-col gap-2">
+      <div className="p-4 bg-panel-2 border border-border rounded-[var(--r-inset)] flex flex-col gap-2">
         <div className="text-xs text-ink-dim font-mono uppercase tracking-[0.06em]">Article</div>
         <div className="font-semibold text-[15px]">How XP &amp; Levels work in GrowQuest</div>
         {url && <div className="text-xs text-ink-dim">{url.replace(/^https?:\/\//, '')}</div>}

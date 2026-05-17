@@ -131,7 +131,7 @@ export function TriviaExperience({
         <div className="flex items-center gap-1.5">
           <Chip tone="primary">SCORE {score}</Chip>
           <span
-            className={`mono py-1 px-2 border rounded-[4px] text-xs ${time < 5 ? 'border-danger text-danger' : 'border-border text-ink'}`}
+            className={`mono py-1 px-2 border rounded-[var(--r-tag)] text-xs ${time < 5 ? 'border-danger text-danger' : 'border-border text-ink'}`}
           >
             ⏱ {String(time).padStart(2, '0')}s
           </span>
@@ -157,7 +157,7 @@ export function TriviaExperience({
               key={i}
               disabled={phase !== 'answering'}
               onClick={() => lockIn(i)}
-              className={`py-4 px-3.5 rounded-lg text-left flex items-center gap-2.5 text-sm border ${good ? 'border-accent-lime' : bad ? 'border-danger' : isPick ? 'border-accent' : 'border-border'} ${good || bad ? '' : 'bg-panel-2'}`}
+              className={`py-4 px-3.5 rounded-[var(--r-inset)] text-left flex items-center gap-2.5 text-sm border ${good ? 'border-accent-lime' : bad ? 'border-danger' : isPick ? 'border-accent' : 'border-border'} ${good || bad ? '' : 'bg-panel-2'}`}
               style={
                 good
                   ? { background: 'color-mix(in oklch, var(--color-primary) 14%, transparent)' }

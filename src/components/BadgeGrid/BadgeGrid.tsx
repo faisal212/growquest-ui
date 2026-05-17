@@ -34,7 +34,7 @@ export const BadgeGrid = memo(function BadgeGrid({
           <div
             key={b.id}
             title={b.desc}
-            className="p-3.5 rounded-[10px] text-center"
+            className="p-3.5 rounded-[var(--r-inset)] text-center"
             style={{
               background: 'var(--badge-grid-bg)',
               border: '1px solid var(--badge-grid-border)',

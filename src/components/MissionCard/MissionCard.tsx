@@ -30,7 +30,7 @@ export const MissionCard = memo(function MissionCard({
     return (
       <button
         onClick={() => onOpen(m)}
-        className={`mission-card text-left flex flex-col gap-2.5 ${padCls} bg-[var(--mission-card-bg)] border border-[color:var(--mission-card-border)] rounded-xl transition-all duration-150`}
+        className={`mission-card text-left flex flex-col gap-2.5 ${padCls} bg-[var(--mission-card-bg)] border border-[color:var(--mission-card-border)] rounded-[var(--r-mission)] transition-all duration-150`}
       >
         <div className="flex justify-between items-center">
           <div
@@ -80,7 +80,7 @@ export const MissionCard = memo(function MissionCard({
     return (
       <button
         onClick={() => onOpen(m)}
-        className={`mission-card text-left flex items-center gap-3.5 ${padCls} bg-[var(--mission-card-bg)] border border-[color:var(--mission-card-border)] rounded-[10px] w-full`}
+        className={`mission-card text-left flex items-center gap-3.5 ${padCls} bg-[var(--mission-card-bg)] border border-[color:var(--mission-card-border)] rounded-[var(--r-inset)] w-full`}
       >
         <div
           className="bg-[var(--mission-card-icon-bg)] border border-[color:var(--mission-card-icon-border)] grid place-items-center w-10 h-10 rounded-lg shrink-0"
@@ -111,7 +111,7 @@ export const MissionCard = memo(function MissionCard({
   return (
     <button
       onClick={() => onOpen(m)}
-      className={`mission-card text-left flex flex-col ${padCls} bg-[var(--mission-card-bg)] border border-[color:var(--mission-card-border)] rounded-xl relative overflow-hidden`}
+      className={`mission-card text-left flex flex-col ${padCls} bg-[var(--mission-card-bg)] border border-[color:var(--mission-card-border)] rounded-[var(--r-mission)] relative overflow-hidden`}
     >
       <div
         className="absolute top-0 right-0 w-20 h-20"
@@ -144,7 +144,7 @@ export const MissionCard = memo(function MissionCard({
       <div className={`flex justify-between items-center gap-2.5 ${compact ? 'mt-2' : 'mt-auto'}`}>
         <XPPill amount={m.xp} />
         <span
-          className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-xs font-bold tracking-[0.04em]"
+          className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-[var(--r-btn-sm)] text-xs font-bold tracking-[0.04em]"
           style={{
             background: toneColor(m.tone),
             color: 'var(--mission-card-cta-fg)',

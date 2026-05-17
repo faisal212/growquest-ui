@@ -37,7 +37,7 @@ export function ShareExperience({
   return (
     <div className="flex flex-col gap-4 p-6">
       {/* Preview card */}
-      <div className="p-3.5 bg-panel-2 border border-border rounded-[10px]">
+      <div className="p-3.5 bg-panel-2 border border-border rounded-[var(--r-inset)]">
         <div className="font-semibold text-[13px] mb-1">{shareText}</div>
         <div className="text-[11px] text-ink-dim font-mono">{shareUrl}</div>
       </div>
@@ -49,7 +49,7 @@ export function ShareExperience({
           <button
             key={id}
             onClick={() => openShare(id)}
-            className="py-2.5 px-3.5 rounded-lg border border-border bg-panel-2 text-ink text-[13px] font-medium cursor-pointer text-left"
+            className="py-2.5 px-3.5 rounded-[var(--r-btn)] border border-border bg-panel-2 text-ink text-[13px] font-medium cursor-pointer text-left"
           >
             {label} ↗
           </button>

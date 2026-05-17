@@ -75,4 +75,21 @@ describe('registry — grouping & routing', () => {
     ])
     expect(byPath.get('overrides.missionCard.haloOpacity')?.kind).toBe('range')
   })
+
+  it('models the four radius controls as px sliders with bounds and defaults', () => {
+    const expected: Array<[string, number]> = [
+      ['card', 14],
+      ['button', 8],
+      ['tag', 4],
+      ['modal', 16],
+    ]
+    for (const [r, d] of expected) {
+      const f = byPath.get(`overrides.radius.${r}`)
+      expect(f?.kind, `overrides.radius.${r} kind`).toBe('lengthPx')
+      expect(f?.default, `overrides.radius.${r} default`).toBe(d)
+      expect(f?.min).toBe(0)
+      expect(f?.max).toBe(32)
+      expect(f?.step).toBe(1)
+    }
+  })
 })

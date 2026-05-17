@@ -72,7 +72,7 @@ export default function WelcomeScreen({ onContinue, email }: WelcomeScreenProps)
             quest state…
           </p>
 
-          <div className="px-4 py-[14px] text-left rounded-lg bg-panel-2 border border-border">
+          <div className="px-4 py-[14px] text-left rounded-[var(--r-inset)] bg-panel-2 border border-border">
             <div className="flex justify-between font-mono text-[10px] tracking-[0.12em] uppercase mb-2 text-ink-dim">
               <span>loading quest data</span>
               <span>{Math.round(pct)}%</span>

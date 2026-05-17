@@ -37,13 +37,13 @@ export function ReferralExperience({
         <div className="text-[11px] text-ink-dim font-mono uppercase tracking-[0.06em] mb-1.5">
           Your referral link
         </div>
-        <div className="flex gap-2 py-2.5 px-3 bg-panel-2 border border-border rounded-lg items-center">
+        <div className="flex gap-2 py-2.5 px-3 bg-panel-2 border border-border rounded-[var(--r-inset)] items-center">
           <span className="flex-1 font-mono text-xs text-ink-dim overflow-hidden text-ellipsis whitespace-nowrap">
             {referralLink}
           </span>
           <button
             onClick={copyLink}
-            className={`py-1 px-2.5 rounded-[5px] border border-border text-[11px] font-semibold cursor-pointer whitespace-nowrap transition-all duration-150 ${copied ? 'bg-primary' : 'bg-panel text-ink'}`}
+            className={`py-1 px-2.5 rounded-[var(--r-btn-sm)] border border-border text-[11px] font-semibold cursor-pointer whitespace-nowrap transition-all duration-150 ${copied ? 'bg-primary' : 'bg-panel text-ink'}`}
             style={copied ? { color: '#05060A' } : undefined}
           >
             {copied ? 'Copied ✓' : 'Copy'}
@@ -62,7 +62,7 @@ export function ReferralExperience({
             <button
               key={id}
               onClick={() => openShare(id)}
-              className="py-2 px-3.5 rounded-md border border-border bg-panel-2 text-ink text-sm font-bold cursor-pointer"
+              className="py-2 px-3.5 rounded-[var(--r-btn-sm)] border border-border bg-panel-2 text-ink text-sm font-bold cursor-pointer"
             >
               {label}
             </button>

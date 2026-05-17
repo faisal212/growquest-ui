@@ -39,6 +39,14 @@ export {
   resetAdminSessionAdapter,
 } from './config/admin/adapter'
 export type { AdminSession, AdminSessionAdapter } from './config/admin/adapter'
+// Asset-upload seam — phase 1 ships no backend (URL-only); consumers/phase-2
+// inject real storage here and the configurator's Upload affordance activates.
+export {
+  setAssetUploadAdapter,
+  getAssetUploadAdapter,
+  resetAssetUploadAdapter,
+} from './config/upload/adapter'
+export type { AssetUploadAdapter } from './config/upload/adapter'
 
 // Primitives
 export { Button } from './primitives/Button'

@@ -58,6 +58,31 @@ describe('Field dispatcher', () => {
     expect(onChange).toHaveBeenCalledWith([{ key: 'Tiers', value: 'B' }])
   })
 
+  it('renders a px slider and emits an Npx string on change', () => {
+    const { onChange } = setup(
+      def({ kind: 'lengthPx', label: 'Radius Card', min: 0, max: 32, step: 1, default: 14 }),
+      '14px'
+    )
+    fireEvent.change(screen.getByLabelText('Radius Card'), { target: { value: '20' } })
+    expect(onChange).toHaveBeenCalledWith('20px')
+  })
+
+  it('seeds the px slider from def.default when the value is empty', () => {
+    setup(
+      def({ kind: 'lengthPx', label: 'Radius Card', min: 0, max: 32, step: 1, default: 14 }),
+      undefined
+    )
+    expect((screen.getByLabelText('Radius Card') as HTMLInputElement).value).toBe('14')
+  })
+
+  it('parses an existing Npx value back onto the slider', () => {
+    setup(
+      def({ kind: 'lengthPx', label: 'Radius Card', min: 0, max: 32, step: 1, default: 14 }),
+      '9px'
+    )
+    expect((screen.getByLabelText('Radius Card') as HTMLInputElement).value).toBe('9')
+  })
+
   it('shows a reset control when modified and calls onReset', () => {
     const onReset = vi.fn()
     render(

@@ -153,7 +153,7 @@ export function QuizExperience({
                   />
                   <div className="absolute inset-0 grid place-items-center">
                     <div
-                      className="font-mono text-[10px] tracking-[0.12em] uppercase py-1 px-2 bg-panel border rounded-[4px]"
+                      className="font-mono text-[10px] tracking-[0.12em] uppercase py-1 px-2 bg-panel border rounded-[var(--r-tag)]"
                       style={{
                         color: `var(--color-${c.tint})`,
                         borderColor: `color-mix(in oklch, var(--color-${c.tint}) 40%, transparent)`,
@@ -202,7 +202,7 @@ export function QuizExperience({
 
       {submitted && (
         <div
-          className={`p-3 rounded-lg text-[13px] border ${correct ? 'border-accent-lime' : 'border-danger'}`}
+          className={`p-3 rounded-[var(--r-inset)] text-[13px] border ${correct ? 'border-accent-lime' : 'border-danger'}`}
           style={{
             background: correct
               ? 'color-mix(in oklch, var(--color-primary) 14%, transparent)'

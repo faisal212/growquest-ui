@@ -72,6 +72,29 @@ describe('deriveTokens', () => {
     expect(tokens['--radius-tag']).toBe('4px')
   })
 
+  it('emits the derived radius tier vars as calc() expressions off the base tokens', () => {
+    const tokens = deriveTokens({ mode: 'dark', brand: { primary: '#FF8C00' } })
+    expect(tokens['--radius-card']).toBe('14px')
+    expect(tokens['--r-panel']).toBe('var(--radius-card)')
+    expect(tokens['--r-mission']).toBe('calc(var(--radius-card) - 2px)')
+    expect(tokens['--r-inset']).toBe('max(0px, calc(var(--radius-card) - 4px))')
+    expect(tokens['--r-btn']).toBe('var(--radius-button)')
+    expect(tokens['--r-btn-sm']).toBe('max(0px, calc(var(--radius-button) - 3px))')
+    expect(tokens['--r-tag']).toBe('var(--radius-tag)')
+    expect(tokens['--r-tag-lg']).toBe('calc(var(--radius-tag) + 2px)')
+    expect(tokens['--r-modal']).toBe('var(--radius-modal)')
+  })
+
+  it('keeps tier vars as live calc references so admin overrides flow through', () => {
+    const tokens = deriveTokens({
+      mode: 'dark',
+      brand: { primary: '#FF8C00' },
+      overrides: { radius: { card: '24px' } },
+    })
+    expect(tokens['--radius-card']).toBe('24px')
+    expect(tokens['--r-mission']).toBe('calc(var(--radius-card) - 2px)')
+  })
+
   it('falls back to default palette when overrides.palette is partial', () => {
     const tokens = deriveTokens({
       mode: 'light',

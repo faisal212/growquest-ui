@@ -124,7 +124,7 @@ export function MissionModal({ m, onClose, onClaim }: MissionModalProps) {
           <button
             onClick={onClose}
             aria-label="Close"
-            className="bg-[var(--mission-modal-close-bg)] border border-[color:var(--mission-modal-close-border)] text-[color:var(--mission-modal-close-icon)] grid place-items-center w-7 h-7 rounded-md"
+            className="bg-[var(--mission-modal-close-bg)] border border-[color:var(--mission-modal-close-border)] text-[color:var(--mission-modal-close-icon)] grid place-items-center w-7 h-7 rounded-[var(--r-btn-sm)]"
           >
             <svg width="12" height="12" viewBox="0 0 12 12">
               <path

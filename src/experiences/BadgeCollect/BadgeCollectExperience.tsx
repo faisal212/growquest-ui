@@ -47,12 +47,12 @@ export function BadgeCollectExperience({
         {badges.map((badge) => (
           <div
             key={badge.id}
-            className={`p-3 bg-panel-2 rounded-lg flex flex-col gap-1 border ${badge.got ? 'border-solid border-accent opacity-100' : 'border-dashed border-border opacity-45'}`}
+            className={`p-3 bg-panel-2 rounded-[var(--r-inset)] flex flex-col gap-1 border ${badge.got ? 'border-solid border-accent opacity-100' : 'border-dashed border-border opacity-45'}`}
           >
             <div className="flex justify-between items-center">
               <span className="text-[18px]">🏅</span>
               {badge.got && (
-                <span className="text-[10px] text-[#05060A] bg-primary py-px px-1.5 rounded-[4px] font-bold">
+                <span className="text-[10px] text-[#05060A] bg-primary py-px px-1.5 rounded-[var(--r-tag)] font-bold">
                   ✓
                 </span>
               )}

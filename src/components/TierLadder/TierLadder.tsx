@@ -23,7 +23,7 @@ export function TierLadder({ tiers, currentXP }: TierLadderProps) {
           return (
             <div
               key={t.name}
-              className="p-3.5 rounded-[10px] border"
+              className="p-3.5 rounded-[var(--r-inset)] border"
               style={{
                 borderColor: isCurrent ? t.color : 'var(--border)',
                 background: isCurrent

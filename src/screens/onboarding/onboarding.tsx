@@ -43,7 +43,7 @@ export default function OnboardingScreen({ onEnter, heroStyle }: OnboardingScree
   return (
     <div className="animate-fade-up w-[min(1040px,100%)] mx-auto">
       <div
-        className="grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] gap-0 rounded-2xl overflow-hidden max-[720px]:grid-cols-1"
+        className="grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] gap-0 rounded-[var(--r-panel)] overflow-hidden max-[720px]:grid-cols-1"
         style={{
           background: 'var(--onboarding-card-bg)',
           border: '1px solid var(--onboarding-card-border)',
@@ -95,7 +95,7 @@ export default function OnboardingScreen({ onEnter, heroStyle }: OnboardingScree
             {t.stats.map((s) => (
               <div
                 key={s.key}
-                className="px-3 py-[10px] rounded-lg"
+                className="px-3 py-[10px] rounded-[var(--r-inset)]"
                 style={{
                   background: 'var(--onboarding-card-stat-bg)',
                   border: '1px solid var(--onboarding-card-stat-border)',

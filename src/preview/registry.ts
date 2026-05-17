@@ -16,6 +16,7 @@ export type FieldKind =
   | 'select'
   | 'number'
   | 'range'
+  | 'lengthPx'
   | 'list'
   | 'asset'
   | 'toneMap'
@@ -29,6 +30,8 @@ export interface FieldDef {
   min?: number
   max?: number
   step?: number
+  /** Slider seed for `lengthPx` when no override is set (matches the token default). */
+  default?: number
 }
 
 export interface GroupDef {
@@ -248,12 +251,17 @@ function buildFields(): FieldDef[] {
       group: 'palette',
     })
   }
+  const radiusDefaults: Record<string, number> = { card: 14, button: 8, tag: 4, modal: 16 }
   for (const r of ['card', 'button', 'tag', 'modal']) {
     out.push({
       path: `overrides.radius.${r}`,
       label: `Radius ${humanize(r)}`,
-      kind: 'text',
+      kind: 'lengthPx',
       group: 'shape',
+      min: 0,
+      max: 32,
+      step: 1,
+      default: radiusDefaults[r],
     })
   }
   for (const f of ['display', 'ui', 'mono']) {

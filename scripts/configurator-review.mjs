@@ -53,6 +53,33 @@ const primaryVar = async (page) => {
     : ''
 }
 
+// Computed top-left border-radius (px number) of the first element matching
+// `sel` inside the live preview frame. null when absent.
+const radiusOf = async (page, sel) => {
+  const f = await previewFrame(page)
+  if (!f) return null
+  return f.evaluate((s) => {
+    const el = document.querySelector(s)
+    if (!el) return null
+    return parseFloat(getComputedStyle(el).borderTopLeftRadius) || 0
+  }, sel)
+}
+
+// Computed radius of the mission-card "GO" CTA (a control → Button family,
+// must NOT track the Tag slider).
+const goButtonRadius = async (page) => {
+  const f = await previewFrame(page)
+  if (!f) return null
+  return f.evaluate(() => {
+    const card = document.querySelector('.mission-card')
+    if (!card) return null
+    const el = Array.from(card.querySelectorAll('span')).find((s) =>
+      (s.textContent || '').trim().startsWith('GO')
+    )
+    return el ? parseFloat(getComputedStyle(el).borderTopLeftRadius) || 0 : null
+  })
+}
+
 const browser = await chromium.launch()
 
 // 1. Gate negative — no admin cookie → no editor.
@@ -231,6 +258,136 @@ await step('Discard reverts unsaved edits', async () => {
   const after = await primaryVar(page)
   await shot(page, '10-after-discard')
   if (after !== saved) throw new Error(`discard did not restore (${saved} vs ${after})`)
+})
+
+await step('radius controls reshape their tier; circular elements excluded', async () => {
+  // Clean known page: /missions has mission cards (Card tier), .btn (Button),
+  // .chip (Tag), and rounded-full dots (excluded/circular).
+  await page.goto(`${BASE}/missions?preview=true`, { waitUntil: 'networkidle' })
+  await root.waitFor({ state: 'visible', timeout: 30000 })
+  await frameEl.waitFor({ state: 'visible', timeout: 30000 })
+  await page.waitForFunction(
+    () => Array.from(document.querySelectorAll('iframe')).some((f) => /preview=embed/.test(f.src)),
+    null,
+    { timeout: 30000 }
+  )
+  await page.waitForTimeout(1500)
+
+  // Surface the radius fields via the cross-group filter (no group expansion).
+  const filter = page.getByLabel(/filter fields/i)
+  await filter.fill('radius')
+  await page.waitForTimeout(350)
+
+  const card0 = await radiusOf(page, '.mission-card')
+  const chip0 = await radiusOf(page, '.chip')
+  const circ0 = await radiusOf(page, '[class*="rounded-full"]')
+  const go0 = await goButtonRadius(page)
+  if (card0 == null) throw new Error('no .mission-card in preview')
+
+  // Card slider 14 → 26 (mission tier = card − 2 ⇒ 12 → 24).
+  const cardNum = page.getByLabel('Radius Card value')
+  await cardNum.fill('26')
+  await cardNum.press('Enter')
+  await page.waitForTimeout(1300)
+  const card1 = await radiusOf(page, '.mission-card')
+  const chipAfterCard = await radiusOf(page, '.chip')
+  const circAfterCard = await radiusOf(page, '[class*="rounded-full"]')
+  await shot(page, '11-radius-card')
+  if (!(card1 > card0)) throw new Error(`mission card radius did not grow (${card0} -> ${card1})`)
+  if (chip0 != null && chipAfterCard !== chip0)
+    throw new Error(`chip moved on a Card-only change (${chip0} -> ${chipAfterCard})`)
+  if (circ0 != null && circAfterCard !== circ0)
+    throw new Error(`circular element deformed on Card change (${circ0} -> ${circAfterCard})`)
+
+  // Tag slider 4 → 14 (.chip = tag tier). Card tier must hold its new value.
+  const tagNum = page.getByLabel('Radius Tag value')
+  await tagNum.fill('14')
+  await tagNum.press('Enter')
+  await page.waitForTimeout(1300)
+  const chip1 = await radiusOf(page, '.chip')
+  const cardAfterTag = await radiusOf(page, '.mission-card')
+  const circAfterTag = await radiusOf(page, '[class*="rounded-full"]')
+  const goAfterTag = await goButtonRadius(page)
+  await shot(page, '12-radius-tag')
+  if (chip0 != null && !(chip1 > chip0))
+    throw new Error(`chip radius did not grow on Tag change (${chip0} -> ${chip1})`)
+  if (cardAfterTag !== card1)
+    throw new Error(`Card tier shifted on a Tag-only change (${card1} -> ${cardAfterTag})`)
+  if (circ0 != null && circAfterTag !== circ0)
+    throw new Error(`circular element deformed on Tag change (${circ0} -> ${circAfterTag})`)
+  // The GO CTA is a control → Button family; a Tag change must NOT move it.
+  if (go0 != null && goAfterTag !== go0)
+    throw new Error(`GO button followed the Tag slider (${go0} -> ${goAfterTag}) — misclassified`)
+
+  // Button slider 8 → 22. .btn = button tier; GO CTA = btn-sm (button − 3).
+  const btn0 = await radiusOf(page, '.btn')
+  const btnNum = page.getByLabel('Radius Button value')
+  await btnNum.fill('22')
+  await btnNum.press('Enter')
+  await page.waitForTimeout(1300)
+  const btn1 = await radiusOf(page, '.btn')
+  const goAfterBtn = await goButtonRadius(page)
+  await shot(page, '13-radius-button')
+  if (btn0 != null && !(btn1 > btn0))
+    throw new Error(`.btn radius did not grow on Button change (${btn0} -> ${btn1})`)
+  if (go0 != null && !(goAfterBtn > goAfterTag))
+    throw new Error(`GO button did not follow the Button slider (${goAfterTag} -> ${goAfterBtn})`)
+
+  await filter.fill('')
+  await page.waitForTimeout(250)
+  return `card ${card0}→${card1}px, chip ${chip0}→${chip1}px, btn ${btn0}→${btn1}px, GO ${go0}→${goAfterBtn}px (held ${go0} thru Tag), circular ${circ0}px held`
+})
+
+await step('assets: live preview, type badge, variant tabs, clear', async () => {
+  // Deterministic offline 1×1 PNG so probeImage resolves without network.
+  const PNG =
+    'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAC0lEQVR4nGNgAAIAAAUAAeImBZsAAAAASUVORK5CYII='
+  await page.goto(`${BASE}/onboarding?preview=true`, { waitUntil: 'networkidle' })
+  await root.waitFor({ state: 'visible', timeout: 30000 })
+  await frameEl.waitFor({ state: 'visible', timeout: 30000 })
+  await page.waitForTimeout(1200)
+
+  const filter = page.getByLabel(/filter fields/i)
+  await filter.fill('Onboarding hero')
+  await page.waitForTimeout(350)
+
+  const urlInput = page.getByLabel('Onboarding hero URL')
+  await urlInput.fill(PNG)
+  await page.waitForTimeout(900)
+
+  const previewSrc = await page
+    .locator('.gqdc-asset-preview img')
+    .first()
+    .getAttribute('src')
+    .catch(() => null)
+  const okStatus = await page.locator('.gqdc-asset-status-ok').count()
+  const badge = await page.locator('.gqdc-asset-badge').first().textContent()
+  await shot(page, '14-assets-preview')
+  if (previewSrc !== PNG) throw new Error(`live preview src mismatch (${String(previewSrc).slice(0, 24)}…)`)
+  if (okStatus < 1) throw new Error('no ✓ OK status after a valid image URL')
+  if ((badge || '').trim() !== 'IMG') throw new Error(`type badge not IMG (${badge})`)
+
+  // Mobile variant is independent: editing it must not touch desktop src.
+  await page.getByRole('button', { name: /mobile variant/i }).click()
+  await urlInput.fill('https://example.com/m.png')
+  await page.waitForTimeout(500)
+  await page.getByRole('button', { name: /desktop variant/i }).click()
+  await page.waitForTimeout(300)
+  const desktopStillSet = await urlInput.inputValue()
+  if (desktopStillSet !== PNG) throw new Error('editing Mobile variant clobbered Desktop src')
+
+  // Clear → revert: the data-URI preview disappears from the inspector.
+  await page.getByRole('button', { name: /clear/i }).first().click()
+  await page.waitForTimeout(700)
+  const stillThere = await page
+    .locator(`.gqdc-asset-preview img[src="${PNG}"]`)
+    .count()
+  await shot(page, '15-assets-cleared')
+  if (stillThere !== 0) throw new Error('Clear did not revert the asset (preview still set)')
+
+  await filter.fill('')
+  await page.waitForTimeout(250)
+  return 'preview+status+badge ok · variants independent · clear reverts'
 })
 
 await browser.close()

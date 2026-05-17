@@ -3,6 +3,7 @@ import { AdminSessionAdapter } from './config/admin/adapter'
 import { applyBrand } from './config'
 import { AssetEntry } from './config'
 import { AssetMap } from './config'
+import { AssetUploadAdapter } from './config/upload/adapter'
 import { AvatarUploadExperience } from './experiences/AvatarUpload'
 import { Badge } from './types'
 import { BadgeCollectExperience } from './experiences/BadgeCollect'
@@ -29,6 +30,7 @@ import { FilterTabs } from './components/FilterTabs'
 import { FollowSocialExperience } from './experiences/FollowSocial'
 import { FontSet } from './config'
 import { getAdminSessionAdapter } from './config/admin/adapter'
+import { getAssetUploadAdapter } from './config/upload/adapter'
 import { getCurrentBrand } from './config'
 import { HangmanExperience } from './experiences/Hangman'
 import { HeroBanner } from './components/HeroBanner'
@@ -61,12 +63,14 @@ import { RadiusSet } from './config'
 import { ReadArticleExperience } from './experiences/ReadArticle'
 import { ReferralExperience } from './experiences/Referral'
 import { resetAdminSessionAdapter } from './config/admin/adapter'
+import { resetAssetUploadAdapter } from './config/upload/adapter'
 import { Reward } from './types'
 import { RewardCard } from './components/RewardCard'
 import { RewardCardProps } from './components/RewardCard'
 import { RewardKind } from './types'
 import { ScratchCardExperience } from './experiences/ScratchCard'
 import { setAdminSessionAdapter } from './config/admin/adapter'
+import { setAssetUploadAdapter } from './config/upload/adapter'
 import { ShareExperience } from './experiences/Share'
 import { Sparkline } from './primitives/Elements'
 import { SpinWheelExperience } from './experiences/SpinWheel'
@@ -98,6 +102,8 @@ export { applyBrand }
 export { AssetEntry }
 
 export { AssetMap }
+
+export { AssetUploadAdapter }
 
 export { AvatarUploadExperience }
 
@@ -150,6 +156,8 @@ export { FollowSocialExperience }
 export { FontSet }
 
 export { getAdminSessionAdapter }
+
+export { getAssetUploadAdapter }
 
 export { getCurrentBrand }
 
@@ -215,6 +223,8 @@ export { ReferralExperience }
 
 export { resetAdminSessionAdapter }
 
+export { resetAssetUploadAdapter }
+
 export { Reward }
 
 export { RewardCard }
@@ -226,6 +236,8 @@ export { RewardKind }
 export { ScratchCardExperience }
 
 export { setAdminSessionAdapter }
+
+export { setAssetUploadAdapter }
 
 export { ShareExperience }
 

@@ -76,7 +76,7 @@ export function PhotoProofExperience({ onComplete }: { onComplete: () => void })
             e.preventDefault()
             if (e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0])
           }}
-          className="border-2 border-dashed border-border rounded-[10px] py-9 px-4 text-center cursor-pointer text-ink-dim text-[13px]"
+          className="border-2 border-dashed border-border rounded-[var(--r-inset)] py-9 px-4 text-center cursor-pointer text-ink-dim text-[13px]"
         >
           <div className="text-[32px] mb-2">📸</div>
           <div className="font-medium mb-1">Upload photo proof</div>

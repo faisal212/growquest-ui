@@ -64,6 +64,10 @@ export const CHROME_CSS = `
   border-radius:6px;color:#cdd9e0;font:inherit;font-size:11.5px;padding:6px 8px}
 .gqdc-f-input:focus{outline:0;border-color:#34d8e8}
 .gqdc-f-ta{min-height:54px;resize:vertical;font-family:ui-sans-serif,system-ui}
+.gqdc-f-range{display:flex;align-items:center;gap:8px}
+.gqdc-f-range input[type=range]{flex:1;min-width:0;accent-color:#34d8e8;cursor:pointer}
+.gqdc-f-range .gqdc-f-num{width:48px;flex:0 0 auto;text-align:right;padding:5px 6px}
+.gqdc-f-range .gqdc-f-unit{color:#7e909c;font-size:11px;flex:0 0 auto}
 .gqdc-f-color{display:flex;align-items:center;gap:7px}
 .gqdc-f-color input[type=color]{width:26px;height:26px;padding:0;border:1px solid #36454f;
   border-radius:6px;background:none;cursor:pointer;flex:0 0 auto}
@@ -82,5 +86,34 @@ export const CHROME_CSS = `
 .gqdc-f-lbl{font-size:11px;color:#93a2ac;flex:1}
 .gqdc-f-add{appearance:none;background:transparent;border:1px dashed #2a4a52;
   color:#34d8e8;border-radius:6px;font:inherit;font-size:11px;padding:5px;cursor:pointer}
-.gqdc-f-asset{display:flex;flex-direction:column;gap:5px}
+.gqdc-f-asset{display:flex;flex-direction:column;gap:7px}
+.gqdc-asset-meta{display:flex;align-items:flex-start;gap:8px}
+.gqdc-asset-hint{flex:1;font-size:10px;line-height:1.4;color:#6b7785}
+.gqdc-asset-badge{flex:0 0 auto;font-size:9px;color:#7fe9f3;border:1px solid #2a5b63;
+  border-radius:4px;padding:1px 5px;letter-spacing:.04em}
+.gqdc-asset-tabs{display:flex;border:1px solid #243039;border-radius:6px;overflow:hidden}
+.gqdc-asset-tabs button{flex:1;appearance:none;background:transparent;border:0;
+  border-right:1px solid #243039;color:#7e909c;font:inherit;font-size:11px;
+  padding:5px;cursor:pointer}
+.gqdc-asset-tabs button:last-child{border-right:0}
+.gqdc-asset-tabs button[aria-pressed="true"]{background:rgba(52,216,232,.15);color:#7fe9f3}
+.gqdc-asset-preview{display:block;height:104px;border-radius:6px;overflow:hidden;
+  border:1px solid #243039;background:linear-gradient(135deg,#13202a,#0e1622)}
+.gqdc-asset-preview img{width:100%;height:100%;object-fit:cover;display:block}
+.gqdc-asset-preview-empty{width:100%;height:100%;display:flex;align-items:center;
+  justify-content:center;font-size:10px;color:#8b93a7}
+.gqdc-asset-row{display:flex;gap:6px}
+.gqdc-asset-upload{flex:0 0 auto;background:#0a0e11;border:1px solid #243039;
+  color:#cdd9e0;border-radius:6px;font-size:12px;padding:0 9px;cursor:pointer}
+.gqdc-asset-upload:disabled{opacity:.45;cursor:not-allowed}
+.gqdc-asset-status{font-size:10px;color:#6b7785}
+.gqdc-asset-status-ok{color:#5fd38a}
+.gqdc-asset-status-checking{color:#d7c357}
+.gqdc-asset-status-error{color:#e08787}
+.gqdc-asset-status-lottie{color:#7fe9f3}
+.gqdc-asset-foot{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.gqdc-asset-rec{font-size:10px;color:#6b7785}
+.gqdc-asset-clear{flex:0 0 auto;background:transparent;border:1px solid #2c3a44;
+  color:#93a2ac;border-radius:5px;font:inherit;font-size:10px;padding:3px 8px;cursor:pointer}
+.gqdc-asset-clear:hover{color:#cdd9e0;border-color:#3a4c58}
 `

@@ -285,7 +285,7 @@ export function DailyModal({
             return (
               <div
                 key={i}
-                className="p-[10px] text-center rounded-lg"
+                className="p-[10px] text-center rounded-[var(--r-inset)]"
                 style={{
                   border: `1px solid ${isToday ? 'var(--color-primary)' : 'var(--border)'}`,
                   background: done

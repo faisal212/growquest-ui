@@ -9,7 +9,7 @@ interface FilterTabsProps {
 /** Pill-style tab bar for filtering a list. Renders one button per option; highlights the active selection. */
 export function FilterTabs({ options, value, onChange, labels }: FilterTabsProps) {
   return (
-    <div className="flex flex-wrap gap-1 p-1 bg-panel-2 border border-border rounded-lg">
+    <div className="flex flex-wrap gap-1 p-1 bg-panel-2 border border-border rounded-[var(--r-btn)]">
       {options.map((opt) => (
         <button
           key={opt}

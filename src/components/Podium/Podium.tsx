@@ -31,7 +31,7 @@ export function Podium({ entries, rankColors, platformHeights }: PodiumProps) {
             <div className="relative">
               <Avatar seed={p.seed} size={56} />
               <div
-                className="absolute -bottom-1.5 -right-1.5 w-[22px] h-[22px] rounded-[5px] text-[#05060A] grid place-items-center font-mono text-[11px] font-bold border-2 border-bg"
+                className="absolute -bottom-1.5 -right-1.5 w-[22px] h-[22px] rounded-[var(--r-tag-lg)] text-[#05060A] grid place-items-center font-mono text-[11px] font-bold border-2 border-bg"
                 style={{ background: color }}
               >
                 {p.rank}

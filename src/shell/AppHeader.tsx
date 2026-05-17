@@ -33,12 +33,12 @@ export function AppHeader() {
         ))}
       </nav>
       <div className="topbar-actions flex items-center gap-2 flex-wrap">
-        <div className="persona-switch flex gap-1 p-1 bg-panel-2 border border-border rounded-lg">
+        <div className="persona-switch flex gap-1 p-1 bg-panel-2 border border-border rounded-[var(--r-btn)]">
           {PERSONAS.map((k) => (
             <button
               key={k}
               onClick={() => shell.setPersonaKey(k)}
-              className={`px-2.5 py-[5px] text-[11px] font-mono tracking-[0.08em] uppercase rounded-[5px] border ${
+              className={`px-2.5 py-[5px] text-[11px] font-mono tracking-[0.08em] uppercase rounded-[var(--r-btn-sm)] border ${
                 shell.personaKey === k
                   ? 'bg-panel text-ink border-border'
                   : 'bg-transparent text-ink-dim border-transparent'

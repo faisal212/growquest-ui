@@ -85,6 +85,21 @@ export function deriveTokens(cfg: BrandConfig): Record<string, string> {
   out['--radius-tag'] = cfg.overrides?.radius?.tag ?? '4px'
   out['--radius-modal'] = cfg.overrides?.radius?.modal ?? '16px'
 
+  // Derived radius tiers. Every rounded surface references one of these
+  // instead of a hardcoded corner, so the four controls above drive the
+  // whole UI. They stay live `calc()` references (not pre-resolved px) so an
+  // admin slider change to a base token flows through every tier without
+  // re-deriving. Offsets are chosen so the defaults equal the historical
+  // hardcoded radii — the app looks identical until a slider moves.
+  out['--r-panel'] = 'var(--radius-card)' // 14
+  out['--r-mission'] = 'calc(var(--radius-card) - 2px)' // 12
+  out['--r-inset'] = 'max(0px, calc(var(--radius-card) - 4px))' // 10
+  out['--r-btn'] = 'var(--radius-button)' // 8
+  out['--r-btn-sm'] = 'max(0px, calc(var(--radius-button) - 3px))' // 5
+  out['--r-tag'] = 'var(--radius-tag)' // 4
+  out['--r-tag-lg'] = 'calc(var(--radius-tag) + 2px)' // 6
+  out['--r-modal'] = 'var(--radius-modal)' // 16
+
   // Fonts (overridable)
   if (cfg.overrides?.fonts?.display) out['--font-display'] = cfg.overrides.fonts.display
   if (cfg.overrides?.fonts?.ui) out['--font-ui'] = cfg.overrides.fonts.ui

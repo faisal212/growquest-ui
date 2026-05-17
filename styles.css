@@ -214,7 +214,7 @@ html[data-theme="light"] body::before {
 .panel {
   background: var(--panel);
   border: 1px solid var(--border);
-  border-radius: 14px;
+  border-radius: var(--r-panel);
   container-type: inline-size;
 }
 
@@ -228,7 +228,7 @@ html[data-theme="light"] body::before {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   border: 1px solid var(--border);
-  border-radius: var(--radius-tag, 4px);
+  border-radius: var(--r-tag);
   color: var(--ink-dim);
   background: var(--panel-2);
 }
@@ -245,7 +245,7 @@ html[data-theme="light"] body::before {
   justify-content: center;
   gap: 8px;
   padding: 12px 18px;
-  border-radius: var(--radius-button, 8px);
+  border-radius: var(--r-btn);
   font-weight: 600;
   font-size: 14px;
   letter-spacing: -0.005em;
@@ -380,7 +380,7 @@ html[data-theme="light"] body::before {
 .modal {
   background: var(--mission-modal-bg);
   border: 1px solid var(--mission-modal-border);
-  border-radius: var(--radius-modal, 16px);
+  border-radius: var(--r-modal);
   width: min(560px, 100%);
   max-height: 90vh;
   overflow: auto;
@@ -440,7 +440,7 @@ html[data-theme="light"] body::before {
   .app-footer { flex-direction: column; gap: 10px; padding: 16px 14px; text-align: left; }
   .app-footer > div:first-child { flex-wrap: wrap; gap: 12px; }
   .modal-backdrop { padding: 12px; align-items: flex-end; }
-  .modal { max-height: 94vh; border-radius: 14px; }
+  .modal { max-height: 94vh; border-radius: var(--r-modal); }
 
   /* Hero banner mobile (.hero-banner is a structural component class) */
   .hero-banner { min-height: 180px !important; }
@@ -478,7 +478,7 @@ html[data-theme="light"] body::before {
 .hero-banner {
   position: relative;
   min-height: 240px;
-  border-radius: 14px;
+  border-radius: var(--r-panel);
   overflow: hidden;
   border: 1px solid var(--hero-banner-border);
 }

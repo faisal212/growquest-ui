@@ -34,7 +34,7 @@ export default function ProfileScreen({ persona }: ProfileScreenProps) {
       <div className="panel p-6 grid gap-5 grid-cols-[auto_1fr] items-center max-[720px]:grid-cols-1 max-[720px]:text-center">
         <div className="relative">
           <Avatar seed={7} size={88} />
-          <div className="absolute -bottom-2 -right-2 px-2 py-1 rounded-[6px] text-[11px] font-bold font-mono bg-secondary text-[#05060A] border-2 border-bg">
+          <div className="absolute -bottom-2 -right-2 px-2 py-1 rounded-[var(--r-tag-lg)] text-[11px] font-bold font-mono bg-secondary text-[#05060A] border-2 border-bg">
             LV.{Math.floor(persona.xp / 1000)}
           </div>
         </div>
@@ -86,7 +86,7 @@ export default function ProfileScreen({ persona }: ProfileScreenProps) {
           </div>
           <div>
             <Eyebrow>{t.xpChartEyebrow}</Eyebrow>
-            <div className="mt-3 flex items-end gap-[3px] h-[100px] p-[10px] rounded-[10px] bg-panel-2 border border-border">
+            <div className="mt-3 flex items-end gap-[3px] h-[100px] p-[10px] rounded-[var(--r-inset)] bg-panel-2 border border-border">
               {activity.map((v, i) => (
                 <div
                   key={i}

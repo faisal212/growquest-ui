@@ -39,7 +39,7 @@ export function ScratchCardExperience({
     <div className="flex flex-col items-center gap-4 p-6">
       <div className="relative w-[280px]">
         {/* Reward underneath */}
-        <div className="h-[140px] grid place-items-center bg-panel-2 border border-border rounded-[10px]">
+        <div className="h-[140px] grid place-items-center bg-panel-2 border border-border rounded-[var(--r-inset)]">
           <div className="text-center">
             <div className="text-[11px] text-ink-dim mb-1 font-mono uppercase tracking-[0.06em]">
               You won
@@ -49,7 +49,7 @@ export function ScratchCardExperience({
         </div>
         {/* Scratch overlay */}
         <div
-          className={`absolute inset-0 rounded-[10px] grid grid-cols-4 gap-0.5 p-0.5 ${completed ? 'pointer-events-none' : 'pointer-events-auto'}`}
+          className={`absolute inset-0 rounded-[var(--r-inset)] grid grid-cols-4 gap-0.5 p-0.5 ${completed ? 'pointer-events-none' : 'pointer-events-auto'}`}
         >
           {Array.from({ length: TILE_COUNT }, (_, i) => (
             <div
