@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react'
 
 export function Eyebrow({ children, dot }: { children: React.ReactNode; dot?: boolean }) {
   return (
-    <div className="inline-flex items-center gap-2 font-mono text-[11px] tracking-[0.16em] uppercase text-ink-dim">
+    <div className="inline-flex items-center gap-2 font-mono text-[11px] tracking-[0.16em] uppercase text-[color:var(--eyebrow-fg,var(--ink-dim))]">
       {dot !== false && (
-        <span className="w-1.5 h-1.5 bg-primary rounded-full shadow-[0_0_8px_var(--color-primary)]" />
+        <span className="w-1.5 h-1.5 bg-[var(--eyebrow-dot,var(--color-primary))] rounded-full shadow-[0_0_8px_var(--eyebrow-dot,var(--color-primary))]" />
       )}
       {children}
     </div>

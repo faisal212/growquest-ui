@@ -26,10 +26,12 @@ export default function LeaderboardScreen({ persona: _persona }: { persona: Pers
 
   return (
     <div className="animate-fade-up w-full max-w-[1080px] mx-auto px-6 pt-6 pb-10 max-[720px]:px-3 max-[720px]:pt-4 max-[720px]:pb-8">
-      <div className="mb-5">
+      <div className="mb-5 [--eyebrow-fg:var(--leaderboard-eyebrow)] [--eyebrow-dot:var(--leaderboard-eyebrow-dot)]">
         <Eyebrow>{t.eyebrow}</Eyebrow>
-        <h1 className="display mt-[6px] mb-1 text-[30px]">{t.title}</h1>
-        <div className="text-sm text-ink-dim">{t.subtitle}</div>
+        <h1 className="display mt-[6px] mb-1 text-[30px] text-[color:var(--leaderboard-title)]">
+          {t.title}
+        </h1>
+        <div className="text-sm text-[color:var(--leaderboard-subtitle)]">{t.subtitle}</div>
       </div>
       <Podium entries={LEADERBOARD} rankColors={rankColors} platformHeights={platformHeights} />
       <LeaderboardTable
