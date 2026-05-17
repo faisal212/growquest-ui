@@ -24,6 +24,7 @@
     --mission-card-title: var(--ink);
     --mission-card-body: var(--ink-dim);
     --mission-card-cta-fg: #05060A;
+    --mission-card-cta-fg-on-secondary: #0A0B10;
     --mission-card-halo-opacity: 0.25;
 
     --mission-modal-backdrop: color-mix(in oklch, #000 60%, transparent);
@@ -259,7 +260,10 @@ html[data-theme="light"] body::before {
 
 .btn.primary {
   background: var(--color-primary);
-  color: #05060A;
+  /* Contrast-aware: BrandStyles emits --on-primary (black/white by the chosen
+     color's lightness) so primary buttons stay readable on any brand color.
+     The #05060A literal is the Storybook/no-BrandStyles fallback only. */
+  color: var(--on-primary, #05060A);
   border-color: var(--color-primary);
   box-shadow: 0 0 0 1px color-mix(in oklch, var(--color-primary) 30%, transparent), 0 10px 32px -8px color-mix(in oklch, var(--color-primary) 50%, transparent);
 }

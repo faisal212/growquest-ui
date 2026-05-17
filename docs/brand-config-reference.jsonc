@@ -184,12 +184,26 @@
       "borderStrong": "oklch(0.38 0.02 270)"       // → --border-strong
     },
 
-    // Corner radii (defaults: 14px / 8px / 4px / 16px).
+    // Corner radii (defaults: 14px / 8px / 4px / 16px). These 4 knobs are the
+    // ONLY radius inputs a tenant sets — but they don't just style 4 things.
+    // tokens.ts cascades them into 8 derived tier vars that drive every
+    // rounded surface app-wide (live calc(), not pre-resolved px, so the
+    // whole UI rescales proportionally when one knob moves):
+    //   --radius-card   → --r-panel  (panels)            = card
+    //                   → --r-mission (mission cards)    = card − 2px
+    //                   → --r-inset  (icon/inset boxes)  = max(0, card − 4px)
+    //   --radius-button → --r-btn    (buttons)           = button
+    //                   → --r-btn-sm (small CTAs, GO)    = max(0, button − 3px)
+    //   --radius-tag    → --r-tag    (tags/pills)        = tag
+    //                   → --r-tag-lg (large tags)        = tag + 2px
+    //   --radius-modal  → --r-modal  (modals)            = modal
+    // So changing `card` reshapes panels, mission cards, AND inset boxes
+    // together. Circular and sub-pixel chrome are intentionally excluded.
     "radius": {
-      "card":   "14px",                            // → --radius-card
-      "button": "8px",                             // → --radius-button
-      "tag":    "4px",                             // → --radius-tag
-      "modal":  "16px"                             // → --radius-modal
+      "card":   "14px",                            // → --radius-card  (→ --r-panel / --r-mission / --r-inset)
+      "button": "8px",                             // → --radius-button (→ --r-btn / --r-btn-sm)
+      "tag":    "4px",                             // → --radius-tag   (→ --r-tag / --r-tag-lg)
+      "modal":  "16px"                             // → --radius-modal (→ --r-modal)
     },
 
     // Font stacks. Each is a full `font-family` value.
@@ -208,7 +222,7 @@
       "body":          "#5A6275",                  // → --mission-card-body
       "iconBoxBg":     "#F9F8F4",                  // → --mission-card-icon-bg
       "iconBoxBorder": "#FF8C00",                  // → --mission-card-icon-border
-      "ctaFg":         "#FFFFFF",                  // → --mission-card-cta-fg
+      "ctaFg":         "#FFFFFF",                  // → --mission-card-cta-fg (+ -on-secondary). OMIT to auto-pick readable black/white from the tone color's lightness (--on-primary/--on-secondary); set to force an exact color for both tones
       "haloOpacity":   0.4                         // → --mission-card-halo-opacity (0–1)
     },
 

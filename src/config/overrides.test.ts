@@ -11,7 +11,12 @@ describe('deriveTokens — per-component overrides', () => {
     const tokens = deriveTokens(BASE)
     expect(tokens['--mission-card-bg']).toBe('var(--panel)')
     expect(tokens['--mission-card-halo-opacity']).toBe('0.25')
-    expect(tokens['--mission-card-cta-fg']).toBe('#05060A')
+    // Contrast-aware: GO text follows the tone color's lightness, not a fixed
+    // near-black (unreadable on dark brand colors).
+    expect(tokens['--mission-card-cta-fg']).toBe('var(--on-primary)')
+    expect(tokens['--mission-card-cta-fg-on-secondary']).toBe(
+      'var(--on-secondary, var(--on-primary))'
+    )
     expect(tokens['--mission-modal-bg']).toBe('var(--panel)')
     expect(tokens['--reward-card-bg']).toBe('var(--panel)')
     expect(tokens['--profile-card-bg']).toBe('var(--panel)')
@@ -32,7 +37,9 @@ describe('deriveTokens — per-component overrides', () => {
     })
     expect(tokens['--mission-card-bg']).toBe('#1A0E00')
     expect(tokens['--mission-card-border']).toBe('#FF8C00')
+    // Explicit ctaFg wins for BOTH tones.
     expect(tokens['--mission-card-cta-fg']).toBe('#FFFFFF')
+    expect(tokens['--mission-card-cta-fg-on-secondary']).toBe('#FFFFFF')
     expect(tokens['--mission-card-halo-opacity']).toBe('0.5')
   })
 

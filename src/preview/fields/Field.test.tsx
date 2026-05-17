@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from 'vitest'
 import { render, screen, fireEvent } from '@testing-library/react'
 import { Field } from './Field'
-import type { FieldDef } from '../registry'
+import { FIELDS, type FieldDef } from '../registry'
 
 const def = (over: Partial<FieldDef>): FieldDef => ({
   path: 'x',
@@ -56,6 +56,17 @@ describe('Field dispatcher', () => {
     ])
     fireEvent.click(screen.getAllByRole('button', { name: /remove/i })[0])
     expect(onChange).toHaveBeenCalledWith([{ key: 'Tiers', value: 'B' }])
+  })
+
+  it('Add on an empty stats list appends a correctly-shaped object, not a string', () => {
+    // Real registry def: this is what the configurator actually uses. A tenant
+    // with no stats override gives value=undefined; the first "+ Add" must yield
+    // a {key,value} object — a string "" corrupts the array and breaks render.
+    const statsDef = FIELDS.find((f) => f.path === 'content.onboarding.stats')!
+    expect(statsDef.kind).toBe('list')
+    const { onChange } = setup(statsDef, undefined)
+    fireEvent.click(screen.getByRole('button', { name: '+ Add' }))
+    expect(onChange).toHaveBeenCalledWith([{ key: '', value: '' }])
   })
 
   it('renders a px slider and emits an Npx string on change', () => {

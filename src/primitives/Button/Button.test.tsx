@@ -30,4 +30,9 @@ describe('Button', () => {
     fireEvent.click(screen.getByRole('button'))
     expect(handleClick).not.toHaveBeenCalled()
   })
+
+  it('primary variant carries the .primary class (contrast-aware fg comes from .btn.primary CSS)', () => {
+    render(<Button variant="primary">Redeem</Button>)
+    expect(screen.getByRole('button', { name: 'Redeem' })).toHaveClass('btn', 'primary')
+  })
 })

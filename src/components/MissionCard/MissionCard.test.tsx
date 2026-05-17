@@ -50,4 +50,16 @@ describe('MissionCard', () => {
     render(<MissionCard m={{ ...mission, limited: true }} onOpen={vi.fn()} />)
     expect(screen.getByText(/LIMITED/)).toBeInTheDocument()
   })
+
+  it('GO button uses the primary contrast token for primary-tone missions', () => {
+    render(<MissionCard m={mission} onOpen={vi.fn()} />)
+    const go = screen.getByText('GO')
+    expect(go.getAttribute('style')).toContain('var(--mission-card-cta-fg)')
+  })
+
+  it('GO button uses the secondary contrast token for secondary-tone missions', () => {
+    render(<MissionCard m={{ ...mission, tone: 'secondary' }} onOpen={vi.fn()} />)
+    const go = screen.getByText('GO')
+    expect(go.getAttribute('style')).toContain('var(--mission-card-cta-fg-on-secondary)')
+  })
 })

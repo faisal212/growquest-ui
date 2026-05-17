@@ -92,4 +92,10 @@ describe('registry — grouping & routing', () => {
       expect(f?.step).toBe(1)
     }
   })
+
+  it('list fields carry an itemTemplate so "+ Add" stays well-shaped on an empty list', () => {
+    const stats = byPath.get('content.onboarding.stats')
+    expect(stats?.kind).toBe('list')
+    expect(stats?.itemTemplate).toEqual({ key: '', value: '' })
+  })
 })

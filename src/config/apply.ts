@@ -2,32 +2,23 @@ import type { BrandConfig } from './schema'
 import { deepMerge } from './schema'
 import { DEFAULT_CONFIG } from './defaults'
 import { deriveTokens } from './tokens'
+import { setCurrentBrand } from './brandStore'
 
-let currentConfig: BrandConfig = DEFAULT_CONFIG
 const previousKeys = new Set<string>()
-
-type BrandListener = (cfg: BrandConfig) => void
-const listeners = new Set<BrandListener>()
-
-/**
- * Subscribe to client-side BrandConfig changes. Used by BrandProvider so that
- * a runtime `applyBrand(newCfg)` call re-renders the React tree with the new
- * content/assets/recipe values.
- */
-export function subscribeBrand(fn: BrandListener): () => void {
-  listeners.add(fn)
-  return () => {
-    listeners.delete(fn)
-  }
-}
 
 /**
  * Apply a brand config: derive tokens, write CSS vars to :root, set data-theme,
- * notify any subscribed BrandProvider so React consumers re-render.
+ * then commit to the store so subscribed BrandProviders re-render.
  *
- * On the server (no document) this is a no-op — server-side rendering goes
- * through <BrandProvider value={cfg}> directly. On the client it's the runtime
- * swap entry point (dev console / future CMS preview).
+ * Preview-only: this is the sole client-side caller of `deriveTokens`
+ * (→ `tokens.ts` → `culori`). It must NOT be statically imported by any
+ * always-loaded component — `EmbedBridge` dynamic-imports it so the culori
+ * graph stays out of the end-user bundle. The store half (subscribe /
+ * getCurrentBrand) lives in the culori-free `./brandStore`.
+ *
+ * On the server (no document) the DOM block is skipped — server-side rendering
+ * goes through <BrandProvider value={cfg}> directly. On the client it's the
+ * runtime swap entry point (configurator preview / dev console).
  */
 export function applyBrand(input: Partial<BrandConfig>): void {
   const cfg: BrandConfig = {
@@ -37,7 +28,6 @@ export function applyBrand(input: Partial<BrandConfig>): void {
     assets: input.assets,
     overrides: deepMerge(DEFAULT_CONFIG.overrides ?? {}, input.overrides),
   }
-  currentConfig = cfg
 
   if (typeof document !== 'undefined') {
     const root = document.documentElement
@@ -54,10 +44,5 @@ export function applyBrand(input: Partial<BrandConfig>): void {
     }
   }
 
-  for (const fn of listeners) fn(cfg)
-}
-
-/** Read the currently-applied BrandConfig (client-side runtime state). */
-export function getCurrentBrand(): BrandConfig {
-  return currentConfig
+  setCurrentBrand(cfg)
 }

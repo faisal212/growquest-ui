@@ -13,7 +13,6 @@
  */
 import { useEffect, useRef } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
-import { applyBrand } from '../config/apply'
 import { sendToHost, subscribePreviewMessages } from './bridge'
 
 export function EmbedBridge() {
@@ -27,7 +26,11 @@ export function EmbedBridge() {
       window,
       (msg) => {
         if (msg.type === 'gq-preview:applyPreview') {
-          applyBrand(msg.config)
+          // Dynamic import keeps `apply.ts` → `tokens.ts` → `culori` out of the
+          // eager end-user bundle. EmbedBridge is eagerly mounted on every page;
+          // this chunk loads only on the first preview message (embed/editor only).
+          const { config } = msg
+          void import('../config/apply').then(({ applyBrand }) => applyBrand(config))
         } else if (msg.type === 'gq-preview:navigate') {
           router.push(msg.route)
         }

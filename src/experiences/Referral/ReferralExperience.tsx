@@ -44,7 +44,7 @@ export function ReferralExperience({
           <button
             onClick={copyLink}
             className={`py-1 px-2.5 rounded-[var(--r-btn-sm)] border border-border text-[11px] font-semibold cursor-pointer whitespace-nowrap transition-all duration-150 ${copied ? 'bg-primary' : 'bg-panel text-ink'}`}
-            style={copied ? { color: '#05060A' } : undefined}
+            style={copied ? { color: 'var(--on-primary)' } : undefined}
           >
             {copied ? 'Copied ✓' : 'Copy'}
           </button>

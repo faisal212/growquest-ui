@@ -43,11 +43,16 @@ export const RewardCard = memo(function RewardCard({
             />
             <div className="absolute inset-0 grid place-items-center">
               <div
-                className="rounded-xl text-[#05060A] grid place-items-center font-bold font-mono tracking-[0.1em] uppercase shadow-[0_10px_30px_-10px_rgba(0,0,0,0.3)]"
+                className="rounded-xl grid place-items-center font-bold font-mono tracking-[0.1em] uppercase shadow-[0_10px_30px_-10px_rgba(0,0,0,0.3)]"
                 style={{
                   width: compact ? 52 : 68,
                   height: compact ? 52 : 68,
                   background: toneVar,
+                  // Contrast-aware against the tone background (mirrors MissionCard).
+                  color:
+                    r.tone === 'secondary'
+                      ? 'var(--on-secondary, var(--on-primary))'
+                      : 'var(--on-primary)',
                   fontSize: compact ? 9 : 11,
                 }}
               >

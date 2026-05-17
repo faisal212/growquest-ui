@@ -213,7 +213,12 @@ export interface MissionCardRecipe extends ComponentPanelRecipe {
   /** Overrides panel2 for the icon container only. */
   iconBoxBg?: string
   iconBoxBorder?: string
-  /** Foreground color of the tone-tinted "GO" CTA. Default `#05060A`. */
+  /**
+   * Foreground color of the tone-tinted "GO" CTA. Defaults to a contrast-aware
+   * `--on-primary` / `--on-secondary` (auto black/white chosen by the
+   * tone color's lightness, so it stays readable on any brand color). Set this
+   * to force an exact color regardless of tone.
+   */
   ctaFg?: string
   /** Halo gradient opacity on the split layout. Default 0.25. */
   haloOpacity?: number

@@ -73,11 +73,25 @@ function ColorControl({
   )
 }
 
-function ListControl({ value, onChange }: { value: unknown; onChange: (v: unknown) => void }) {
+function ListControl({
+  value,
+  onChange,
+  itemTemplate,
+}: {
+  value: unknown
+  onChange: (v: unknown) => void
+  itemTemplate?: unknown
+}) {
   const items: unknown[] = Array.isArray(value) ? value : []
   const isObjectItem = items.length > 0 && typeof items[0] === 'object' && items[0] !== null
-  const blank = () =>
-    isObjectItem ? Object.fromEntries(Object.keys(items[0] as object).map((k) => [k, ''])) : ''
+  // Shape priority: an existing row, else the field's declared template (so the
+  // FIRST add on an empty/undefined list is still well-shaped), else a string.
+  const blank = () => {
+    if (isObjectItem) return Object.fromEntries(Object.keys(items[0] as object).map((k) => [k, '']))
+    if (itemTemplate && typeof itemTemplate === 'object' && !Array.isArray(itemTemplate))
+      return Object.fromEntries(Object.keys(itemTemplate as object).map((k) => [k, '']))
+    return ''
+  }
   return (
     <div className="gqdc-f-list">
       {items.map((item, i) => (
@@ -238,7 +252,7 @@ export function Field({ def, value, modified, onChange, onReset }: FieldProps) {
       )
       break
     case 'list':
-      control = <ListControl value={value} onChange={onChange} />
+      control = <ListControl value={value} onChange={onChange} itemTemplate={def.itemTemplate} />
       break
     case 'asset':
       control = <AssetControl id={id} def={def} value={value} onChange={onChange} />

@@ -11,7 +11,7 @@ var Pe = (e, t, n, r) => ({
     return p(e, t, r);
   }
 });
-import { u as dt, D as pe, P as ut, a as pt, p as Xe, c as ft, j as l, g as gt, f as ht, n as Re, s as ye, b as bt } from "./index-BoeVB90d.js";
+import { u as dt, D as pe, P as ut, a as pt, p as Xe, c as ft, j as l, g as gt, f as ht, n as Re, s as ye, b as bt } from "./index-icNreKhD.js";
 import xe, { useCallback as M, useState as P, useEffect as se, useMemo as ve, useRef as ee } from "react";
 function mt(e) {
   return typeof e == "function";
@@ -1264,11 +1264,29 @@ function pn({ id: e, def: t, value: n, onChange: r }) {
       /* @__PURE__ */ l.jsx("span", { className: "gqdc-asset-badge", children: i })
     ] }),
     /* @__PURE__ */ l.jsxs("span", { className: "gqdc-asset-tabs", role: "group", "aria-label": `${t.label} variant`, children: [
-      /* @__PURE__ */ l.jsx("button", { type: "button", "aria-pressed": a === "desktop", onClick: () => f("desktop"), children: "Desktop" }),
-      /* @__PURE__ */ l.jsxs("button", { type: "button", "aria-pressed": a === "mobile", onClick: () => f("mobile"), children: [
-        "Mobile",
-        s != null && s.mobileSrc ? "" : " ·opt"
-      ] })
+      /* @__PURE__ */ l.jsx(
+        "button",
+        {
+          type: "button",
+          "aria-label": "desktop variant",
+          "aria-pressed": a === "desktop",
+          onClick: () => f("desktop"),
+          children: "Desktop"
+        }
+      ),
+      /* @__PURE__ */ l.jsxs(
+        "button",
+        {
+          type: "button",
+          "aria-label": "mobile variant",
+          "aria-pressed": a === "mobile",
+          onClick: () => f("mobile"),
+          children: [
+            "Mobile",
+            s != null && s.mobileSrc ? "" : " ·opt"
+          ]
+        }
+      )
     ] }),
     /* @__PURE__ */ l.jsx("span", { className: "gqdc-asset-preview", "aria-hidden": !0, children: d && o.k === "ok" ? /* @__PURE__ */ l.jsx("img", { src: d, alt: "" }) : /* @__PURE__ */ l.jsx("span", { className: "gqdc-asset-preview-empty", children: o.k === "checking" ? "⏳" : o.k === "error" ? "⚠" : o.k === "lottie" ? "Lottie" : "built-in art" }) }),
     /* @__PURE__ */ l.jsxs("span", { className: "gqdc-asset-row", children: [

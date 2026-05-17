@@ -32,6 +32,12 @@ export interface FieldDef {
   step?: number
   /** Slider seed for `lengthPx` when no override is set (matches the token default). */
   default?: number
+  /**
+   * For `list` fields: the shape of a new item, so "+ Add" produces a
+   * correctly-typed blank even when the current list is empty/undefined.
+   * Derived from DEFAULT_CONTENT. Absent ⇒ a plain string list.
+   */
+  itemTemplate?: unknown
 }
 
 export interface GroupDef {
@@ -79,13 +85,30 @@ function leafEntries(obj: unknown, prefix: string): { path: string; isArray: boo
   )
 }
 
+/** Blank-valued clone of a sample object (→ item template); undefined for non-objects. */
+function blankTemplate(sample: unknown): Record<string, string> | undefined {
+  if (sample === null || typeof sample !== 'object' || Array.isArray(sample)) return undefined
+  return Object.fromEntries(Object.keys(sample).map((k) => [k, '']))
+}
+
 function contentFields(): FieldDef[] {
   return leafEntries(DEFAULT_CONTENT, 'content').map(({ path, isArray }) => {
     const parts = path.split('.')
     const ns = parts[1] as keyof ContentMap
     const leaf = parts[parts.length - 1]
     const kind: FieldKind = isArray ? 'list' : leaf === 'body' ? 'textarea' : 'text'
-    return { path, label: humanize(leaf), kind, group: CONTENT_GROUP[ns] }
+    const fd: FieldDef = { path, label: humanize(leaf), kind, group: CONTENT_GROUP[ns] }
+    if (isArray) {
+      // Resolve the default array (path is `content.<...>`; DEFAULT_CONTENT is
+      // the content root) and template from its first element.
+      let cur: unknown = DEFAULT_CONTENT
+      for (const k of parts.slice(1)) {
+        cur = cur && typeof cur === 'object' ? (cur as Record<string, unknown>)[k] : undefined
+      }
+      const tpl = blankTemplate(Array.isArray(cur) ? cur[0] : undefined)
+      if (tpl) fd.itemTemplate = tpl
+    }
+    return fd
   })
 }
 

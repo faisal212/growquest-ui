@@ -31,7 +31,7 @@ export function InviteExperience({ onComplete }: { onComplete: () => void }) {
           onClick={sendInvite}
           disabled={!valid}
           className={`py-0 px-4 rounded-[var(--r-btn)] border border-border text-xs font-bold whitespace-nowrap transition-all duration-150 ${valid ? 'bg-primary cursor-pointer' : 'bg-panel-2 text-ink-dim cursor-not-allowed'}`}
-          style={valid ? { color: '#05060A' } : undefined}
+          style={valid ? { color: 'var(--on-primary)' } : undefined}
         >
           Send
         </button>

@@ -4,7 +4,7 @@ import { createContext, useContext, useEffect, useMemo, useState, type ReactNode
 import type { BrandConfig, ContentMap, AssetMap } from './schema'
 import { deepMerge } from './schema'
 import { DEFAULT_CONTENT, DEFAULT_CONFIG } from './defaults'
-import { subscribeBrand } from './apply'
+import { subscribeBrand } from './brandStore'
 
 const DEFAULT_ASSETS: AssetMap = DEFAULT_CONFIG.assets ?? {}
 

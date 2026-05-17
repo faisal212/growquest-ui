@@ -52,6 +52,22 @@ describe('RewardCard', () => {
     expect(screen.getByText('LIMITED')).toBeInTheDocument()
   })
 
+  it('placeholder box uses the primary contrast token for primary-tone rewards', () => {
+    render(<RewardCard r={reward} persona={{ xp: 1000 }} onRedeem={vi.fn()} />)
+    const box = screen.getByText('merc') // r.kind.slice(0,4)
+    const style = box.getAttribute('style') ?? ''
+    expect(style).toContain('var(--on-primary)')
+    expect(style).not.toContain('on-secondary')
+  })
+
+  it('placeholder box uses the secondary contrast token for secondary-tone rewards', () => {
+    render(
+      <RewardCard r={{ ...reward, tone: 'secondary' }} persona={{ xp: 1000 }} onRedeem={vi.fn()} />
+    )
+    const box = screen.getByText('merc')
+    expect(box.getAttribute('style')).toContain('var(--on-secondary, var(--on-primary))')
+  })
+
   it('renders image when imageUrl is provided', () => {
     render(
       <RewardCard

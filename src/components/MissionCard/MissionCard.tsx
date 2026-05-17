@@ -147,7 +147,10 @@ export const MissionCard = memo(function MissionCard({
           className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-[var(--r-btn-sm)] text-xs font-bold tracking-[0.04em]"
           style={{
             background: toneColor(m.tone),
-            color: 'var(--mission-card-cta-fg)',
+            color:
+              m.tone === 'secondary'
+                ? 'var(--mission-card-cta-fg-on-secondary)'
+                : 'var(--mission-card-cta-fg)',
           }}
         >
           GO

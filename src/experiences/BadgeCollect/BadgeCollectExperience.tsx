@@ -52,7 +52,7 @@ export function BadgeCollectExperience({
             <div className="flex justify-between items-center">
               <span className="text-[18px]">🏅</span>
               {badge.got && (
-                <span className="text-[10px] text-[#05060A] bg-primary py-px px-1.5 rounded-[var(--r-tag)] font-bold">
+                <span className="text-[10px] text-[color:var(--on-primary)] bg-primary py-px px-1.5 rounded-[var(--r-tag)] font-bold">
                   ✓
                 </span>
               )}

@@ -116,7 +116,14 @@ export function deriveTokens(cfg: BrandConfig): Record<string, string> {
   out['--mission-card-icon-border'] = 'var(--border)'
   out['--mission-card-title'] = 'var(--ink)'
   out['--mission-card-body'] = 'var(--ink-dim)'
-  out['--mission-card-cta-fg'] = '#05060A'
+  // Contrast-aware GO-button text. The button background is the tone color
+  // (primary/secondary), so the foreground must follow the chosen color's
+  // lightness — reuse the already-computed --on-primary/--on-secondary instead
+  // of a fixed near-black (which is unreadable on dark tenant colors). Two
+  // tokens because the per-mission tone is only known in MissionCard; an
+  // explicit overrides.missionCard.ctaFg sets both (see below).
+  out['--mission-card-cta-fg'] = 'var(--on-primary)'
+  out['--mission-card-cta-fg-on-secondary'] = 'var(--on-secondary, var(--on-primary))'
   out['--mission-card-halo-opacity'] = '0.25'
 
   out['--mission-modal-backdrop'] = 'color-mix(in oklch, #000 60%, transparent)'
@@ -221,7 +228,11 @@ export function deriveTokens(cfg: BrandConfig): Record<string, string> {
     if (r.iconBoxBorder) out['--mission-card-icon-border'] = r.iconBoxBorder
     if (r.title) out['--mission-card-title'] = r.title
     if (r.body) out['--mission-card-body'] = r.body
-    if (r.ctaFg) out['--mission-card-cta-fg'] = r.ctaFg
+    if (r.ctaFg) {
+      // Explicit color wins for either tone — the tenant asked for exactly this.
+      out['--mission-card-cta-fg'] = r.ctaFg
+      out['--mission-card-cta-fg-on-secondary'] = r.ctaFg
+    }
     if (typeof r.haloOpacity === 'number')
       out['--mission-card-halo-opacity'] = String(r.haloOpacity)
   }

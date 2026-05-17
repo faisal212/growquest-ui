@@ -92,9 +92,9 @@ export default function OnboardingScreen({ onEnter, heroStyle }: OnboardingScree
           </p>
 
           <div className="grid grid-cols-3 gap-[10px]">
-            {t.stats.map((s) => (
+            {t.stats.map((s, i) => (
               <div
-                key={s.key}
+                key={i}
                 className="px-3 py-[10px] rounded-[var(--r-inset)]"
                 style={{
                   background: 'var(--onboarding-card-stat-bg)',

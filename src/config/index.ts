@@ -1,4 +1,5 @@
-export { applyBrand, getCurrentBrand, subscribeBrand } from './apply'
+export { getCurrentBrand, subscribeBrand } from './brandStore'
+export { applyBrand } from './apply'
 export { BrandProvider, useBrandState } from './BrandProvider'
 export { useContentSlice } from './content'
 export { interpolate } from './interpolate'
